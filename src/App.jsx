@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router-dom";
 import Home from "./components/Home/Home";
 import Subjects from "./components/Subjects/Subjects";
 import "./App.css";
@@ -15,30 +20,39 @@ import Notification from "./components/Notifications/Notification";
 import Contribution from "./components/Contribution/Contribution";
 import useClickSound from "./components/SoundHook/useClickSound";
 import clickSoundFile from "./click.mp3";
+import { jwtDecode } from "jwt-decode";
 function App() {
   useClickSound(clickSoundFile, [".wrapper", ".sidebar-nav"]);
   const [folders, setFolders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSlow, setIsSlow] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimeout(() => {
       setIsSlow(true);
     }, 2000);
     const token = localStorage.getItem("user");
-    axios
-      .get("https://course-mate-server.onrender.com/folder/folders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setFolders(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setLoading(false);
-      });
+    try {
+      if (jwtDecode(token).email.endsWith("@rguktn.ac.in")) {
+        navigate("/home");
+      }
+    } catch (error) {
+    } finally {
+      axios
+        .get("https://course-mate-server.onrender.com/folder/folders", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          setFolders(response.data);
+          setLoading(false);
+        })
+        .catch((error) => {
+          setLoading(false);
+        });
+    }
   }, []);
 
   if (loading) {
