@@ -1,0 +1,68 @@
+.cust-text {
+  animation: blinkTeam 0.5s linear infinite;
+  font-size: medium;
+  font-weight: bolder;
+  background: radial-gradient(
+    circle,
+    rgb(224, 160, 240) 0%,
+    rgb(184, 227, 247) 66%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+@keyframes expandWidth {
+  from {
+    width: 50vw;
+    opacity: 0;
+  }
+  to {
+    width: 70vw;
+    opacity: 1;
+  }
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../../../public/bing/welcome.jpeg");
+  background-size: cover;
+  background-position: center;
+}
+
+.login-content {
+  animation: expandWidth 2s ease-in;
+  max-width: 800px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
+}
+
+.login-left {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-right {
+  flex: 1;
+  display: flex;
+  /* justify-content: flex-end; */
+  align-items: center;
+  padding: 20px;
+}
+
+.coursmate-img {
+  mix-blend-mode: difference;
+}

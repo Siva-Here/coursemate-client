@@ -1,0 +1,89 @@
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes blink-sub {
+  0%,
+  100% {
+    color: #fff;
+    text-shadow: 0 0 10px #6f00ff, 0 0 20px #6f00ff, 0 0 40px #6f00ff,
+      0 0 80px #6f00ff, 0 0 120px #6f00ff, 0 0 200px #6f00ff, 0 0 300px #6f00ff,
+      0 0 400px #6f00ff;
+  }
+  5%,
+  95% {
+    color: #111;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+}
+
+.blinking-text-subjects {
+  animation: blink-sub 1.5s linear infinite;
+}
+
+.folder-div {
+  animation: slideUp 1s ease-in;
+  z-index: 10;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  max-width: 650px;
+  cursor: pointer;
+  border: 2px solid rgb(18, 24, 105);
+  transition: 0.2s;
+}
+.folder-div:hover {
+  transform: scale(1.05);
+}
+
+.img-container1 {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url("../../../public/bing/laptop1.jpg") no-repeat center
+    center/cover;
+  z-index: -1;
+}
+
+.blur1 {
+  width: 100%;
+  position: relative;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  /* backdrop-filter: blur(2px); */
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.outer-container {
+  width: 100%;
+  padding: 20px;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+}

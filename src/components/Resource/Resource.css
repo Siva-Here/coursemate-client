@@ -1,0 +1,75 @@
+.resource-div {
+  animation: fadeIn 0.5s ease-in;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 10px;
+  color: white;
+  width: 90vw;
+  max-width: 1000px;
+  margin-bottom: 10px;
+  position: relative;
+  transition: 0.3s;
+}
+
+.resource-content {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.resource-user {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.resource-date {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 12px;
+  color: #ccc;
+}
+.add-button-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.add-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: transparent;
+  border: 2px solid rgb(184, 172, 14);
+  color: rgb(184, 172, 14);
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: rgb(184, 172, 14);
+  color: black;
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  color: white;
+}
+.modal-content {
+  color: "white";
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+.modal-dialog {
+  color: "white";
+  margin: 1.75rem auto;
+  max-width: 600px;
+}

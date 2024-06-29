@@ -1,0 +1,164 @@
+@import url("https://fonts.googleapis.com/css?family=Caveat:400,700|Gochi+Hand");
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    left: 200px;
+    right: 800px;
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    left: 200px;
+    right: 200px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes blink1 {
+  0%,
+  100% {
+    color: #fff;
+    filter: blur(2px);
+    text-shadow: 0 0 10px #ffee00, 0 0 20px #ffee00, 0 0 40px #ffee00,
+      0 0 80px #ffee00, 0 0 120px #ffee00, 0 0 200px #ffee00, 0 0 300px #ffee00,
+      0 0 400px #ffee00;
+  }
+  5%,
+  95% {
+    color: #111;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+}
+
+.blinking-text-units {
+  animation: blink1 1.5s linear infinite;
+}
+
+h1 {
+  font-size: 88px;
+  font-family: "Caveat", cursive;
+  text-align: center;
+}
+
+body {
+  background: #000;
+  display: flex;
+  justify-content: center;
+}
+
+h1 span {
+  display: inline-block;
+  animation: animate 2.25s linear infinite;
+  margin: 0 2px;
+  padding: 0;
+  font-size: 88px;
+  position: relative;
+  color: #111;
+}
+
+.typing-effect {
+  display: inline-block;
+  color: yellow;
+  background-color: transparent;
+  overflow: hidden;
+  z-index: 2;
+  font-size: 84px;
+  white-space: nowrap;
+  width: 0;
+}
+
+.units-div {
+  animation: fadeIn 0.5s ease-in;
+  z-index: 10;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  max-width: 650px;
+  cursor: pointer;
+  border: 1px solid rgb(184, 172, 14);
+  transition: 0.2s;
+}
+
+.units-div:hover {
+  transform: scale(1.05);
+}
+
+.units-img {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url("../../../public/bing/pdf1.jpg") no-repeat center center/cover;
+  z-index: -1;
+}
+
+.blur-units {
+  width: 100%;
+  position: relative;
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.3);
+  height: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.outer-container-units {
+  width: 100%;
+  padding: 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.content-units,
+.content-resources {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.btn-group {
+  margin: 20px;
+  text-align: center;
+  z-index: 100;
+  position: relative;
+}
+
+.btn-group .btn {
+  background-color: transparent;
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(184, 172, 14);
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-group .btn:hover,
+.btn-group .btn.active {
+  background-color: rgb(184, 172, 14);
+  color: black;
+}
