@@ -22,7 +22,7 @@ function Sidebar() {
   }, []);
 
   const clickSound = new Audio("/nav.aac");
-  clickSound.volume = 0.4; // Set the volume to 30%
+  clickSound.volume = 0.2; // Set the volume to 30%
 
   function handleLogOut() {
     localStorage.removeItem("user");
