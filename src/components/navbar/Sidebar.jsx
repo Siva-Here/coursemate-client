@@ -3,7 +3,7 @@ import { BiSolidCategory } from "react-icons/bi";
 import { TbLogout2 } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -19,9 +19,10 @@ function Sidebar() {
     } catch (error) {
       console.error(error);
     }
-  });
+  }, []);
 
   const clickSound = new Audio("/nav.aac");
+  clickSound.volume = 0.4; // Set the volume to 30%
 
   function handleLogOut() {
     localStorage.removeItem("user");

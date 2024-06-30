@@ -4,6 +4,7 @@ const useClickSound = (soundFile, excludedSelectors = []) => {
   useEffect(() => {
     const clickSound = new Audio(soundFile);
     clickSound.preload = 'auto'; // Ensure audio file is preloaded
+    clickSound.volume=0.5;
 
     const handleClick = (event) => {
       if (excludedSelectors.some(selector => event.target.closest(selector))) {
