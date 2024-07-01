@@ -7,11 +7,35 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
 
-const Resource = ({ parentFolder, uploadedBy }) => {
+const Resource = () => {
   const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
-  const { folderName } = location.state || null;
+  const { uploadedBy, parentFolder } = location.state;
+  const [folderName, setFolderName] = useState(null);
+
+  async function getFolderName() {
+    try {
+      const response = await axios.post(
+        "https://course-mate-server.onrender.com/folder",
+        { folderId: parentFolder },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        setFolderName(response.data.name);
+        setResources(sortedResources);
+      } else {
+        toast.error("Failed to fetch resources. Please try again later.");
+      }
+    } catch (error) {
+      console.error("Error fetching resources:", error);
+    }
+  }
+
   const [resources, setResources] = useState([
     {
       uploadedBy: "Loading...",
@@ -55,7 +79,7 @@ const Resource = ({ parentFolder, uploadedBy }) => {
     }
   };
   useEffect(() => {
-    console.log(folderName);
+    getFolderName();
     fetchResources();
   }, [isPosted]);
 
@@ -72,7 +96,7 @@ const Resource = ({ parentFolder, uploadedBy }) => {
       userId: uploadedBy,
       folderId: parentFolder,
     };
-
+    console.log(formData);
     try {
       const response = await axios.post(
         "https://course-mate-server.onrender.com/resource/create",
@@ -102,9 +126,10 @@ const Resource = ({ parentFolder, uploadedBy }) => {
     <>
       <ToastContainer />
       <div>
-        {folderName ? (
+        {true ? (
           <div style={{ marginTop: "50px" }}>
             <Sidebar />
+            <div className="units-img"></div>
             <div className="outer-container-units text-center">
               <h1
                 className="display-3 text-center text-white blinking-text-units"
@@ -117,7 +142,6 @@ const Resource = ({ parentFolder, uploadedBy }) => {
         ) : (
           <></>
         )}
-        <div className="units-img"></div>
         <div className="blur1"></div>
         {resources.map((resource) => (
           <div key={resource._id} className="resource-div">

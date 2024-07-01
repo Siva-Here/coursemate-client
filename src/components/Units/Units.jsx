@@ -3,7 +3,6 @@ import "./Units.css";
 import axios from "axios";
 import Sidebar from "../navbar/Sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
-import Resource from "../Resource/Resource";
 import { jwtDecode } from "jwt-decode";
 
 function Units({ folders }) {
@@ -16,6 +15,12 @@ function Units({ folders }) {
   const [user, setUser] = useState(false);
   const token = localStorage.getItem("user") || null;
   const [userId, setUserId] = useState(null);
+
+  if (!user) {
+    navigate("/resource", {
+      state: { parentFolder: folderId, uploadedBy: userId },
+    });
+  }
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user") || false;
@@ -104,7 +109,11 @@ function Units({ folders }) {
                   </button>
                   <button
                     className={`btn ${view === "resources" ? "active" : ""}`}
-                    onClick={() => setView("resources")}
+                    onClick={() =>
+                      navigate("/resource", {
+                        state: { parentFolder: folderId, uploadedBy: userId },
+                      })
+                    }
                   >
                     Resources
                   </button>
@@ -132,7 +141,7 @@ function Units({ folders }) {
                     ))}
                   </div>
                 ) : (
-                  <Resource parentFolder={folderId} uploadedBy={userId} />
+                  <></>
                 )}
               </div>
             </div>

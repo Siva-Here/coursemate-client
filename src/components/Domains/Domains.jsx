@@ -53,7 +53,7 @@ function Domains({ folders }) {
 
   const handleClick = (folderId, folderName) => {
     navigate("/resource", {
-      state: { folderId, folderName, uploadedBy: userId },
+      state: { parentFolder: folderId, folderName, uploadedBy: userId },
     });
   };
 
