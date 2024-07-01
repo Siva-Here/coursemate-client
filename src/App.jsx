@@ -20,6 +20,7 @@ import Notification from "./components/Notifications/Notification";
 import Contribution from "./components/Contribution/Contribution";
 import useClickSound from "./components/SoundHook/useClickSound";
 import clickSoundFile from "./click.mp3";
+
 import { jwtDecode } from "jwt-decode";
 function App() {
   useClickSound(clickSoundFile, [".wrapper", ".sidebar-nav"]);
