@@ -39,12 +39,12 @@
   justify-content: center;
   width: 50vw;
   min-width: 300px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.774);
+  border: 1px solid rgba(255, 0, 0, 0.574);
   max-width: 650px;
   cursor: pointer;
   transition: 0.2s;
