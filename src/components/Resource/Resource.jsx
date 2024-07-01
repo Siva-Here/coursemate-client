@@ -103,7 +103,7 @@ const Resource = ({ parentFolder, uploadedBy }) => {
       <ToastContainer />
       <div>
         {folderName ? (
-          <div style={{marginTop: "50px"}}>
+          <div style={{ marginTop: "50px" }}>
             <Sidebar />
             <div className="outer-container-units text-center">
               <h1
@@ -113,7 +113,7 @@ const Resource = ({ parentFolder, uploadedBy }) => {
                 {folderName}
               </h1>
             </div>
-          </>
+          </div>
         ) : (
           <></>
         )}
