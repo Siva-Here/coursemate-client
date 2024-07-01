@@ -31,6 +31,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setIsSlow(true);
+      setLoading(false);
     }, 2000);
     const token = localStorage.getItem("user");
     try {
