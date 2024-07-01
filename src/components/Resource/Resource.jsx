@@ -7,18 +7,22 @@ import "react-toastify/dist/ReactToastify.css";
 import { useLocation } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
 
-const Resource = () => {
+const Resource = ({ parentFolder, uploadedBy, view }) => {
   const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
-  const { uploadedBy, parentFolder } = location.state;
   const [folderName, setFolderName] = useState(null);
+  const [folderId, setFolderId] = useState(null);
+  const [userId, setUserId] = useState(null);
 
   async function getFolderName() {
+    if (!folderId) return;
+
     try {
+      console.error(folderId);
       const response = await axios.post(
-        "https://course-mate-server.onrender.com/folder",
-        { folderId: parentFolder },
+        "https://course-mate-server.onrender.com/folder/",
+        { folderId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -27,12 +31,12 @@ const Resource = () => {
       );
       if (response.status === 200) {
         setFolderName(response.data.name);
-        setResources(sortedResources);
       } else {
         toast.error("Failed to fetch resources. Please try again later.");
       }
     } catch (error) {
       console.error("Error fetching resources:", error);
+      toast.error("Failed to fetch resources. Please try again later.");
     }
   }
 
@@ -49,10 +53,12 @@ const Resource = () => {
   const [isPosted, setIsPosted] = useState(true);
 
   const fetchResources = async () => {
+    if (!folderId) return;
+
     try {
       const response = await axios.post(
         "https://course-mate-server.onrender.com/resource/folder",
-        { folderId: parentFolder },
+        { folderId },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -64,11 +70,9 @@ const Resource = () => {
         let sortedResources = response.data.sort((a, b) =>
           b.uploadedAt.localeCompare(a.uploadedAt)
         );
-        sortedResources = sortedResources.filter((resource) => {
-          if (!resource.byAdmin) {
-            return true;
-          } else return false;
-        });
+        sortedResources = sortedResources.filter(
+          (resource) => !resource.byAdmin
+        );
         setResources(sortedResources);
       } else {
         toast.error("Failed to fetch resources. Please try again later.");
@@ -78,10 +82,22 @@ const Resource = () => {
       toast.error("Failed to fetch resources. Please try again later.");
     }
   };
+
+  useEffect(() => {
+    if (view !== "units") {
+      console.log(location.state);
+      setFolderId(location.state.parentFolder);
+      setUserId(location.state.uploadedBy);
+    } else {
+      setFolderId(parentFolder);
+      setUserId(uploadedBy);
+    }
+  }, []);
+
   useEffect(() => {
     getFolderName();
     fetchResources();
-  }, [isPosted]);
+  }, [folderId, isPosted]);
 
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
@@ -93,8 +109,8 @@ const Resource = () => {
       name: event.target.formName.value,
       description: event.target.formDescription.value,
       rscLink: event.target.formLink.value,
-      userId: uploadedBy,
-      folderId: parentFolder,
+      userId,
+      folderId,
     };
     console.log(formData);
     try {
@@ -126,7 +142,7 @@ const Resource = () => {
     <>
       <ToastContainer />
       <div>
-        {true ? (
+        {view !== "units" ? (
           <div style={{ marginTop: "50px" }}>
             <Sidebar />
             <div className="units-img"></div>
@@ -139,9 +155,7 @@ const Resource = () => {
               </h1>
             </div>
           </div>
-        ) : (
-          <></>
-        )}
+        ) : null}
         <div className="blur1"></div>
         {resources.map((resource) => (
           <div key={resource._id} className="resource-div">

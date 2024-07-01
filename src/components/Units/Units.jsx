@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Units.css";
 import axios from "axios";
 import Sidebar from "../navbar/Sidebar";
+import Resource from "../Resource/Resource";
 import { useLocation, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
@@ -109,11 +110,12 @@ function Units({ folders }) {
                   </button>
                   <button
                     className={`btn ${view === "resources" ? "active" : ""}`}
-                    onClick={() =>
-                      navigate("/resource", {
-                        state: { parentFolder: folderId, uploadedBy: userId },
-                      })
-                    }
+                    onClick={() => {
+                      // navigate("/resource", {
+                      //   state: { parentFolder: folderId, uploadedBy: userId },
+                      // })
+                      setView("resource");
+                    }}
                   >
                     Resources
                   </button>
@@ -141,7 +143,13 @@ function Units({ folders }) {
                     ))}
                   </div>
                 ) : (
-                  <></>
+                  <>
+                    <Resource
+                      parentFolder={folderId}
+                      uploadedBy={userId}
+                      view={"units"}
+                    />
+                  </>
                 )}
               </div>
             </div>
