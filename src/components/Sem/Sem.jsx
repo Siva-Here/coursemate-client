@@ -11,6 +11,9 @@ function Sem({ folders }) {
   const { folderId } = location.state;
 
   useEffect(() => {
+    if (!folderId) {
+      navigate("/year");
+    }
     const storedUser = localStorage.getItem("user") || false;
     if (storedUser) {
       setUser(storedUser);
@@ -53,9 +56,13 @@ function Sem({ folders }) {
                 >
                   Semester
                 </h1>
-                <div className="content-sem text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
+                <div
+                  className="content-sem text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center"
+                  style={{ marginTop: "150px" }}
+                >
                   {delayedFolders.map((folder) => (
                     <div
+                      style={{ marginTop: "50px" }}
                       key={folder._id}
                       className="folder-div-sem d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
                       onClick={() =>
