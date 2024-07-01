@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./Domains.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 function Domains({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const [user, setUser] = useState(false);
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -15,7 +18,23 @@ function Domains({ folders }) {
     } else {
       navigate("/");
     }
-
+    const email = jwtDecode(storedUser).email;
+    axios
+      .post(
+        "https://course-mate-server.onrender.com/user/getUserId",
+        { email },
+        {
+          headers: {
+            Authorization: `Bearer ${storedUser}`,
+          },
+        }
+      )
+      .then((response) => {
+        setUserId(response.data.userId);
+      })
+      .catch((error) => {
+        console.error("Cannot get user ID", error);
+      });
     let timer;
     const rootFolders = folders.filter(
       (folder) => !folder.parentFolder && !folder.isSubject && !folder.isSem
@@ -31,6 +50,12 @@ function Domains({ folders }) {
       clearTimeout(timer);
     };
   }, [folders]);
+
+  const handleClick = (folderId, folderName) => {
+    navigate("/resource", {
+      state: { folderId, folderName, uploadedBy: userId },
+    });
+  };
 
   return (
     <div>
@@ -50,6 +75,9 @@ function Domains({ folders }) {
                     <div
                       key={folder._id}
                       className="domains-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
+                      onClick={() => {
+                        handleClick(folder._id, folder.name);
+                      }}
                     >
                       <div className="w-25 text-end align-items-end">
                         <img

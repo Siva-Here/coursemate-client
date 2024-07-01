@@ -4,10 +4,14 @@ import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useLocation } from "react-router-dom";
+import Sidebar from "../navbar/Sidebar";
 
 const Resource = ({ parentFolder, uploadedBy }) => {
+  const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
+  const { folderName } = location.state || null;
   const [resources, setResources] = useState([
     {
       uploadedBy: "Loading...",
@@ -51,6 +55,7 @@ const Resource = ({ parentFolder, uploadedBy }) => {
     }
   };
   useEffect(() => {
+    console.log(folderName);
     fetchResources();
   }, [isPosted]);
 
@@ -97,6 +102,22 @@ const Resource = ({ parentFolder, uploadedBy }) => {
     <>
       <ToastContainer />
       <div>
+        {folderName ? (
+          <div style={{marginTop: "50px"}}>
+            <Sidebar />
+            <div className="outer-container-units text-center">
+              <h1
+                className="display-3 text-center text-white blinking-text-units"
+                style={{ zIndex: 100 }}
+              >
+                {folderName}
+              </h1>
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+        <div className="units-img"></div>
         <div className="blur1"></div>
         {resources.map((resource) => (
           <div key={resource._id} className="resource-div">
