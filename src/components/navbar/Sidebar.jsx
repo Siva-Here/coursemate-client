@@ -87,7 +87,7 @@ function Sidebar() {
               onClick={playClickSound}
             >
               <img src="/favicons/book.png" height={"32px"} alt="" />
-              <span className="ms-3 fw-bold">Semesters</span>
+              <span className="ms-3 fw-bold">Year</span>
             </NavLink>
           </li>
           <li className="sidebar-item mt-3 text-start ms-2">

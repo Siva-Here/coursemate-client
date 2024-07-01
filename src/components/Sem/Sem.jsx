@@ -58,7 +58,7 @@ function Sem({ folders }) {
                 </h1>
                 <div
                   className="content-sem text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center"
-                  style={{ marginTop: "150px" }}
+                  style={{ marginTop: "50px" }}
                 >
                   {delayedFolders.map((folder) => (
                     <div
