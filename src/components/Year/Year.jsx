@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./Sem.css";
+import "./Year.css";
 import Sidebar from "../navbar/Sidebar";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Sem({ folders }) {
-  const location = useLocation();
+function Year({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const [user, setUser] = useState(false);
   const navigate = useNavigate();
-  const { folderId } = location.state;
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user") || false;
@@ -19,7 +17,7 @@ function Sem({ folders }) {
     }
     let timer;
     const rootFolders = folders
-      .filter((folder) => folder.isSem && folder.parentFolder == folderId)
+      .filter((folder) => !folder.parentFolder && folder.isSubject)
       .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
     rootFolders.forEach((folder, index) => {
@@ -34,7 +32,7 @@ function Sem({ folders }) {
   }, [folders]);
 
   const handleClick = (folderId, imgSrc) => {
-    navigate("/subjects", { state: { folderId, imgSrc, folders } });
+    navigate("/sem", { state: { folderId, imgSrc, folders } });
   };
 
   return (
@@ -43,21 +41,21 @@ function Sem({ folders }) {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="img-container-sem"></div>
+            <div className="img-container-year"></div>
             <div>
               <Sidebar />
-              <div className="outer-container-sem">
+              <div className="outer-container-year">
                 <h1
-                  className="display-1 text-center text-light blinking-text-sem"
+                  className="display-1 text-center text-light blinking-text-year"
                   style={{ fontSize: "58px" }}
                 >
-                  Semester
+                  Year
                 </h1>
-                <div className="content-sem text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
+                <div className="content-year text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
                   {delayedFolders.map((folder) => (
                     <div
                       key={folder._id}
-                      className="folder-div-sem d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
+                      className="folder-div-year d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
                       onClick={() =>
                         handleClick(folder._id, "/icons8-folder-96.png")
                       }
@@ -65,7 +63,7 @@ function Sem({ folders }) {
                       <div className="w-25 text-end align-items-end">
                         <img
                           className="text-start"
-                          src="/bing/folder4.png"
+                          src="/bing/folder5.png"
                           alt=""
                           height={"35px"}
                           style={{ opacity: 0.6 }}
@@ -88,4 +86,4 @@ function Sem({ folders }) {
   );
 }
 
-export default Sem;
+export default Year;

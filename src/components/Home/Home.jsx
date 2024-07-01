@@ -21,7 +21,7 @@ function Home() {
   function handleOpenSem() {
     setIsClickedSem(true);
     setTimeout(() => {
-      navigate("/sem");
+      navigate("/year");
     }, 450);
   }
   function handleOpenDomains() {

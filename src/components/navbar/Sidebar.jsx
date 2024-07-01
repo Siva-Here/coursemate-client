@@ -3,7 +3,7 @@ import { BiSolidCategory } from "react-icons/bi";
 import { TbLogout2 } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -22,7 +22,7 @@ function Sidebar() {
   }, []);
 
   const clickSound = new Audio("/nav.aac");
-  clickSound.volume = 0.2; // Set the volume to 30%
+  clickSound.volume = 0.05;
 
   function handleLogOut() {
     localStorage.removeItem("user");
@@ -35,7 +35,9 @@ function Sidebar() {
   };
 
   const playClickSound = () => {
-    clickSound.play();
+    setTimeout(() => {
+      clickSound.play();
+    }, 0.5);
   };
 
   return (
@@ -80,7 +82,7 @@ function Sidebar() {
           </li>
           <li className="sidebar-item mt-3 text-start ms-2">
             <NavLink
-              to="/sem"
+              to="/year"
               className="sidebar-link"
               onClick={playClickSound}
             >

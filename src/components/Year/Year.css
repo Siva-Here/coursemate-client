@@ -1,0 +1,75 @@
+@keyframes zoomIn {
+  from {
+    transform: scale(0%);
+    opacity: 0;
+  }
+  to {
+    transform: scale(100%);
+    opacity: 1;
+  }
+}
+
+@keyframes blink-year {
+  0%,
+  100% {
+    color: #fff;
+    text-shadow: 0 0 10px #f80000, 0 0 20px #fa0000, 0 0 40px #fa0000,
+      0 0 80px #fa0000, 0 0 120px #fa0000, 0 0 200px #fa0000, 0 0 300px #fa0000,
+      0 0 400px #fa0000;
+  }
+  5%,
+  95% {
+    color: #111;
+    filter: blur(0px);
+    text-shadow: none;
+  }
+}
+
+.blinking-text-year {
+  animation: blink-year 1.5s linear infinite;
+}
+
+.folder-div-year {
+  animation: zoomIn 0.3s ease-in;
+  z-index: 10;
+  margin: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50vw;
+  min-width: 300px;
+  background: rgba(0, 0, 0, 0.25);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.774);
+  max-width: 650px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.folder-div-year:hover {
+  transform: scale(1.05);
+}
+
+.img-container-year {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url("../../../public/bing/year.jpg") no-repeat center
+    center/contain;
+  z-index: -1;
+}
+
+.outer-container-year {
+  width: 100%;
+  padding: 20px;
+}
+
+.content-year {
+  width: 100%;
+  max-width: 1200px;
+}

@@ -13,6 +13,7 @@ import Domains from "./components/Domains/Domains";
 import Units from "./components/Units/Units";
 import Content from "./components/Content/Content";
 import Sem from "./components/Sem/Sem";
+import Year from "./components/Year/Year";
 import Team from "./components/Team/Team";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -83,6 +84,7 @@ function App() {
         <Route path="/units" element={<Units folders={folders} />} />
         <Route path="/content" element={<Content />} />
         <Route path="/sem" element={<Sem folders={folders} />} />
+        <Route path="/year" element={<Year folders={folders} />} />
         <Route path="/team" element={<Team />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/contribution" element={<Contribution />} />

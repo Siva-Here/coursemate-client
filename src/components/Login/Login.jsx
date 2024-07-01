@@ -72,8 +72,7 @@ function Login() {
   useEffect(() => {
     /* global google */
     google.accounts.id.initialize({
-      client_id:
-        process.env.REACT_APP_CLIENT_ID,
+      client_id: process.env.REACT_APP_CLIENT_ID,
       callback: handleCallbackResponse,
     });
 
