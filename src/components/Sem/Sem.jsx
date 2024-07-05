@@ -52,7 +52,7 @@ function Sem({ folders }) {
               <div className="outer-container-sem">
                 <h1
                   className="display-1 text-center text-light blinking-text-sem"
-                  style={{ fontSize: "58px" }}
+                  style={{ fontSize: "48px" }}
                 >
                   Semester
                 </h1>

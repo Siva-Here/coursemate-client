@@ -88,12 +88,12 @@ function Login() {
     <div className="login-container">
       <ToastContainer />
       <div className="login-content row">
-        <h1 className="display-3 fw-bold text-center cust-text">
+        <h1 className="display-5 fw-bold text-center cust-text">
           Welcome To CoursMate
         </h1>
         <div className="login-left justify-content-center col-12 col-sm-12 col-md-6">
           <img
-            src="/logo-removebg.png"
+            src="/logo-login.png"
             height={"300px"}
             alt="Coursemate"
             style={{ borderRadius: "50%" }}

@@ -47,7 +47,7 @@ function Year({ folders }) {
               <div className="outer-container-year">
                 <h1
                   className="display-1 text-center text-light blinking-text-year"
-                  style={{ fontSize: "58px" }}
+                  style={{ fontSize: "48px" }}
                 >
                   Year
                 </h1>

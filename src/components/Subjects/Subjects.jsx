@@ -54,9 +54,9 @@ function Subjects() {
               <div className="outer-container">
                 <h1
                   className="display-1 text-center text-light blinking-text-sem"
-                  style={{ fontSize: "58px" }}
+                  style={{ fontSize: "48px" }}
                 >
-                  Semester
+                  Subjects
                 </h1>
                 <div className="content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
                   {delayedFolders.map((folder) => (
