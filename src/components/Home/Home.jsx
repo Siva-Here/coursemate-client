@@ -37,7 +37,7 @@ function Home() {
         <div className="img-container">
           <img
             className="d-block logo ms-auto me-auto"
-            src="/logo-removebg.png"
+            src="/home.png"
             alt=""
             height="300px"
           />
