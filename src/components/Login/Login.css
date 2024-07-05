@@ -1,15 +1,25 @@
+@keyframes blinkLogin {
+  0%,
+  100% {
+    color: #fff;
+    text-shadow: 0 0 5px #8a55ee, 0 0 20px #8a55ee, 0 0 40px #000,
+      0 0 80px #8a55ee, 0 0 90px #8a55ee, 0 0 200px #8a55ee, 0 0 70px #000,
+      0 0 100px #000;
+  }
+}
+
 .cust-text {
-  animation: blinkTeam 0.5s linear infinite;
+  animation: blinkLogin 0.5s linear infinite;
   font-size: medium;
   font-weight: bolder;
-  background: radial-gradient(
+  /* background: radial-gradient(
     circle,
     rgb(224, 160, 240) 0%,
     rgb(184, 227, 247) 66%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  background-clip: text; */
 }
 @keyframes expandWidth {
   from {
@@ -28,7 +38,14 @@
   align-items: center;
   height: 100vh;
   width: 100vw;
-  background-image: url("../../../public/bing/welcome.jpeg");
+  /* background-image: url("../../../public/bg.jpg"); */
+  background: rgb(84, 28, 153);
+  background: linear-gradient(
+    180deg,
+    rgba(84, 28, 153, 1) 0%,
+    rgba(24, 24, 24, 1) 80%,
+    rgba(24, 24, 24, 1) 100%
+  );
   background-size: cover;
   background-position: center;
 }
