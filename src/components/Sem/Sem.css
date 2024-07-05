@@ -13,9 +13,9 @@
   0%,
   100% {
     color: #fff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 40px #ffffff,
-      0 0 80px #ffffff, 0 0 120px #ffffff, 0 0 200px #ffffff, 0 0 300px #ffffff,
-      0 0 400px #ffffff;
+    text-shadow: 0 0 10px #5b98e9, 0 0 20px #5b98e9, 0 0 40px #5b98e9,
+      0 0 80px #5b98e9, 0 0 120px #5b98e9, 0 0 200px #5b98e9, 0 0 300px #5b98e9,
+      0 0 400px #5b98e9;
   }
   5%,
   95% {
@@ -59,7 +59,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../../../public/bing/sem4.jpg") no-repeat center
+  background: url("../../../public/bing/sem.jpeg") no-repeat center
     center/contain;
   z-index: -1;
 }

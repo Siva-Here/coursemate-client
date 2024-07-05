@@ -46,7 +46,7 @@ function Sem({ folders }) {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="img-container-sem"></div>
+            <div className="units-img"></div>
             <div>
               <Sidebar />
               <div className="outer-container-sem">
@@ -72,7 +72,7 @@ function Sem({ folders }) {
                       <div className="w-25 text-end align-items-end">
                         <img
                           className="text-start"
-                          src="/bing/folder4.png"
+                          src="/bing/folder1.png"
                           alt=""
                           height={"35px"}
                           style={{ opacity: 0.6 }}

@@ -13,9 +13,9 @@
   0%,
   100% {
     color: #fff;
-    text-shadow: 0 0 10px #f80000, 0 0 20px #fa0000, 0 0 40px #fa0000,
-      0 0 80px #fa0000, 0 0 120px #fa0000, 0 0 200px #fa0000, 0 0 300px #fa0000,
-      0 0 400px #fa0000;
+    text-shadow: 0 0 10px #5b98e9, 0 0 20px #5b98e9, 0 0 40px #5b98e9,
+      0 0 80px #5b98e9, 0 0 120px #5b98e9, 0 0 200px #5b98e9, 0 0 300px #5b98e9,
+      0 0 400px #5b98e9;
   }
   5%,
   95% {
@@ -44,7 +44,7 @@
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(255, 0, 0, 0.574);
+  border: 1px solid rgba(31, 38, 135, 0.574);
   max-width: 650px;
   cursor: pointer;
   transition: 0.2s;
@@ -59,7 +59,7 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../../../public/bing/year.jpg") no-repeat center
+  background: url("../../../public/bing/team.jpg") no-repeat center
     center/contain;
   z-index: -1;
 }

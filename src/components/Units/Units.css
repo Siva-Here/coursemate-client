@@ -29,10 +29,10 @@
   0%,
   100% {
     color: #fff;
-    filter: blur(2px);
-    text-shadow: 0 0 10px #ffee00, 0 0 20px #ffee00, 0 0 40px #ffee00,
-      0 0 80px #ffee00, 0 0 120px #ffee00, 0 0 200px #ffee00, 0 0 300px #ffee00,
-      0 0 400px #ffee00;
+    /* filter: blur(2px); */
+    text-shadow: 0 0 10px #5b98e9, 0 0 20px #5b98e9, 0 0 40px #5b98e9,
+      0 0 80px #5b98e9, 0 0 120px #5b98e9, 0 0 200px #5b98e9, 0 0 300px #5b98e9,
+      0 0 400px #5b98e9;
   }
   5%,
   95% {
@@ -70,7 +70,7 @@ h1 span {
 
 .typing-effect {
   display: inline-block;
-  color: yellow;
+  color: rgb(31, 38, 135);
   background-color: transparent;
   overflow: hidden;
   z-index: 2;
@@ -96,7 +96,7 @@ h1 span {
   border: 1px solid rgba(255, 255, 255, 0.18);
   max-width: 650px;
   cursor: pointer;
-  border: 1px solid rgb(184, 172, 14);
+  border: 1px solid rgb(31, 38, 135);
   transition: 0.2s;
 }
 
@@ -110,7 +110,7 @@ h1 span {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../../../public/bing/pdf1.jpg") no-repeat center center/cover;
+  background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
   z-index: -1;
 }
 
