@@ -70,6 +70,19 @@ function Admin() {
     fetchDocuments();
   }, []);
 
+  const getImageSrc = (fileName) => {
+    const extension = fileName.split(".").pop().toLowerCase();
+    if (extension === "pdf") {
+      return "/favicons/pdf.png";
+    } else if (["ppt", "pptx"].includes(extension)) {
+      return "/favicons/ppt.png";
+    } else if (["doc", "docx"].includes(extension)) {
+      return "/favicons/doc.png";
+    } else {
+      return "/favicons/default.png";
+    }
+  };
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -78,6 +91,8 @@ function Admin() {
       </div>
     );
   }
+
+  function handleAccept() {}
 
   return (
     <>
