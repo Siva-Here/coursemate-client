@@ -19,7 +19,6 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
     if (!folderId) return;
 
     try {
-      console.error(folderId);
       const response = await axios.post(
         "https://course-mate-server.onrender.com/folder/",
         { folderId },

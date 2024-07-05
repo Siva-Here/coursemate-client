@@ -64,7 +64,7 @@ function Content() {
           },
         }
       );
-      const rootDocs = response.data;
+      const rootDocs = response.data.filter((doc) => doc.isAccepted);
       setDocs(rootDocs);
       setLoading(false);
       setDelayedDocs([]);

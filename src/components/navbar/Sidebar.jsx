@@ -9,6 +9,7 @@ function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [username, setUsername] = useState(null);
   const [profile, setProfile] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     try {
@@ -16,6 +17,9 @@ function Sidebar() {
       const email = user.email;
       setUsername(email.split("@")[0].toUpperCase());
       setProfile(user.picture);
+      if (email == "n200232@rguktn.ac.in" || email == "n200086@rguktn.ac.in") {
+        setIsAdmin(true);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +50,7 @@ function Sidebar() {
         <div className="d-flex">
           <button className="toggle-btn" type="button" onClick={toggleSidebar}>
             <BiSolidCategory className="fs-1 text-white home-icon icons" />
-            <h5 className="mt-2 text-white">Menu</h5>
+            <h5 className="text-white">Menu</h5>
           </button>
           <div className="sidebar-logo text-white fw-bold">
             {username !== null ? (
@@ -70,11 +74,11 @@ function Sidebar() {
             isExpanded ? "d-inline" : "d-none s-sm-inline"
           }`}
         >
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item text-start ms-2">
             <NavLink
               to="/home"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <img src="/favicons/home.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Home</span>
@@ -84,7 +88,7 @@ function Sidebar() {
             <NavLink
               to="/year"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <img src="/favicons/book.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Year</span>
@@ -94,7 +98,7 @@ function Sidebar() {
             <NavLink
               to="/domains"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <img src="/favicons/computer.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Domains</span>
@@ -104,17 +108,17 @@ function Sidebar() {
             <NavLink
               to="/contribution"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <img src="/favicons/star1.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Contributions</span>
             </NavLink>
           </li>
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-1 text-start ms-2">
             <NavLink
               to="/notifications"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <div style={{ display: "inline" }}>
                 <div className="notify"></div>
@@ -123,16 +127,30 @@ function Sidebar() {
               <span className="ms-3 fw-bold">Notifications</span>
             </NavLink>
           </li>
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-1 text-start ms-2">
             <NavLink
               to="/team"
               className="sidebar-link"
-              onClick={playClickSound}
+              // onClick={playClickSound}
             >
               <img src="/favicons/coding.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Web Team</span>
             </NavLink>
           </li>
+          {isAdmin ? (
+            <li className="sidebar-item mt-3 text-start ms-2">
+              <NavLink
+                to="/admin"
+                className="sidebar-link"
+                // onClick={playClickSound}
+              >
+                <img src="/favicons/admin.png" height={"32px"} alt="" />
+                <span className="ms-3 fw-bold">Admin Page</span>
+              </NavLink>
+            </li>
+          ) : (
+            <></>
+          )}
           <li className="sidebar-item mt-3 text-start ms-2">
             <div
               className={`sidebar-footer mb-3 wrapper ${

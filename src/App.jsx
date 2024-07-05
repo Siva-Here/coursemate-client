@@ -20,6 +20,7 @@ import axios from "axios";
 import Notification from "./components/Notifications/Notification";
 import Resource from "./components/Resource/Resource";
 import Contribution from "./components/Contribution/Contribution";
+import Admin from "./components/Admin/Admin";
 // import useClickSound from "./components/SoundHook/useClickSound";
 // import clickSoundFile from "./click.mp3";
 
@@ -90,6 +91,7 @@ function App() {
         <Route path="/notifications" element={<Notification />} />
         <Route path="/contribution" element={<Contribution />} />
         <Route path="/resource" element={<Resource />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );
