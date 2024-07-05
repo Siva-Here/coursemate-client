@@ -39,7 +39,7 @@ function Home() {
             className="d-block logo ms-auto me-auto"
             src="/home.png"
             alt=""
-            height="300px"
+            height="250px"
           />
           <div className="blur">
             <SideBar />
