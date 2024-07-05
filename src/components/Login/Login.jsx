@@ -93,7 +93,7 @@ function Login() {
         </h1>
         <div className="login-left justify-content-center col-12 col-sm-12 col-md-6">
           <img
-            src="/logo-login.png"
+            src="/logo-login1.png"
             height={"300px"}
             alt="Coursemate"
             style={{ borderRadius: "50%" }}
