@@ -74,7 +74,7 @@
   position: relative;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
-  /* backdrop-filter: blur(2px); */
+  backdrop-filter: blur(2px);
   height: 100%;
   top: 0;
   right: 0;

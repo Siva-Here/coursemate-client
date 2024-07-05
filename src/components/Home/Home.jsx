@@ -39,8 +39,6 @@ function Home() {
             <SideBar />
             <div className="outer-container">
               <div className="blur1"></div>
-              <div className="blur1"></div>
-              <div className="blur1"></div>
               <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                 <div
                   className={`categories ${
