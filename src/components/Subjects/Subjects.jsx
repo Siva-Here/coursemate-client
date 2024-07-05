@@ -52,8 +52,11 @@ function Subjects() {
             <div>
               <Sidebar />
               <div className="outer-container">
-                <h1 className="display-1 text-center text-white blinking-text-subjects">
-                  Subjects
+                <h1
+                  className="display-1 text-center text-light blinking-text-sem"
+                  style={{ fontSize: "58px" }}
+                >
+                  Semester
                 </h1>
                 <div className="content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
                   {delayedFolders.map((folder) => (
@@ -67,7 +70,7 @@ function Subjects() {
                       <div className="w-25 text-end align-items-end">
                         <img
                           className="text-start"
-                          src="/icons8-folder-96.png"
+                          src="/bing/folder1.png"
                           alt=""
                           height={"40px"}
                         />
