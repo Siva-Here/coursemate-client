@@ -26,18 +26,18 @@ function Sidebar() {
 
   function handleLogOut() {
     localStorage.removeItem("user");
-    playClickSound();
+    // playClickSound();
   }
 
   const toggleSidebar = () => {
     setIsExpanded(!isExpanded);
-    playClickSound();
+    // playClickSound();
   };
 
   const playClickSound = () => {
-    setTimeout(() => {
-      clickSound.play();
-    }, 0.5);
+    // setTimeout(() => {
+    //   clickSound.play();
+    // }, 0.5);
   };
 
   return (

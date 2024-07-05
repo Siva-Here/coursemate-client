@@ -20,12 +20,12 @@ import axios from "axios";
 import Notification from "./components/Notifications/Notification";
 import Resource from "./components/Resource/Resource";
 import Contribution from "./components/Contribution/Contribution";
-import useClickSound from "./components/SoundHook/useClickSound";
-import clickSoundFile from "./click.mp3";
+// import useClickSound from "./components/SoundHook/useClickSound";
+// import clickSoundFile from "./click.mp3";
 
 import { jwtDecode } from "jwt-decode";
 function App() {
-  useClickSound(clickSoundFile, [".wrapper", ".sidebar-nav"]);
+  // useClickSound(clickSoundFile, [".wrapper", ".sidebar-nav"]);
   const [folders, setFolders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSlow, setIsSlow] = useState(false);
