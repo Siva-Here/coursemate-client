@@ -35,10 +35,16 @@ function Home() {
     <div>
       {user ? (
         <div className="img-container">
+          <img
+            className="d-block logo ms-auto me-auto"
+            src="/logo-removebg.png"
+            alt=""
+            height="300px"
+          />
           <div className="blur">
             <SideBar />
             <div className="outer-container">
-              <div className="blur1"></div>
+              <div className="blur-home"></div>
               <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                 <div
                   className={`categories ${
