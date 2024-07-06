@@ -21,12 +21,12 @@ import Notification from "./components/Notifications/Notification";
 import Resource from "./components/Resource/Resource";
 import Contribution from "./components/Contribution/Contribution";
 import Admin from "./components/Admin/Admin";
-// import useClickSound from "./components/SoundHook/useClickSound";
-// import clickSoundFile from "./click.mp3";
+import useClickSound from "./components/SoundHook/useClickSound";
+import clickSoundFile from "./click.mp3";
 
 import { jwtDecode } from "jwt-decode";
 function App() {
-  // useClickSound(clickSoundFile, [".wrapper", ".sidebar-nav"]);
+  useClickSound(clickSoundFile, []);
   const [folders, setFolders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSlow, setIsSlow] = useState(false);

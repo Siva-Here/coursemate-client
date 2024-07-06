@@ -53,6 +53,12 @@ function Home() {
                   } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
                   onClick={handleOpenSem}
                 >
+                  <img
+                    src="/favicons/book.png"
+                    alt="book"
+                    height="38px"
+                    className="me-3"
+                  />
                   SEMESTERS
                 </div>
                 <div
@@ -61,6 +67,12 @@ function Home() {
                   } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
                   onClick={handleOpenDomains}
                 >
+                  <img
+                    src="/favicons/domain-home.png"
+                    alt="book"
+                    height="40px"
+                    className="me-3"
+                  />
                   DOMAINS
                 </div>
               </div>

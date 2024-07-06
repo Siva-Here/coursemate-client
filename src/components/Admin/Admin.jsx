@@ -118,19 +118,25 @@ function Admin() {
 
   async function handleDelete(docId) {
     try {
-      const response = await axios.delete(
-        `https://course-mate-server.onrender.com/document/${docId}`,
+      const response = await fetch(
+        "https://course-mate-server.onrender.com/document/",
         {
+          method: "DELETE",
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+          body: JSON.stringify({ docId }),
         }
       );
-      if (response.status === 200) {
+
+      if (response.ok) {
+        const data = await response.json();
         toast.success("File Deleted...");
         setIsAccepted(!isAccepted);
       } else {
-        toast.error("Error Deleting the file...");
+        const errorData = await response.json();
+        toast.error(`Error Deleting the file: ${errorData.message}`);
       }
     } catch (error) {
       toast.error("Error Deleting the file...");
