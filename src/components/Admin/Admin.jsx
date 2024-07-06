@@ -13,6 +13,7 @@ function Admin() {
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAccepted, setIsAccepted] = useState(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
 
@@ -68,7 +69,7 @@ function Admin() {
 
   useEffect(() => {
     fetchDocuments();
-  }, []);
+  }, [isAccepted]);
 
   const getImageSrc = (fileName) => {
     const extension = fileName.split(".").pop().toLowerCase();
@@ -92,7 +93,49 @@ function Admin() {
     );
   }
 
-  function handleAccept() {}
+  async function handleAccept(docId) {
+    console.log(token);
+    try {
+      const response = await axios.post(
+        "https://course-mate-server.onrender.com/document/accept",
+        { docId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status == 200) {
+        toast.success("File accepted...");
+        setIsAccepted(!isAccepted);
+      } else {
+        toast.error("Error accepting the file...");
+      }
+    } catch (error) {
+      toast.error("Error accepting the file...");
+    }
+  }
+
+  async function handleDelete(docId) {
+    try {
+      const response = await axios.delete(
+        `https://course-mate-server.onrender.com/document/${docId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status === 200) {
+        toast.success("File Deleted...");
+        setIsAccepted(!isAccepted);
+      } else {
+        toast.error("Error Deleting the file...");
+      }
+    } catch (error) {
+      toast.error("Error Deleting the file...");
+    }
+  }
 
   return (
     <>
@@ -136,13 +179,25 @@ function Admin() {
 
                       <div
                         className="download-div text-end me-3 align-items-start"
-                        onClick={handleAccept}
+                        onClick={() => handleAccept(doc._id)}
                       >
                         <img
                           className=""
                           src="/favicons/tick.png"
                           alt=""
-                          height={"40px"}
+                          height={"35px"}
+                        />
+                      </div>
+                      <div
+                        className="download-div text-end me-3 align-items-start"
+                        onClick={() => handleDelete(doc._id)}
+                      >
+                        <img
+                          className=""
+                          src="/favicons/delete.png"
+                          alt=""
+                          height={"35px"}
+                          style={{ opacity: 0.6 }}
                         />
                       </div>
                     </div>

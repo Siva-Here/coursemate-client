@@ -41,6 +41,7 @@ function Home() {
             alt=""
             height="250px"
           />
+          <div className="blur1"></div>
           <div className="blur">
             <SideBar />
             <div className="outer-container">

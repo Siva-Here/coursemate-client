@@ -1,4 +1,4 @@
-@keyframes blinkboard {
+/* @keyframes blinkboard {
   0%,
   100% {
     color: #fff;
@@ -15,6 +15,26 @@
 .blinking-text-leaderboard {
   font-size: 30px;
   animation: blinkboard 0.5s linear infinite;
+} */
+
+.blinking-text-leaderboard {
+  animation: blinkboard 1.5s linear infinite;
+}
+
+@keyframes blinkboard {
+  0%,
+  100% {
+    color: #fff;
+    text-shadow: 3px 0 20px #047204, 0 0 20px #047204, 0 0 40px #047204,
+      0 0 80px #047204, 0 0 120px #047204, 0 0 200px #047204, 0 0 300px #047204,
+      0 0 400px #047204;
+  }
+  5%,
+  95% {
+    color: #111;
+    opacity: 1;
+    text-shadow: none;
+  }
 }
 
 .contributions-container {

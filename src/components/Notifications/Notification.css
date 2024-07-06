@@ -1,4 +1,4 @@
-@keyframes blink-notify {
+/* @keyframes blink-notify {
   0%,
   100% {
     color: #fff;
@@ -17,6 +17,26 @@
 
 .blinking-text-notify {
   animation: blink-notify 1.5s linear infinite;
+} */
+
+.blinking-text-notify {
+  animation: blink-notify 1.5s linear infinite;
+}
+
+@keyframes blink-notify {
+  0%,
+  100% {
+    color: #fff;
+    text-shadow: 3px 0 20px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000,
+      0 0 80px #ff0000, 0 0 120px #ff0000, 0 0 200px #ff0000, 0 0 300px #ff0000,
+      0 0 400px #ff0000;
+  }
+  5%,
+  95% {
+    color: #111;
+    opacity: 1;
+    text-shadow: none;
+  }
 }
 .blur-notify {
   width: 100%;

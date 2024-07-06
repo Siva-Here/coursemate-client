@@ -39,7 +39,7 @@ function Year({ folders }) {
     <div>
       {user ? (
         <>
-          {/* <div className="blur1"></div> */}
+          <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
             <div className="units-img"></div>
             <div>
@@ -65,7 +65,7 @@ function Year({ folders }) {
                           className="text-start"
                           src="/bing/folder1.png"
                           alt=""
-                          height={"35px"}
+                          height={"40px"}
                           style={{ opacity: 0.6 }}
                         />
                       </div>

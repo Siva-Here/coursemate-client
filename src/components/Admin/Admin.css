@@ -4,7 +4,7 @@ body {
   background: #000;
   display: flex;
   justify-content: center;
-  font-family: "Caveat", cursive;
+  /* font-family: "Caveat", cursive; */
 }
 
 h1 {

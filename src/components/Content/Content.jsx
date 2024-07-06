@@ -64,7 +64,7 @@ function Content() {
           },
         }
       );
-      const rootDocs = response.data.filter((doc) => doc.isAccepted);
+      const rootDocs = response.data;
       setDocs(rootDocs);
       setLoading(false);
       setDelayedDocs([]);
@@ -242,45 +242,53 @@ function Content() {
                 >
                   {parentFolder}
                 </h1>
-                <div className="content-content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
-                  {delayedDocs.map((doc) => (
-                    <div
-                      key={doc._id}
-                      className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
-                    >
-                      <div className="img-div text-start ms-4 align-items-end">
-                        <img
-                          className="text-start"
-                          src={getImageSrc(doc.name)}
-                          alt=""
-                          height={"35px"}
-                        />
-                      </div>
-                      <div
-                        className="text-div text-start align-items-start"
-                        onClick={() => {
-                          window.location.href = `${doc.viewLink}`;
-                        }}
-                      >
-                        {doc.name.toUpperCase()}
-                      </div>
+                {delayedDocs.length != 0 ? (
+                  <div className="content-content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
+                    {delayedDocs
+                      .filter((doc) => doc.isAccepted)
+                      .map((doc) => (
+                        <div
+                          key={doc._id}
+                          className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                        >
+                          <div className="img-div text-start ms-4 align-items-end">
+                            <img
+                              className="text-start"
+                              src={getImageSrc(doc.name)}
+                              alt=""
+                              height={"35px"}
+                            />
+                          </div>
+                          <div
+                            className="text-div text-start align-items-start"
+                            onClick={() => {
+                              window.location.href = `${doc.viewLink}`;
+                            }}
+                          >
+                            {doc.name.toUpperCase()}
+                          </div>
 
-                      <div
-                        className="download-div text-end me-3 align-items-start"
-                        onClick={() => {
-                          window.location.href = `${doc.downloadLink}`;
-                        }}
-                      >
-                        <img
-                          className=""
-                          src="/favicons/download2.png"
-                          alt=""
-                          height={"40px"}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                          <div
+                            className="download-div text-end me-3 align-items-start"
+                            onClick={() => {
+                              window.location.href = `${doc.downloadLink}`;
+                            }}
+                          >
+                            <img
+                              className=""
+                              src="/favicons/download2.png"
+                              alt=""
+                              height={"40px"}
+                            />
+                          </div>
+                        </div>
+                      ))}
+                  </div>
+                ) : (
+                  <h1 className="text-center text-white display-6 align-items-center justify-content-center">
+                    No Content Yet. Please Upload or wait Until uploaded....
+                  </h1>
+                )}
               </div>
             </div>
             <form onSubmit={handleSubmit}>

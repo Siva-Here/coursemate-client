@@ -74,7 +74,7 @@ function Sem({ folders }) {
                           className="text-start"
                           src="/bing/folder1.png"
                           alt=""
-                          height={"35px"}
+                          height={"40px"}
                           style={{ opacity: 0.6 }}
                         />
                       </div>
