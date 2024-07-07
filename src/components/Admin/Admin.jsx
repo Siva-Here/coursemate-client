@@ -387,7 +387,10 @@ function Admin() {
                                 style={{ opacity: 0.8 }}
                               />
                             </div>
-                            <p>Name: {resource.name}</p>
+                            <p className="text-uppercase fw-bold fst-italic font-italic">
+                              {" "}
+                              {resource.name}
+                            </p>
                             <p>{resource.description}</p>
                             <p>
                               Link:{" "}

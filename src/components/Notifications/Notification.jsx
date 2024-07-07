@@ -111,7 +111,10 @@ const Notification = () => {
                 <p className="Notification-user">
                   Uploaded by: {Notification.uploadedBy}
                 </p>
-                <p>Name: {Notification.name}</p>
+                <p className="text-uppercase fw-bold fst-italic font-italic">
+                  {" "}
+                  {Notification.name}
+                </p>
                 <p>{Notification.description}</p>
                 <p>
                   Link:{""}

@@ -172,7 +172,10 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
               <p className="resource-user">
                 Uploaded by: {resource.uploadedBy}
               </p>
-              <p>Name: {resource.name}</p>
+              <p className="text-uppercase fw-bold fst-italic font-italic">
+                {" "}
+                {resource.name}
+              </p>
               <p>{resource.description}</p>
               <p>
                 Link:{" "}
