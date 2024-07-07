@@ -37,7 +37,7 @@ function Content() {
     const email = jwtDecode(token).email;
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/user/getUserId`,
+        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
         { email },
         {
           headers: {
@@ -56,7 +56,7 @@ function Content() {
   const fetchDocuments = async () => {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/document/folder`,
+        `${process.env.REACT_APP_BASE_API_URL}/document/folder`,
         { folderId },
         {
           headers: {
@@ -75,7 +75,7 @@ function Content() {
       });
 
       const folderResponse = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/folder`,
+        `${process.env.REACT_APP_BASE_API_URL}/folder`,
         { folderId },
         {
           headers: {
@@ -149,7 +149,7 @@ function Content() {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/document/upload`,
+        `${process.env.REACT_APP_BASE_API_URL}/document/upload`,
         formData,
         {
           headers: {
@@ -171,7 +171,7 @@ function Content() {
 
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/document/saveDocument`,
+          `${process.env.REACT_APP_BASE_API_URL}/document/saveDocument`,
           params,
           {
             headers: {

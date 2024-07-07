@@ -13,7 +13,7 @@ function Login() {
     const token = response.credential;
 
     axios
-      .get(`${process.env.REACT_APP_BASE_URL}/user/login`, {
+      .get(`${process.env.REACT_APP_BASE_API_URL}/user/login`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -25,14 +25,14 @@ function Login() {
           const email = user.email;
 
           axios
-            .get(`${process.env.REACT_APP_BASE_URL}/user/users`)
+            .get(`${process.env.REACT_APP_BASE_API_URL}/user/users`)
             .then((userRes) => {
               const users = userRes.data;
               const userExists = users.some((u) => u.email === email);
 
               if (!userExists) {
                 axios
-                  .post(`${process.env.REACT_APP_BASE_URL}/user/create`, {
+                  .post(`${process.env.REACT_APP_BASE_API_URL}/user/create`, {
                     username,
                     email,
                   })

@@ -21,7 +21,7 @@ function Domains({ folders }) {
     const email = jwtDecode(storedUser).email;
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/user/getUserId`,
+        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
         { email },
         {
           headers: {

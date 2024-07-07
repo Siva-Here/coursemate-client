@@ -45,7 +45,7 @@ function App() {
     } catch (error) {
     } finally {
       axios
-        .get(`${process.env.REACT_APP_BASE_URL}/folder/folders`, {
+        .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

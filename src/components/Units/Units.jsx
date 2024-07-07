@@ -40,7 +40,7 @@ function Units({ folders }) {
     const email = jwtDecode(token).email;
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/user/getUserId`,
+        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
         { email },
         {
           headers: {

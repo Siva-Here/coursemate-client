@@ -28,7 +28,7 @@ function Admin() {
     const email = jwtDecode(token).email;
     axios
       .post(
-        `${process.env.REACT_APP_BASE_URL}/user/getUserId`,
+        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
         { email },
         {
           headers: {
@@ -47,7 +47,7 @@ function Admin() {
   const fetchDocuments = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_BASE_URL}/document/docs`,
+        `${process.env.REACT_APP_BASE_API_URL}/document/docs`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -112,7 +112,7 @@ function Admin() {
     console.log(token);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/document/accept`,
+        `${process.env.REACT_APP_BASE_API_URL}/document/accept`,
         { docId },
         {
           headers: {
@@ -134,7 +134,7 @@ function Admin() {
   async function getUserName(uploadedBy) {
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_URL}/user/profile`,
+        `${process.env.REACT_APP_BASE_API_URL}/user/profile`,
         { userId: uploadedBy },
         {
           headers: {
@@ -156,7 +156,7 @@ function Admin() {
   async function handleDelete(docId) {
     try {
       const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}/document/`,
+        `${process.env.REACT_APP_BASE_API_URL}/document/`,
         {
           method: "DELETE",
           headers: {
