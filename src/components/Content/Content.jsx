@@ -285,9 +285,20 @@ function Content() {
                       ))}
                   </div>
                 ) : (
-                  <h1 className="text-center text-white display-6 align-items-center justify-content-center">
-                    No Content Yet. Please Upload or wait Until uploaded....
-                  </h1>
+                  <div
+                    className="text-center d-flex justify-content-center align-items-center text-white display-6"
+                    style={{ height: "60vh" }}
+                  >
+                    <div className="blur1"></div>
+                    <div className="blur1"></div>
+                    <div className="blur1"></div>
+                    <h1
+                      className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
+                      style={{ zIndex: 100 }}
+                    >
+                      No Content Yet. Please Upload or wait Until uploaded....
+                    </h1>
+                  </div>
                 )}
               </div>
             </div>
