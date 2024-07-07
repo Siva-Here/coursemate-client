@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Resource.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
+import { AuthContext } from "../../AuthContext";
 
 const Resource = ({ parentFolder, uploadedBy, view }) => {
   const location = useLocation();
@@ -14,6 +15,8 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
   const [folderName, setFolderName] = useState(null);
   const [folderId, setFolderId] = useState(null);
   const [userId, setUserId] = useState(null);
+  const { isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   async function getFolderName() {
     if (!folderId) return;
@@ -83,8 +86,13 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
   };
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      // navigate("/");
+    }
     if (view !== "units") {
-      console.log(location.state);
+      if (!location.state) {
+        navigate("/");
+      }
       setFolderId(location.state.parentFolder);
       setUserId(location.state.uploadedBy);
     } else {
@@ -94,6 +102,9 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
   }, []);
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      navigate("/");
+    }
     getFolderName();
     fetchResources();
   }, [folderId, isPosted]);

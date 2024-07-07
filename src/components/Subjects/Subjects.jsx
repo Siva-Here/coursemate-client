@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Subjects.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 
 function Subjects() {
   const navigate = useNavigate();
   const location = useLocation();
   const { folderId, folders } = location.state || {};
   const [delayedFolders, setDelayedFolders] = useState([]);
-  const [user, setUser] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      setUser(storedUser);
-    } else {
+    if (!isLoggedIn) {
       navigate("/");
     }
 
@@ -44,7 +42,7 @@ function Subjects() {
 
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>

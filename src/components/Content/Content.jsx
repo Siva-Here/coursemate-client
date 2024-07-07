@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Content.css";
 import Sidebar from "../navbar/Sidebar";
@@ -6,11 +6,12 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../AuthContext";
 
 function Content() {
   const location = useLocation();
   let { folderId } = location.state;
-  const [user, setUser] = useState(null);
+  const { isLoggedIn } = useContext(AuthContext);
   const [userId, setUserId] = useState(null);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
@@ -26,15 +27,15 @@ function Content() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user") || false;
+    let email;
     if (storedUser) {
-      setUser(storedUser);
+      email = jwtDecode(token).email;
     } else {
       navigate("/");
     }
     if (location.state) {
       folderId = location.state.folderId;
     }
-    const email = jwtDecode(token).email;
     axios
       .post(
         `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
@@ -227,7 +228,7 @@ function Content() {
 
   return (
     <>
-      {user ? (
+      {isLoggedIn ? (
         <div>
           <ToastContainer />
           <div className="blur1"></div>

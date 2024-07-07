@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Admin.css";
 import Sidebar from "../navbar/Sidebar";
@@ -6,9 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../AuthContext";
 
 function Admin() {
-  const [user, setUser] = useState(null);
+  const { isLoggedIn } = useContext(AuthContext);
   const [userId, setUserId] = useState(null);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
@@ -20,12 +21,16 @@ function Admin() {
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
+    let email;
+    if (isLoggedIn) {
+      try {
+        email = jwtDecode(storedUser).email;
+      } catch (error) {
+        navigate("/");
+      }
     } else {
       navigate("/");
     }
-    const email = jwtDecode(token).email;
     axios
       .post(
         `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
@@ -182,7 +187,7 @@ function Admin() {
 
   return (
     <>
-      {user ? (
+      {isLoggedIn ? (
         <div>
           <ToastContainer />
           <div className="blur1"></div>

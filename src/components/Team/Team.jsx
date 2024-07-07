@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Team.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 
 const Team = () => {
-  const [user, setUser] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
-    } else {
+    if (!isLoggedIn) {
       navigate("/");
     }
-  });
+  }, []);
   return (
     <>
-      {user ? (
+      {isLoggedIn ? (
         <div className="container-fluid">
           <div style={{ marginTop: "50px" }}>
             <div className="img-container-sem"></div>

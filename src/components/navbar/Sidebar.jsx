@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { TbLogout2 } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../AuthContext";
 
 function Sidebar() {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -11,6 +12,7 @@ function Sidebar() {
   const [profile, setProfile] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const menuButtonRef = useRef(null);
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     try {
@@ -50,6 +52,7 @@ function Sidebar() {
 
   function handleLogOut() {
     localStorage.removeItem("user");
+    setIsLoggedIn(false);
     // playClickSound();
   }
 

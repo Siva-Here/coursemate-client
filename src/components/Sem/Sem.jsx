@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Sem.css";
 import Sidebar from "../navbar/Sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 
 function Sem({ folders }) {
   const location = useLocation();
   const [delayedFolders, setDelayedFolders] = useState([]);
-  const [user, setUser] = useState(false);
   const navigate = useNavigate();
   const { folderId } = location.state;
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     if (!folderId) {
       navigate("/year");
     }
-    const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
-    } else {
+    if (!isLoggedIn) {
       navigate("/");
     }
     let timer;
@@ -42,7 +40,7 @@ function Sem({ folders }) {
 
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>

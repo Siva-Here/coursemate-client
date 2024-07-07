@@ -1,22 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SideBar from "../navbar/Sidebar";
 import "./Home.css";
+import { AuthContext } from "../../AuthContext";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 
 function Home() {
-  const [user, setUser] = useState(null);
+  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [isClickedSem, setIsClickedSem] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
+    const token = localStorage.getItem("user") || false;
+    if (token) {
+      const email = jwtDecode(token).email;
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
+          { email },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setIsLoggedIn(true);
+          }
+        })
+        .catch((error) => {});
     } else {
       navigate("/");
     }
-  }, [navigate]);
+  }, []);
 
   function handleOpenSem() {
     setIsClickedSem(true);
@@ -24,6 +43,7 @@ function Home() {
       navigate("/year");
     }, 450);
   }
+
   function handleOpenDomains() {
     setIsClickedDomains(true);
     setTimeout(() => {
@@ -33,7 +53,7 @@ function Home() {
 
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <div className="img-container">
           <img
             className="d-block logo ms-auto me-auto"
@@ -80,7 +100,7 @@ function Home() {
           </div>
         </div>
       ) : (
-        <p></p>
+        <></>
       )}
     </div>
   );

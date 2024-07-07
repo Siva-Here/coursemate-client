@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Contribution.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 
 const Contribution = () => {
   const [contributions, setContributions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isSlow, setIsSlow] = useState(false);
-  const [user, setUser] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
 
@@ -36,10 +37,7 @@ const Contribution = () => {
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
-    } else {
+    if (!isLoggedIn) {
       navigate("/");
     }
     setTimeout(() => {
@@ -79,7 +77,7 @@ const Contribution = () => {
 
   return (
     <>
-      {user ? (
+      {isLoggedIn ? (
         <>
           <ToastContainer />
           <div>

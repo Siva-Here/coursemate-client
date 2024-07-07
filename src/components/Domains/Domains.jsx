@@ -1,24 +1,30 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Domains.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { AuthContext } from "../../AuthContext";
 
 function Domains({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
-  const [user, setUser] = useState(false);
   const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
+    let email;
     if (storedUser) {
-      setUser(storedUser);
+      try {
+        email = jwtDecode(storedUser).email;
+      } catch (error) {
+        console.error("Invalid user...", error);
+        navigate("/");
+      }
     } else {
       navigate("/");
     }
-    const email = jwtDecode(storedUser).email;
     axios
       .post(
         `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
@@ -59,7 +65,7 @@ function Domains({ folders }) {
 
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>

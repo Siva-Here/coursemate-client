@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Year.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthContext";
 
 function Year({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
-  const [user, setUser] = useState(false);
   const navigate = useNavigate();
+  const { isLoggedIn } = useContext(AuthContext);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    if (storedUser) {
-      setUser(storedUser);
-    } else {
+    if (!isLoggedIn) {
       navigate("/");
     }
     let timer;
@@ -37,7 +35,7 @@ function Year({ folders }) {
 
   return (
     <div>
-      {user ? (
+      {isLoggedIn ? (
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>

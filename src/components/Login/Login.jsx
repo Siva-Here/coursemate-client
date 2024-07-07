@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { setIsLoggedIn } = useContext(AuthContext);
 
   function handleCallbackResponse(response) {
     const token = response.credential;
@@ -20,54 +22,108 @@ function Login() {
       })
       .then((res) => {
         if (res.status === 200) {
-          const user = jwtDecode(token);
-          const username = user.family_name;
-          const email = user.email;
-
-          axios
-            .get(`${process.env.REACT_APP_BASE_API_URL}/user/users`)
-            .then((userRes) => {
-              const users = userRes.data;
-              const userExists = users.some((u) => u.email === email);
-
-              if (!userExists) {
-                axios
-                  .post(`${process.env.REACT_APP_BASE_API_URL}/user/create`, {
-                    username,
-                    email,
-                  })
-                  .then((createRes) => {
-                    if (createRes.status === 201) {
-                      localStorage.setItem("user", JSON.stringify(token));
-                      navigate("/home");
-                    } else {
-                      toast.error("Error logging in. Please try again.");
-                    }
-                  })
-                  .catch((error) => {
-                    console.error("Error creating user:", error);
-                    toast.error("Error logging in. Please try again.");
-                  });
-              } else {
-                localStorage.setItem("user", JSON.stringify(token));
-                navigate("/home");
-              }
-            })
-            .catch((error) => {
-              console.error("Error fetching users:", error);
-              toast.error("Error logging in. Please try again.");
-            });
+          setIsLoggedIn(true);
+          toast.success("Login Successful!");
+          localStorage.setItem("user", JSON.stringify(token));
+          setTimeout(() => {
+            navigate("/home");
+          }, 1500);
+        } else if (res.status === 201) {
+          localStorage.setItem("user", JSON.stringify(token));
+          setIsLoggedIn(true);
+          toast.success("Login Successful! Welcome to coursemate!");
+          setTimeout(() => {
+            navigate("/home");
+          }, 1500);
+        } else {
+          toast.error("Failed to Login! Try with Your College Email!");
         }
       })
       .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          toast.error("Please login with your college Mail ID");
-        } else {
-          console.error("Login error:", error);
-          toast.error("An error occurred during login. Please try again.");
-        }
+        toast.error("Failed to login! Try with Your College Email!");
       });
+    //   if (res.status === 200) {
+    //     const user = jwtDecode(token);
+    //     const username = user.family_name;
+    //     const email = user.email;
+
+    //     axios
+    //       .get(`${process.env.REACT_APP_BASE_API_URL}/user/users`)
+    //       .then((userRes) => {
+    //         const users = userRes.data;
+    //         const userExists = users.some((u) => u.email === email);
+
+    //         if (!userExists) {
+    //           axios
+    //             .post(`${process.env.REACT_APP_BASE_API_URL}/user/create`, {
+    //               username,
+    //               email,
+    //             })
+    //             .then((createRes) => {
+    //               if (createRes.status === 201) {
+    //                 localStorage.setItem("user", JSON.stringify(token));
+    //                 setIsLoggedIn(true);
+    //                 toast.success("Login Successful!");
+    //                 setTimeout(() => {
+    //                   navigate("/home");
+    //                 }, 1500);
+    //               } else {
+    //                 toast.error("Error logging in. Please try again.");
+    //               }
+    //             })
+    //             .catch((error) => {
+    //               console.error("Error creating user:", error);
+    //               toast.error("Error logging in. Please try again.");
+    //             });
+    //         } else {
+    // setIsLoggedIn(true);
+    // toast.success("Login Successful!");
+    // localStorage.setItem("user", JSON.stringify(token));
+    // navigate("/home");
+    //         }
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error fetching users:", error);
+    //         toast.error("Error logging in. Please try again.");
+    //       });
+    //   }
+    // })
+    // .catch((error) => {
+    //   if (error.response && error.response.status === 401) {
+    //     toast.error("Please login with your college Mail ID");
+    //   } else {
+    //     console.error("Login error:", error);
+    //     toast.error("An error occurred during login. Please try again.");
+    //   }
+    // });
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("user") || false;
+    let email;
+    if (token) {
+      try {
+        email = jwtDecode(token).email;
+      } catch (error) {}
+      axios
+        .post(
+          `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
+          { email },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          if (res.status === 200) {
+            setIsLoggedIn(true);
+            navigate("/home");
+          }
+        })
+        .catch((error) => {});
+    }
+  }, []);
 
   useEffect(() => {
     /* global google */
@@ -82,7 +138,7 @@ function Login() {
     });
 
     google.accounts.id.prompt();
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="login-container">
