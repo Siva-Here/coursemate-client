@@ -24,7 +24,7 @@ const Notification = () => {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(
-        "https://course-mate-server.onrender.com/resource/resources",
+        `${process.env.REACT_APP_BASE_URL}/resource/resources`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

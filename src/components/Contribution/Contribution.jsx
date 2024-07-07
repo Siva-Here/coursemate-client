@@ -17,7 +17,7 @@ const Contribution = () => {
   const fetchContributions = async () => {
     try {
       const response = await axios.get(
-        "https://course-mate-server.onrender.com/user/users"
+        `${process.env.REACT_APP_BASE_URL}/user/users`
       );
 
       if (response.status === 200) {

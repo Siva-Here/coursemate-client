@@ -20,7 +20,7 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
 
     try {
       const response = await axios.post(
-        "https://course-mate-server.onrender.com/folder/",
+        `${process.env.REACT_APP_BASE_URL}/folder/`,
         { folderId },
         {
           headers: {
@@ -56,7 +56,7 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
 
     try {
       const response = await axios.post(
-        "https://course-mate-server.onrender.com/resource/folder",
+        `${process.env.REACT_APP_BASE_URL}/resource/folder`,
         { folderId },
         {
           headers: {
@@ -114,7 +114,7 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
     console.log(formData);
     try {
       const response = await axios.post(
-        "https://course-mate-server.onrender.com/resource/create",
+        `${process.env.REACT_APP_BASE_URL}/resource/create`,
         formData,
         {
           headers: {

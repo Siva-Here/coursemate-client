@@ -14,6 +14,7 @@ function Admin() {
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isAccepted, setIsAccepted] = useState(false);
+  const [usernames, setUsernames] = useState({});
   const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
 
@@ -27,7 +28,7 @@ function Admin() {
     const email = jwtDecode(token).email;
     axios
       .post(
-        "https://course-mate-server.onrender.com/user/getUserId",
+        `${process.env.REACT_APP_BASE_URL}/user/getUserId`,
         { email },
         {
           headers: {
@@ -46,7 +47,7 @@ function Admin() {
   const fetchDocuments = async () => {
     try {
       const response = await axios.get(
-        "https://course-mate-server.onrender.com/document/docs",
+        `${process.env.REACT_APP_BASE_URL}/document/docs`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -66,6 +67,20 @@ function Admin() {
       console.error("Error fetching documents or folder", error);
     }
   };
+
+  useEffect(() => {
+    const fetchUsernames = async () => {
+      const userPromises = docs.map((doc) => getUserName(doc.uploadedBy));
+      const fetchedUsernames = await Promise.all(userPromises);
+      const usernameMap = docs.reduce((acc, doc, index) => {
+        acc[doc.uploadedBy] = fetchedUsernames[index];
+        return acc;
+      }, {});
+      setUsernames(usernameMap);
+    };
+
+    fetchUsernames();
+  }, [docs]);
 
   useEffect(() => {
     fetchDocuments();
@@ -97,7 +112,7 @@ function Admin() {
     console.log(token);
     try {
       const response = await axios.post(
-        "https://course-mate-server.onrender.com/document/accept",
+        `${process.env.REACT_APP_BASE_URL}/document/accept`,
         { docId },
         {
           headers: {
@@ -116,10 +131,32 @@ function Admin() {
     }
   }
 
+  async function getUserName(uploadedBy) {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BASE_URL}/user/profile`,
+        { userId: uploadedBy },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      if (response.status == 200) {
+        console.log(response.data);
+        return response.data.username;
+      } else {
+        toast.error("Can't get user names");
+      }
+    } catch (error) {
+      toast.error("Can't get user names");
+    }
+  }
+
   async function handleDelete(docId) {
     try {
       const response = await fetch(
-        "https://course-mate-server.onrender.com/document/",
+        `${process.env.REACT_APP_BASE_URL}/document/`,
         {
           method: "DELETE",
           headers: {
@@ -162,49 +199,53 @@ function Admin() {
                 </h1>
                 <div className="admin-admin text-center w-50 container-fluid d-flex flex-column align-items-center justify-admin-center">
                   {delayedDocs.map((doc) => (
-                    <div
-                      key={doc._id}
-                      className="admin-div d-flex fw-bold text-white lead py-4 justify-admin-between"
-                    >
-                      <div className="img-div text-start ms-4 align-items-end">
-                        <img
-                          className="text-start"
-                          src={getImageSrc(doc.name)}
-                          alt=""
-                          height={"35px"}
-                        />
-                      </div>
-                      <div
-                        className="text-div text-start align-items-start"
-                        onClick={() => {
-                          window.location.href = `${doc.viewLink}`;
-                        }}
-                      >
-                        {doc.name.toUpperCase()}
-                      </div>
+                    <div key={doc._id}>
+                      <div className="d-flex flex-column mt-3">
+                        <h1 className="lead text-center text-white fw-bold m-0">
+                          {usernames[doc.uploadedBy] || "Loading..."}
+                        </h1>
+                        <div className="admin-div d-flex fw-bold text-white lead py-4 justify-admin-between">
+                          <div className="img-div text-start ms-4 align-items-end">
+                            <img
+                              className="text-start"
+                              src={getImageSrc(doc.name)}
+                              alt=""
+                              height={"35px"}
+                            />
+                          </div>
+                          <div
+                            className="text-div text-start align-items-start"
+                            onClick={() => {
+                              window.location.href = `${doc.viewLink}`;
+                            }}
+                          >
+                            {doc.name.toUpperCase()}
+                          </div>
 
-                      <div
-                        className="download-div text-end me-3 align-items-start"
-                        onClick={() => handleAccept(doc._id)}
-                      >
-                        <img
-                          className=""
-                          src="/favicons/tick.png"
-                          alt=""
-                          height={"35px"}
-                        />
-                      </div>
-                      <div
-                        className="download-div text-end me-3 align-items-start"
-                        onClick={() => handleDelete(doc._id)}
-                      >
-                        <img
-                          className=""
-                          src="/favicons/delete.png"
-                          alt=""
-                          height={"35px"}
-                          style={{ opacity: 0.8 }}
-                        />
+                          <div
+                            className="download-div text-end me-3 align-items-start"
+                            onClick={() => handleAccept(doc._id)}
+                          >
+                            <img
+                              className=""
+                              src="/favicons/tick.png"
+                              alt=""
+                              height={"35px"}
+                            />
+                          </div>
+                          <div
+                            className="download-div text-end me-3 align-items-start"
+                            onClick={() => handleDelete(doc._id)}
+                          >
+                            <img
+                              className=""
+                              src="/favicons/delete.png"
+                              alt=""
+                              height={"35px"}
+                              style={{ opacity: 0.8 }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   ))}
@@ -219,5 +260,4 @@ function Admin() {
     </>
   );
 }
-
 export default Admin;
