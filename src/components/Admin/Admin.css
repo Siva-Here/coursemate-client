@@ -56,7 +56,7 @@ h1 {
   padding: 10px;
   display: flex;
   align-items: center;
-  justify-admin: center;
+  justify-content: center;
   width: 50vw;
   min-width: 300px;
   background: rgba(255, 255, 255, 0.15);
@@ -116,10 +116,6 @@ h1 {
   border-radius: 50%;
   margin: 3px;
   padding: 3px;
-}
-
-.download-div:hover {
-  transform: scale(1.1);
 }
 
 .custom-button,

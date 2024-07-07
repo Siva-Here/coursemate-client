@@ -72,9 +72,9 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
         let sortedResources = response.data.sort((a, b) =>
           b.uploadedAt.localeCompare(a.uploadedAt)
         );
-        sortedResources = sortedResources.filter(
-          (resource) => !resource.byAdmin
-        );
+        sortedResources = sortedResources.filter((resource) => {
+          !resource.byAdmin && resource.isAccepted;
+        });
         setResources(sortedResources);
       } else {
         toast.error("Failed to fetch resources. Please try again later.");
@@ -86,9 +86,9 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
   };
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      // navigate("/");
-    }
+    // if (!isLoggedIn) {
+    // navigate("/");
+    // }
     if (view !== "units") {
       if (!location.state) {
         navigate("/");
@@ -122,7 +122,6 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
       userId,
       folderId,
     };
-    console.log(formData);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
