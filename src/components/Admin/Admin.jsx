@@ -203,7 +203,7 @@ function Admin() {
                           src="/favicons/delete.png"
                           alt=""
                           height={"35px"}
-                          style={{ opacity: 0.6 }}
+                          style={{ opacity: 0.8 }}
                         />
                       </div>
                     </div>

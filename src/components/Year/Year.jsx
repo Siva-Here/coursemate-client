@@ -66,7 +66,7 @@ function Year({ folders }) {
                           src="/bing/folder1.png"
                           alt=""
                           height={"40px"}
-                          style={{ opacity: 0.6 }}
+                          style={{ opacity: 0.8 }}
                         />
                       </div>
                       <div className="w-75 text-start px-3 px-5 align-items-start">
