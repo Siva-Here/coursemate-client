@@ -8,11 +8,16 @@ import axios from "axios";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const [isSlow, setIsSlow] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isClickedSem, setIsClickedSem] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    setTimeout(() => {
+      setIsSlow(true);
+    }, 4000);
     const token = localStorage.getItem("user") || false;
     if (token) {
       const email = jwtDecode(token).email;
@@ -29,6 +34,7 @@ function Home() {
         .then((res) => {
           if (res.status === 200) {
             setIsLoggedIn(true);
+            setLoading(false);
           }
         })
         .catch((error) => {});
@@ -49,6 +55,22 @@ function Home() {
     setTimeout(() => {
       navigate("/domains");
     }, 450);
+  }
+
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loading-spinner"></div>
+        <p className="lead text-white m-3 loading">Loading...</p>
+        {isSlow ? (
+          <p className="text-white m-3 loading">
+            Server is Busy! Please wait...
+          </p>
+        ) : (
+          <p></p>
+        )}
+      </div>
+    );
   }
 
   return (
