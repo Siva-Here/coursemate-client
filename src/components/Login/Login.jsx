@@ -31,7 +31,7 @@ function Login() {
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
           setIsLoggedIn(true);
-          toast.success("Login Successful! Welcome to coursemate!");
+          toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
             navigate("/home");
           }, 1500);

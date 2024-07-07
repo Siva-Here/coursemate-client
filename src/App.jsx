@@ -33,10 +33,6 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsSlow(true);
-      setLoading(false);
-    }, 2000);
     const token = localStorage.getItem("user");
     try {
       if (jwtDecode(token).email.endsWith("@rguktn.ac.in")) {
@@ -61,6 +57,9 @@ function App() {
   }, []);
 
   if (loading) {
+    setTimeout(() => {
+      setIsSlow(true);
+    }, 4000);
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>

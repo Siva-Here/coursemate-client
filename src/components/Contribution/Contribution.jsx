@@ -45,9 +45,6 @@ const Contribution = () => {
     if (!isLoggedIn) {
       navigate("/");
     }
-    setTimeout(() => {
-      setIsSlow(true);
-    }, 2000);
     fetchContributions();
   }, []);
 
@@ -65,6 +62,9 @@ const Contribution = () => {
   };
 
   if (loading) {
+    setTimeout(() => {
+      setIsSlow(true);
+    }, 4000);
     return (
       <div className="loading-container1">
         <div className="loading-spinner-leaderboard"></div>

@@ -8,16 +8,13 @@ import axios from "axios";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
-  const [isSlow, setIsSlow] = useState(false);
   const [loading, setLoading] = useState(true);
   const [isClickedSem, setIsClickedSem] = useState(false);
+  const [isSlow, setIsSlow] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsSlow(true);
-    }, 4000);
     const token = localStorage.getItem("user") || false;
     if (token) {
       const email = jwtDecode(token).email;
@@ -56,6 +53,12 @@ function Home() {
       navigate("/domains");
     }, 450);
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSlow(true);
+    }, 3000);
+  }, []);
 
   if (loading) {
     return (
