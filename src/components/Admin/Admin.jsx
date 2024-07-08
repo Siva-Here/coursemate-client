@@ -29,7 +29,7 @@ function Admin(props) {
       });
     };
     fetchResources();
-  }, [isChanged]);
+  }, []);
 
   const fetchDocuments = async () => {
     try {
