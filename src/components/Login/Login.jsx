@@ -1,5 +1,4 @@
 import React, { useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -8,7 +7,6 @@ import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
 
 function Login() {
-  const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
   const { setUserId } = useContext(IdContext);
 
@@ -29,7 +27,7 @@ function Login() {
           toast.success("Login Successful!");
           localStorage.setItem("user", JSON.stringify(token));
           setTimeout(() => {
-            navigate("/home");
+            window.location.href = "/home";
           }, 1500);
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
@@ -38,13 +36,13 @@ function Login() {
           localStorage.setItem("userId", res.data._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
-            navigate("/home");
+            window.location.href = "/home";
           }, 1500);
         } else {
           toast.error("Failed to Login! Try with Your College Email!");
         }
       })
-      .catch((error) => {
+      .catch(() => {
         toast.error("Failed to login!");
       });
     //   if (res.status === 200) {
