@@ -197,13 +197,13 @@ function Admin() {
         }
       );
       if (response.status == 200) {
-        toast.success("File accepted...");
+        toast.success("Resource accepted...");
         setIsChanged(!isChanged);
       } else {
-        toast.error("Error accepting the file...");
+        toast.error("Error accepting the Resource...");
       }
     } catch (error) {
-      toast.error("Error accepting the file...");
+      toast.error("Error accepting the Resource...");
     }
   }
 
@@ -222,14 +222,14 @@ function Admin() {
       );
 
       if (response.ok) {
-        toast.success("File Deleted...");
+        toast.success("Resource Deleted...");
         setIsChanged(!isChanged);
       } else {
         const errorData = await response.json();
-        toast.error(`Error Deleting the file: ${errorData.message}`);
+        toast.error(`Error Deleting the Resource: ${errorData.message}`);
       }
     } catch (error) {
-      toast.error("Error Deleting the file...");
+      toast.error("Error Deleting the Resource...");
     }
   }
 
