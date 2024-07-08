@@ -65,13 +65,13 @@ function Home() {
       <div className="loading-container">
         <div className="loading-spinner"></div>
         <p className="lead text-white m-3 loading">Loading...</p>
-        {isSlow ? (
+        {/* {isSlow ? (
           <p className="text-white m-3 loading">
-            Server is Busy! Please wait...
+            Server is Busy! Please waitt...
           </p>
         ) : (
           <p></p>
-        )}
+        )} */}
       </div>
     );
   }

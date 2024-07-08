@@ -83,13 +83,13 @@ const Notification = () => {
       <div className="loading-container">
         <div className="loading-spinner-notification"></div>
         <p className="lead text-white m-3 loading">Loading...</p>
-        {isSlow ? (
+        {/* {isSlow ? (
           <p className="text-white m-3 loading">
             Server is Busy! Please wait...
           </p>
         ) : (
           <p></p>
-        )}
+        )} */}
       </div>
     );
   }

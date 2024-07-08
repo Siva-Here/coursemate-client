@@ -67,13 +67,12 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
           },
         }
       );
-
       if (response.status === 200) {
         let sortedResources = response.data.sort((a, b) =>
           b.uploadedAt.localeCompare(a.uploadedAt)
         );
         sortedResources = sortedResources.filter((resource) => {
-          !resource.byAdmin && resource.isAccepted;
+          return !resource.byAdmin && resource.isAccepted;
         });
         setResources(sortedResources);
       } else {

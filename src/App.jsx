@@ -29,7 +29,6 @@ function App() {
   useClickSound(clickSoundFile, []);
   const [folders, setFolders] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isSlow, setIsSlow] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,20 +56,10 @@ function App() {
   }, []);
 
   if (loading) {
-    setTimeout(() => {
-      setIsSlow(true);
-    }, 4000);
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
         <p className="lead text-white m-3 loading">Loading...</p>
-        {isSlow ? (
-          <p className="text-white m-3 loading">
-            Server is Busy! Please wait...
-          </p>
-        ) : (
-          <p></p>
-        )}
       </div>
     );
   }
