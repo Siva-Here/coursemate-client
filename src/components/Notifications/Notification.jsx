@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Notification.css";
-import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../navbar/Sidebar";
-import { jwtDecode } from "jwt-decode";
+import { ResourceContext } from "../../ResourceContext";
 import { AuthContext } from "../../AuthContext";
 
 const Notification = () => {
-  const [loading, setLoading] = useState(true);
-  const [isSlow, setIsSlow] = useState(false);
-  const { isLoggedIn } = useContext(AuthContext);
-  const token = localStorage.getItem("user") || null;
+  const { resources } = useContext(ResourceContext);
   const [Notifications, setNotifications] = useState([
     {
       uploadedBy: "Loading...",
@@ -21,32 +17,25 @@ const Notification = () => {
     },
   ]);
 
-  const fetchNotifications = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/resource/resources`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  const [loading, setLoading] = useState(true);
+  const [isSlow, setIsSlow] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
 
-      if (response.status === 200) {
-        const data = response.data.filter((notification) => {
-          if (notification.byAdmin) {
-            return true;
-          } else return false;
-        });
-        const sortedNotifications = data.sort((a, b) =>
-          b.uploadedAt.localeCompare(a.uploadedAt)
-        );
-        setLoading(false);
-        setNotifications(sortedNotifications);
-      }
-    } catch (error) {
-      console.error("Error fetching Notifications:", error);
-    }
+  const fetchNotifications = () => {
+    const sortedResources = resources
+      .filter((rsc) => {
+        return rsc.byAdmin;
+      })
+      .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
+
+    const data = sortedResources.filter((notification) => {
+      return notification.byAdmin;
+    });
+    const sortedNotifications = data.sort((a, b) =>
+      b.uploadedAt.localeCompare(a.uploadedAt)
+    );
+    setLoading(false);
+    setNotifications(sortedNotifications);
   };
 
   useEffect(() => {
