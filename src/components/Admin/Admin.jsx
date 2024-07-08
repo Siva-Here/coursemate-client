@@ -9,6 +9,7 @@ import { ResourceContext } from "../../ResourceContext";
 
 function Admin(props) {
   const { resources } = useContext(ResourceContext);
+  const [resource, setResource] = useState([]);
   const { isLoggedIn } = useContext(AuthContext);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -25,8 +26,10 @@ function Admin(props) {
         b.uploadedAt.localeCompare(a.uploadedAt)
       );
       sortedResources = sortedResources.filter((rsc) => {
-        return !rsc.byAdmin && !rsc.isAccepted;
+        return !rsc.isAccepted;
       });
+      setResource(sortedResources);
+      console.log(sortedResources);
     };
     fetchResources();
   }, []);
@@ -265,7 +268,7 @@ function Admin(props) {
                         </div>
                       ) : null}
                       <div className="blur1"></div>
-                      {resources.map((resource) => (
+                      {resource.map((resource) => (
                         <div key={resource._id} className="resource-div">
                           <div className="resource-content">
                             <p className="resource-user d-inline">
