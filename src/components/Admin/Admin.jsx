@@ -7,11 +7,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
-import { IdContext } from "../../IdContext";
 
 function Admin() {
   const { isLoggedIn } = useContext(AuthContext);
-  const { userId, setUserId } = useContext(IdContext);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
