@@ -5,10 +5,12 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { setIsLoggedIn } = useContext(AuthContext);
-  const { setUserId } = useContext(IdContext);
+  const { userId, setUserId } = useContext(IdContext);
+  const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
     const token = response.credential;
@@ -24,19 +26,21 @@ function Login() {
           setIsLoggedIn(true);
           setUserId(res.data._id);
           localStorage.setItem("userId", res.data._id);
+          localStorage.setItem("username", res.data.username);
           toast.success("Login Successful!");
           localStorage.setItem("user", JSON.stringify(token));
           setTimeout(() => {
-            window.location.href = "/home";
+            navigate("/home");
           }, 1500);
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
+          localStorage.setItem("username", res.data.username);
           setIsLoggedIn(true);
           setUserId(res.data._id);
           localStorage.setItem("userId", res.data._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
-            window.location.href = "/home";
+            navigate("/home");
           }, 1500);
         } else {
           toast.error("Failed to Login! Try with Your College Email!");

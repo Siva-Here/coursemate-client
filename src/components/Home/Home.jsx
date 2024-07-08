@@ -16,27 +16,26 @@ function Home() {
   useEffect(() => {
     const userId = localStorage.getItem("userId") || false;
     const token = localStorage.getItem("user") || false;
-    if (token) {
-      axios
-        .post(
-          `${process.env.REACT_APP_BASE_API_URL}/user/exists`,
-          { _id: userId },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            setIsLoggedIn(true);
-            setLoading(false);
-          }
-        })
-        .catch((error) => {});
-    } else {
-      navigate("/");
-    }
+    axios
+      .post(
+        `${process.env.REACT_APP_BASE_API_URL}/user/exists`,
+        { _id: userId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        if (res.status === 200) {
+          setIsLoggedIn(true);
+          setLoading(false);
+        }
+      })
+      .catch((error) => {});
+    // } else {
+    //   navigate("/");
+    // }
   }, []);
 
   function handleOpenSem() {

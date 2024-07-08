@@ -4,89 +4,59 @@ import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
-import { AuthContext } from "../../AuthContext";
+import { IdContext } from "../../IdContext";
+import { ResourceContext } from "../../ResourceContext";
 
 const Resource = ({ parentFolder, view, folderName }) => {
+  const { resources } = useContext(ResourceContext);
+  const [resource, setResource] = useState([]);
   const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
-  const [folderId, setFolderId] = useState(null);
-  const userId = localStorage.getItem("userId") || false;
-  const { isLoggedIn } = useContext(AuthContext);
-  const navigate = useNavigate();
-  if (!userId) {
-    toast.error("Invalid");
-    navigate("/");
-  }
+  const [folderId, setFolderId] = useState(parentFolder);
+  const { userId } = useContext(IdContext);
 
   if (!folderName) {
     folderName = location.state.folderName;
   }
 
-  const [resources, setResources] = useState([
-    {
-      uploadedBy: "Loading...",
-      name: "",
-      _id: "",
-      description: "",
-      rscLink: "",
-      uploadedAt: "",
-    },
-  ]);
   const [isPosted, setIsPosted] = useState(true);
 
-  const fetchResources = async () => {
+  useEffect(() => {
+    if (view !== "units") {
+      setFolderId(location.state?.parentFolder || parentFolder);
+    } else {
+      setFolderId(parentFolder);
+    }
     if (!folderId) return;
 
+    const sortedResources = resources
+      .filter((rsc) => {
+        return !rsc.byAdmin && rsc.isAccepted && rsc.parentFolder === folderId;
+      })
+      .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
+
+    setResource(sortedResources);
+  }, [resources, location.state, parentFolder, view, folderId, isPosted]);
+
+  const fetchResources = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/resource/folder`,
-        { folderId },
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_API_URL}/resource`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      if (response.status === 200) {
-        let sortedResources = response.data.sort((a, b) =>
-          b.uploadedAt.localeCompare(a.uploadedAt)
-        );
-        sortedResources = sortedResources.filter((resource) => {
-          return !resource.byAdmin && resource.isAccepted;
-        });
-        setResources(sortedResources);
-      } else {
-        toast.error("Failed to fetch resources. Please try again later.");
-      }
+      // Assuming you have some mechanism to update the ResourceContext
+      // updateResources(response.data);
     } catch (error) {
       console.error("Error fetching resources:", error);
-      toast.error("Failed to fetch resources. Please try again later.");
     }
   };
-
-  useEffect(() => {
-    // if (!isLoggedIn) {
-    // navigate("/");
-    // }
-    if (view !== "units") {
-      if (!location.state) {
-        navigate("/");
-      }
-      setFolderId(location.state.parentFolder);
-    } else {
-      setFolderId(parentFolder);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate("/");
-    }
-    fetchResources();
-  }, [folderId, isPosted]);
 
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
@@ -101,7 +71,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
       userId,
       folderId,
     };
-    console.error(formData);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
@@ -112,12 +81,11 @@ const Resource = ({ parentFolder, view, folderName }) => {
           },
         }
       );
-
       if (response.status === 201) {
         setShowModal(false);
         fetchResources();
         setIsPosted(!isPosted);
-        toast.success("Resource added successfully!");
+        toast.success("Added! Wait until admin accepts it!");
       } else {
         toast.error("Failed to add resource. Please try again later.");
       }
@@ -146,37 +114,53 @@ const Resource = ({ parentFolder, view, folderName }) => {
           </div>
         ) : null}
         <div className="blur1"></div>
-        {resources.map((resource) => (
-          <div key={resource._id} className="resource-div">
-            <div className="resource-content">
-              <p className="resource-user">
-                Uploaded by: {resource.uploadedBy}
-              </p>
-              <p className="text-uppercase fw-bold fst-italic font-italic">
-                {" "}
-                {resource.name}
-              </p>
-              <p>{resource.description}</p>
-              <p>
-                Link:{" "}
-                <a
-                  href={resource.rscLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ color: "yellow" }}
-                >
-                  {resource.rscLink}
-                </a>
-              </p>
-            </div>
-            <br />
-            <div className="resource-date">
-              <p style={{ fontSize: "1.2em" }}>
-                Posted at: {formatTimestamp(resource.uploadedAt)}
-              </p>
-            </div>
+        {resource ? (
+          <>
+            {resource.map((rsc) => (
+              <div key={rsc._id} className="resource-div">
+                <div className="resource-content">
+                  <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p>
+                  <p className="text-uppercase fw-bold fst-italic font-italic">
+                    {rsc.name}
+                  </p>
+                  <p>{rsc.description}</p>
+                  <p>
+                    Link:{" "}
+                    <a
+                      href={rsc.rscLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "yellow" }}
+                    >
+                      {rsc.rscLink}
+                    </a>
+                  </p>
+                </div>
+                <br />
+                <div className="resource-date">
+                  <p style={{ fontSize: "1.2em" }}>
+                    Posted at: {formatTimestamp(rsc.uploadedAt)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </>
+        ) : (
+          <div
+            className="text-center d-flex justify-content-center align-items-center text-white display-6"
+            style={{ height: "60vh" }}
+          >
+            <div className="blur1"></div>
+            <div className="blur1"></div>
+            <div className="blur1"></div>
+            <h1
+              className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
+              style={{ zIndex: 100 }}
+            >
+              No Resources Yet. Please Try to share....
+            </h1>
           </div>
-        ))}
+        )}
 
         <div className="add-button-container">
           <button className="add-button" onClick={handleModalShow}>

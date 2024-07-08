@@ -5,6 +5,7 @@ import App from "./App";
 import "./index.css";
 import { AuthProvider } from "./AuthContext";
 import { IdProvider } from "./IdContext";
+import { ResourceProvider } from "./ResourceContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -13,7 +14,9 @@ root.render(
   <Router>
     <AuthProvider>
       <IdProvider>
-        <App />
+        <ResourceProvider>
+          <App />
+        </ResourceProvider>
       </IdProvider>
     </AuthProvider>
   </Router>

@@ -10,7 +10,7 @@ import Content from "./components/Content/Content";
 import Sem from "./components/Sem/Sem";
 import Year from "./components/Year/Year";
 import Team from "./components/Team/Team";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Notification from "./components/Notifications/Notification";
 import Resource from "./components/Resource/Resource";
@@ -18,35 +18,73 @@ import Contribution from "./components/Contribution/Contribution";
 import Admin from "./components/Admin/Admin";
 import useClickSound from "./components/SoundHook/useClickSound";
 import clickSoundFile from "./click.mp3";
-
 import { jwtDecode } from "jwt-decode";
+import { ResourceContext } from "./ResourceContext";
+
 function App() {
   useClickSound(clickSoundFile, []);
   const [folders, setFolders] = useState([]);
+  const [docs, setDocs] = useState([]);
+  const { resources, setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
+  function fetchFolders() {
+    const token = localStorage.getItem("user") || false;
+    axios
+      .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setFolders(response.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  }
+  function fetchDocuments() {
+    const token = localStorage.getItem("user") || false;
+    axios
+      .get(`${process.env.REACT_APP_BASE_API_URL}/document/docs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const docs = response.data;
+        setDocs(docs);
+      });
+  }
+  function fetchResources() {
+    const token = localStorage.getItem("user") || false;
+    axios
+      .get(`${process.env.REACT_APP_BASE_API_URL}/resource/resources`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        const resources = response.data;
+        setResources(resources);
+      });
+  }
   useEffect(() => {
-    const token = localStorage.getItem("user");
+    const token = localStorage.getItem("user") || false;
     try {
       if (jwtDecode(token).email.endsWith("@rguktn.ac.in")) {
+        fetchFolders();
+        fetchDocuments();
+        fetchResources();
         navigate("/home");
       }
     } catch (error) {
     } finally {
-      axios
-        .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then((response) => {
-          setFolders(response.data);
-          setLoading(false);
-        })
-        .catch(() => {
-          setLoading(false);
-        });
+      if (!token) {
+        setLoading(false);
+        navigate("/");
+      }
     }
   }, []);
 
@@ -67,14 +105,14 @@ function App() {
         <Route path="/subjects" element={<Subjects folders={folders} />} />
         <Route path="/domains" element={<Domains folders={folders} />} />
         <Route path="/units" element={<Units folders={folders} />} />
-        <Route path="/content" element={<Content />} />
+        <Route path="/content" element={<Content documents={docs} />} />
         <Route path="/sem" element={<Sem folders={folders} />} />
         <Route path="/year" element={<Year folders={folders} />} />
         <Route path="/team" element={<Team />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/contribution" element={<Contribution />} />
         <Route path="/resource" element={<Resource />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={<Admin documents={docs} />} />
       </Routes>
     </div>
   );

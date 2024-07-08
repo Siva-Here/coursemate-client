@@ -5,15 +5,14 @@ import Sidebar from "../navbar/Sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
 
-function Content() {
+function Content(props) {
   const location = useLocation();
   let { folderId, parentFolder } = location.state;
   const { isLoggedIn } = useContext(AuthContext);
-  const { userId, setUserId } = useContext(IdContext);
+  const { userId } = useContext(IdContext);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [billFile, setBillFile] = useState(null);
@@ -26,13 +25,6 @@ function Content() {
   const token = localStorage.getItem("user") || null;
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    let email;
-    if (storedUser) {
-      email = jwtDecode(token).email;
-    } else {
-      navigate("/");
-    }
     if (location.state) {
       folderId = location.state.folderId;
     }
@@ -40,16 +32,11 @@ function Content() {
 
   const fetchDocuments = async () => {
     try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/document/folder`,
-        { folderId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const rootDocs = response.data;
+      let documents = JSON.stringify(props);
+      documents = JSON.parse(documents).documents.docs;
+      const rootDocs = documents.filter((doc) => {
+        return doc.parentFolder == folderId && doc.isAccepted;
+      });
       setDocs(rootDocs);
       setLoading(false);
       setDelayedDocs([]);
@@ -142,7 +129,6 @@ function Content() {
         parentFolder: folderId || location.state.folderId,
         uploadedBy: userId,
       };
-
       axios
         .post(
           `${process.env.REACT_APP_BASE_API_URL}/document/saveDocument`,
@@ -158,7 +144,9 @@ function Content() {
           setIsFileSet(true);
           setBillFile(null);
           setErrorMessage("");
-          toast.success("File saved successfully!");
+          toast.success(
+            "File saved successfully! Wait until admin accepts it!"
+          );
         })
         .catch((error) => {
           console.error("Cannot save the document", error);

@@ -2,82 +2,43 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import "./Admin.css";
 import Sidebar from "../navbar/Sidebar";
-import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
+import { ResourceContext } from "../../ResourceContext";
 
-function Admin() {
+function Admin(props) {
+  const { resources } = useContext(ResourceContext);
   const { isLoggedIn } = useContext(AuthContext);
-  const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isChanged, setIsChanged] = useState(false);
-  const [usernames, setUsernames] = useState({});
-  const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
-  const [resources, setResources] = useState(null);
   const [view, setView] = useState("docs");
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user") || false;
-    let email;
-    if (isLoggedIn) {
-      try {
-        email = jwtDecode(storedUser).email;
-      } catch (error) {
-        navigate("/");
-      }
-    } else {
-      navigate("/");
-    }
-
     fetchDocuments();
   }, [isChanged]);
 
   useEffect(() => {
     const fetchResources = async () => {
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BASE_API_URL}/resource/resources`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        if (response.status === 200) {
-          let sortedResources = response.data.sort((a, b) =>
-            b.uploadedAt.localeCompare(a.uploadedAt)
-          );
-          sortedResources = sortedResources.filter(
-            (resource) => !resource.isAccepted
-          );
-          setResources(sortedResources);
-        } else {
-          toast.error("Failed to fetch resources. Please try again later.");
-        }
-      } catch (error) {
-        console.error("Error fetching resources:", error);
-        toast.error("Failed to fetch resources. Please try again later.");
-      }
+      let sortedResources = resources.sort((a, b) =>
+        b.uploadedAt.localeCompare(a.uploadedAt)
+      );
+      sortedResources = sortedResources.filter((rsc) => {
+        return !rsc.byAdmin && !rsc.isAccepted;
+      });
     };
     fetchResources();
   }, [isChanged]);
 
   const fetchDocuments = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/document/docs`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      const rootDocs = response.data.docs.filter((doc) => !doc.isAccepted);
-      setDocs(rootDocs);
+      let documents = JSON.stringify(props);
+      documents = JSON.parse(documents).documents.docs;
+      const rootDocs = documents.filter((doc) => {
+        return !doc.isAccepted;
+      });
       setLoading(false);
       setDelayedDocs([]);
       rootDocs.forEach((doc, index) => {
@@ -89,20 +50,6 @@ function Admin() {
       console.error("Error fetching documents or folder", error);
     }
   };
-
-  useEffect(() => {
-    const fetchUsernames = async () => {
-      const userPromises = docs.map((doc) => getUserName(doc.uploadedBy));
-      const fetchedUsernames = await Promise.all(userPromises);
-      const usernameMap = docs.reduce((acc, doc, index) => {
-        acc[doc.uploadedBy] = fetchedUsernames[index];
-        return acc;
-      }, {});
-      setUsernames(usernameMap);
-    };
-
-    fetchUsernames();
-  }, [docs]);
 
   const getImageSrc = (fileName) => {
     const extension = fileName.split(".").pop().toLowerCase();
@@ -124,27 +71,6 @@ function Admin() {
         <p className="lead text-white m-3 loading">Loading...</p>
       </div>
     );
-  }
-
-  async function getUserName(uploadedBy) {
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/user/profile`,
-        { userId: uploadedBy },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status == 200) {
-        return response.data.username;
-      } else {
-        toast.error("Can't get user names");
-      }
-    } catch (error) {
-      toast.error("Can't get user names");
-    }
   }
 
   async function handleAccept(docId) {
@@ -206,14 +132,14 @@ function Admin() {
       );
 
       if (response.ok) {
-        toast.success("Resource Deleted...");
+        toast.success("File Deleted...");
         setIsChanged(!isChanged);
       } else {
         const errorData = await response.json();
-        toast.error(`Error Deleting the Resource: ${errorData.message}`);
+        toast.error(`Error Deleting the File: ${errorData.message}`);
       }
     } catch (error) {
-      toast.error("Error Deleting the Resource...");
+      toast.error("Error Deleting the File...");
     }
   }
 
@@ -285,7 +211,7 @@ function Admin() {
                       <div key={doc._id}>
                         <div className="d-flex flex-column mt-3">
                           <h1 className="lead text-center text-white fw-bold m-0">
-                            {usernames[doc.uploadedBy] || "Loading..."}
+                            {doc.uploadedBy}
                           </h1>
                           <div className="admin-div d-flex fw-bold text-white lead py-4 justify-admin-between">
                             <div className="img-div text-start ms-4 align-items-end">
