@@ -22,8 +22,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
     folderName = location.state.folderName;
   }
 
-  const [isPosted, setIsPosted] = useState(true);
-
   useEffect(() => {
     if (view !== "units") {
       setFolderId(location.state?.parentFolder || parentFolder);
@@ -39,24 +37,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
     setResource(sortedResources);
-  }, [resources, location.state, parentFolder, view, folderId, isPosted]);
-
-  const fetchResources = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BASE_API_URL}/resource`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // Assuming you have some mechanism to update the ResourceContext
-      // updateResources(response.data);
-    } catch (error) {
-      console.error("Error fetching resources:", error);
-    }
-  };
+  }, [resources, location.state, parentFolder, view, folderId]);
 
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
@@ -71,6 +52,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
       userId,
       folderId,
     };
+    console.error(formData);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
@@ -83,8 +65,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
       );
       if (response.status === 201) {
         setShowModal(false);
-        fetchResources();
-        setIsPosted(!isPosted);
         toast.success("Added! Wait until admin accepts it!");
       } else {
         toast.error("Failed to add resource. Please try again later.");
