@@ -8,38 +8,21 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
 import { AuthContext } from "../../AuthContext";
 
-const Resource = ({ parentFolder, uploadedBy, view }) => {
+const Resource = ({ parentFolder, view, folderName }) => {
   const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
-  const [folderName, setFolderName] = useState(null);
   const [folderId, setFolderId] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const userId = localStorage.getItem("userId") || false;
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  if (!userId) {
+    toast.error("Invalid");
+    navigate("/");
+  }
 
-  async function getFolderName() {
-    if (!folderId) return;
-
-    try {
-      const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/folder/`,
-        { folderId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      if (response.status === 200) {
-        setFolderName(response.data.name);
-      } else {
-        toast.error("Failed to fetch resources. Please try again later.");
-      }
-    } catch (error) {
-      console.error("Error fetching resources:", error);
-      toast.error("Failed to fetch resources. Please try again later.");
-    }
+  if (!folderName) {
+    folderName = location.state.folderName;
   }
 
   const [resources, setResources] = useState([
@@ -93,10 +76,8 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
         navigate("/");
       }
       setFolderId(location.state.parentFolder);
-      setUserId(location.state.uploadedBy);
     } else {
       setFolderId(parentFolder);
-      setUserId(uploadedBy);
     }
   }, []);
 
@@ -104,7 +85,6 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
     if (!isLoggedIn) {
       navigate("/");
     }
-    getFolderName();
     fetchResources();
   }, [folderId, isPosted]);
 
@@ -121,6 +101,7 @@ const Resource = ({ parentFolder, uploadedBy, view }) => {
       userId,
       folderId,
     };
+    console.error(formData);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,

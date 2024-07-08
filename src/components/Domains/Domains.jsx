@@ -3,12 +3,12 @@ import "./Domains.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import axios from "axios";
 import { AuthContext } from "../../AuthContext";
+import { IdContext } from "../../IdContext";
 
 function Domains({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
-  const [userId, setUserId] = useState(null);
+  const { userId } = useContext(IdContext);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
 
@@ -25,22 +25,7 @@ function Domains({ folders }) {
     } else {
       navigate("/");
     }
-    axios
-      .post(
-        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-        { email },
-        {
-          headers: {
-            Authorization: `Bearer ${storedUser}`,
-          },
-        }
-      )
-      .then((response) => {
-        setUserId(response.data.userId);
-      })
-      .catch((error) => {
-        console.error("Cannot get user ID", error);
-      });
+
     let timer;
     const rootFolders = folders.filter(
       (folder) => !folder.parentFolder && !folder.isSubject && !folder.isSem

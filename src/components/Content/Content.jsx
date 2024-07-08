@@ -7,15 +7,15 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
+import { IdContext } from "../../IdContext";
 
 function Content() {
   const location = useLocation();
-  let { folderId } = location.state;
+  let { folderId, parentFolder } = location.state;
   const { isLoggedIn } = useContext(AuthContext);
-  const [userId, setUserId] = useState(null);
+  const { userId, setUserId } = useContext(IdContext);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
-  const [parentFolder, setParentFolder] = useState("Subject");
   const [billFile, setBillFile] = useState(null);
   const [isFileSet, setIsFileSet] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,22 +36,6 @@ function Content() {
     if (location.state) {
       folderId = location.state.folderId;
     }
-    axios
-      .post(
-        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-        { email },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        setUserId(response.data.userId);
-      })
-      .catch((error) => {
-        console.error("Cannot get user ID", error);
-      });
   }, []);
 
   const fetchDocuments = async () => {
@@ -74,17 +58,6 @@ function Content() {
           setDelayedDocs((prevDocs) => [...prevDocs, doc]);
         }, index * 175);
       });
-
-      const folderResponse = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/folder`,
-        { folderId },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setParentFolder(folderResponse.data.name);
     } catch (error) {
       console.error("Error fetching documents or folder", error);
     }

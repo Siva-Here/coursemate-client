@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Units.css";
-import axios from "axios";
 import Sidebar from "../navbar/Sidebar";
 import Resource from "../Resource/Resource";
 import { useLocation, useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { IdContext } from "../../IdContext";
 
 function Units({ folders }) {
   const location = useLocation();
@@ -14,8 +13,7 @@ function Units({ folders }) {
   const [parentFolder, setParentFolder] = useState("Subject");
   const [view, setView] = useState("units");
   const [user, setUser] = useState(false);
-  const token = localStorage.getItem("user") || null;
-  const [userId, setUserId] = useState(null);
+  const { userId, setUserId } = useContext(IdContext);
 
   if (!user) {
     navigate("/resource", {
@@ -37,23 +35,6 @@ function Units({ folders }) {
     }
 
     let timer;
-    const email = jwtDecode(token).email;
-    axios
-      .post(
-        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-        { email },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        setUserId(response.data.userId);
-      })
-      .catch((error) => {
-        console.error("Cannot get user ID", error);
-      });
 
     const rootFolders = folders.filter(
       (folder) => folder.parentFolder === folderId
@@ -81,8 +62,8 @@ function Units({ folders }) {
     };
   }, [folders, folderId, navigate]);
 
-  const handleFolderClick = (folderId) => {
-    navigate("/content", { state: { folderId, imgSrc } });
+  const handleFolderClick = (folderId, parentFolder) => {
+    navigate("/content", { state: { folderId, imgSrc, parentFolder } });
   };
 
   return (
@@ -126,7 +107,9 @@ function Units({ folders }) {
                       <div
                         key={folder._id}
                         className="units-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
-                        onClick={() => handleFolderClick(folder._id)}
+                        onClick={() =>
+                          handleFolderClick(folder._id, folder.name)
+                        }
                       >
                         <div className="w-25 text-end align-items-end">
                           <img
@@ -149,6 +132,7 @@ function Units({ folders }) {
                       parentFolder={folderId}
                       uploadedBy={userId}
                       view={"units"}
+                      folderName={parentFolder}
                     />
                   </>
                 )}

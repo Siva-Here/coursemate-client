@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import SideBar from "../navbar/Sidebar";
 import "./Home.css";
 import { AuthContext } from "../../AuthContext";
-import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 
 function Home() {
@@ -15,13 +14,13 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const userId = localStorage.getItem("userId") || false;
     const token = localStorage.getItem("user") || false;
     if (token) {
-      const email = jwtDecode(token).email;
       axios
         .post(
-          `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-          { email },
+          `${process.env.REACT_APP_BASE_API_URL}/user/exists`,
+          { _id: userId },
           {
             headers: {
               Authorization: `Bearer ${token}`,

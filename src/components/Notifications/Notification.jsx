@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Notification.css";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../navbar/Sidebar";
 import { jwtDecode } from "jwt-decode";
+import { AuthContext } from "../../AuthContext";
 
 const Notification = () => {
   const [loading, setLoading] = useState(true);
   const [isSlow, setIsSlow] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn } = useContext(AuthContext);
   const token = localStorage.getItem("user") || null;
   const [Notifications, setNotifications] = useState([
     {
@@ -49,29 +50,6 @@ const Notification = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("user") || false;
-    if (token) {
-      const email = jwtDecode(token).email;
-      axios
-        .post(
-          `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-          { email },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            setIsLoggedIn(true);
-          }
-        })
-        .catch((error) => {});
-    }
-  }, []);
-
-  useEffect(() => {
     setTimeout(() => {
       setIsSlow(true);
     }, 2000);
@@ -83,13 +61,13 @@ const Notification = () => {
       <div className="loading-container">
         <div className="loading-spinner-notification"></div>
         <p className="lead text-white m-3 loading">Loading...</p>
-        {/* {isSlow ? (
+        {isSlow ? (
           <p className="text-white m-3 loading">
             Server is Busy! Please wait...
           </p>
         ) : (
           <p></p>
-        )} */}
+        )}
       </div>
     );
   }
@@ -106,7 +84,7 @@ const Notification = () => {
           </h1>
           <div className="blur-notify"></div>
           {Notifications.map((Notification) => (
-            <div key={Notification._id} className="Notification-div">
+            <div key={Notification.name} className="Notification-div">
               <div className="Notification-content">
                 <p className="Notification-user">
                   Uploaded by: {Notification.uploadedBy}

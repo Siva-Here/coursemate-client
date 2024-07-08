@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Subjects from "./components/Subjects/Subjects";
 import "./App.css";
@@ -49,7 +44,7 @@ function App() {
           setFolders(response.data);
           setLoading(false);
         })
-        .catch((error) => {
+        .catch(() => {
           setLoading(false);
         });
     }

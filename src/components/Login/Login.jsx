@@ -4,12 +4,13 @@ import axios from "axios";
 import "./Login.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
+import { IdContext } from "../../IdContext";
 
 function Login() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(AuthContext);
+  const { setUserId } = useContext(IdContext);
 
   function handleCallbackResponse(response) {
     const token = response.credential;
@@ -23,6 +24,8 @@ function Login() {
       .then((res) => {
         if (res.status === 200) {
           setIsLoggedIn(true);
+          setUserId(res.data._id);
+          localStorage.setItem("userId", res.data._id);
           toast.success("Login Successful!");
           localStorage.setItem("user", JSON.stringify(token));
           setTimeout(() => {
@@ -31,6 +34,8 @@ function Login() {
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
           setIsLoggedIn(true);
+          setUserId(res.data._id);
+          localStorage.setItem("userId", res.data._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
             navigate("/home");
@@ -40,7 +45,7 @@ function Login() {
         }
       })
       .catch((error) => {
-        toast.error("Failed to login! Try with Your College Email!");
+        toast.error("Failed to login!");
       });
     //   if (res.status === 200) {
     //     const user = jwtDecode(token);
@@ -98,32 +103,32 @@ function Login() {
     // });
   }
 
-  useEffect(() => {
-    const token = localStorage.getItem("user") || false;
-    let email;
-    if (token) {
-      try {
-        email = jwtDecode(token).email;
-      } catch (error) {}
-      axios
-        .post(
-          `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-          { email },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          if (res.status === 200) {
-            setIsLoggedIn(true);
-            navigate("/home");
-          }
-        })
-        .catch((error) => {});
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("user") || false;
+  //   let email;
+  //   if (token) {
+  //     try {
+  //       email = jwtDecode(token).email;
+  //     } catch (error) {}
+  //     axios
+  //       .post(
+  //         `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
+  //         { email },
+  //         {
+  //           headers: {
+  //             Authorization: `Bearer ${token}`,
+  //           },
+  //         }
+  //       )
+  //       .then((res) => {
+  //         if (res.status === 200) {
+  //           setIsLoggedIn(true);
+  //           navigate("/home");
+  //         }
+  //       })
+  //       .catch((error) => {});
+  //   }
+  // }, []);
 
   useEffect(() => {
     /* global google */

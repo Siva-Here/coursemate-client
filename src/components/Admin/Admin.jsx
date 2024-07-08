@@ -7,10 +7,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
+import { IdContext } from "../../IdContext";
 
 function Admin() {
   const { isLoggedIn } = useContext(AuthContext);
-  const [userId, setUserId] = useState(null);
+  const { userId, setUserId } = useContext(IdContext);
   const [docs, setDocs] = useState([]);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -33,22 +34,7 @@ function Admin() {
     } else {
       navigate("/");
     }
-    axios
-      .post(
-        `${process.env.REACT_APP_BASE_API_URL}/user/getUserId`,
-        { email },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
-      .then((response) => {
-        setUserId(response.data.userId);
-      })
-      .catch((error) => {
-        console.error("Cannot get user ID", error);
-      });
+
     fetchDocuments();
   }, [isChanged]);
 
