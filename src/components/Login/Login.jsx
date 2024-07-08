@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { setIsLoggedIn } = useContext(AuthContext);
-  const { userId, setUserId } = useContext(IdContext);
+  const { setUserId } = useContext(IdContext);
   const navigate = useNavigate();
 
   function handleCallbackResponse(response) {
@@ -30,7 +30,7 @@ function Login() {
           toast.success("Login Successful!");
           localStorage.setItem("user", JSON.stringify(token));
           setTimeout(() => {
-            navigate("/home");
+            window.location.reload();
           }, 1500);
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
@@ -40,7 +40,7 @@ function Login() {
           localStorage.setItem("userId", res.data._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
-            navigate("/home");
+            window.location.reload();
           }, 1500);
         } else {
           toast.error("Failed to Login! Try with Your College Email!");

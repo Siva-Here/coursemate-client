@@ -52,6 +52,8 @@ function Sidebar() {
 
   function handleLogOut() {
     localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("username");
     setIsLoggedIn(false);
     // playClickSound();
   }

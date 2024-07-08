@@ -25,7 +25,7 @@ function App() {
   useClickSound(clickSoundFile, []);
   const [folders, setFolders] = useState([]);
   const [docs, setDocs] = useState([]);
-  const { resources, setResources } = useContext(ResourceContext);
+  const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   function fetchFolders() {

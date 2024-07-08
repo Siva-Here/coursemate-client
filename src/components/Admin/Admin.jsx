@@ -12,13 +12,12 @@ function Admin(props) {
   const { isLoggedIn } = useContext(AuthContext);
   const [delayedDocs, setDelayedDocs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [isChanged, setIsChanged] = useState(false);
   const token = localStorage.getItem("user") || null;
   const [view, setView] = useState("docs");
 
   useEffect(() => {
     fetchDocuments();
-  }, [isChanged]);
+  }, []);
 
   useEffect(() => {
     const fetchResources = async () => {
@@ -86,7 +85,6 @@ function Admin(props) {
       );
       if (response.status == 200) {
         toast.success("File accepted...");
-        setIsChanged(!isChanged);
       } else {
         toast.error("Error accepting the file...");
       }
@@ -108,7 +106,6 @@ function Admin(props) {
       );
       if (response.status == 200) {
         toast.success("Resource accepted...");
-        setIsChanged(!isChanged);
       } else {
         toast.error("Error accepting the Resource...");
       }
@@ -133,7 +130,6 @@ function Admin(props) {
 
       if (response.ok) {
         toast.success("File Deleted...");
-        setIsChanged(!isChanged);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the File: ${errorData.message}`);
@@ -159,7 +155,6 @@ function Admin(props) {
 
       if (response.ok) {
         toast.success("Resource Deleted...");
-        setIsChanged(!isChanged);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the Resource: ${errorData.message}`);
