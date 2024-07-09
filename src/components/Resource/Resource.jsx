@@ -181,16 +181,40 @@ const Resource = ({ parentFolder, view, folderName }) => {
   );
 };
 
-const formatTimestamp = (timestamp) => {
+const formatTimestampToIST = (timestamp) => {
   const date = new Date(timestamp);
-  const formattedDate = date.toLocaleString("en-US", {
+
+  const IST_OFFSET = 5 * 60 + 30;
+
+  const utcMinutes =
+    date.getUTCMinutes() +
+    30 +
+    (date.getUTCHours() + 5 + (date.getUTCMinutes() + 30) / 60) * 60;
+
+  const istMinutes = utcMinutes + IST_OFFSET;
+
+  const istHours = Math.floor(istMinutes / 60) % 24;
+  const istMinutesRemainder = istMinutes % 60;
+
+  const istDate = new Date(date);
+  istDate.setUTCHours(
+    istHours,
+    istMinutesRemainder,
+    date.getUTCSeconds(),
+    date.getUTCMilliseconds()
+  );
+
+  const formattedDate = istDate.toLocaleString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Kolkata",
   });
+
   return formattedDate.replace(",", "");
 };
 

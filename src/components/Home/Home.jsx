@@ -4,12 +4,14 @@ import SideBar from "../navbar/Sidebar";
 import "./Home.css";
 import { AuthContext } from "../../AuthContext";
 import axios from "axios";
+import Lottie from "lottie-react";
+import welcome from "./welcome.json";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
   const [isClickedSem, setIsClickedSem] = useState(false);
-  const [isSlow, setIsSlow] = useState(false);
+  const [isSlow, setIsSlow] = useState(true);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
 
@@ -54,23 +56,18 @@ function Home() {
 
   useEffect(() => {
     setTimeout(() => {
-      setIsSlow(true);
-    }, 3000);
+      setIsSlow(false);
+    }, 5000);
   }, []);
 
   if (loading) {
     return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p className="lead text-white m-3 loading">Loading...</p>
-        {/* {isSlow ? (
-          <p className="text-white m-3 loading">
-            Server is Busy! Please waitt...
-          </p>
-        ) : (
-          <p></p>
-        )} */}
-      </div>
+      <>
+        <div className="loading-container">
+          <div className="loading-spinner"></div>
+          <p className="lead text-white m-3 loading">Loading...</p>
+        </div>
+      </>
     );
   }
 
@@ -84,6 +81,20 @@ function Home() {
             alt=""
             height="250px"
           />
+          {isSlow && (
+            <div
+              className="lottie"
+              style={{ zIndex: 1000, position: "absolute" }}
+            >
+              <h1
+                className="lead fw-bold text-center cust-text welcome"
+                style={{ fontSize: "2rem" }}
+              >
+                Welcome
+              </h1>
+              <Lottie className="" animationData={welcome} />
+            </div>
+          )}
           <div className="blur1"></div>
           <div className="blur">
             <SideBar />
