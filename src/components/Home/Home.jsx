@@ -87,7 +87,7 @@ function Home() {
               style={{ zIndex: 1000, position: "absolute" }}
             >
               <h1
-                className="lead fw-bold text-center cust-text welcome mb-5 pb-5"
+                className="lead fw-bold text-center cust-text welcome"
                 style={{ fontSize: "2rem" }}
               >
                 Welcome
