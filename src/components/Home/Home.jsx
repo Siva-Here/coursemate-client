@@ -17,14 +17,20 @@ function Home() {
 
   useEffect(() => {
     const userId = localStorage.getItem("userId") || false;
+    if (!userId) {
+      navigate("/");
+    }
     const token = localStorage.getItem("user") || false;
+    const token1 = localStorage.getItem("user") || false;
+    localStorage.removeItem("user");
+    localStorage.setItem("user", token);
     axios
       .post(
         `${process.env.REACT_APP_BASE_API_URL}/user/exists`,
         { _id: userId },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${token1}`,
           },
         }
       )
