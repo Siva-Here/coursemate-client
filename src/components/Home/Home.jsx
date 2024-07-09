@@ -87,7 +87,7 @@ function Home() {
             alt=""
             height="250px"
           />
-          {isSlow && (
+          {isSlow ? (
             <div
               className="lottie"
               style={{ zIndex: 1000, position: "absolute" }}
@@ -100,44 +100,47 @@ function Home() {
               </h1>
               <Lottie className="" animationData={welcome} />
             </div>
-          )}
-          <div className="blur1"></div>
-          <div className="blur">
-            <SideBar />
-            <div className="outer-container">
-              <div className="blur-home"></div>
-              <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
-                <div
-                  className={`categories ${
-                    isClickedSem ? "expand-open" : ""
-                  } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
-                  onClick={handleOpenSem}
-                >
-                  <img
-                    src="/favicons/book.png"
-                    alt="book"
-                    height="38px"
-                    className="me-3"
-                  />
-                  SEMESTERS
-                </div>
-                <div
-                  className={`categories ${
-                    isClickedDomains ? "expand-open" : ""
-                  } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
-                  onClick={handleOpenDomains}
-                >
-                  <img
-                    src="/favicons/domain-home.png"
-                    alt="book"
-                    height="40px"
-                    className="me-3"
-                  />
-                  DOMAINS
+          ) : (
+            <>
+              <div className="blur1"></div>
+              <div className="blur">
+                <SideBar />
+                <div className="outer-container">
+                  <div className="blur-home"></div>
+                  <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
+                    <div
+                      className={`categories ${
+                        isClickedSem ? "expand-open" : ""
+                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      onClick={handleOpenSem}
+                    >
+                      <img
+                        src="/favicons/book.png"
+                        alt="book"
+                        height="38px"
+                        className="me-3"
+                      />
+                      SEMESTERS
+                    </div>
+                    <div
+                      className={`categories ${
+                        isClickedDomains ? "expand-open" : ""
+                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      onClick={handleOpenDomains}
+                    >
+                      <img
+                        src="/favicons/domain-home.png"
+                        alt="book"
+                        height="40px"
+                        className="me-3"
+                      />
+                      DOMAINS
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
       ) : (
         <></>
