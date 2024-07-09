@@ -98,7 +98,7 @@ function Home() {
               >
                 Welcome
               </h1>
-              <Lottie className="" animationData={welcome} />
+              <Lottie animationData={welcome} />
             </div>
           ) : (
             <>
