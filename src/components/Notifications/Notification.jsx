@@ -112,7 +112,9 @@ const Notification = () => {
 };
 
 const formatTimestamp = (timestamp) => {
-  const date = new Date(timestamp);
+  console.log("timestamp");
+  const d = new Date(timestamp);
+  const date = new Date(d - -19800000);
   const formattedDate = date.toLocaleString("en-US", {
     year: "numeric",
     month: "2-digit",

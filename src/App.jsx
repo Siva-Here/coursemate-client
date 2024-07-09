@@ -72,8 +72,6 @@ function App() {
   }
   useEffect(() => {
     const token = localStorage.getItem("user") || false;
-    localStorage.removeItem("user");
-    localStorage.setItem("user", token);
     try {
       if (jwtDecode(token).email.endsWith("@rguktn.ac.in")) {
         fetchFolders();

@@ -110,7 +110,9 @@ const Resource = ({ parentFolder, view, folderName }) => {
                       href={rsc.rscLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{ color: "yellow" }}
+                      style={{
+                        color: "yellow",
+                      }}
                     >
                       {rsc.rscLink}
                     </a>
@@ -181,41 +183,18 @@ const Resource = ({ parentFolder, view, folderName }) => {
   );
 };
 
-const formatTimestampToIST = (timestamp) => {
-  const date = new Date(timestamp);
-
-  const IST_OFFSET = 5 * 60 + 30;
-
-  const utcMinutes =
-    date.getUTCMinutes() +
-    30 +
-    (date.getUTCHours() + 5 + (date.getUTCMinutes() + 30) / 60) * 60;
-
-  const istMinutes = utcMinutes + IST_OFFSET;
-
-  const istHours = Math.floor(istMinutes / 60) % 24;
-  const istMinutesRemainder = istMinutes % 60;
-
-  const istDate = new Date(date);
-  istDate.setUTCHours(
-    istHours,
-    istMinutesRemainder,
-    date.getUTCSeconds(),
-    date.getUTCMilliseconds()
-  );
-
-  const formattedDate = istDate.toLocaleString("en-US", {
+const formatTimestamp = (timestamp) => {
+  console.log("timestamp");
+  const d = new Date(timestamp);
+  const date = new Date(d);
+  const formattedDate = date.toLocaleString("en-US", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
-    hour12: false,
-    timeZone: "Asia/Kolkata",
   });
-
   return formattedDate.replace(",", "");
 };
-
 export default Resource;
