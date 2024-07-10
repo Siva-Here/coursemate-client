@@ -11,20 +11,18 @@
   }
 }
 
-@keyframes zoomWelcome {
+/* @keyframes zoomWelcome {
   from {
-    transform: scale(100%);
     font-size: 1rem;
   }
   to {
-    transform: scale(250%);
     font-size: 2rem;
   }
 }
 
 .welcome {
   animation: zoomWelcome 2s ease-in;
-}
+} */
 .lottie {
   animation: slideUp 2s ease-in;
 }
