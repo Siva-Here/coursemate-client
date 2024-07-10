@@ -100,7 +100,7 @@ function Home() {
               </h1>
               <Lottie
                 animationData={welcome}
-                style={{ marginInlineStart: "60px" }}
+                style={{ marginInlineStart: "30px" }}
               />
             </div>
           ) : (
