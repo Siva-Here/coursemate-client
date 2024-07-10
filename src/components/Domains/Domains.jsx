@@ -53,7 +53,7 @@ function Domains({ folders }) {
       {isLoggedIn ? (
         <>
           <div className="blur1"></div>
-          <div style={{ marginTop: "50px" }}>
+          <div>
             <div className="img-container2"></div>
             <div>
               <Sidebar />

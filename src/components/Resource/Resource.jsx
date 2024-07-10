@@ -86,7 +86,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             <div className="outer-container-units text-center">
               <h1
                 className="display-5 text-center text-white blinking-text-units"
-                style={{ zIndex: 1000, marginTop: "80px" }}
+                style={{ zIndex: 1000, marginTop: "40px" }}
               >
                 {folderName}
               </h1>
