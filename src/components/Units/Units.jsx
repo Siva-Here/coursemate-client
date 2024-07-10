@@ -71,7 +71,7 @@ function Units({ folders }) {
       {user ? (
         <>
           <div className="blur1"></div>
-          <div style={{ marginTop: "50px" }}>
+          <div style={{ marginTop: "50px", zIndex: 10 }}>
             <div className="units-img"></div>
             <div>
               <Sidebar />

@@ -118,9 +118,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
             className="text-center d-flex justify-content-center align-items-center text-white display-6"
             style={{ height: "60vh" }}
           >
-            <div className="blur1"></div>
-            <div className="blur1"></div>
-            <div className="blur1"></div>
             <h1
               className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
               style={{ zIndex: 100 }}
@@ -130,7 +127,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
           </div>
         )}
 
-        <div className="add-button-container">
+        <div className="add-button-container" style={{ zIndex: 1000 }}>
           <button className="add-button" onClick={handleModalShow}>
             +
           </button>
