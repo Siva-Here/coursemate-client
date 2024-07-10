@@ -53,12 +53,12 @@ function Domains({ folders }) {
       {isLoggedIn ? (
         <>
           <div className="blur1"></div>
-          <div>
+          <div style={{ marginTop: "60px" }}>
             <div className="img-container2"></div>
             <div>
               <Sidebar />
               <div className="outer-container-domains">
-                <h1 className="display-1 text-center text-white blinking-text-domains">
+                <h1 className="display-3 text-center text-white blinking-text-domains">
                   Domains
                 </h1>
                 <div className="content-domains text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
