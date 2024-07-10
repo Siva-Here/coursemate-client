@@ -89,7 +89,7 @@ const Contribution = () => {
             <Sidebar />
             <h1
               className="display-4 text-center text-light blinking-text-leaderboard"
-              style={{ fontSize: "48px", marginTop: "50px", zIndex: 1000 }}
+              style={{ fontSize: "48px", marginTop: "80px", zIndex: 1000 }}
             >
               LeaderBoard
             </h1>

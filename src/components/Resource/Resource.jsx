@@ -79,22 +79,8 @@ const Resource = ({ parentFolder, view, folderName }) => {
     <>
       <ToastContainer />
       <div>
-        {view !== "units" ? (
-          <div style={{ marginTop: "50px" }}>
-            <Sidebar />
-            <div className="units-img"></div>
-            <div className="outer-container-units text-center">
-              <h1
-                className="display-3 text-center text-white blinking-text-units"
-                style={{ zIndex: 100 }}
-              >
-                {folderName}
-              </h1>
-            </div>
-          </div>
-        ) : null}
         <div className="blur1"></div>
-        {resource ? (
+        {resource.length !== 0 ? (
           <>
             {resource.map((rsc) => (
               <div key={rsc._id} className="resource-div">

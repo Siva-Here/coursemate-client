@@ -67,7 +67,7 @@ const Notification = () => {
           <Sidebar />
           <h1
             className="display-3 text-center text-white blinking-text-notify"
-            style={{ zIndex: 100, marginTop: "60px" }}
+            style={{ zIndex: 100, marginTop: "80px" }}
           >
             Notifications
           </h1>

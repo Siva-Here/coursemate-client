@@ -77,8 +77,8 @@ function Units({ folders }) {
               <Sidebar />
               <div className="outer-container-units text-center">
                 <h1
-                  className="display-3 text-center text-white blinking-text-units"
-                  style={{ zIndex: 100 }}
+                  className="display-5 text-center text-white blinking-text-units"
+                  style={{ zIndex: 1001, marginTop: "80px" }}
                 >
                   {parentFolder}
                 </h1>
