@@ -34,10 +34,11 @@ function Login() {
           }, 1500);
         } else if (res.status === 201) {
           localStorage.setItem("user", JSON.stringify(token));
-          localStorage.setItem("username", res.data.username);
+          localStorage.setItem("username", res.data.user.username);
+          localStorage.setItem("userId", res.data.user._id);
+          setUserId(res.data.user._id);
           setIsLoggedIn(true);
-          setUserId(res.data._id);
-          localStorage.setItem("userId", res.data._id);
+          console.log(res.data.user._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
             window.location.reload();
