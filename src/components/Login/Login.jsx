@@ -43,7 +43,7 @@ function Login() {
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
             window.location.reload();
-          }, 19500);
+          }, 1500);
         } else {
           toast.error("Failed to Login! Try with Your College Email!");
         }
