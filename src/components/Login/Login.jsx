@@ -36,7 +36,8 @@ function Login() {
           localStorage.setItem("user", JSON.stringify(token));
           localStorage.setItem("username", res.data.username);
           setIsLoggedIn(true);
-          setUserId(res.data._id);
+          setUserId(res.data.user._id);
+          console.log(res.data.user._id);
           localStorage.setItem("userId", res.data._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
