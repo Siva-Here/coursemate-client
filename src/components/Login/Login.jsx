@@ -53,7 +53,7 @@ function Login() {
         }
       })
       .catch(() => {
-        toast.error("Failed to login!");
+        toast.error("Failed to login! Try Again!");
       });
   }
 
