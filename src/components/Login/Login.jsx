@@ -12,7 +12,7 @@ function Login() {
 
   function handleCallbackResponse(response) {
     const token = response.credential;
-    const notify = localStorage.getItem("notify");
+    const notify = JSON.parse(localStorage.getItem("notify"));
 
     axios
       .post(
