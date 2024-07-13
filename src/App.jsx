@@ -20,6 +20,10 @@ import useClickSound from "./components/SoundHook/useClickSound";
 import clickSoundFile from "./click.mp3";
 import { jwtDecode } from "jwt-decode";
 import { ResourceContext } from "./ResourceContext";
+import Gate from "../src/components/Gate/Gate";
+import GateUnits from "./components/Gate/GateUnits";
+import Placements from "./components/Placements/Placements";
+import Notifications from "./Notification";
 
 function App() {
   useClickSound(clickSoundFile, []);
@@ -113,7 +117,14 @@ function App() {
         <Route path="/contribution" element={<Contribution />} />
         <Route path="/resource" element={<Resource />} />
         <Route path="/admin" element={<Admin documents={docs} />} />
+        <Route path="/gate" element={<Gate folders={folders} />} />
+        <Route path="placements" element={<Placements docs={docs} />} />
+        <Route
+          path="/gateunits"
+          element={<GateUnits folders={folders} docs={docs} />}
+        />
       </Routes>
+      <Notifications />
     </div>
   );
 }

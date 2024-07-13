@@ -35,7 +35,9 @@ function Content(props) {
       let documents = JSON.stringify(props);
       documents = JSON.parse(documents).documents.docs;
       const rootDocs = documents.filter((doc) => {
-        return doc.parentFolder == folderId && doc.isAccepted;
+        return (
+          doc.parentFolder == folderId && doc.isAccepted && !doc.isPlacement
+        );
       });
       setDocs(rootDocs);
       setLoading(false);
@@ -178,7 +180,7 @@ function Content(props) {
     }
   };
 
-  if (loading) {
+  if (loading && props.view !== "gate") {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
@@ -192,9 +194,13 @@ function Content(props) {
       {isLoggedIn ? (
         <div>
           <ToastContainer />
-          <div className="blur1"></div>
-          <div style={{ marginTop: "50px" }}>
-            <div className="content-img"></div>
+          {props.view != "gate" ? <div className="blur1"></div> : <></>}
+          <div style={props.view !== "gate" ? { marginTop: "50px" } : {}}>
+            {props.view != "gate" ? (
+              <div className="content-img"></div>
+            ) : (
+              <div className="units-img" style={{ zIndex: -1 }}></div>
+            )}
             <div>
               <Sidebar />
               <div className="outer-container-content">

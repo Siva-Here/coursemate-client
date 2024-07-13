@@ -27,9 +27,7 @@ function Domains({ folders }) {
     }
 
     let timer;
-    const rootFolders = folders.filter(
-      (folder) => !folder.parentFolder && !folder.isSubject && !folder.isSem
-    );
+    const rootFolders = folders.filter((folder) => folder.isDomain);
 
     rootFolders.forEach((folder, index) => {
       timer = setTimeout(() => {

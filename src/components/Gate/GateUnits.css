@@ -1,0 +1,24 @@
+.gate-img {
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 75vw;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 1s;
+  max-width: 350px;
+}
+
+.gate-img:hover {
+  border-radius: 0px;
+  background: rgba(155, 150, 150, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transform: scale3d(1.05, 1.05, 1.05);
+}

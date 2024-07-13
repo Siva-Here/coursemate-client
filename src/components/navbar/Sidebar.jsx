@@ -20,10 +20,7 @@ function Sidebar() {
       const email = user.email;
       setUsername(email.split("@")[0].toUpperCase());
       setProfile(user.picture);
-      if (
-        email === "n200232@rguktn.ac.in" ||
-        email === "n200086@rguktn.ac.in"
-      ) {
+      if (process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
         setIsAdmin(true);
       }
     } catch (error) {

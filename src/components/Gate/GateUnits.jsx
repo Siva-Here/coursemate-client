@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Units.css";
 import Sidebar from "../navbar/Sidebar";
 import Resource from "../Resource/Resource";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IdContext } from "../../IdContext";
+import Content from "../Content/Content";
+import "./GateUnits.css";
 
-function Units({ folders }) {
+function GateUnits({ folders, docs }) {
   const location = useLocation();
   const navigate = useNavigate();
-  const { folderId, imgSrc } = location.state || {};
+  const { folderId, imgSrc, courseLink } = location.state || {};
   const [delayedFolders, setDelayedFolders] = useState([]);
   const [parentFolder, setParentFolder] = useState("Subject");
-  const [view, setView] = useState("units");
+  const [view, setView] = useState("content");
   const [user, setUser] = useState(false);
   const { userId, setUserId } = useContext(IdContext);
 
@@ -63,19 +64,17 @@ function Units({ folders }) {
   }, [folders, folderId, navigate]);
 
   const handleFolderClick = (folderId, parentFolder) => {
-    navigate("/content", { state: { folderId, imgSrc, parentFolder } });
+    navigate("/units", { state: { folderId, imgSrc, parentFolder } });
   };
 
   return (
     <div>
       {user ? (
         <>
-          <div className="blur1"></div>
           <div style={{ marginTop: "50px", zIndex: 10 }}>
-            <div className="units-img"></div>
             <div>
               <Sidebar />
-              <div className="outer-container-units text-center">
+              <div className="outer-container-content text-center">
                 <h1
                   className="display-5 text-center text-white blinking-text-units"
                   style={{ zIndex: 1001, marginTop: "50px" }}
@@ -84,47 +83,43 @@ function Units({ folders }) {
                 </h1>
                 <div className="btn-group text-center">
                   <button
-                    className={`btn ${view === "units" ? "active" : ""}`}
-                    onClick={() => setView("units")}
+                    className={`btn ${view === "content" ? "active" : ""}`}
+                    onClick={() => setView("content")}
                   >
-                    Units
+                    Content
                   </button>
                   <button
-                    className={`btn ${view !== "units" ? "active" : ""}`}
+                    className={`btn ${view !== "content" ? "active" : ""}`}
                     onClick={() => {
-                      // navigate("/resource", {
-                      //   state: { parentFolder: folderId, uploadedBy: userId },
-                      // })
-                      setView("resource");
+                      setView("pyqs");
                     }}
                   >
-                    Resources
+                    PYQs
                   </button>
                 </div>
-                {view === "units" ? (
-                  <div className="content-units text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
-                    {delayedFolders.map((folder) => (
-                      <div
-                        key={folder._id}
-                        className="units-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
-                        onClick={() =>
-                          handleFolderClick(folder._id, folder.name)
-                        }
-                      >
-                        <div className="w-25 text-end align-items-end">
-                          <img
-                            className="text-start"
-                            src="/bing/folder1.png"
-                            alt=""
-                            height={"40px"}
-                            style={{ opacity: 0.8 }}
-                          />
-                        </div>
-                        <div className="w-75 text-start px-3 px-5 align-items-start">
-                          {folder.name}
-                        </div>
+                {view === "content" ? (
+                  <div className="w-100">
+                    <a
+                      href={courseLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="gate-img ms-auto me-auto">
+                        <img
+                          src={`/favicons/gate/${parentFolder.toLowerCase()}.png`}
+                          alt={`${parentFolder.toLowerCase()}`}
+                          height="100px"
+                        />
                       </div>
-                    ))}
+                    </a>
+                    <h1 className="lead text-white text-center fw-bold mt-3 cust-text">
+                      Video Course 👆
+                    </h1>
+                    <Content
+                      documents={docs}
+                      gateFolderId={folderId}
+                      view="gate"
+                    />
                   </div>
                 ) : (
                   <>
@@ -147,4 +142,4 @@ function Units({ folders }) {
   );
 }
 
-export default Units;
+export default GateUnits;

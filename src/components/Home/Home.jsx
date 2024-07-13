@@ -9,13 +9,22 @@ import welcome from "./welcome.json";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const [isSlow, setIsSlow] = useState(true);
   const [loading, setLoading] = useState(true);
   const [isClickedSem, setIsClickedSem] = useState(false);
-  const [isSlow, setIsSlow] = useState(true);
+  const [isClickedGate, setIsClickedGate] = useState(false);
+  const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const notify = localStorage.getItem("notify") || false;
+    if (!notify) {
+      localStorage.removeItem("userId");
+      localStorage.removeItem("user");
+      localStorage.removeItem("username");
+      navigate("/");
+    }
     const userId = localStorage.getItem("userId") || false;
     if (!userId) {
       navigate("/");
@@ -57,6 +66,20 @@ function Home() {
     setIsClickedDomains(true);
     setTimeout(() => {
       navigate("/domains");
+    }, 450);
+  }
+
+  function handleOpenGate() {
+    setIsClickedGate(true);
+    setTimeout(() => {
+      navigate("/gate");
+    }, 450);
+  }
+
+  function handleOpenPlacements() {
+    setIsClickedPlacements(true);
+    setTimeout(() => {
+      navigate("/placements");
     }, 450);
   }
 
@@ -108,7 +131,7 @@ function Home() {
               <div className="blur1"></div>
               <div className="blur">
                 <SideBar />
-                <div className="outer-container">
+                <div className="outer-container" style={{ marginTop: "15vh" }}>
                   <div className="blur-home"></div>
                   <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                     <div
@@ -117,13 +140,25 @@ function Home() {
                       } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
                       onClick={handleOpenSem}
                     >
-                      <img
-                        src="/favicons/book.png"
-                        alt="book"
-                        height="38px"
-                        className="me-3"
-                      />
-                      SEMESTERS
+                      <div className="w-100">
+                        <div
+                          className="px-3 ps-auto d-inline-block text-end"
+                          style={{ width: "40%" }}
+                        >
+                          <img
+                            src="/favicons/book.png"
+                            alt="book"
+                            height="38px"
+                            className="ms-auto"
+                          />
+                        </div>
+                        <div
+                          className="text-start ps-3 d-inline-block"
+                          style={{ width: "60%" }}
+                        >
+                          SEMESTERS
+                        </div>
+                      </div>
                     </div>
                     <div
                       className={`categories ${
@@ -131,13 +166,77 @@ function Home() {
                       } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
                       onClick={handleOpenDomains}
                     >
-                      <img
-                        src="/favicons/domain-home.png"
-                        alt="book"
-                        height="40px"
-                        className="me-3"
-                      />
-                      DOMAINS
+                      <div className="w-100">
+                        <div
+                          className="px-3 ps-auto d-inline-block text-end"
+                          style={{ width: "40%" }}
+                        >
+                          <img
+                            src="/favicons/domain-home.png"
+                            alt="book"
+                            height="38px"
+                            className="ms-auto"
+                          />
+                        </div>
+                        <div
+                          className="text-start ps-3 d-inline-block"
+                          style={{ width: "60%" }}
+                        >
+                          DOMAINS
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`categories ${
+                        isClickedGate ? "expand-open" : ""
+                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      onClick={handleOpenGate}
+                    >
+                      <div className="w-100">
+                        <div
+                          className="px-3 ps-auto d-inline-block text-end"
+                          style={{ width: "40%" }}
+                        >
+                          <img
+                            src="/favicons/book.png"
+                            alt="book"
+                            height="38px"
+                            className="ms-auto"
+                          />
+                        </div>
+                        <div
+                          className="text-start ps-3 d-inline-block"
+                          style={{ width: "60%" }}
+                        >
+                          GATE
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className={`categories ${
+                        isClickedPlacements ? "expand-open" : ""
+                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      onClick={handleOpenPlacements}
+                    >
+                      <div className="w-100">
+                        <div
+                          className="px-3 ps-auto d-inline-block text-end"
+                          style={{ width: "40%" }}
+                        >
+                          <img
+                            src="/favicons/domain-home.png"
+                            alt="book"
+                            height="38px"
+                            className="ms-auto"
+                          />
+                        </div>
+                        <div
+                          className="text-start ps-3 d-inline-block"
+                          style={{ width: "60%" }}
+                        >
+                          PLACEMENTS
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

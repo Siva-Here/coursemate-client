@@ -24,7 +24,7 @@ const Notification = () => {
   const fetchNotifications = () => {
     const sortedResources = resources
       .filter((rsc) => {
-        return rsc.byAdmin;
+        return rsc.byAdmin && !rsc.isPlacement;
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
@@ -112,7 +112,6 @@ const Notification = () => {
 };
 
 const formatTimestamp = (timestamp) => {
-  console.log("timestamp");
   const d = new Date(timestamp);
   const date = new Date(d - -19800000);
   const formattedDate = date.toLocaleString("en-US", {

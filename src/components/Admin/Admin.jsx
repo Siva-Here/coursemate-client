@@ -26,7 +26,7 @@ function Admin(props) {
         b.uploadedAt.localeCompare(a.uploadedAt)
       );
       sortedResources = sortedResources.filter((rsc) => {
-        return !rsc.isAccepted;
+        return !rsc.isAccepted && !rsc.isPlacement;
       });
       setResource(sortedResources);
       console.log(sortedResources);
@@ -39,7 +39,10 @@ function Admin(props) {
       let documents = JSON.stringify(props);
       documents = JSON.parse(documents).documents.docs;
       const rootDocs = documents.filter((doc) => {
-        return !doc.isAccepted;
+        return (
+          !doc.isAccepted &&
+          doc.parentFolder != process.env.REACT_APP_PLACEMENTS_FOLDER
+        );
       });
       setLoading(false);
       setDelayedDocs([]);
@@ -118,6 +121,7 @@ function Admin(props) {
   }
 
   async function handleDelete(docId) {
+    console.log(docId);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_API_URL}/document/`,

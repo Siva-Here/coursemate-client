@@ -64,19 +64,6 @@
   z-index: -1;
 }
 
-.blur1 {
-  width: 100%;
-  position: relative;
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
-  /* backdrop-filter: blur(2px); */
-  height: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-}
-
 .outer-container {
   width: 100%;
   padding: 20px;

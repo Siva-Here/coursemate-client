@@ -32,7 +32,12 @@ const Resource = ({ parentFolder, view, folderName }) => {
 
     const sortedResources = resources
       .filter((rsc) => {
-        return !rsc.byAdmin && rsc.isAccepted && rsc.parentFolder === folderId;
+        return (
+          !rsc.byAdmin &&
+          rsc.isAccepted &&
+          rsc.parentFolder === folderId &&
+          !rsc.isPlacement
+        );
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
@@ -52,7 +57,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
       userId,
       folderId,
     };
-    console.error(formData);
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
@@ -79,10 +83,10 @@ const Resource = ({ parentFolder, view, folderName }) => {
     <>
       <ToastContainer />
       <div>
+        <div className="units-img"></div>
         {view !== "units" ? (
           <div style={{ marginTop: "50px" }}>
             <Sidebar />
-            <div className="units-img"></div>
             <div className="outer-container-units text-center">
               <h1
                 className="display-5 text-center text-white blinking-text-units"
@@ -104,7 +108,14 @@ const Resource = ({ parentFolder, view, folderName }) => {
                     {rsc.name}
                   </p>
                   <p>{rsc.description}</p>
-                  <p>
+                  <p
+                    className=""
+                    style={{
+                      width: "75vw",
+                      overflow: "auto",
+                      maxWidth: "750px",
+                    }}
+                  >
                     Link:{" "}
                     <a
                       href={rsc.rscLink}
@@ -182,7 +193,6 @@ const Resource = ({ parentFolder, view, folderName }) => {
 };
 
 const formatTimestamp = (timestamp) => {
-  console.log("timestamp");
   const d = new Date(timestamp);
   const date = new Date(d);
   const formattedDate = date.toLocaleString("en-US", {
