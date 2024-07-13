@@ -58,11 +58,16 @@ initializeApp(firebaseConfig);
 
 const messaging = getMessaging();
 
-export const requestForToken = () => {
-  return getToken(messaging, {
-    vapidKey: process.env.REACT_APP_VAPID_KEY,
-  })
-    .then((currentToken) => {
+export const requestForToken = async () => {
+  if ("serviceWorker" in navigator) {
+    const registration = await navigator.serviceWorker.ready;
+
+    try {
+      const currentToken = await getToken(messaging, {
+        vapidKey: process.env.REACT_APP_VAPID_KEY,
+        serviceWorkerRegistration: registration,
+      });
+
       if (currentToken) {
         console.log("notify token: ", currentToken);
         return currentToken;
@@ -73,10 +78,12 @@ export const requestForToken = () => {
           "No registration token available. Request permission to generate one."
         );
       }
-    })
-    .catch((err) => {
+    } catch (err) {
       console.log("An error occurred while retrieving token. ", err);
-    });
+    }
+  } else {
+    console.log("Service workers are not supported by this browser.");
+  }
 };
 
 export const onMessageListener = () =>

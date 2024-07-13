@@ -35,37 +35,38 @@
 // This a service worker file for receiving push notifications.
 // See `Access registration token section` @ https://firebase.google.com/docs/cloud-messaging/js/client#retrieve-the-current-registration-token
 
+// This a service worker file for receiving push notifications.
+// See `Access registration token section` @ https://firebase.google.com/docs/cloud-messaging/js/client#retrieve-the-current-registration-token
+
+// firebase-messaging-sw.js in public folder
+
 // Scripts for firebase and firebase messaging
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.0/firebase-messaging.js");
 
-self.addEventListener("install", function (event) {
-  event.waitUntil(
-    fetch("/firebaseConfig.json")
-      .then((response) => response.json())
-      .then((firebaseConfig) => {
-        firebase.initializeApp(firebaseConfig);
+fetch("/firebaseConfig.json")
+  .then((response) => response.json())
+  .then((firebaseConfig) => {
+    firebase.initializeApp(firebaseConfig);
 
-        // Retrieve firebase messaging
-        const messaging = firebase.messaging();
+    // Retrieve firebase messaging
+    const messaging = firebase.messaging();
 
-        // Handle incoming messages while the app is not in focus
-        messaging.onBackgroundMessage(function (payload) {
-          console.log("Received background message ", payload);
+    // Handle incoming messages while the app is not in focus
+    messaging.onBackgroundMessage(function (payload) {
+      console.log("Received background message ", payload);
 
-          const notificationTitle = payload.notification.title;
-          const notificationOptions = {
-            body: payload.notification.body,
-          };
+      const notificationTitle = payload.notification.title;
+      const notificationOptions = {
+        body: payload.notification.body,
+      };
 
-          self.registration.showNotification(
-            notificationTitle,
-            notificationOptions
-          );
-        });
-      })
-      .catch((error) =>
-        console.error("Failed to fetch firebaseConfig.json:", error)
-      )
+      self.registration.showNotification(
+        notificationTitle,
+        notificationOptions
+      );
+    });
+  })
+  .catch((error) =>
+    console.error("Failed to fetch firebaseConfig.json:", error)
   );
-});
