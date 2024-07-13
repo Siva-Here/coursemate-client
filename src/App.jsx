@@ -31,31 +31,22 @@ function App() {
   const [docs, setDocs] = useState([]);
   const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState(true);
   const navigate = useNavigate();
-  const token = localStorage.getItem("user") || false;
-  if (token) {
-    const user = jwtDecode(token);
-    const email = user.email;
-    if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-      setLoading(true);
-      return (
-        <>
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <p className="lead text-white m-3 loading">
-              Site is Under Maintanance...
-            </p>
-          </div>
-        </>
-      );
-    }
-  } else {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("user");
-    localStorage.removeItem("username");
-    navigate("/");
-  }
+
   function fetchFolders() {
+    const token = localStorage.getItem("user") || false;
+    if (token) {
+      const user = jwtDecode(token);
+      const email = user.email;
+      if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
+        setLoading1(true);
+      } else {
+        setLoading1(false);
+      }
+    } else {
+      setLoading1(false);
+    }
     axios
       .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
         headers: {
@@ -64,10 +55,14 @@ function App() {
       })
       .then((response) => {
         setFolders(response.data);
-        setLoading(false);
+        if (!loading1) {
+          setLoading(false);
+        }
       })
       .catch(() => {
-        setLoading(false);
+        if (!loading1) {
+          setLoading(false);
+        }
       });
   }
   function fetchDocuments() {
@@ -108,7 +103,9 @@ function App() {
     } catch (error) {
     } finally {
       if (!token) {
-        setLoading(false);
+        if (!loading1) {
+          setLoading(false);
+        }
         navigate("/");
       }
     }
