@@ -34,13 +34,6 @@ function App() {
   const navigate = useNavigate();
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
-    if (token) {
-      const user = jwtDecode(token);
-      const email = user.email;
-      if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-        return;
-      }
-    }
     axios
       .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
         headers: {
