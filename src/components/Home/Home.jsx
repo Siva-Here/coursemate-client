@@ -6,6 +6,7 @@ import { AuthContext } from "../../AuthContext";
 import axios from "axios";
 import Lottie from "lottie-react";
 import welcome from "./welcome.json";
+import { jwtDecode } from "jwt-decode";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
