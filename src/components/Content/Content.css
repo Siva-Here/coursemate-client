@@ -156,8 +156,8 @@ h1 {
 
 .file-input-wrapper {
   position: fixed;
-  bottom: 40px;
-  right: 30px;
+  bottom: 70px;
+  right: 50px;
   overflow: hidden;
   display: inline-block;
 }

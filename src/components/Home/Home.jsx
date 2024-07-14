@@ -200,7 +200,7 @@ function Home() {
                           style={{ width: "40%" }}
                         >
                           <img
-                            src="/favicons/book.png"
+                            src="/favicons/gate.png"
                             alt="book"
                             height="38px"
                             className="ms-auto"
@@ -226,7 +226,7 @@ function Home() {
                           style={{ width: "40%" }}
                         >
                           <img
-                            src="/favicons/domain-home.png"
+                            src="/favicons/job.png"
                             alt="book"
                             height="38px"
                             className="ms-auto"
