@@ -176,7 +176,7 @@ const Placements = ({ docs }) => {
       userId,
       folderId,
     };
-    console.error(formData);
+
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
@@ -194,8 +194,7 @@ const Placements = ({ docs }) => {
         toast.error("Failed to add placement. Please try again later.");
       }
     } catch (error) {
-      console.error("Error adding placement:", error);
-      toast.error("Failed to add placement. Please try again later.");
+      toast.error("Server Error. Can't add placement...");
     }
   };
 
