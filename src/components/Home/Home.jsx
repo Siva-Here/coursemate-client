@@ -18,13 +18,13 @@ function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const notify = localStorage.getItem("notify") || false;
-    if (!notify) {
-      localStorage.removeItem("userId");
-      localStorage.removeItem("user");
-      localStorage.removeItem("username");
-      navigate("/");
-    }
+    // const notify = localStorage.getItem("notify") || false;
+    // if (!notify) {
+    //   localStorage.removeItem("userId");
+    //   localStorage.removeItem("user");
+    //   localStorage.removeItem("username");
+    //   navigate("/");
+    // }
     const userId = localStorage.getItem("userId") || false;
     if (!userId) {
       navigate("/");
@@ -94,9 +94,7 @@ function Home() {
       <>
         <div className="loading-container">
           <div className="loading-spinner"></div>
-          <p className="lead text-white m-3 loading">
-            Site is Under Maintanance...
-          </p>
+          <p className="lead text-white m-3 loading">Loading...</p>
         </div>
       </>
     );

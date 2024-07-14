@@ -32,7 +32,6 @@ function App() {
   const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const [loading1, setLoading1] = useState(false);
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
@@ -101,13 +100,11 @@ function App() {
     }
   }, []);
 
-  if (loading || loading1) {
+  if (loading) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="lead text-white m-3 loading">
-          Site is Under maintanance...
-        </p>
+        <p className="lead text-white m-3 loading">Loading...</p>
       </div>
     );
   }
