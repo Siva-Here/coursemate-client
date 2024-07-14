@@ -52,7 +52,8 @@ function Login() {
           toast.error("Failed to Login! Try with Your College Email!");
         }
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error);
         toast.error("Failed to login! Try Again!");
       });
   }

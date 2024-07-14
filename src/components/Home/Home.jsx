@@ -6,7 +6,6 @@ import { AuthContext } from "../../AuthContext";
 import axios from "axios";
 import Lottie from "lottie-react";
 import welcome from "./welcome.json";
-import { jwtDecode } from "jwt-decode";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -17,29 +16,7 @@ function Home() {
   const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
-  const token = localStorage.getItem("user") || false;
-  if (token) {
-    const user = jwtDecode(token);
-    const email = user.email;
-    if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-      setLoading(true);
-      return (
-        <>
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <p className="lead text-white m-3 loading">
-              Site is Under Maintanance...
-            </p>
-          </div>
-        </>
-      );
-    }
-  } else {
-    localStorage.removeItem("userId");
-    localStorage.removeItem("user");
-    localStorage.removeItem("username");
-    navigate("/");
-  }
+
   useEffect(() => {
     const notify = localStorage.getItem("notify") || false;
     if (!notify) {

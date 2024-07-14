@@ -31,22 +31,22 @@ function App() {
   const [docs, setDocs] = useState([]);
   const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
-  const [loading1, setLoading1] = useState(true);
   const navigate = useNavigate();
+  const [loading1, setLoading1] = useState(false);
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
-    if (token) {
-      const user = jwtDecode(token);
-      const email = user.email;
-      if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-        setLoading1(true);
-      } else {
-        setLoading1(false);
-      }
-    } else {
-      setLoading1(false);
-    }
+    // if (token) {
+    //   const user = jwtDecode(token);
+    //   const email = user.email;
+    //   if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
+    //     setLoading1(true);
+    //   } else {
+    //     setLoading1(false);
+    //   }
+    // } else {
+    //   setLoading1(false);
+    // }
     axios
       .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
         headers: {
@@ -55,14 +55,11 @@ function App() {
       })
       .then((response) => {
         setFolders(response.data);
-        if (!loading1) {
-          setLoading(false);
-        }
+
+        setLoading(false);
       })
       .catch(() => {
-        if (!loading1) {
-          setLoading(false);
-        }
+        setLoading(false);
       });
   }
   function fetchDocuments() {
@@ -94,24 +91,27 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem("user") || false;
     try {
-      if (jwtDecode(token).email.endsWith("@rguktn.ac.in")) {
+      const email = jwtDecode(token).email;
+      if (
+        email.endsWith("@rguktn.ac.in") &&
+        process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
+      ) {
         fetchFolders();
         fetchDocuments();
         fetchResources();
+        console.log("Navigating to home", email);
         navigate("/home");
+      } else {
+        console.log("Temporarily not allowed..");
       }
     } catch (error) {
-    } finally {
-      if (!token) {
-        if (!loading1) {
-          setLoading(false);
-        }
-        navigate("/");
-      }
+      setLoading(false);
+      console.error(error);
+      navigate("/");
     }
   }, []);
 
-  if (loading) {
+  if (loading || loading1) {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
