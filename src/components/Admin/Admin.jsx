@@ -89,7 +89,7 @@ function Admin(props) {
           },
         }
       );
-      if (response.status == 200) {
+      if (response.ok) {
         toast.success("File accepted...");
       } else {
         toast.error("Error accepting the file...");
