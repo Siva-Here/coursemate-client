@@ -36,17 +36,6 @@ function App() {
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
-    // if (token) {
-    //   const user = jwtDecode(token);
-    //   const email = user.email;
-    //   if (!process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-    //     setLoading1(true);
-    //   } else {
-    //     setLoading1(false);
-    //   }
-    // } else {
-    //   setLoading1(false);
-    // }
     axios
       .get(`${process.env.REACT_APP_BASE_API_URL}/folder/folders`, {
         headers: {
@@ -94,7 +83,8 @@ function App() {
       const email = jwtDecode(token).email;
       if (
         email.endsWith("@rguktn.ac.in") &&
-        process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
+        true
+        // process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
       ) {
         fetchFolders();
         fetchDocuments();
