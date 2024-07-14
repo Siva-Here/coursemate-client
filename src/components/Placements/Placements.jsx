@@ -226,8 +226,8 @@ const Placements = ({ docs }) => {
                   </p>
                   <p>{rsc.description}</p>
                   <div
-                    className="content-div d-flex fw-bold text-white lead py-4 justify-content-between mb-4"
-                    style={{ width: "95%", marginRight: "8px" }}
+                    className="placements-div d-flex fw-bold text-white lead py-4 justify-content-between mb-4 ms-auto me-auto"
+                    style={{ marginRight: "8px" }}
                   >
                     <div className="img-div text-start ms-4 align-items-end">
                       <img

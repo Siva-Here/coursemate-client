@@ -77,7 +77,7 @@ function GateUnits({ folders, docs }) {
               <div className="outer-container-content text-center">
                 <h1
                   className="display-5 text-center text-white blinking-text-units"
-                  style={{ zIndex: 1001, marginTop: "50px" }}
+                  style={{ zIndex: 1001 }}
                 >
                   {parentFolder}
                 </h1>
