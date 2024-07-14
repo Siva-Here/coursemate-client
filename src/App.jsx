@@ -82,8 +82,8 @@ function App() {
       const email = jwtDecode(token).email;
       if (
         email.endsWith("@rguktn.ac.in") &&
-        true
-        // process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
+        process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
+        // true
       ) {
         fetchFolders();
         fetchDocuments();
