@@ -96,13 +96,13 @@ function Sidebar() {
               <span className="ms-3 fw-bold">Home</span>
             </NavLink>
           </li>
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-2 text-start ms-2">
             <NavLink to="/year" className="sidebar-link">
               <img src="/favicons/book.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Year</span>
             </NavLink>
           </li>
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-2 text-start ms-2">
             <NavLink to="/domains" className="sidebar-link">
               <img src="/favicons/computer.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Domains</span>
@@ -120,7 +120,7 @@ function Sidebar() {
               <span className="ms-3 fw-bold">Placements</span>
             </NavLink>
           </li>
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-2 text-start ms-2">
             <NavLink to="/contribution" className="sidebar-link">
               <img src="/favicons/star1.png" height={"32px"} alt="" />
               <span className="ms-3 fw-bold">Contributions</span>
@@ -142,14 +142,14 @@ function Sidebar() {
             </NavLink>
           </li>
           {isAdmin ? (
-            <li className="sidebar-item mt-3 text-start ms-2">
+            <li className="sidebar-item mt-2 text-start ms-2">
               <NavLink to="/admin" className="sidebar-link">
                 <img src="/favicons/admin.png" height={"32px"} alt="" />
                 <span className="ms-3 fw-bold">Admin Page</span>
               </NavLink>
             </li>
           ) : null}
-          <li className="sidebar-item mt-3 text-start ms-2">
+          <li className="sidebar-item mt-2 text-start ms-2">
             <div
               className={`sidebar-footer mb-3 wrapper ${
                 isExpanded ? "" : "d-none"
