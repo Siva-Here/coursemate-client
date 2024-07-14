@@ -108,6 +108,18 @@ function Sidebar() {
               <span className="ms-3 fw-bold">Domains</span>
             </NavLink>
           </li>
+          <li className="sidebar-item mt-1 text-start ms-2">
+            <NavLink to="/gate" className="sidebar-link">
+              <img src="/favicons/gate.png" height={"32px"} alt="" />
+              <span className="ms-3 fw-bold">Gate</span>
+            </NavLink>
+          </li>
+          <li className="sidebar-item mt-1 text-start ms-2">
+            <NavLink to="/placements" className="sidebar-link">
+              <img src="/favicons/job.png" height={"32px"} alt="" />
+              <span className="ms-3 fw-bold">Placements</span>
+            </NavLink>
+          </li>
           <li className="sidebar-item mt-3 text-start ms-2">
             <NavLink to="/contribution" className="sidebar-link">
               <img src="/favicons/star1.png" height={"32px"} alt="" />
