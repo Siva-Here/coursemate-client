@@ -9,7 +9,7 @@ const Notification = () => {
   const { resources } = useContext(ResourceContext);
   const [Notifications, setNotifications] = useState([
     {
-      uploadedBy: "Site is Under Maintanance...",
+      uploadedBy: "Loading...",
       name: "",
       _id: "",
       description: "",
@@ -49,9 +49,7 @@ const Notification = () => {
     return (
       <div className="loading-container">
         <div className="loading-spinner-notification"></div>
-        <p className="lead text-white m-3 loading">
-          Site is Under Maintanance...
-        </p>
+        <p className="lead text-white m-3 loading">Loading...</p>
         {isSlow ? (
           <p className="text-white m-3 loading">
             Server is Busy! Please wait...
