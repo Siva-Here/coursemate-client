@@ -103,7 +103,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             {resource.map((rsc) => (
               <div key={rsc._id} className="resource-div">
                 <div className="resource-content">
-                  <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p>
+                  {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
                   <p className="text-uppercase fw-bold fst-italic font-italic">
                     {rsc.name}
                   </p>
