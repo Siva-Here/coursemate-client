@@ -89,6 +89,7 @@ function Sidebar() {
           className={`my-0 sidebar-nav ${
             isExpanded ? "d-inline" : "d-none s-sm-inline"
           }`}
+          style={{ overflow: "auto" }}
         >
           <li className="sidebar-item text-start ms-2">
             <NavLink to="/home" className="sidebar-link">
