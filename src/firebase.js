@@ -69,7 +69,6 @@ export const requestForToken = async () => {
       });
 
       if (currentToken) {
-        console.log("notify token: ", currentToken);
         return currentToken;
         // Perform any other necessary action with the token
       } else {

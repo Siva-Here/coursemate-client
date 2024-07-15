@@ -29,7 +29,6 @@ function Admin(props) {
         return !rsc.isAccepted && !rsc.isPlacement;
       });
       setResource(sortedResources);
-      console.log(sortedResources);
     };
     fetchResources();
   }, []);
@@ -123,7 +122,6 @@ function Admin(props) {
   }
 
   async function handleDelete(docId) {
-    console.log(docId);
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_API_URL}/document/`,

@@ -88,10 +88,9 @@ function App() {
         fetchFolders();
         fetchDocuments();
         fetchResources();
-        console.log("Navigating to home", email);
         navigate("/home");
       } else {
-        console.log("Temporarily not allowed..");
+        console.error("Temporarily not allowed..");
       }
     } catch (error) {
       setLoading(false);

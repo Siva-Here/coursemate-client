@@ -43,7 +43,6 @@ function Login() {
           localStorage.setItem("userId", res.data.user._id);
           setUserId(res.data.user._id);
           setIsLoggedIn(true);
-          console.log(res.data.user._id);
           toast.success("Sign up Successful! Welcome to coursemate!");
           setTimeout(() => {
             window.location.reload();
@@ -53,7 +52,6 @@ function Login() {
         }
       })
       .catch((error) => {
-        console.log(error);
         toast.error("Failed to login! Try Again!");
       });
   }
