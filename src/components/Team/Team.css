@@ -60,7 +60,8 @@
 }
 
 @media (max-width: 768px) {
-  .order-2 {
+  .order-2,
+  .order-1 {
     border-radius: 10px;
     height: 360px;
     padding-bottom: 50px;
@@ -73,7 +74,8 @@
       pointer-events: all;
     }
   }
-  .order-2 {
+  .order-2,
+  .order-1 {
     transform: scale(0.8) translateY(-100px);
   }
 }
