@@ -91,7 +91,7 @@ function Admin(props) {
           },
         }
       );
-      if (response.ok) {
+      if (response.status == 200) {
         toast.success("File accepted...");
       } else {
         toast.error("Error accepting the file...");
@@ -137,7 +137,7 @@ function Admin(props) {
         }
       );
 
-      if (response.ok) {
+      if (response.status == 200) {
         toast.success("File Deleted...");
       } else {
         const errorData = await response.json();
@@ -162,7 +162,7 @@ function Admin(props) {
         }
       );
 
-      if (response.ok) {
+      if (response.status == 200) {
         toast.success("Resource Deleted...");
       } else {
         const errorData = await response.json();
