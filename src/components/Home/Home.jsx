@@ -16,6 +16,10 @@ function Home() {
   const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const navigate = useNavigate();
+  let lottie = localStorage.getItem("lottie");
+  setTimeout(() => {
+    localStorage.setItem("lottie", 2);
+  }, 2000);
 
   useEffect(() => {
     // const notify = localStorage.getItem("notify") || false;
@@ -89,16 +93,16 @@ function Home() {
     }, 5000);
   }, []);
 
-  if (loading) {
-    return (
-      <>
-        <div className="loading-container">
-          <div className="loading-spinner"></div>
-          <p className="lead text-white m-3 loading">Loading...</p>
-        </div>
-      </>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <>
+  //       <div className="loading-container">
+  //         <div className="loading-spinner"></div>
+  //         <p className="lead text-white m-3 loading">Loading...</p>
+  //       </div>
+  //     </>
+  //   );
+  // }
 
   return (
     <div>
@@ -110,22 +114,24 @@ function Home() {
             alt=""
             height="250px"
           />
-          {isSlow ? (
-            <div
-              className="lottie"
-              style={{ zIndex: 1000, position: "absolute" }}
-            >
-              <h1
-                className="lead fw-bold text-center cust-text welcome"
-                style={{ fontSize: "2rem" }}
+          {isSlow && lottie == 1 ? (
+            <>
+              <div
+                className="lottie"
+                style={{ zIndex: 1000, position: "absolute" }}
               >
-                Welcome
-              </h1>
-              <Lottie
-                animationData={welcome}
-                style={{ marginInlineStart: "30px" }}
-              />
-            </div>
+                <h1
+                  className="lead fw-bold text-center cust-text welcome"
+                  style={{ fontSize: "2rem" }}
+                >
+                  Welcome
+                </h1>
+                <Lottie
+                  animationData={welcome}
+                  style={{ marginInlineStart: "30px" }}
+                />
+              </div>
+            </>
           ) : (
             <>
               <div className="blur1"></div>

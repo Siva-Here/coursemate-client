@@ -77,6 +77,7 @@ function App() {
       });
   }
   useEffect(() => {
+    localStorage.setItem("lottie", 1);
     const token = localStorage.getItem("user") || false;
     try {
       const email = jwtDecode(token).email;
