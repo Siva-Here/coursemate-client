@@ -89,7 +89,10 @@ function Admin(props) {
         }
       );
       if (response.status == 200) {
-        toast.success("File accepted...");
+        let docs = delayedDocs.filter((doc) => {
+          return doc._id != docId;
+        });
+        setResource(docs);
       } else {
         toast.error("Error accepting the file...");
       }
@@ -110,7 +113,10 @@ function Admin(props) {
         }
       );
       if (response.status == 200) {
-        toast.success("Resource accepted...");
+        let rscs = resource.filter((rsc) => {
+          return rsc._id != rscId;
+        });
+        setResource(rscs);
       } else {
         toast.error("Error accepting the Resource...");
       }
@@ -134,7 +140,10 @@ function Admin(props) {
       );
 
       if (response.status == 200) {
-        toast.success("File Deleted...");
+        let docs = delayedDocs.filter((doc) => {
+          return doc._id != docId;
+        });
+        setResource(docs);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the File: ${errorData.message}`);
@@ -159,13 +168,18 @@ function Admin(props) {
       );
 
       if (response.status == 200) {
-        toast.success("Resource Deleted...");
+        let rscs = resource.filter((rsc) => {
+          return rsc._id != rscId;
+        });
+        setResource(rscs);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the Resource: ${errorData.message}`);
+        console.error(errorData);
       }
     } catch (error) {
       toast.error("Error Deleting the Resource...");
+      console.error(error);
     }
   }
 
