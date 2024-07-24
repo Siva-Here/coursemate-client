@@ -141,8 +141,6 @@ function Home() {
           ) : (
             <>
               <div className="blur1"></div>
-              <div className="blur1"></div>
-              <div className="blur1"></div>
               <div className="blr">
                 <SideBar />
                 <div className="outer-container" style={{ marginTop: "15vh" }}>
