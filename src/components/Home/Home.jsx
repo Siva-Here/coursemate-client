@@ -98,7 +98,7 @@ function Home() {
   //     <>
   //       <div className="loading-container">
   //         <div className="loading-spinner"></div>
-  //         <p className="lead text-white m-3 loading">Loading...</p>
+  //         <p className="lead text-black m-3 loading">Loading...</p>
   //       </div>
   //     </>
   //   );
@@ -110,10 +110,16 @@ function Home() {
         <div className="img-container">
           <img
             className="d-block logo ms-auto me-auto"
-            src="/home.png"
+            src="/logo-login1.png"
             alt=""
             height="250px"
           />
+          {/* <h1
+            className="display-5 text-center text-white cust-text d-block logo ms-auto me-auto"
+            style={{ zIndex: 1000, marginTop: "40px" }}
+          >
+            CoursMate
+          </h1> */}
           {isSlow && lottie == 1 ? (
             <>
               <div
@@ -135,15 +141,17 @@ function Home() {
           ) : (
             <>
               <div className="blur1"></div>
-              <div className="blur">
+              <div className="blur1"></div>
+              <div className="blur1"></div>
+              <div className="blr">
                 <SideBar />
                 <div className="outer-container" style={{ marginTop: "15vh" }}>
                   <div className="blur-home"></div>
                   <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                     <div
-                      className={`categories ${
+                      className={`categories sem ${
                         isClickedSem ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
                       onClick={handleOpenSem}
                     >
                       <div className="w-100">
@@ -167,9 +175,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories ${
+                      className={`categories domains ${
                         isClickedDomains ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
                       onClick={handleOpenDomains}
                     >
                       <div className="w-100">
@@ -193,9 +201,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories ${
+                      className={`categories gate${
                         isClickedGate ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
                       onClick={handleOpenGate}
                     >
                       <div className="w-100">
@@ -219,9 +227,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories ${
+                      className={`categories placements${
                         isClickedPlacements ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-white lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
                       onClick={handleOpenPlacements}
                     >
                       <div className="w-100">

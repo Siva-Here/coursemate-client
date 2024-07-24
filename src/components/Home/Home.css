@@ -11,18 +11,6 @@
   }
 }
 
-/* @keyframes zoomWelcome {
-  from {
-    font-size: 1rem;
-  }
-  to {
-    font-size: 2rem;
-  }
-}
-
-.welcome {
-  animation: zoomWelcome 2s ease-in;
-} */
 .lottie {
   animation: slideUp 2s ease-in;
 }
@@ -37,7 +25,8 @@
   top: 0;
   right: 0;
   left: 0;
-  background-image: url("../../../public/bing/welcome.jpeg");
+  background-image: url("../../../public/bing/backgound.jpg");
+  background-color: white;
   background-size: cover;
   background-position: center;
 }
@@ -46,7 +35,7 @@
   width: 100%;
   position: relative;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(145, 142, 142, 0.295);
   backdrop-filter: blur(0.5px);
   height: 100%;
   top: 0;
@@ -57,7 +46,6 @@
 
 .logo {
   position: absolute;
-  /* right: 10px; */
   top: 0;
   z-index: 1;
 }
@@ -96,15 +84,16 @@
   align-items: center;
   justify-content: center;
   width: 80vw;
-  background: rgba(0, 0, 0, 0.25);
-  /* box-shadow: 0 8px 32px 0 rgba(84, 28, 153, 0.37); */
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(5px);
+  background: rgb(255, 255, 255);
+  /* backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(5px); */
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   max-width: 650px;
   cursor: pointer;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
+  color: black !important;
 }
 
 .categories:hover {
@@ -120,10 +109,16 @@
   position: relative;
   position: fixed;
   background-color: rgba(0, 0, 0, 0.3);
-  /* backdrop-filter: blur(2px); */
   height: 100%;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+}
+
+.gate,
+.placements,
+.domains,
+.sem {
+  background-color: rgba(255, 255, 255, 1);
 }
