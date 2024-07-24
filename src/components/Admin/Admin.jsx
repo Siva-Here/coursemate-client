@@ -92,7 +92,7 @@ function Admin(props) {
         let docs = delayedDocs.filter((doc) => {
           return doc._id != docId;
         });
-        setDoc(docs);
+        setDelayedDocs(docs);
       } else {
         toast.error("Error accepting the file...");
       }
@@ -143,7 +143,7 @@ function Admin(props) {
         let docs = delayedDocs.filter((doc) => {
           return doc._id != docId;
         });
-        setDoc(docs);
+        setDelayedDocs(docs);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the File: ${errorData.message}`);
