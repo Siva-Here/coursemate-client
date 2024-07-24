@@ -19,7 +19,7 @@ function Home() {
   let lottie = localStorage.getItem("lottie");
   setTimeout(() => {
     localStorage.setItem("lottie", 2);
-  }, 2000);
+  }, 5000);
 
   useEffect(() => {
     // const notify = localStorage.getItem("notify") || false;

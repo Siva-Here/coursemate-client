@@ -92,7 +92,7 @@ function Admin(props) {
         let docs = delayedDocs.filter((doc) => {
           return doc._id != docId;
         });
-        setResource(docs);
+        setDoc(docs);
       } else {
         toast.error("Error accepting the file...");
       }
@@ -143,7 +143,7 @@ function Admin(props) {
         let docs = delayedDocs.filter((doc) => {
           return doc._id != docId;
         });
-        setResource(docs);
+        setDoc(docs);
       } else {
         const errorData = await response.json();
         toast.error(`Error Deleting the File: ${errorData.message}`);
@@ -179,6 +179,19 @@ function Admin(props) {
       }
     } catch (error) {
       toast.error("Error Deleting the Resource...");
+      console.error(error);
+    }
+  }
+
+  async function handleActivate() {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_ACTIVATE_URL}/auth`
+      );
+      if (response.status == 201) {
+        toast.success("Token Updated successfully...");
+      }
+    } catch (error) {
       console.error(error);
     }
   }
@@ -272,6 +285,19 @@ function Admin(props) {
                         </div>
                       </div>
                     ))}
+                    {/* <button
+                      className="custom-button-submit"
+                      style={{
+                        zIndex: 1010,
+                        cursor: "pointer",
+                        position: "absolute",
+                        bottom: "80px",
+                        right: "50px",
+                      }}
+                      onClick={handleActivate}
+                    >
+                      Activate
+                    </button> */}
                   </div>
                 ) : (
                   <>
