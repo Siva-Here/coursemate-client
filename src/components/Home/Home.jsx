@@ -98,7 +98,7 @@ function Home() {
   //     <>
   //       <div className="loading-container">
   //         <div className="loading-spinner"></div>
-  //         <p className="lead text-black m-3 loading">Loading...</p>
+  //         <p className="lead text-black m-3 loading">Site is Under Maintanance...</p>
   //       </div>
   //     </>
   //   );

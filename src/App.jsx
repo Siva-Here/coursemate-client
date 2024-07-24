@@ -82,8 +82,8 @@ function App() {
     try {
       const email = jwtDecode(token).email;
       if (
-        email.endsWith("@rguktn.ac.in")
-        // && process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
+        email.endsWith("@rguktn.ac.in") &&
+        process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
         // true
       ) {
         fetchFolders();
@@ -104,7 +104,9 @@ function App() {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
-        <p className="lead text-white m-3 loading">Loading...</p>
+        <p className="lead text-white m-3 loading">
+          Site is Under Maintanance...
+        </p>
       </div>
     );
   }

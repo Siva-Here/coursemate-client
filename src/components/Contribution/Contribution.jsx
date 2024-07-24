@@ -68,7 +68,9 @@ const Contribution = () => {
     return (
       <div className="loading-container1">
         <div className="loading-spinner-leaderboard"></div>
-        <p className="lead text-white m-3 loading1">Loading...</p>
+        <p className="lead text-white m-3 loading1">
+          Site is Under Maintanance...
+        </p>
         {/* {isSlow ? (
           <p className="text-white m-3 loading">
             Server is Busy! Please wait...
