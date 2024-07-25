@@ -101,10 +101,10 @@
 }
 
 .categories.light {
-  border: 2px solid rgba(0, 0, 255, 0.38);
+  border: 1px solid rgba(39, 39, 247, 0.39);
   color: black;
   background: rgb(255, 255, 255);
-  box-shadow: 5px 5px 20px rgba(0, 0, 255, 0.63);
+  box-shadow: 5px 5px 20px rgba(39, 39, 247, 0.39);
 }
 
 .categories.dark {
