@@ -6,6 +6,7 @@ import "./index.css";
 import { AuthProvider } from "./AuthContext";
 import { IdProvider } from "./IdContext";
 import { ResourceProvider } from "./ResourceContext";
+import { ThemeProvider } from "./ThemeContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -31,7 +32,9 @@ root.render(
     <AuthProvider>
       <IdProvider>
         <ResourceProvider>
-          <App />
+          <ThemeProvider>
+            <App />
+          </ThemeProvider>
         </ResourceProvider>
       </IdProvider>
     </AuthProvider>

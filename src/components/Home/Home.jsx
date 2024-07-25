@@ -6,6 +6,8 @@ import { AuthContext } from "../../AuthContext";
 import axios from "axios";
 import Lottie from "lottie-react";
 import welcome from "./welcome.json";
+import { ThemeContext } from "../../ThemeContext";
+import Toggle from "../Toggle/Toggle";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -15,6 +17,8 @@ function Home() {
   const [isClickedGate, setIsClickedGate] = useState(false);
   const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
+  const { theme, setTheme } = useContext(ThemeContext);
+
   const navigate = useNavigate();
   let lottie = localStorage.getItem("lottie");
   setTimeout(() => {
@@ -22,6 +26,7 @@ function Home() {
   }, 5000);
 
   useEffect(() => {
+    console.log(theme);
     // const notify = localStorage.getItem("notify") || false;
     // if (!notify) {
     //   localStorage.removeItem("userId");
@@ -98,7 +103,7 @@ function Home() {
   //     <>
   //       <div className="loading-container">
   //         <div className="loading-spinner"></div>
-  //         <p className="lead text-black m-3 loading">Site is Under Maintanance...</p>
+  //         <p className="lead  m-3 loading">Site is Under Maintanance...</p>
   //       </div>
   //     </>
   //   );
@@ -107,10 +112,10 @@ function Home() {
   return (
     <div>
       {isLoggedIn ? (
-        <div className="img-container">
+        <div className={`img-container ${theme}`}>
           <img
             className="d-block logo ms-auto me-auto"
-            src="/logo-login1.png"
+            src="/logo-login.png"
             alt=""
             height="250px"
           />
@@ -140,16 +145,16 @@ function Home() {
             </>
           ) : (
             <>
-              <div className="blur1"></div>
-              <div className="blr">
+              {/* <div className="blur1"></div> */}
+              <div className="blur">
                 <SideBar />
                 <div className="outer-container" style={{ marginTop: "15vh" }}>
                   <div className="blur-home"></div>
                   <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                     <div
-                      className={`categories sem ${
+                      className={`categories ${theme} sem ${
                         isClickedSem ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
                       onClick={handleOpenSem}
                     >
                       <div className="w-100">
@@ -173,9 +178,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories domains ${
+                      className={`categories ${theme} domains ${
                         isClickedDomains ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
                       onClick={handleOpenDomains}
                     >
                       <div className="w-100">
@@ -199,9 +204,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories gate${
+                      className={`categories ${theme} gate${
                         isClickedGate ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
                       onClick={handleOpenGate}
                     >
                       <div className="w-100">
@@ -225,9 +230,9 @@ function Home() {
                       </div>
                     </div>
                     <div
-                      className={`categories placements${
+                      className={`categories ${theme} placements${
                         isClickedPlacements ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold text-black lead p-4`}
+                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
                       onClick={handleOpenPlacements}
                     >
                       <div className="w-100">

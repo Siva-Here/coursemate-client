@@ -25,17 +25,22 @@
   top: 0;
   right: 0;
   left: 0;
-  background-image: url("../../../public/bing/backgound.jpg");
   background-color: white;
   background-size: cover;
   background-position: center;
+}
+.img-container.light {
+  background-image: url("../../../public/background2.jpg");
+}
+
+.img-container.dark {
+  background-image: url("../../../public/bing/welcome.jpeg");
 }
 
 .blur-home {
   width: 100%;
   position: relative;
   position: fixed;
-  background-color: rgba(145, 142, 142, 0.295);
   backdrop-filter: blur(0.5px);
   height: 100%;
   top: 0;
@@ -43,7 +48,12 @@
   bottom: 0;
   left: 0;
 }
-
+.blur-home.light {
+  background-color: rgba(145, 142, 142, 0.295);
+}
+.blur-home.dark {
+  background-color: rgba(0, 0, 0, 0.3);
+}
 .logo {
   position: absolute;
   top: 0;
@@ -84,16 +94,26 @@
   align-items: center;
   justify-content: center;
   width: 80vw;
-  background: rgb(255, 255, 255);
-  /* backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(5px); */
   border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   max-width: 650px;
   cursor: pointer;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
   transition: 0.2s;
-  color: black !important;
+}
+
+.categories.light {
+  border: 2px solid rgba(0, 0, 255, 0.38);
+  color: black;
+  background: rgb(255, 255, 255);
+  box-shadow: 5px 5px 20px rgba(0, 0, 255, 0.63);
+}
+
+.categories.dark {
+  color: white;
+  background: rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 8px 32px 0 rgba(84, 28, 153, 0.37); */
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .categories:hover {
