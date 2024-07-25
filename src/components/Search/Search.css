@@ -19,7 +19,7 @@
   width: 22px;
   height: 22px;
   border-radius: 120px;
-  transition: 0.15s ease width;
+
   z-index: 2;
 }
 
@@ -48,7 +48,7 @@ form {
   z-index: 2010;
   line-height: 1;
   background-color: white;
-  transition: 0.15s ease margin-top;
+
   cursor: auto;
   padding: 20px;
 }
@@ -61,7 +61,7 @@ form {
   outline: none;
 }
 
-button {
+.search-btn {
   position: absolute;
   top: 0;
   right: 0;
@@ -72,7 +72,6 @@ button {
   line-height: 0.8;
   border: 0;
   background-color: #ffffff;
-  transition: 0.2s ease background-color;
   border-radius: 50%;
 }
 
@@ -90,7 +89,7 @@ button i.fas {
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  transition: 0.5s ease all;
+  /* transition: 0.15s ease all; */
   position: fixed;
   top: 15px;
   right: 100px;
@@ -105,9 +104,6 @@ button i.fas {
 }
 .layer-dark {
   background: rgba(255, 255, 255, 1);
-}
-#layer.sl {
-  transition: 0.3s ease all;
 }
 
 /* #app.opened {

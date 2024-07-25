@@ -59,7 +59,10 @@ const Search = ({ initialIsOpened = false, position = {}, size = 32 }) => {
                 className={`search-bar ${isOpened ? "visible" : ""}`}
               />
             </div>
-            <button type="submit" className={isOpened ? "" : "shadow"}>
+            <button
+              type="submit"
+              className={isOpened ? "search-btn" : "shadow search-btn"}
+            >
               <i className="fas fa-search" style={{ zIndex: 3000 }}></i>
             </button>
           </form>
