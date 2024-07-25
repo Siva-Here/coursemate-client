@@ -7,7 +7,6 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import welcome from "./welcome.json";
 import { ThemeContext } from "../../ThemeContext";
-import Toggle from "../Toggle/Toggle";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -17,7 +16,7 @@ function Home() {
   const [isClickedGate, setIsClickedGate] = useState(false);
   const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   const navigate = useNavigate();
   let lottie = localStorage.getItem("lottie");

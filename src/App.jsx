@@ -25,6 +25,7 @@ import GateUnits from "./components/Gate/GateUnits";
 import Placements from "./components/Placements/Placements";
 import Notifications from "./Notification";
 import Toggle from "./components/Toggle/Toggle";
+import Search from "./components/Search/Search";
 
 function App() {
   useClickSound(clickSoundFile, []);
@@ -115,6 +116,7 @@ function App() {
   return (
     <div className="App">
       <Toggle />
+      <Search />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />

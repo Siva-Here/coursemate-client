@@ -1,9 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../ThemeContext";
 import "./Toggle.css";
 
 const Toggle = () => {
   const { theme, setTheme } = useContext(ThemeContext);
+  const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    if (theme == "light") {
+      setIsChecked(true);
+    } else {
+      setIsChecked(false);
+    }
+  }, [theme]);
 
   const toggleTheme = () => {
     let theme1 = localStorage.getItem("theme");
@@ -87,6 +96,7 @@ const Toggle = () => {
           type="checkbox"
           role="switch"
           name="dark"
+          checked={isChecked}
         />
         <svg
           className="switch__icon"

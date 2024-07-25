@@ -9,7 +9,6 @@
   --primary: hsl(var(--hue), 90%, 50%);
   --trans-dur: 0.6s;
   --trans-timing: cubic-bezier(0.65, 0, 0.35, 1);
-  /* font-size: calc(60px + (120 - 60) * (100vw - 320px) / (2560 - 320)); */
 }
 .toggle-button {
   position: fixed;
@@ -58,8 +57,8 @@ body:has(.switch__input:checked) {
   display: block;
   overflow: hidden;
   position: absolute;
-  top: 0.25em;
-  left: 0.25em;
+  top: 0.35em;
+  left: 0.35em;
   width: 2.25em;
   height: 1em;
 }
