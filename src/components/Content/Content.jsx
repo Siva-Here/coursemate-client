@@ -220,17 +220,22 @@ function Content(props) {
                         <div
                           key={doc._id}
                           className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                          style={{
+                            height: "50px",
+                            textWrap: "nowrap",
+                            borderRadius: "5px",
+                          }}
                         >
                           <div className="img-div text-start ms-4 align-items-end">
                             <img
                               className="text-start"
                               src={getImageSrc(doc.name)}
                               alt=""
-                              height={"35px"}
+                              height={"30px"}
                             />
                           </div>
                           <div
-                            className="text-div text-start align-items-start"
+                            className="text-div text-start align-items-start justify-content-center"
                             onClick={() => {
                               window.location.href = `${doc.viewLink}`;
                             }}
@@ -248,7 +253,7 @@ function Content(props) {
                               className=""
                               src="/favicons/download2.png"
                               alt=""
-                              height={"40px"}
+                              height={"30px"}
                             />
                           </div>
                         </div>
