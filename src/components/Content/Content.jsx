@@ -30,7 +30,7 @@ function Content(props) {
   const { theme } = useContext(ThemeContext);
   const token = localStorage.getItem("user") || null;
 
-  const ITEMS_PER_PAGE = 7;
+  const ITEMS_PER_PAGE = 6;
 
   useEffect(() => {
     if (location.state) {
@@ -245,7 +245,7 @@ function Content(props) {
               <div className="outer-container-content justify-content-center align-items-center d-flex flex-column">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "30px" }}
+                  style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   {parentFolder}
                 </h1>
@@ -302,7 +302,7 @@ function Content(props) {
                                   />
                                 </div>
                                 <div
-                                  className={`${theme} text-div text-start mt-2 align-items-center justify-content-center`}
+                                  className={`${theme} text-div text-start mt-1 align-items-center justify-content-center`}
                                   onClick={() => {
                                     window.location.href = `${doc.viewLink}`;
                                   }}
@@ -322,10 +322,11 @@ function Content(props) {
                                     height={"30px"}
                                   />
                                 </div>
-                                <div className={`uploaded-date ${theme}`}>
+                                <div className={`uploaded-date`}>
                                   <p
                                     style={{
                                       fontSize: "0.5em",
+                                      color: "#01254b",
                                     }}
                                   >
                                     {getDate(doc.createdAt)}

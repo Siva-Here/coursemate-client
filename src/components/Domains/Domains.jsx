@@ -60,7 +60,7 @@ function Domains({ folders }) {
               <div className="outer-container-domains">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "30px" }}
+                  style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Domains
                 </h1>

@@ -92,7 +92,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             <div className="outer-container-units text-center">
               <h1
                 className={`display-5 text-center cust-text-${theme}`}
-                style={{ zIndex: 1000, marginTop: "30px" }}
+                style={{ zIndex: 1000, marginTop: "15px" }}
               >
                 {folderName}
               </h1>

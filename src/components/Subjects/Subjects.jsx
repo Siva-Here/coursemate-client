@@ -54,7 +54,7 @@ function Subjects() {
               <div className="outer-container-year">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "30px" }}
+                  style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Subjects
                 </h1>

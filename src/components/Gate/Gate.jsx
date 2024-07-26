@@ -49,7 +49,7 @@ function Gate({ folders }) {
               <div className="outer-container-year">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "30px" }}
+                  style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Gate
                 </h1>
@@ -82,6 +82,7 @@ function Gate({ folders }) {
                           />
                           <div
                             className={`${theme} text-capitalize mt-3 fw-bold text-nowrap`}
+                            style={{ fontSize: "1rem" }}
                           >
                             {folder.name.toUpperCase()}
                           </div>
