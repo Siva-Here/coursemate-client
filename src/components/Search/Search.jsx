@@ -31,10 +31,28 @@ const Search = ({ initialIsOpened = false, position = {}, size = 32 }) => {
     if (layer) {
       layer.addEventListener("click", toggleApp);
     }
+
+    // Handle Esc key press
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsOpened(false);
+      }
+    };
+
+    // Handle back button on mobile
+    const handlePopState = () => {
+      setIsOpened(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("popstate", handlePopState);
+
     return () => {
       if (layer) {
         layer.removeEventListener("click", toggleApp);
       }
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, [isOpened]);
 
@@ -48,7 +66,7 @@ const Search = ({ initialIsOpened = false, position = {}, size = 32 }) => {
     <div className="search-div">
       <div id="app-cover" style={appCoverStyle}>
         <div id="app" className={isOpened ? "opened" : ""}>
-          <form>
+          <form className={`${isOpened ? "visible" : ""}`}>
             <div id="f-element">
               <input
                 type="text"
@@ -58,6 +76,13 @@ const Search = ({ initialIsOpened = false, position = {}, size = 32 }) => {
                 ref={inputRef}
                 className={`search-bar ${isOpened ? "visible" : ""}`}
               />
+              <div
+                className={`search-bar-div text-dark display-1 ${
+                  isOpened ? "visible" : ""
+                }`}
+              >
+                HELLO
+              </div>
             </div>
             <button
               type="submit"
@@ -69,7 +94,7 @@ const Search = ({ initialIsOpened = false, position = {}, size = 32 }) => {
         </div>
         <div
           id="layer"
-          title="Click the blue area to hide the form"
+          title="Click here to close..."
           className={`ms-auto me-auto d-flex justify-content-center align-items-center layer-${theme}`}
         >
           <i className={`fas fa-search ${isOpened ? "d-none" : ""}`}></i>

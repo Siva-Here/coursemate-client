@@ -29,7 +29,9 @@ form {
   cursor: auto;
   right: 100px;
 }
-
+form.visible {
+  right: 40px;
+}
 #inp-cover {
   position: absolute;
   top: 0;
@@ -37,23 +39,35 @@ form {
   background-color: #fff;
 }
 
-.search-bar {
+.search-bar,
+.search-bar-div {
   display: none;
-  width: 50vw;
+  width: 80vw;
   height: 40px;
-  border-radius: 40px;
+  border-radius: 10px;
   font-size: 19px;
   font-family: Arial, Helvetica, sans-serif;
   color: #00688a;
   z-index: 2010;
   line-height: 1;
-  background-color: white;
-
+  background: rgba(189, 186, 186, 0.76);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: auto;
   padding: 20px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }
-
-.search-bar.visible {
+.search-bar-div {
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  height: 350px;
+}
+.search-bar.visible,
+.search-bar-div.visible {
   display: block;
 }
 
@@ -95,8 +109,8 @@ button i.fas {
   right: 100px;
   z-index: 1020;
   cursor: pointer;
-  backdrop-filter: blur(0.25px);
-  -webkit-backdrop-filter: blur(0.2px);
+  /* backdrop-filter: blur(0.25px);
+  -webkit-backdrop-filter: blur(0.2px); */
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .layer-light {
@@ -127,17 +141,19 @@ button i.fas {
 }
 
 #app.opened + #layer.layer-dark {
-  background: rgba(0, 0, 0, 0.25);
+  /* background: rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  background: transparent;
 }
 
 #app.opened + #layer.layer-light {
-  background: rgba(255, 255, 255, 0.25);
+  /* background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(0.2px);
   -webkit-backdrop-filter: blur(0.05px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.18); */
+  background: transparent;
 }
 
 #app.opened ~ #init {
