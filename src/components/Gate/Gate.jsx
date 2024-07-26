@@ -15,7 +15,7 @@ function Gate({ folders }) {
     }
     let timer;
     const rootFolders = folders
-      .filter((folder) => !folder.parentFolder && folder.isGate)
+      .filter((folder) => folder.isGate)
       .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
 
     rootFolders.forEach((folder, index) => {
