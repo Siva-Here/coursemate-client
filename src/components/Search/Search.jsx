@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import "./Search.css";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 const Search = ({
   initialIsOpened = false,
@@ -15,6 +16,7 @@ const Search = ({
   const [filteredDocs, setFilteredDocs] = useState([]);
   const inputRef = useRef(null);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     if (searchQuery) {
@@ -110,7 +112,7 @@ const Search = ({
   };
 
   return (
-    <div className={`search-div`}>
+    <div className={`search-div show-${isExpanded}`}>
       <div id="app-cover" style={appCoverStyle}>
         <div id="app" className={isOpened ? "opened" : ""}>
           <form className={`${isOpened ? "visible" : ""}`}>

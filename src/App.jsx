@@ -120,7 +120,7 @@ function App() {
       {docs.length != 0 && (
         <>
           <Toggle />
-          {!isExpanded && <Search docs={docs} folders={folders} />}
+          <Search docs={docs} folders={folders} />
         </>
       )}
       <Routes>

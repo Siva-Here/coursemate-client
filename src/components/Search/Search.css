@@ -171,3 +171,8 @@ button i.fas {
 #app.opened ~ #init {
   z-index: -1;
 }
+@media (max-width: 599px) {
+  .show-true {
+    display: none;
+  }
+}
