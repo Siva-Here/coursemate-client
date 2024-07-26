@@ -70,6 +70,11 @@ body {
   position: fixed;
   bottom: 0;
   top: 0;
+  z-index: 4000;
+}
+
+.menu-button {
+  z-index: 4000;
 }
 
 #sidebar.expand-dark {
@@ -85,6 +90,7 @@ body {
   position: fixed;
   bottom: 0;
   top: 0;
+  z-index: 4000;
 }
 
 .toggle-btn {

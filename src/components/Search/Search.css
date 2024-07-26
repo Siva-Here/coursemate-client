@@ -104,7 +104,7 @@ form.visible {
 
 button.shadow {
   box-shadow: 0 10px 30px #d0d0d0;
-  z-index: 3000;
+  z-index: 2000;
 }
 
 button i.fas {
@@ -120,7 +120,7 @@ button i.fas {
   position: fixed;
   top: 15px;
   right: 100px;
-  z-index: 1020;
+  z-index: 100;
   cursor: pointer;
   /* backdrop-filter: blur(0.25px);
   -webkit-backdrop-filter: blur(0.2px); */

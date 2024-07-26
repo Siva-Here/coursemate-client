@@ -23,7 +23,7 @@ const Search = ({
           doc.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
         .slice(0, 5);
-
+      console.log(filtered);
       setFilteredDocs(filtered);
     } else {
       setFilteredDocs([]);
@@ -106,7 +106,7 @@ const Search = ({
     const subject = folders.find(
       (folder) => folder._id === parentFolder.parentFolder
     );
-    return subject ? subject.name : "GATE";
+    return subject ? subject.name : parentFolder.name;
   };
 
   return (
@@ -118,7 +118,7 @@ const Search = ({
               <input
                 type="text"
                 name="query"
-                placeholder="Type something to search ..."
+                placeholder="Search documents"
                 autoComplete="off"
                 ref={inputRef}
                 className={`search-bar ${isOpened ? "visible" : ""} ${theme}`}
@@ -131,44 +131,42 @@ const Search = ({
               >
                 {filteredDocs.length !== 0 ? (
                   <div className="content-content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
-                    {filteredDocs
-                      .filter((doc) => doc.isAccepted)
-                      .map((doc) => (
+                    {filteredDocs.map((doc) => (
+                      <div
+                        key={doc._id}
+                        className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                        style={{
+                          height: "50px",
+                          textWrap: "nowrap",
+                        }}
+                      >
+                        <div className="img-div text-start ms-4 align-items-end">
+                          <img
+                            className="text-start"
+                            src={getImageSrc(doc.name)}
+                            alt=""
+                            height={"25px"}
+                          />
+                        </div>
                         <div
-                          key={doc._id}
-                          className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
-                          style={{
-                            height: "50px",
-                            textWrap: "nowrap",
+                          className={`text-div-search text-start align-items-start ${theme}`}
+                          onClick={() => {
+                            window.location.href = `${doc.viewLink}`;
                           }}
                         >
-                          <div className="img-div text-start ms-4 align-items-end">
-                            <img
-                              className="text-start"
-                              src={getImageSrc(doc.name)}
-                              alt=""
-                              height={"25px"}
-                            />
-                          </div>
-                          <div
-                            className={`text-div-search text-start align-items-start ${theme}`}
-                            onClick={() => {
-                              window.location.href = `${doc.viewLink}`;
+                          {doc.name.toUpperCase()}
+                        </div>
+                        <div className={`parent-name ${theme}`}>
+                          <p
+                            style={{
+                              fontSize: "0.5em",
                             }}
                           >
-                            {doc.name.toUpperCase()}
-                          </div>
-                          <div className={`parent-name ${theme}`}>
-                            <p
-                              style={{
-                                fontSize: "0.5em",
-                              }}
-                            >
-                              {getParentFolderName(doc.parentFolder)}
-                            </p>
-                          </div>
+                            {getParentFolderName(doc.parentFolder)}
+                          </p>
                         </div>
-                      ))}
+                      </div>
+                    ))}
                   </div>
                 ) : (
                   <p>No results found.</p>

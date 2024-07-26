@@ -67,28 +67,28 @@ function Home() {
     setIsClickedSem(true);
     setTimeout(() => {
       navigate("/year");
-    }, 790);
+    }, 100);
   }
 
   function handleOpenDomains() {
     setIsClickedDomains(true);
     setTimeout(() => {
       navigate("/domains");
-    }, 790);
+    }, 100);
   }
 
   function handleOpenGate() {
     setIsClickedGate(true);
     setTimeout(() => {
       navigate("/gate");
-    }, 790);
+    }, 100);
   }
 
   function handleOpenPlacements() {
     setIsClickedPlacements(true);
     setTimeout(() => {
       navigate("/placements");
-    }, 790);
+    }, 100);
   }
 
   useEffect(() => {
