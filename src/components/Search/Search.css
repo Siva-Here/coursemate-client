@@ -67,7 +67,7 @@ form.visible {
 }
 
 .text-div-search {
-  font-size: 1rem;
+  font-size: 0.8rem;
   flex: 6;
   overflow: hidden;
   white-space: nowrap;
@@ -82,7 +82,12 @@ form.visible {
 .search-bar:focus {
   outline: none;
 }
-
+.parent-name {
+  /* display: inline; */
+  position: absolute;
+  right: 10px;
+  bottom: -15px;
+}
 .search-btn {
   position: absolute;
   top: 0;

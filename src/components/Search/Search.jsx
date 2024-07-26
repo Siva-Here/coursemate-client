@@ -138,7 +138,6 @@ const Search = ({
                           key={doc._id}
                           className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
                           style={{
-                            width: "45vw",
                             height: "50px",
                             textWrap: "nowrap",
                           }}
@@ -159,8 +158,12 @@ const Search = ({
                           >
                             {doc.name.toUpperCase()}
                           </div>
-                          <div className={`parent-name mt-5 ${theme}`}>
-                            <p style={{ fontSize: "0.6em" }}>
+                          <div className={`parent-name ${theme}`}>
+                            <p
+                              style={{
+                                fontSize: "0.5em",
+                              }}
+                            >
                               {getParentFolderName(doc.parentFolder)}
                             </p>
                           </div>
