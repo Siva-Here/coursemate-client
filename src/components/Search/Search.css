@@ -2,7 +2,7 @@
   position: fixed;
   top: 15px;
   right: 100px;
-  z-index: 1020;
+  z-index: 120;
   cursor: pointer;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
   position: fixed;
   top: 15px;
   right: 90px;
-  z-index: 2000;
+  z-index: 200;
 }
 
 #app {
@@ -19,7 +19,6 @@
   width: 22px;
   height: 22px;
   border-radius: 120px;
-
   z-index: 2;
 }
 
@@ -104,7 +103,7 @@ form.visible {
 
 button.shadow {
   box-shadow: 0 10px 30px #d0d0d0;
-  z-index: 2000;
+  z-index: 200;
 }
 
 button i.fas {

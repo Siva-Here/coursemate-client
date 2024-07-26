@@ -115,8 +115,12 @@ function App() {
 
   return (
     <div className="App">
-      <Toggle />
-      <Search docs={docs} folders={folders} />
+      {docs.length != 0 && (
+        <>
+          <Toggle />
+          <Search docs={docs} folders={folders} />
+        </>
+      )}
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />

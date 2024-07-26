@@ -46,7 +46,7 @@ body {
 #sidebar {
   width: 90px;
   min-width: 70px;
-  z-index: 1000;
+  z-index: 4000;
   opacity: 1;
   transition: all 0.25s ease-in-out;
   /* background-color: #0e2238; */
@@ -135,7 +135,9 @@ body {
     display: none;
   }
 }
-
+.usrname {
+  z-index: 10000;
+}
 .sidebar-nav {
   padding: 1rem 0;
   flex: 1 1 auto;

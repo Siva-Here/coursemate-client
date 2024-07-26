@@ -72,7 +72,7 @@ function Sidebar() {
           </button>
           <div className="sidebar-logo fw-bold">
             {username !== null ? (
-              <div className="usrname">
+              <div className={`usrname ${theme}`}>
                 <img
                   src={`${profile}`}
                   alt=""
@@ -83,7 +83,7 @@ function Sidebar() {
                 {username}
               </div>
             ) : (
-              "CoursMate"
+              ""
             )}
           </div>
         </div>
