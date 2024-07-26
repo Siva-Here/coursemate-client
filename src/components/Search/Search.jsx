@@ -137,7 +137,11 @@ const Search = ({
                         <div
                           key={doc._id}
                           className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
-                          style={{ height: "50px", textWrap: "nowrap" }}
+                          style={{
+                            width: "45vw",
+                            height: "50px",
+                            textWrap: "nowrap",
+                          }}
                         >
                           <div className="img-div text-start ms-4 align-items-end">
                             <img
