@@ -68,7 +68,11 @@
   width: 100%;
   padding: 20px;
 }
-
+@media (min-width: 799px) {
+  .outer-container-year {
+    margin-left: 100px;
+  }
+}
 .content-year {
   width: 100%;
   max-width: 1200px;

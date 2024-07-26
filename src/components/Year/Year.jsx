@@ -3,11 +3,13 @@ import "./Year.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Year({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -39,13 +41,13 @@ function Year({ folders }) {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="units-img"></div>
+            <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-year">
                 <h1
-                  className="display-1 text-center text-light blinking-text-year"
-                  style={{ fontSize: "48px" }}
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Year
                 </h1>

@@ -8,6 +8,7 @@ import { useLocation } from "react-router-dom";
 import Sidebar from "../navbar/Sidebar";
 import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
+import { ThemeContext } from "../../ThemeContext";
 
 const Resource = ({ parentFolder, view, folderName }) => {
   const { resources } = useContext(ResourceContext);
@@ -17,6 +18,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
   const [showModal, setShowModal] = useState(false);
   const [folderId, setFolderId] = useState(parentFolder);
   const { userId } = useContext(IdContext);
+  const { theme } = useContext(ThemeContext);
 
   if (!folderName) {
     folderName = location.state.folderName;
@@ -83,14 +85,14 @@ const Resource = ({ parentFolder, view, folderName }) => {
     <>
       <ToastContainer />
       <div>
-        <div className="units-img"></div>
+        <div className={`units-img ${theme}`}></div>
         {view !== "units" ? (
           <div style={{ marginTop: "50px" }}>
             <Sidebar />
             <div className="outer-container-units text-center">
               <h1
-                className="display-5 text-center text-white blinking-text-units"
-                style={{ zIndex: 1000, marginTop: "40px" }}
+                className={`display-5 text-center fw-bold cust-text-${theme}`}
+                style={{ zIndex: 1000, marginTop: "30px" }}
               >
                 {folderName}
               </h1>

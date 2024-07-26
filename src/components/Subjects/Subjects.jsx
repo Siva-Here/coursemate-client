@@ -3,6 +3,7 @@ import "./Subjects.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Subjects() {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ function Subjects() {
   const { folderId, folders } = location.state || {};
   const [delayedFolders, setDelayedFolders] = useState([]);
   const { isLoggedIn } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -51,8 +53,8 @@ function Subjects() {
               <Sidebar />
               <div className="outer-container">
                 <h1
-                  className="display-1 text-center text-light blinking-text-sem"
-                  style={{ fontSize: "48px" }}
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Subjects
                 </h1>

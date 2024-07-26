@@ -3,11 +3,13 @@ import "./Gate.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Gate({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -39,15 +41,15 @@ function Gate({ folders }) {
     <div>
       {isLoggedIn ? (
         <>
-          <div className="blur1"></div>
+          {theme == "dark" && <div className="blur1"></div>}
           <div style={{ marginTop: "50px" }}>
-            <div className="units-img"></div>
+            <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-year">
                 <h1
-                  className="display-1 text-center text-light blinking-text-year"
-                  style={{ fontSize: "48px" }}
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Gate
                 </h1>
@@ -63,7 +65,7 @@ function Gate({ folders }) {
                         style={{ cursor: "pointer" }}
                       >
                         <div
-                          className="d-flex flex-column align-items-center justify-content-center p-3"
+                          className={`gate-div ${theme} d-flex flex-column align-items-center justify-content-center p-3`}
                           onClick={() =>
                             handleClick(
                               folder._id,
@@ -71,14 +73,6 @@ function Gate({ folders }) {
                               folder.courseLink
                             )
                           }
-                          style={{
-                            borderRadius: "15px",
-                            background: "rgba(0, 0, 0, 0.5)",
-                            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
-                            backdropFilter: "blur(10px)",
-                            WebkitBackdropFilter: "blur(10px)",
-                            border: "1px solid rgba(255, 255, 255, 0.3)",
-                          }}
                         >
                           <img
                             src={`/favicons/gate/${folder.name.toLowerCase()}.png`}
@@ -86,7 +80,9 @@ function Gate({ folders }) {
                             height="50px"
                             style={{ opacity: 0.8 }}
                           />
-                          <div className="text-white text-capitalize mt-3 fw-bold text-nowrap">
+                          <div
+                            className={`${theme} text-capitalize mt-3 fw-bold text-nowrap`}
+                          >
                             {folder.name.toUpperCase()}
                           </div>
                         </div>

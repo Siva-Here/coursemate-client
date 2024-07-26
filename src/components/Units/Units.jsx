@@ -4,6 +4,7 @@ import Sidebar from "../navbar/Sidebar";
 import Resource from "../Resource/Resource";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IdContext } from "../../IdContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Units({ folders }) {
   const location = useLocation();
@@ -13,6 +14,7 @@ function Units({ folders }) {
   const [parentFolder, setParentFolder] = useState("Subject");
   const [view, setView] = useState("units");
   const [user, setUser] = useState(false);
+  const { theme } = useContext(ThemeContext);
   const { userId, setUserId } = useContext(IdContext);
 
   if (!user) {
@@ -72,13 +74,13 @@ function Units({ folders }) {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px", zIndex: 10 }}>
-            <div className="units-img"></div>
+            <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-units text-center">
                 <h1
-                  className="display-5 text-center text-white blinking-text-units"
-                  style={{ zIndex: 1001, marginTop: "50px" }}
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   {parentFolder}
                 </h1>

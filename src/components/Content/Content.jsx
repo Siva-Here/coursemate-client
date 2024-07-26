@@ -235,7 +235,10 @@ function Content(props) {
             {props.view != "gate" ? (
               <div className="content-img"></div>
             ) : (
-              <div className="units-img" style={{ zIndex: -1 }}></div>
+              <div
+                className={`units-img ${theme}`}
+                style={{ zIndex: -1 }}
+              ></div>
             )}
             <div>
               <Sidebar />

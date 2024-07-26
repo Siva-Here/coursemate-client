@@ -8,6 +8,7 @@ import Sidebar from "../navbar/Sidebar";
 import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { jwtDecode } from "jwt-decode";
+import { ThemeContext } from "../../ThemeContext";
 
 const Placements = ({ docs }) => {
   const { resources } = useContext(ResourceContext);
@@ -23,6 +24,7 @@ const Placements = ({ docs }) => {
   const [rscLink, setRscLink] = useState(null);
   const [isAllowed, setIsAllowed] = useState(false);
   const [disable, setDisable] = useState(true);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     try {
@@ -202,13 +204,13 @@ const Placements = ({ docs }) => {
     <>
       <ToastContainer />
       <div>
-        <div className="units-img"></div>
+        <div className={`units-img ${theme}`}></div>
         <div style={{ marginTop: "50px" }}>
           <Sidebar />
           <div className="outer-container-units text-center">
             <h1
-              className="display-5 text-center text-white cust-text"
-              style={{ zIndex: 1000, marginTop: "40px" }}
+              className={`display-5 text-center fw-bold cust-text-${theme}`}
+              style={{ zIndex: 1000, marginTop: "30px" }}
             >
               Placements
             </h1>

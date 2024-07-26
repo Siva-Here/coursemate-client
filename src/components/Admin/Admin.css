@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Caveat:400,700|Gochi+Hand");
 
-body {
+/* body {
   background: #000;
   display: flex;
   justify-content: center;
-  /* font-family: "Caveat", cursive; */
-}
+  font-family: "Caveat", cursive;
+} */
 
 h1 {
   font-size: 88px;

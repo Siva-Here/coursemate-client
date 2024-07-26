@@ -308,7 +308,7 @@ function Admin(props) {
                       {view !== "docs" ? (
                         <div style={{ marginTop: "50px" }}>
                           <Sidebar />
-                          <div className="units-img"></div>
+                          <div className={`units-img ${theme}`}></div>
                         </div>
                       ) : null}
                       <div className="blur1"></div>

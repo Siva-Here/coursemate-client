@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Domains({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const { userId } = useContext(IdContext);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -50,13 +52,16 @@ function Domains({ folders }) {
     <div>
       {isLoggedIn ? (
         <>
-          <div className="blur1"></div>
+          {/* <div className="blur1"></div> */}
           <div style={{ marginTop: "60px" }}>
             <div className="img-container2"></div>
             <div>
               <Sidebar />
               <div className="outer-container-domains">
-                <h1 className="display-3 text-center text-white blinking-text-domains">
+                <h1
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
+                >
                   Domains
                 </h1>
                 <div className="content-domains text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">

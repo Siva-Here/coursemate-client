@@ -3,6 +3,7 @@ import "./Sem.css";
 import Sidebar from "../navbar/Sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Sem({ folders }) {
   const location = useLocation();
@@ -10,6 +11,7 @@ function Sem({ folders }) {
   const navigate = useNavigate();
   const { folderId } = location.state;
   const { isLoggedIn } = useContext(AuthContext);
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     if (!folderId) {
@@ -44,13 +46,13 @@ function Sem({ folders }) {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="units-img"></div>
+            <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-sem">
                 <h1
-                  className="display-1 text-center text-light blinking-text-sem"
-                  style={{ fontSize: "48px" }}
+                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Semester
                 </h1>

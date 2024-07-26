@@ -111,8 +111,14 @@ h1 span {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
   z-index: -1;
+}
+.units-img.dark {
+  background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
+}
+
+.units-img.light {
+  background-color: #fefaf6;
 }
 
 .blur-units {

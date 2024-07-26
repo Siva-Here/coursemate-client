@@ -3,10 +3,13 @@ import "./Team.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 const Team = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/");
@@ -20,8 +23,8 @@ const Team = () => {
             <div className="img-container-sem"></div>
             <Sidebar />
             <h1
-              className="display-4 text-center text-light blinking-text-team"
-              style={{ fontSize: "48px" }}
+              className={`display-5 text-center fw-bold cust-text-${theme}`}
+              style={{ zIndex: 1000, marginTop: "30px" }}
             >
               Web Team
             </h1>
