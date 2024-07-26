@@ -116,7 +116,7 @@ function App() {
   return (
     <div className="App">
       <Toggle />
-      <Search />
+      <Search docs={docs} folders={folders} />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
@@ -132,7 +132,7 @@ function App() {
         <Route path="/resource" element={<Resource />} />
         <Route path="/admin" element={<Admin documents={docs} />} />
         <Route path="/gate" element={<Gate folders={folders} />} />
-        <Route path="placements" element={<Placements docs={docs} />} />
+        <Route path="/placements" element={<Placements docs={docs} />} />
         <Route
           path="/gateunits"
           element={<GateUnits folders={folders} docs={docs} />}
