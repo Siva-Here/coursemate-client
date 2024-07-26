@@ -226,7 +226,7 @@ function Content(props) {
                             borderRadius: "5px",
                           }}
                         >
-                          <div className="img-div text-start ms-4 align-items-end">
+                          <div className="img-div text-start align-items-end">
                             <img
                               className="text-start"
                               src={getImageSrc(doc.name)}
@@ -235,7 +235,7 @@ function Content(props) {
                             />
                           </div>
                           <div
-                            className="text-div text-start align-items-start justify-content-center"
+                            className="text-div text-center align-items-center justify-content-center"
                             onClick={() => {
                               window.location.href = `${doc.viewLink}`;
                             }}
@@ -244,7 +244,7 @@ function Content(props) {
                           </div>
 
                           <div
-                            className="download-div text-end me-3 align-items-start"
+                            className="download-div text-end me-1 align-items-start"
                             onClick={() => {
                               window.location.href = `${doc.downloadLink}`;
                             }}
