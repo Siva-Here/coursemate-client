@@ -15,7 +15,7 @@ function Units({ folders }) {
   const [view, setView] = useState("units");
   const [user, setUser] = useState(false);
   const { theme } = useContext(ThemeContext);
-  const { userId, setUserId } = useContext(IdContext);
+  const { userId } = useContext(IdContext);
 
   if (!user) {
     navigate("/resource", {
@@ -72,27 +72,31 @@ function Units({ folders }) {
     <div>
       {user ? (
         <>
-          <div className="blur1"></div>
+          {/* <div className="blur1"></div> */}
           <div style={{ marginTop: "50px", zIndex: 10 }}>
             <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-units text-center">
                 <h1
-                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   {parentFolder}
                 </h1>
-                <div className="btn-group text-center">
+                <div className={`btn-group ${theme} text-center`}>
                   <button
-                    className={`btn ${view === "units" ? "active" : ""}`}
+                    className={`btn ${theme} ${
+                      view === "units" ? "active" : ""
+                    }`}
                     onClick={() => setView("units")}
                   >
                     Units
                   </button>
                   <button
-                    className={`btn ${view !== "units" ? "active" : ""}`}
+                    className={`btn ${theme} ${
+                      view !== "units" ? "active" : ""
+                    }`}
                     onClick={() => {
                       // navigate("/resource", {
                       //   state: { parentFolder: folderId, uploadedBy: userId },
@@ -108,19 +112,33 @@ function Units({ folders }) {
                     {delayedFolders.map((folder) => (
                       <div
                         key={folder._id}
-                        className="units-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
+                        className={`folder-div-year ${theme} d-flex rounded-3 fw-bold lead p-4 justify-content-evenly`}
                         onClick={() =>
                           handleFolderClick(folder._id, folder.name)
                         }
                       >
                         <div className="w-25 text-end align-items-end">
-                          <img
-                            className="text-start"
-                            src="/bing/folder1.png"
-                            alt=""
-                            height={"40px"}
-                            style={{ opacity: 0.8 }}
-                          />
+                          {theme == "light" ? (
+                            <>
+                              <img
+                                className="text-start"
+                                src="/bing/folder.png"
+                                alt=""
+                                height={"30px"}
+                                style={{ opacity: 1 }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <img
+                                className="text-start"
+                                src="/bing/folder1.png"
+                                alt=""
+                                height={"40px"}
+                                style={{ opacity: 0.8 }}
+                              />
+                            </>
+                          )}
                         </div>
                         <div className="w-75 text-start px-3 px-5 align-items-start">
                           {folder.name}

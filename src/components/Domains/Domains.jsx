@@ -54,12 +54,12 @@ function Domains({ folders }) {
         <>
           {/* <div className="blur1"></div> */}
           <div style={{ marginTop: "60px" }}>
-            <div className="img-container2"></div>
+            <div className={`img-container2 ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-domains">
                 <h1
-                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Domains
@@ -68,7 +68,7 @@ function Domains({ folders }) {
                   {delayedFolders.map((folder) => (
                     <div
                       key={folder._id}
-                      className="domains-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
+                      className={`domains-div ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
                       onClick={() => {
                         handleClick(folder._id, folder.name);
                       }}
@@ -81,7 +81,9 @@ function Domains({ folders }) {
                           height={"40px"}
                         />
                       </div>
-                      <div className="w-75 text-start px-3 px-5 align-items-start">
+                      <div
+                        className={`w-75 text-start px-3 px-5 align-items-start ${theme}`}
+                      >
                         {folder.name}
                       </div>
                     </div>

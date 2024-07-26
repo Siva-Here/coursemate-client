@@ -41,7 +41,7 @@ form.visible {
 .search-bar,
 .search-bar-div {
   display: none;
-  width: 80vw;
+  width: 75vw;
   height: 40px;
   border-radius: 10px;
   font-size: 19px;

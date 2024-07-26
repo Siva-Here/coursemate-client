@@ -36,22 +36,28 @@
 .domains-div {
   animation: slide 1s ease-in;
   z-index: 10;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50vw;
   min-width: 300px;
-  background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
   max-width: 650px;
   cursor: pointer;
-  border: 2px solid rgb(52, 81, 175);
   transition: 0.2s;
+}
+.domains-div.dark {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgb(52, 81, 175);
+}
+.domains-div.light {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid #102c57;
 }
 
 .folder-div:hover {
@@ -64,9 +70,14 @@
   height: 100%;
   top: 0;
   left: 0;
+  z-index: -1;
+}
+.img-container2.dark {
   background: url("../../../public/favicons/domains1.png") no-repeat center
     center/cover;
-  z-index: -1;
+}
+.img-container2.light {
+  background-color: #fefef6;
 }
 
 .outer-container-domains {

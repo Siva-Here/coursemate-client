@@ -58,15 +58,29 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80vw;
+  width: 75vw;
   min-width: 260px;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   max-width: 650px;
   cursor: pointer;
   transition: 0.2s;
+}
+.content-div.dark {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+.content-div.light {
+  box-shadow: 4px 4px 12px 0 rgba(31, 38, 135, 0.37);
+  border-radius: 4px;
+  background: transparent;
+}
+
+.uploaded-date {
+  /* display: inline; */
+  position: absolute;
+  right: 50px;
+  bottom: -15px;
 }
 
 .content-img {
@@ -75,8 +89,14 @@ h1 {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("../../../public/bing/book.png") no-repeat center center/cover;
   z-index: -1;
+}
+.content-img.dark {
+  background: url("../../../public/bing/book.png") no-repeat center center/cover;
+}
+.content-img.light {
+  /* background-color: #d9e7fc; */
+  background-color: #eef7ff;
 }
 
 .blur-content {
@@ -209,19 +229,22 @@ a {
 }
 .search-sort-container.light {
   border: 1px solid rgba(39, 129, 247, 0.39);
-  color: green;
+  color: black !important;
   background: rgba(255, 255, 255, 0.25);
-  box-shadow: 5px 5px 20px rgba(39, 129, 247, 0.39);
+  /* box-shadow: 5px 5px 20px rgba(39, 129, 247, 0.39); */
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(5px);
 }
 .search-sort-container.dark {
   color: white;
   background: rgba(0, 0, 0, 0.25);
-  /* box-shadow: 0 8px 32px 0 rgba(84, 28, 153, 0.37); */
+  box-shadow: 0 8px 32px 0 rgba(84, 28, 153, 0.37);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.sort-select:not(:focus) {
+  color: gray;
 }
 .search-input,
 .sort-select {
@@ -238,7 +261,7 @@ a {
 }
 
 option {
-  background-color: white;
+  background-color: #102c57;
   color: black;
 }
 .search-input.dark {
@@ -311,15 +334,16 @@ option {
   align-items: center;
   justify-content: center;
   margin: 20px 0;
-  gap: 10px; /* Adds space between pagination buttons */
+  gap: 5px;
 }
 
 .pagination-button {
-  padding: 10px 15px;
-  margin: 0 5px;
+  padding: 2px 6px;
+  margin: 0 2px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 50%;
   background-color: #f9f9f9;
+  color: blue;
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
 }
@@ -328,8 +352,13 @@ option {
   background-color: #e0e0e0;
 }
 
-.pagination-button.active {
-  background-color: #007bff;
+.pagination-button.light.active {
+  background-color: #102c57;
+  color: white;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+.pagination-button.dark.active {
+  background-color: #01254b;
   color: white;
   box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
 }

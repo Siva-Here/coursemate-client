@@ -23,7 +23,7 @@ const Team = () => {
             <div className="img-container-sem"></div>
             <Sidebar />
             <h1
-              className={`display-5 text-center fw-bold cust-text-${theme}`}
+              className={`display-5 text-center cust-text-${theme}`}
               style={{ zIndex: 1000, marginTop: "30px" }}
             >
               Web Team

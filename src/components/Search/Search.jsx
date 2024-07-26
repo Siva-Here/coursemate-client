@@ -136,7 +136,7 @@ const Search = ({
                     {filteredDocs.map((doc) => (
                       <div
                         key={doc._id}
-                        className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                        className={`content-div ${theme} d-flex fw-bold text-white lead py-4 justify-content-between`}
                         style={{
                           height: "50px",
                           textWrap: "nowrap",

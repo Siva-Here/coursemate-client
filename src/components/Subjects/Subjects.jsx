@@ -48,12 +48,12 @@ function Subjects() {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="img-container1"></div>
+            <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container">
+              <div className="outer-container-year">
                 <h1
-                  className={`display-5 text-center fw-bold cust-text-${theme}`}
+                  className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   Subjects
@@ -62,21 +62,37 @@ function Subjects() {
                   {delayedFolders.map((folder) => (
                     <div
                       key={folder._id}
-                      className="folder-div d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly"
+                      className={`folder-div-year ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
                       onClick={() =>
                         handleClick(folder._id, "/icons8-folder-96.png")
                       }
                     >
                       <div className="w-25 text-end align-items-end">
-                        <img
-                          className="text-start"
-                          src="/bing/folder1.png"
-                          alt=""
-                          height={"40px"}
-                          style={{ opacity: 0.8 }}
-                        />
+                        {theme == "light" ? (
+                          <>
+                            <img
+                              className="text-start"
+                              src="/bing/folder.png"
+                              alt=""
+                              height={"30px"}
+                              style={{ opacity: 1 }}
+                            />
+                          </>
+                        ) : (
+                          <>
+                            <img
+                              className="text-start"
+                              src="/bing/folder1.png"
+                              alt=""
+                              height={"40px"}
+                              style={{ opacity: 0.8 }}
+                            />
+                          </>
+                        )}
                       </div>
-                      <div className="w-75 text-start px-3 px-5 align-items-start">
+                      <div
+                        className={`${theme} w-75 text-start px-3 px-5 align-items-start`}
+                      >
                         {folder.name}
                       </div>
                     </div>

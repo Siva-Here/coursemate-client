@@ -39,7 +39,7 @@ function Sidebar() {
         menuButtonRef.current &&
         !menuButtonRef.current.contains(event.target)
       ) {
-        setIsExpanded(false);
+        setIsExpanded(window.innerWidth >= 768);
       }
     };
 

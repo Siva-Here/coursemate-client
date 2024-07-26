@@ -30,7 +30,7 @@ function Content(props) {
   const { theme } = useContext(ThemeContext);
   const token = localStorage.getItem("user") || null;
 
-  const ITEMS_PER_PAGE = 8;
+  const ITEMS_PER_PAGE = 7;
 
   useEffect(() => {
     if (location.state) {
@@ -203,7 +203,7 @@ function Content(props) {
       if (sortType === "name") {
         return a.name.localeCompare(b.name);
       } else {
-        return new Date(a.createdAt) - new Date(b.createdAt);
+        return new Date(b.createdAt) - new Date(a.createdAt);
       }
     });
 
@@ -233,7 +233,7 @@ function Content(props) {
           {props.view != "gate" ? <div className="blr1"></div> : <></>}
           <div style={props.view !== "gate" ? { marginTop: "50px" } : {}}>
             {props.view != "gate" ? (
-              <div className="content-img"></div>
+              <div className={`content-img ${theme}`}></div>
             ) : (
               <div
                 className={`units-img ${theme}`}
@@ -242,14 +242,16 @@ function Content(props) {
             )}
             <div>
               <Sidebar />
-              <div className="outer-container-content">
+              <div className="outer-container-content justify-content-center align-items-center d-flex flex-column">
                 <h1
-                  className="display-3 text-center text-white blinking-text"
-                  style={{ zIndex: 100 }}
+                  className={`display-5 text-center cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "30px" }}
                 >
                   {parentFolder}
                 </h1>
-                <div className={`${theme} search-sort-container row`}>
+                <div
+                  className={`${theme} search-sort-container row justify-content-center align-items-center d-flex`}
+                >
                   <div className="col-12 col-sm-12 col-md-6">
                     <input
                       type="text"
@@ -265,8 +267,12 @@ function Content(props) {
                       onChange={handleSortChange}
                       className={`sort-select ${theme}`}
                     >
-                      <option value="name">Sort by Name</option>
-                      <option value="createdAt">Sort by Date</option>
+                      <option value="name" className={`${theme}`}>
+                        Sort by Name
+                      </option>
+                      <option value="createdAt" className={`${theme}`}>
+                        Sort by Date
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -280,7 +286,7 @@ function Content(props) {
                             <td>
                               <div
                                 key={doc._id}
-                                className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                                className={`content-div d-flex fw-bold lead py-4 justify-content-between ${theme}`}
                                 style={{
                                   height: "50px",
                                   textWrap: "nowrap",
@@ -296,14 +302,13 @@ function Content(props) {
                                   />
                                 </div>
                                 <div
-                                  className="text-div text-center align-items-center justify-content-center"
+                                  className={`${theme} text-div text-start mt-2 align-items-center justify-content-center`}
                                   onClick={() => {
                                     window.location.href = `${doc.viewLink}`;
                                   }}
                                 >
                                   {doc.name.toUpperCase()}
                                 </div>
-
                                 <div
                                   className="download-div text-end me-1 align-items-start"
                                   onClick={() => {
@@ -317,6 +322,15 @@ function Content(props) {
                                     height={"30px"}
                                   />
                                 </div>
+                                <div className={`uploaded-date ${theme}`}>
+                                  <p
+                                    style={{
+                                      fontSize: "0.5em",
+                                    }}
+                                  >
+                                    {getDate(doc.createdAt)}
+                                  </p>
+                                </div>
                               </div>
                             </td>
                           </tr>
@@ -324,11 +338,11 @@ function Content(props) {
                     </tbody>
                   </table>
                 ) : (
-                  <div className="text-white lead my-5 py-5">
-                    <p>No documents available.</p>
+                  <div className={`h3 m-5 py-5 ${theme}`}>
+                    <p className={`ps-5 ${theme}`}>No documents available.</p>
                   </div>
                 )}
-                {/* <div className="pagination-container">
+                <div className="pagination-container">
                   <button
                     onClick={() =>
                       setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
@@ -342,7 +356,7 @@ function Content(props) {
                     <button
                       key={index + 1}
                       onClick={() => setCurrentPage(index + 1)}
-                      className={`pagination-button ${
+                      className={`pagination-button ${theme} ${
                         currentPage === index + 1 ? "active" : ""
                       }`}
                     >
@@ -360,7 +374,7 @@ function Content(props) {
                   >
                     <FaArrowRight />
                   </button>
-                </div> */}
+                </div>
               </div>
               <form onSubmit={handleSubmit}>
                 <div className="file-input-wrapper">
@@ -401,3 +415,31 @@ function Content(props) {
 }
 
 export default Content;
+
+const getDate = (timestamp) => {
+  const date = new Date(timestamp);
+
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  const getDayWithSuffix = (day) => {
+    const j = day % 10,
+      k = day % 100;
+    //   if (j === 1 && k !== 11) {
+    //     return day + "st";
+    //   }
+    //   if (j === 2 && k !== 12) {
+    //     return day + "nd";
+    //   }
+    //   if (j === 3 && k !== 13) {
+    //     return day + "rd";
+    //   }
+    return day;
+  };
+
+  const formattedDate = `${getDayWithSuffix(
+    day
+  )} ${month} ${year}`.toUpperCase();
+  return formattedDate;
+};

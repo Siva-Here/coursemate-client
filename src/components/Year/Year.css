@@ -49,6 +49,15 @@
   cursor: pointer;
   transition: 0.2s;
 }
+.folder-div-year.light {
+  background-color: #fff;
+}
+.folder-div-year.dark {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 .folder-div-year:hover {
   transform: scale(1.05);
 }
@@ -68,8 +77,20 @@
   width: 100%;
   padding: 20px;
 }
-@media (min-width: 799px) {
+@media (min-width: 768px) {
   .outer-container-year {
+    margin-left: 100px;
+  }
+  .outer-container-domains {
+    margin-left: 100px;
+  }
+  .outer-container-sem {
+    margin-left: 100px;
+  }
+  .outer-container-units {
+    margin-left: 100px;
+  }
+  .outer-container-content {
     margin-left: 100px;
   }
 }
