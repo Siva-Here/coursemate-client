@@ -7,6 +7,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { ThemeContext } from "../../ThemeContext";
 
 function Content(props) {
   const location = useLocation();
@@ -21,8 +23,14 @@ function Content(props) {
   const [errorMessage, setErrorMessage] = useState("");
   const [isUploaded, setIsUploaded] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortType, setSortType] = useState("name");
   const navigate = useNavigate();
+  const { theme } = useContext(ThemeContext);
   const token = localStorage.getItem("user") || null;
+
+  const ITEMS_PER_PAGE = 8;
 
   useEffect(() => {
     if (location.state) {
@@ -180,12 +188,38 @@ function Content(props) {
     }
   };
 
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
+    setCurrentPage(1);
+  };
+
+  const handleSortChange = (e) => {
+    setSortType(e.target.value);
+  };
+
+  const filteredAndSortedDocs = delayedDocs
+    .filter((doc) => doc.name.toLowerCase().includes(searchTerm.toLowerCase()))
+    .sort((a, b) => {
+      if (sortType === "name") {
+        return a.name.localeCompare(b.name);
+      } else {
+        return new Date(a.createdAt) - new Date(b.createdAt);
+      }
+    });
+
+  const currentDocs = filteredAndSortedDocs.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(filteredAndSortedDocs.length / ITEMS_PER_PAGE);
+
   if (loading && props.view !== "gate") {
     return (
       <div className="loading-container">
         <div className="loading-spinner"></div>
         <p className="lead text-white m-3 loading">
-          Site is Under Maintanance...
+          Site is Under Maintenance...
         </p>
       </div>
     );
@@ -196,7 +230,7 @@ function Content(props) {
       {isLoggedIn ? (
         <div>
           <ToastContainer />
-          {props.view != "gate" ? <div className="blur1"></div> : <></>}
+          {props.view != "gate" ? <div className="blr1"></div> : <></>}
           <div style={props.view !== "gate" ? { marginTop: "50px" } : {}}>
             {props.view != "gate" ? (
               <div className="content-img"></div>
@@ -212,103 +246,152 @@ function Content(props) {
                 >
                   {parentFolder}
                 </h1>
-                {delayedDocs.length != 0 ? (
-                  <div className="content-content text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
-                    {delayedDocs
-                      .filter((doc) => doc.isAccepted)
-                      .map((doc) => (
-                        <div
-                          key={doc._id}
-                          className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
-                          style={{
-                            height: "50px",
-                            textWrap: "nowrap",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          <div className="img-div text-start align-items-end">
-                            <img
-                              className="text-start"
-                              src={getImageSrc(doc.name)}
-                              alt=""
-                              height={"30px"}
-                            />
-                          </div>
-                          <div
-                            className="text-div text-center align-items-center justify-content-center"
-                            onClick={() => {
-                              window.location.href = `${doc.viewLink}`;
-                            }}
-                          >
-                            {doc.name.toUpperCase()}
-                          </div>
-
-                          <div
-                            className="download-div text-end me-1 align-items-start"
-                            onClick={() => {
-                              window.location.href = `${doc.downloadLink}`;
-                            }}
-                          >
-                            <img
-                              className=""
-                              src="/favicons/download2.png"
-                              alt=""
-                              height={"30px"}
-                            />
-                          </div>
-                        </div>
-                      ))}
-                  </div>
-                ) : (
-                  <div
-                    className="text-center d-flex justify-content-center align-items-center text-white display-6"
-                    style={{ height: "60vh" }}
-                  >
-                    <div className="blur1"></div>
-                    <div className="blur1"></div>
-                    <div className="blur1"></div>
-                    <h1
-                      className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
-                      style={{ zIndex: 100 }}
-                    >
-                      No Content Yet. Please Upload or wait Until uploaded....
-                    </h1>
-                  </div>
-                )}
-              </div>
-            </div>
-            <form onSubmit={handleSubmit}>
-              <div className="file-input-wrapper">
-                {isFileSet ? (
-                  <>
+                <div className={`${theme} search-sort-container row`}>
+                  <div className="col-12 col-sm-12 col-md-6">
                     <input
-                      type="file"
-                      className="file-input"
-                      id="file-input"
-                      accept=".pdf, .ppt, .pptx, .doc, .docx"
-                      onChange={handleFileChange}
+                      type="text"
+                      placeholder="Search documents..."
+                      value={searchTerm}
+                      onChange={handleSearchChange}
+                      className={`search-input ${theme}`}
                     />
-                    <button className="custom-button" htmlFor="file-input">
-                      +
-                    </button>
-                  </>
+                  </div>
+                  <div className="col-12 col-sm-12 col-md-6 mt-sm-2 mt-md-0 mt-2 box">
+                    <select
+                      value={sortType}
+                      onChange={handleSortChange}
+                      className={`sort-select ${theme}`}
+                    >
+                      <option value="name">Sort by Name</option>
+                      <option value="createdAt">Sort by Date</option>
+                    </select>
+                  </div>
+                </div>
+                {currentDocs.length != 0 ? (
+                  <table className="content-table">
+                    <tbody>
+                      {currentDocs
+                        .filter((doc) => doc.isAccepted)
+                        .map((doc) => (
+                          <tr key={doc._id}>
+                            <td>
+                              <div
+                                key={doc._id}
+                                className="content-div d-flex fw-bold text-white lead py-4 justify-content-between"
+                                style={{
+                                  height: "50px",
+                                  textWrap: "nowrap",
+                                  borderRadius: "5px",
+                                }}
+                              >
+                                <div className="img-div text-start align-items-end">
+                                  <img
+                                    className="text-start"
+                                    src={getImageSrc(doc.name)}
+                                    alt=""
+                                    height={"30px"}
+                                  />
+                                </div>
+                                <div
+                                  className="text-div text-center align-items-center justify-content-center"
+                                  onClick={() => {
+                                    window.location.href = `${doc.viewLink}`;
+                                  }}
+                                >
+                                  {doc.name.toUpperCase()}
+                                </div>
+
+                                <div
+                                  className="download-div text-end me-1 align-items-start"
+                                  onClick={() => {
+                                    window.location.href = `${doc.downloadLink}`;
+                                  }}
+                                >
+                                  <img
+                                    className=""
+                                    src="/favicons/download2.png"
+                                    alt=""
+                                    height={"30px"}
+                                  />
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
                 ) : (
-                  <button
-                    className={`custom-button-submit ${
-                      isLoading ? "loading" : ""
-                    }`}
-                    type="submit"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? <div className="spinner"></div> : "Upload"}
-                  </button>
+                  <div className="text-white lead my-5 py-5">
+                    <p>No documents available.</p>
+                  </div>
                 )}
+                {/* <div className="pagination-container">
+                  <button
+                    onClick={() =>
+                      setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+                    }
+                    className="pagination-arrow"
+                    disabled={currentPage === 1}
+                  >
+                    <FaArrowLeft />
+                  </button>
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                      key={index + 1}
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`pagination-button ${
+                        currentPage === index + 1 ? "active" : ""
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  ))}
+                  <button
+                    onClick={() =>
+                      setCurrentPage(
+                        currentPage < totalPages ? currentPage + 1 : totalPages
+                      )
+                    }
+                    className="pagination-arrow"
+                    disabled={currentPage === totalPages}
+                  >
+                    <FaArrowRight />
+                  </button>
+                </div> */}
               </div>
-            </form>
+              <form onSubmit={handleSubmit}>
+                <div className="file-input-wrapper">
+                  {isFileSet ? (
+                    <>
+                      <input
+                        type="file"
+                        className="file-input"
+                        id="file-input"
+                        accept=".pdf, .ppt, .pptx, .doc, .docx"
+                        onChange={handleFileChange}
+                      />
+                      <button className="custom-button" htmlFor="file-input">
+                        +
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className={`custom-button-submit ${
+                        isLoading ? "loading" : ""
+                      }`}
+                      type="submit"
+                      disabled={isLoading}
+                    >
+                      {isLoading ? <div className="spinner"></div> : "Upload"}
+                    </button>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       ) : (
-        <p className="display-1 text-white"></p>
+        navigate("/")
       )}
     </>
   );

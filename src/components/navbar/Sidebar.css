@@ -46,7 +46,7 @@ body {
 #sidebar {
   width: 90px;
   min-width: 70px;
-  z-index: 4000;
+  z-index: 1000;
   opacity: 1;
   transition: all 0.25s ease-in-out;
   /* background-color: #0e2238; */

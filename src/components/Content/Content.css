@@ -192,3 +192,157 @@ a {
   text-decoration: none;
   text-align: left;
 }
+
+.search-sort-container {
+  animation: zoomOut 1s ease-out;
+  z-index: 10;
+  margin: 10px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80vw;
+  border-radius: 10px;
+  max-width: 650px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.search-sort-container.light {
+  border: 1px solid rgba(39, 129, 247, 0.39);
+  color: green;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 5px 5px 20px rgba(39, 129, 247, 0.39);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(5px);
+}
+.search-sort-container.dark {
+  color: white;
+  background: rgba(0, 0, 0, 0.25);
+  /* box-shadow: 0 8px 32px 0 rgba(84, 28, 153, 0.37); */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.search-input,
+.sort-select {
+  padding: 3px 10px;
+  background: transparent;
+  border-bottom: 1px solid #007bff;
+  border-top: 1px solid #007bff;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Nunito";
+  transition: all 0.3s ease;
+}
+
+option {
+  background-color: white;
+  color: black;
+}
+.search-input.dark {
+  color: white;
+}
+
+.search-input.light,
+.search-input {
+  color: black;
+}
+
+.search-input:focus,
+.sort-select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.box select {
+  background-color: transparent;
+  color: white;
+  padding: 5px;
+  border: none;
+  font-size: 1rem;
+  /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
+  border-bottom: 1px solid #007bff;
+  border-top: 1px solid #007bff;
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+  font-family: "Nunito";
+}
+
+/* .box::after {
+  content: "\f13a";
+  font-family: FontAwesome;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+} */
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
+}
+.sort-select option {
+  padding: 10px;
+}
+
+/* Additional styling for the container */
+.search-sort-container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  gap: 10px; /* Adds space between pagination buttons */
+}
+
+.pagination-button {
+  padding: 10px 15px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.pagination-button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination-button.active {
+  background-color: #007bff;
+  color: white;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
+}
+
+.pagination-arrow {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.pagination-arrow:hover {
+  background-color: #e0e0e0;
+}

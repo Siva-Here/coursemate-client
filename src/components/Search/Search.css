@@ -2,7 +2,7 @@
   position: fixed;
   top: 15px;
   right: 100px;
-  z-index: 120;
+  z-index: 1020;
   cursor: pointer;
   overflow: hidden;
 }
@@ -11,7 +11,7 @@
   position: fixed;
   top: 15px;
   right: 90px;
-  z-index: 200;
+  z-index: 2000;
 }
 
 #app {
@@ -119,7 +119,7 @@ button i.fas {
   position: fixed;
   top: 15px;
   right: 100px;
-  z-index: 100;
+  z-index: 1000;
   cursor: pointer;
   /* backdrop-filter: blur(0.25px);
   -webkit-backdrop-filter: blur(0.2px); */
