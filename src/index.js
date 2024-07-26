@@ -7,6 +7,8 @@ import { AuthProvider } from "./AuthContext";
 import { IdProvider } from "./IdContext";
 import { ResourceProvider } from "./ResourceContext";
 import { ThemeProvider } from "./ThemeContext";
+import { NavProvider } from "./NavContext";
+import { NavbarProvider } from "./NavbarContext";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -32,9 +34,13 @@ root.render(
     <AuthProvider>
       <IdProvider>
         <ResourceProvider>
-          <ThemeProvider>
-            <App />
-          </ThemeProvider>
+          <NavProvider>
+            <NavbarProvider>
+              <ThemeProvider>
+                <App />
+              </ThemeProvider>
+            </NavbarProvider>
+          </NavProvider>
         </ResourceProvider>
       </IdProvider>
     </AuthProvider>

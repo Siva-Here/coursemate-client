@@ -26,6 +26,7 @@ import Placements from "./components/Placements/Placements";
 import Notifications from "./Notification";
 import Toggle from "./components/Toggle/Toggle";
 import Search from "./components/Search/Search";
+import { NavbarContext } from "./NavbarContext";
 
 function App() {
   useClickSound(clickSoundFile, []);
@@ -34,6 +35,7 @@ function App() {
   const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+  const { isExpanded } = useContext(NavbarContext);
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
@@ -118,7 +120,7 @@ function App() {
       {docs.length != 0 && (
         <>
           <Toggle />
-          <Search docs={docs} folders={folders} />
+          {!isExpanded && <Search docs={docs} folders={folders} />}
         </>
       )}
       <Routes>

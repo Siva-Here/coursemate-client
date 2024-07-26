@@ -7,6 +7,7 @@ import axios from "axios";
 import Lottie from "lottie-react";
 import welcome from "./welcome.json";
 import { ThemeContext } from "../../ThemeContext";
+import { NavContext } from "../../NavContext";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -17,6 +18,7 @@ function Home() {
   const [isClickedPlacements, setIsClickedPlacements] = useState(false);
   const [isClickedDomains, setIsClickedDomains] = useState(false);
   const { theme } = useContext(ThemeContext);
+  const { setSelected } = useContext(NavContext);
 
   const navigate = useNavigate();
   let lottie = localStorage.getItem("lottie");
@@ -64,6 +66,7 @@ function Home() {
   }, []);
 
   function handleOpenSem() {
+    setSelected("Year");
     setIsClickedSem(true);
     setTimeout(() => {
       navigate("/year");
@@ -71,6 +74,7 @@ function Home() {
   }
 
   function handleOpenDomains() {
+    setSelected("Domains");
     setIsClickedDomains(true);
     setTimeout(() => {
       navigate("/domains");
@@ -78,6 +82,7 @@ function Home() {
   }
 
   function handleOpenGate() {
+    setSelected("Gate");
     setIsClickedGate(true);
     setTimeout(() => {
       navigate("/gate");
@@ -85,6 +90,7 @@ function Home() {
   }
 
   function handleOpenPlacements() {
+    setSelected("Placements");
     setIsClickedPlacements(true);
     setTimeout(() => {
       navigate("/placements");

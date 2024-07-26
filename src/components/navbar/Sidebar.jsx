@@ -6,15 +6,18 @@ import "./Sidebar.css";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavContext } from "../../NavContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Sidebar() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const { isExpanded, setIsExpanded } = useContext(NavbarContext);
   const [username, setUsername] = useState(null);
   const [profile, setProfile] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const menuButtonRef = useRef(null);
   const { setIsLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const { selected, setSelected } = useContext(NavContext);
 
   useEffect(() => {
     try {
@@ -62,6 +65,10 @@ function Sidebar() {
     // playClickSound();
   };
 
+  const handleNavLinkClick = (page) => {
+    setSelected(page);
+  };
+
   return (
     <div className={`wrapper ${isExpanded ? "expand" : ""}`}>
       <aside id="sidebar" className={isExpanded ? `expand-${theme}` : ""}>
@@ -93,43 +100,78 @@ function Sidebar() {
           }`}
           style={{ overflow: "auto" }}
         >
-          <li className={`sidebar-item text-start ms-2 selected`}>
+          <li
+            className={`sidebar-item text-start ms-2 ${
+              selected === "Home" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Home")}
+          >
             <NavLink to="/home" className="sidebar-link">
               <img src="/favicons/home.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Home</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-2 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-2 text-start ms-2 ${
+              selected === "Year" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Year")}
+          >
             <NavLink to="/year" className="sidebar-link">
               <img src="/favicons/book.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Year</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-2 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-2 text-start ms-2 ${
+              selected === "Domains" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Domains")}
+          >
             <NavLink to="/domains" className="sidebar-link">
               <img src="/favicons/computer.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Domains</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-1 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-1 text-start ms-2 ${
+              selected === "Gate" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Gate")}
+          >
             <NavLink to="/gate" className="sidebar-link">
               <img src="/favicons/gate.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Gate</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-1 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-1 text-start ms-2 ${
+              selected === "Placements" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Placements")}
+          >
             <NavLink to="/placements" className="sidebar-link">
               <img src="/favicons/job.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Placements</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-2 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-2 text-start ms-2 ${
+              selected === "Contributions" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Contributions")}
+          >
             <NavLink to="/contribution" className="sidebar-link">
               <img src="/favicons/star1.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Contributions</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-1 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-1 text-start ms-2 ${
+              selected === "Notifications" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Notifications")}
+          >
             <NavLink to="/notifications" className="sidebar-link">
               <div style={{ display: "inline" }}>
                 <div className="notify"></div>
@@ -138,14 +180,24 @@ function Sidebar() {
               <span className={`${theme} ms-3 fw-bold`}>Notifications</span>
             </NavLink>
           </li>
-          <li className={`sidebar-item mt-1 text-start ms-2`}>
+          <li
+            className={`sidebar-item mt-1 text-start ms-2 ${
+              selected === "Web Team" ? "selected" : ""
+            }`}
+            onClick={() => handleNavLinkClick("Web Team")}
+          >
             <NavLink to="/team" className="sidebar-link">
               <img src="/favicons/coding.png" height={"32px"} alt="" />
               <span className={`${theme} ms-3 fw-bold`}>Web Team</span>
             </NavLink>
           </li>
           {isAdmin ? (
-            <li className={`sidebar-item mt-2 text-start ms-2`}>
+            <li
+              className={`sidebar-item mt-2 text-start ms-2 ${
+                selected === "Admin Page" ? "selected" : ""
+              }`}
+              onClick={() => handleNavLinkClick("Admin Page")}
+            >
               <NavLink to="/admin" className="sidebar-link">
                 <img src="/favicons/admin.png" height={"32px"} alt="" />
                 <span className={`${theme} ms-3 fw-bold`}>Admin Page</span>
