@@ -17,9 +17,10 @@
   z-index: 1020;
   cursor: pointer;
 }
-body,
-input {
+
+.switch__input {
   font: 20px/1.5 sans-serif;
+  transform: scale(1.2);
 }
 body:has(.switch__input:checked) {
   color: hsl(var(--hue), 10%, 90%);

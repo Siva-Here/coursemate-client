@@ -26,10 +26,26 @@ import Placements from "./components/Placements/Placements";
 import Notifications from "./Notification";
 import Toggle from "./components/Toggle/Toggle";
 import Search from "./components/Search/Search";
-import { NavbarContext } from "./NavbarContext";
-import { Button, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import { ToastContainer, toast } from "react-toastify";
 import NestedItems from "./NestedItems";
 import { ThemeContext } from "./ThemeContext";
+import { NavbarContext } from "./NavbarContext";
+
+function buildNestedStructure(folderId, folders) {
+  let nestedFolders = [];
+  folders.forEach((folder) => {
+    if (folder.parentFolder == folderId) {
+      nestedFolders.push({
+        _id: folder._id,
+        name: folder.name,
+        nested: buildNestedStructure(folder._id, folders),
+      });
+    }
+  });
+  nestedFolders.sort((a, b) => a.name.localeCompare(b.name));
+  return nestedFolders;
+}
 
 function App() {
   useClickSound(clickSoundFile, []);
@@ -38,9 +54,9 @@ function App() {
   const { setResources } = useContext(ResourceContext);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const { isExpanded } = useContext(NavbarContext);
   const [show, setShow] = useState(false);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -55,13 +71,13 @@ function App() {
       })
       .then((response) => {
         setFolders(response.data);
-
         setLoading(false);
       })
       .catch(() => {
         setLoading(false);
       });
   }
+
   function fetchDocuments() {
     const token = localStorage.getItem("user") || false;
     axios
@@ -75,6 +91,7 @@ function App() {
         setDocs(docs);
       });
   }
+
   function fetchResources() {
     const token = localStorage.getItem("user") || false;
     axios
@@ -88,6 +105,7 @@ function App() {
         setResources(resources);
       });
   }
+
   useEffect(() => {
     localStorage.setItem("lottie", 1);
     const token = localStorage.getItem("user") || false;
@@ -96,7 +114,6 @@ function App() {
       if (
         email.endsWith("@rguktn.ac.in") &&
         process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
-        // true
       ) {
         fetchFolders();
         fetchDocuments();
@@ -117,38 +134,43 @@ function App() {
       <div className="loading-container">
         <div className="loading-spinner"></div>
         <p className="lead text-white m-3 loading">
-          Site is Under Maintanance...
+          Site is Under Maintenance...
         </p>
       </div>
     );
   }
-  let data = folders.filter((folder) => {
-    return (
-      folder.name == "E1" ||
-      folder.name == "E2" ||
-      folder.name == "E3" ||
-      folder.name == "E4"
-    );
-  });
-  data = data.sort((a, b) => {
-    return a.name.localeCompare(b) > b.name.localeCompare(a);
+  let semFolders = folders
+    .filter((folder) => ["E1", "E2", "E3", "E4"].includes(folder.name))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  let nestedFolders = [];
+  semFolders.forEach((folder) => {
+    nestedFolders.push({
+      _id: folder._id,
+      name: folder.name,
+      nested: buildNestedStructure(folder._id, folders),
+    });
   });
 
   return (
     <div className="App">
+      <ToastContainer />
+      {/* <Options docs={docs} folders={folders}/> */}
       {docs.length != 0 && (
         <>
           <Toggle />
           <Search docs={docs} folders={folders} />
-          <button className={`${theme} stunning-btn`} onClick={handleShow}>
+          <button
+            className={`${theme} stunning-btn show-${isExpanded}`}
+            onClick={handleShow}
+          >
             <i className="fas fa-plus"></i>
           </button>
           <Modal show={show} onHide={handleClose} centered>
             <Modal.Header closeButton>
-              <Modal.Title>Upload Document</Modal.Title>
+              <Modal.Title>Upload document</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <NestedItems data={data} />
+              <NestedItems data={nestedFolders} docs={docs} />
             </Modal.Body>
           </Modal>
         </>

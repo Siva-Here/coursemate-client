@@ -84,12 +84,12 @@ const Resource = ({ parentFolder, view, folderName }) => {
   return (
     <>
       <ToastContainer />
-      <div>
+      <div className="outer-resource-container">
         <div className={`units-img ${theme}`}></div>
         {view !== "units" ? (
           <div style={{ marginTop: "50px" }}>
             <Sidebar />
-            <div className="outer-container-units text-center">
+            <div className="text-center">
               <h1
                 className={`display-5 text-center cust-text-${theme}`}
                 style={{ zIndex: 1000, marginTop: "15px" }}
@@ -103,15 +103,17 @@ const Resource = ({ parentFolder, view, folderName }) => {
         {resource.length !== 0 ? (
           <>
             {resource.map((rsc) => (
-              <div key={rsc._id} className="resource-div">
+              <div key={rsc._id} className={`resource-div ${theme}`}>
                 <div className="resource-content">
                   {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
-                  <p className="text-uppercase fw-bold fst-italic font-italic">
+                  <p
+                    className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
+                  >
                     {rsc.name}
                   </p>
-                  <p>{rsc.description}</p>
+                  <p className={`${theme}`}>{rsc.description}</p>
                   <p
-                    className=""
+                    className={`${theme}`}
                     style={{
                       width: "75vw",
                       overflow: "auto",
@@ -123,16 +125,14 @@ const Resource = ({ parentFolder, view, folderName }) => {
                       href={rsc.rscLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      style={{
-                        color: "yellow",
-                      }}
+                      className={`rsc-link ${theme}`}
                     >
                       {rsc.rscLink}
                     </a>
                   </p>
                 </div>
                 <br />
-                <div className="resource-date">
+                <div className={`resource-date ${theme}`}>
                   <p style={{ fontSize: "1.2em" }}>
                     Posted at: {formatTimestamp(rsc.uploadedAt)}
                   </p>
@@ -156,7 +156,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
         )}
 
         <div className="add-button-container">
-          <button className="add-button" onClick={handleModalShow}>
+          <button className={`add-button ${theme}`} onClick={handleModalShow}>
             +
           </button>
         </div>

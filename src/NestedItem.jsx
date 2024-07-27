@@ -4,7 +4,7 @@ import "./NestedItem.css";
 import { ThemeContext } from "./ThemeContext";
 import NestedItems from "./NestedItems";
 
-const NestedItem = ({ item, openId, setOpenId }) => {
+const NestedItem = ({ item, openId, setOpenId, docs }) => {
   const { theme } = useContext(ThemeContext);
 
   const toggleOpen = (id) => {
@@ -18,7 +18,7 @@ const NestedItem = ({ item, openId, setOpenId }) => {
   return (
     <ListGroup.Item className="nested-item">
       <button
-        className={`nested-btn ${theme}`}
+        className={`nested-btn ${theme} text-start`}
         onClick={() => toggleOpen(item._id)}
       >
         <img
@@ -32,21 +32,19 @@ const NestedItem = ({ item, openId, setOpenId }) => {
               : "folder"
           }.png`}
           alt=""
-          height="32px"
-          style={{ marginRight: "20px" }}
+          height="22px"
+          style={{ margin: "5px", marginLeft: "20px" }}
         />
-        {item.name}
+        <span className="ms-5">{item.name}</span>
       </button>
-      {openId === item._id && item.nested && item.nested.length > 0 && (
+      {openId === item._id && item.nested && (
         <ListGroup className="ml-4">
-          {/* {item.nested.map((nestedItem) => ( */}
           <NestedItems
             key={item.nested._id}
             data={item.nested}
-            //   openId={openId}
-            //   setOpenId={setOpenId}
+            docs={docs}
+            parentFolder={item._id}
           />
-          {/* ))} */}
         </ListGroup>
       )}
     </ListGroup.Item>

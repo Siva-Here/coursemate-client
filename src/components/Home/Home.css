@@ -31,7 +31,10 @@
 }
 .img-container.light {
   /* background-image: url("../../../public/background2.jpg"); */
-  background-color: #edf4fc;
+  background: var(
+    --Gradient-New-Home,
+    linear-gradient(86deg, #f0f8ff 1.71%, #fffcef 99.56%)
+  );
 }
 
 .img-container.dark {
@@ -104,7 +107,8 @@
 .categories.light {
   border: 1px solid rgba(39, 129, 247, 0.39);
   color: black;
-  background: rgba(14, 34, 56, 0.25);
+  /* background: rgba(14, 34, 56, 0.25); */
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
   box-shadow: 2px 2px 2px rgba(14, 34, 56, 1);
 }
 

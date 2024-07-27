@@ -43,15 +43,20 @@
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgba(31, 38, 135, 0.574);
+  border: 1px solid rgba(31, 38, 135, 0.34);
   max-width: 650px;
   cursor: pointer;
   transition: 0.2s;
 }
 .accordion-item.light {
   border: none;
-  background-color: rgba(16, 44, 87, 0.1);
+  /* background-color: rgba(16, 44, 87, 0.1); */
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
+  /* background-color: white; */
   width: 100%;
+  box-shadow: 0px 9px 30px rgba(255, 149, 5, 0.15);
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), */
+  /* 0 4px 6px -4px rgba(0, 0, 0, 0.1); */
   /* margin: 10px; */
 }
 .accordion-item.dark {
@@ -71,6 +76,9 @@
   background-color: transparent;
   border: none;
 }
+.accordion-button.light {
+  box-shadow: 0px 9px 30px rgba(255, 149, 5, 0.1);
+}
 #accordionExample {
   margin-top: 50px;
 }
@@ -89,8 +97,9 @@
   padding: 0px;
 }
 .folder-div-year.light {
-  background-color: rgba(16, 44, 87, 0.1);
-  box-shadow: 1px 1px 2px 0 #102c57;
+  /* background-color: rgba(16, 44, 87, 0.1); */
+  /* box-shadow: 1px 1px 2px 0 #102c57; */
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13), 0 1px 1px 0 rgba(0, 0, 0, 0.11); */
 }
 .folder-div-year.dark {
   background: rgba(0, 0, 0, 0.15);
@@ -118,7 +127,7 @@
   padding: 20px;
 }
 @media (min-width: 768px) {
-  /* .outer-container-year {
+  .outer-container-year {
     margin-left: 100px;
   }
   .outer-container-domains {
@@ -129,10 +138,13 @@
   }
   .outer-container-content {
     margin-left: 100px;
-    }
+  }
   .outer-container-units {
     margin-left: 100px;
-  } */
+  }
+  .outer-resource-container {
+    margin-left: 200px;
+  }
 }
 .content-year {
   width: 100%;

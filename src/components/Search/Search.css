@@ -50,7 +50,7 @@ form.visible {
   line-height: 1;
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(15px);
+  backdrop-filter: blur(35px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   cursor: auto;
   padding: 20px;

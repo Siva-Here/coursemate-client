@@ -199,6 +199,16 @@ function Content(props) {
     setSortType(e.target.value);
   };
 
+  function handlePreview(doc) {
+    if (doc.name.split(".").slice(-1) == "pdf") {
+      let link = doc.viewLink.split("/").slice(0, -1);
+      link = link.join("/");
+      setPdfLink(link);
+    } else {
+      window.location.href = doc.viewLink;
+    }
+  }
+
   const filteredAndSortedDocs = delayedDocs
     .filter((doc) => doc.name.toLowerCase().includes(searchTerm.toLowerCase()))
     .sort((a, b) => {
@@ -265,7 +275,7 @@ function Content(props) {
                       ></iframe>
                     ) : (
                       <p className={`${theme} text-center`}>
-                        Select a document to preview
+                        Select a pdf to preview
                       </p>
                     )}
                   </div>
@@ -326,12 +336,7 @@ function Content(props) {
                                       className={`${theme} text-div text-start mt-1 align-items-center justify-content-center`}
                                       onClick={() => {
                                         // window.location.href = `${doc.viewLink}`;
-                                        let link = doc.viewLink
-                                          .split("/")
-                                          .slice(0, -1);
-                                        // link.push("/preview");
-                                        link = link.join("/");
-                                        setPdfLink(link);
+                                        handlePreview(doc);
                                       }}
                                     >
                                       {doc.name.toUpperCase()}

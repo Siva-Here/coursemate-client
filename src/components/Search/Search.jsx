@@ -185,7 +185,7 @@ const Search = ({
         </div>
         <div
           id="layer"
-          title="Click here to close..."
+          title="Click here to search..."
           className={`ms-auto me-auto d-flex justify-content-center align-items-center layer-${theme}`}
         >
           <i className={`fas fa-search ${isOpened ? "d-none" : ""}`}></i>

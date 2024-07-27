@@ -21,6 +21,7 @@
   font-size: 2rem;
   font-family: "Nunito";
   font-weight: bold;
+  position: sticky;
 }
 .cust-text-light {
   /* animation: blinkLoginDark 0.5s linear infinite; */
@@ -29,6 +30,7 @@
   font-family: "Nunito";
   font-weight: bold;
   font-size: 2rem;
+  position: sticky;
 }
 @keyframes expandWidth {
   from {
