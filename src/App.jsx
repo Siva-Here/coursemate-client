@@ -27,6 +27,9 @@ import Notifications from "./Notification";
 import Toggle from "./components/Toggle/Toggle";
 import Search from "./components/Search/Search";
 import { NavbarContext } from "./NavbarContext";
+import { Button, Modal } from "react-bootstrap";
+import NestedItems from "./NestedItems";
+import { ThemeContext } from "./ThemeContext";
 
 function App() {
   useClickSound(clickSoundFile, []);
@@ -36,6 +39,11 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const { isExpanded } = useContext(NavbarContext);
+  const [show, setShow] = useState(false);
+  const { theme } = useContext(ThemeContext);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
@@ -114,6 +122,17 @@ function App() {
       </div>
     );
   }
+  let data = folders.filter((folder) => {
+    return (
+      folder.name == "E1" ||
+      folder.name == "E2" ||
+      folder.name == "E3" ||
+      folder.name == "E4"
+    );
+  });
+  data = data.sort((a, b) => {
+    return a.name.localeCompare(b) > b.name.localeCompare(a);
+  });
 
   return (
     <div className="App">
@@ -121,6 +140,17 @@ function App() {
         <>
           <Toggle />
           <Search docs={docs} folders={folders} />
+          <button className={`${theme} stunning-btn`} onClick={handleShow}>
+            <i className="fas fa-plus"></i>
+          </button>
+          <Modal show={show} onHide={handleClose} centered>
+            <Modal.Header closeButton>
+              <Modal.Title>Upload Document</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <NestedItems data={data} />
+            </Modal.Body>
+          </Modal>
         </>
       )}
       <Routes>

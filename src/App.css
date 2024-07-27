@@ -27,3 +27,40 @@
     transform: rotate(360deg);
   }
 }
+
+.stunning-btn {
+  border: none;
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  position: absolute;
+  top: 15px;
+  right: 160px;
+  transition: all 0.3s ease;
+  z-index: 3000;
+}
+.stunning-btn.light {
+  background-color: black;
+  color: white;
+}
+.stunning-btn.dark {
+  background-color: white;
+  color: black;
+}
+.stunning-btn:hover {
+  background-color: #0056b3;
+  transform: scale(1.1);
+}
+
+.stunning-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
+}
+
+.stunning-btn i {
+  font-size: 20px;
+}
