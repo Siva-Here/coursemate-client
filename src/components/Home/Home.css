@@ -30,11 +30,11 @@
   background-position: center;
 }
 .img-container.light {
-  /* background-image: url("../../../public/background2.jpg"); */
-  background: var(
+  background-image: url("../../../public/background2.jpg");
+  /* background: var(
     --Gradient-New-Home,
     linear-gradient(86deg, #f0f8ff 1.71%, #fffcef 99.56%)
-  );
+  ); */
 }
 
 .img-container.dark {

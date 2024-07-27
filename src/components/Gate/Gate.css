@@ -9,8 +9,8 @@
 
 .gate-div.light {
   border-radius: 15px;
-  background-color: rgba(16, 44, 87, 0.075);
-  box-shadow: 1px 1px 2px 0 #102c57;
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
+  box-shadow: 2px 2px 2px rgba(14, 34, 56, 1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid #102c57;
