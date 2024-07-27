@@ -30,7 +30,8 @@
   background-position: center;
 }
 .img-container.light {
-  background-image: url("../../../public/background2.jpg");
+  /* background-image: url("../../../public/background2.jpg"); */
+  background-color: #edf4fc;
 }
 
 .img-container.dark {
@@ -103,8 +104,8 @@
 .categories.light {
   border: 1px solid rgba(39, 129, 247, 0.39);
   color: black;
-  background: rgb(255, 255, 255);
-  box-shadow: 5px 5px 20px rgba(39, 129, 247, 0.39);
+  background: rgba(14, 34, 56, 0.25);
+  box-shadow: 2px 2px 2px rgba(14, 34, 56, 1);
 }
 
 .categories.dark {

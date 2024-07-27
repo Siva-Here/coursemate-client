@@ -33,8 +33,15 @@ function Year({ folders }) {
     };
   }, [folders]);
 
-  const handleClick = (folderId, imgSrc) => {
-    navigate("/sem", { state: { folderId, imgSrc, folders } });
+  const handleClick = (folderId, sem) => {
+    let subjects = folders.filter((folder) => {
+      return folder.parentFolder == folderId;
+    });
+    let currentSem = subjects.find((sub) => {
+      return sub.name.toLowerCase().includes("sem" + sem);
+    });
+    currentSem = currentSem._id;
+    navigate("/subjects", { state: { folderId: currentSem, sem, folders } });
   };
 
   function handleOpen(index) {
@@ -55,12 +62,12 @@ function Year({ folders }) {
             <div>
               <Sidebar />
               <div className="outer-container-year">
-                <h1
+                <h2
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Year
-                </h1>
+                </h2>
                 <div className="content-year text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
                   <div className="accordion" id="accordionExample">
                     {delayedFolders.map((folder, index) => (
@@ -131,12 +138,14 @@ function Year({ folders }) {
                                 <button
                                   className={`btn ${theme} active`}
                                   style={{ width: "100px", zIndex: 1000 }}
+                                  onClick={() => handleClick(folder._id, "1")}
                                 >
                                   Sem1
                                 </button>
                                 <button
                                   className={`btn ${theme} active`}
                                   style={{ width: "100px", zIndex: 1000 }}
+                                  onClick={() => handleClick(folder._id, "2")}
                                 >
                                   Sem2
                                 </button>

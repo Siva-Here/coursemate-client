@@ -99,7 +99,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             </div>
           </div>
         ) : null}
-        <div className="blur1"></div>
+        {/* <div className="blur1"></div> */}
         {resource.length !== 0 ? (
           <>
             {resource.map((rsc) => (

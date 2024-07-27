@@ -9,6 +9,7 @@ import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Content(props) {
   const location = useLocation();
@@ -29,6 +30,7 @@ function Content(props) {
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
   const token = localStorage.getItem("user") || null;
+  const [pdfLink, setPdfLink] = useState(null);
 
   const ITEMS_PER_PAGE = 6;
 
@@ -241,140 +243,171 @@ function Content(props) {
               ></div>
             )}
             <div>
+              <h1
+                className={`display-5 text-center cust-text-${theme}`}
+                style={{ zIndex: 1000, marginTop: "15px" }}
+              >
+                {parentFolder}
+              </h1>
               <Sidebar />
-              <div className="outer-container-content justify-content-center align-items-center d-flex flex-column">
-                <h1
-                  className={`display-5 text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "15px" }}
-                >
-                  {parentFolder}
-                </h1>
-                <div
-                  className={`${theme} search-sort-container row justify-content-center align-items-center d-flex`}
-                >
-                  <div className="col-12 col-sm-12 col-md-6">
-                    <input
-                      type="text"
-                      placeholder="Search documents..."
-                      value={searchTerm}
-                      onChange={handleSearchChange}
-                      className={`search-input ${theme}`}
-                    />
+              <div className="container-fluid">
+                <div className="row justify-content-center align-items-center">
+                  <div
+                    className="col-12 col-sm-12 col-md-8 text-center"
+                    style={{}}
+                  >
+                    {pdfLink ? (
+                      <iframe
+                        src={pdfLink + "/preview"}
+                        frameborder="0"
+                        width={"90%"}
+                        height={"450px"}
+                      ></iframe>
+                    ) : (
+                      <p className={`${theme} text-center`}>
+                        Select a document to preview
+                      </p>
+                    )}
                   </div>
-                  <div className="col-12 col-sm-12 col-md-6 mt-sm-2 mt-md-0 mt-2 box">
-                    <select
-                      value={sortType}
-                      onChange={handleSortChange}
-                      className={`sort-select ${theme}`}
+                  <div className="outer-container-content col-12 col-sm-12 col-md-4 justify-content-center align-items-center d-flex flex-column">
+                    <div
+                      className={`${theme} search-sort-container row justify-content-center align-items-center d-flex`}
                     >
-                      <option value="name" className={`${theme}`}>
-                        Sort by Name
-                      </option>
-                      <option value="createdAt" className={`${theme}`}>
-                        Sort by Date
-                      </option>
-                    </select>
-                  </div>
-                </div>
-                {currentDocs.length != 0 ? (
-                  <table className="content-table">
-                    <tbody>
-                      {currentDocs
-                        .filter((doc) => doc.isAccepted)
-                        .map((doc) => (
-                          <tr key={doc._id}>
-                            <td>
-                              <div
-                                key={doc._id}
-                                className={`content-div d-flex fw-bold lead py-4 justify-content-between ${theme}`}
-                                style={{
-                                  height: "50px",
-                                  textWrap: "nowrap",
-                                  borderRadius: "5px",
-                                }}
-                              >
-                                <div className="img-div text-start align-items-end">
-                                  <img
-                                    className="text-start"
-                                    src={getImageSrc(doc.name)}
-                                    alt=""
-                                    height={"30px"}
-                                  />
-                                </div>
-                                <div
-                                  className={`${theme} text-div text-start mt-1 align-items-center justify-content-center`}
-                                  onClick={() => {
-                                    window.location.href = `${doc.viewLink}`;
-                                  }}
-                                >
-                                  {doc.name.toUpperCase()}
-                                </div>
-                                <div
-                                  className="download-div text-end me-1 align-items-start"
-                                  onClick={() => {
-                                    window.location.href = `${doc.downloadLink}`;
-                                  }}
-                                >
-                                  <img
-                                    className=""
-                                    src="/favicons/download2.png"
-                                    alt=""
-                                    height={"30px"}
-                                  />
-                                </div>
-                                <div className={`uploaded-date`}>
-                                  <p
+                      <div className="col-12 col-sm-12 col-md-6">
+                        <input
+                          type="text"
+                          placeholder="Search documents..."
+                          value={searchTerm}
+                          onChange={handleSearchChange}
+                          className={`search-input ${theme}`}
+                        />
+                      </div>
+                      <div className="col-12 col-sm-12 col-md-6 mt-sm-2 mt-md-0 mt-2 box">
+                        <select
+                          value={sortType}
+                          onChange={handleSortChange}
+                          className={`sort-select ${theme}`}
+                        >
+                          <option value="name" className={`${theme}`}>
+                            Sort by Name
+                          </option>
+                          <option value="createdAt" className={`${theme}`}>
+                            Sort by Date
+                          </option>
+                        </select>
+                      </div>
+                    </div>
+                    {currentDocs.length != 0 ? (
+                      <table className="content-table">
+                        <tbody>
+                          {currentDocs
+                            .filter((doc) => doc.isAccepted)
+                            .map((doc) => (
+                              <tr key={doc._id}>
+                                <td>
+                                  <div
+                                    key={doc._id}
+                                    className={`content-div d-flex fw-bold lead py-4 justify-content-between ${theme}`}
                                     style={{
-                                      fontSize: "0.5em",
-                                      color: "#01254b",
+                                      height: "50px",
+                                      textWrap: "nowrap",
+                                      borderRadius: "5px",
                                     }}
                                   >
-                                    {getDate(doc.createdAt)}
-                                  </p>
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                ) : (
-                  <div className={`h3 m-5 py-5 ${theme}`}>
-                    <p className={`ps-5 ${theme}`}>No documents available.</p>
+                                    <div className="img-div text-start align-items-end">
+                                      <img
+                                        className="text-start"
+                                        src={getImageSrc(doc.name)}
+                                        alt=""
+                                        height={"30px"}
+                                      />
+                                    </div>
+                                    <div
+                                      className={`${theme} text-div text-start mt-1 align-items-center justify-content-center`}
+                                      onClick={() => {
+                                        // window.location.href = `${doc.viewLink}`;
+                                        let link = doc.viewLink
+                                          .split("/")
+                                          .slice(0, -1);
+                                        // link.push("/preview");
+                                        link = link.join("/");
+                                        setPdfLink(link);
+                                      }}
+                                    >
+                                      {doc.name.toUpperCase()}
+                                    </div>
+                                    <div
+                                      className="download-div text-end me-1 align-items-start"
+                                      onClick={() => {
+                                        window.location.href = `${doc.downloadLink}`;
+                                      }}
+                                    >
+                                      <img
+                                        className=""
+                                        src="/favicons/download2.png"
+                                        alt=""
+                                        height={"30px"}
+                                      />
+                                    </div>
+                                    <div className={`uploaded-date`}>
+                                      <p
+                                        style={{
+                                          fontSize: "0.5em",
+                                          color: "#01254b",
+                                        }}
+                                      >
+                                        {getDate(doc.createdAt)}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    ) : (
+                      <div className={`h3 m-5 py-5 ${theme}`}>
+                        <p className={`ps-5 ${theme}`}>
+                          No documents available.
+                        </p>
+                      </div>
+                    )}
+                    <div className="pagination-container">
+                      <button
+                        onClick={() =>
+                          setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+                        }
+                        className="pagination-arrow"
+                        disabled={currentPage === 1}
+                      >
+                        <FaArrowLeft />
+                      </button>
+                      {Array.from({ length: totalPages }, (_, index) => (
+                        <button
+                          key={index + 1}
+                          onClick={() => setCurrentPage(index + 1)}
+                          className={`pagination-button ${theme} ${
+                            currentPage === index + 1 ? "active" : ""
+                          }`}
+                        >
+                          {index + 1}
+                        </button>
+                      ))}
+                      <button
+                        onClick={() =>
+                          setCurrentPage(
+                            currentPage < totalPages
+                              ? currentPage + 1
+                              : totalPages
+                          )
+                        }
+                        className="pagination-arrow"
+                        disabled={currentPage === totalPages}
+                      >
+                        <FaArrowRight />
+                      </button>
+                    </div>
                   </div>
-                )}
-                <div className="pagination-container">
-                  <button
-                    onClick={() =>
-                      setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
-                    }
-                    className="pagination-arrow"
-                    disabled={currentPage === 1}
-                  >
-                    <FaArrowLeft />
-                  </button>
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <button
-                      key={index + 1}
-                      onClick={() => setCurrentPage(index + 1)}
-                      className={`pagination-button ${theme} ${
-                        currentPage === index + 1 ? "active" : ""
-                      }`}
-                    >
-                      {index + 1}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() =>
-                      setCurrentPage(
-                        currentPage < totalPages ? currentPage + 1 : totalPages
-                      )
-                    }
-                    className="pagination-arrow"
-                    disabled={currentPage === totalPages}
-                  >
-                    <FaArrowRight />
-                  </button>
                 </div>
               </div>
               <form onSubmit={handleSubmit}>

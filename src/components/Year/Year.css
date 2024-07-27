@@ -118,7 +118,7 @@
   padding: 20px;
 }
 @media (min-width: 768px) {
-  .outer-container-year {
+  /* .outer-container-year {
     margin-left: 100px;
   }
   .outer-container-domains {
@@ -127,12 +127,12 @@
   .outer-container-sem {
     margin-left: 100px;
   }
-  .outer-container-units {
-    margin-left: 100px;
-  }
   .outer-container-content {
     margin-left: 100px;
-  }
+    }
+  .outer-container-units {
+    margin-left: 100px;
+  } */
 }
 .content-year {
   width: 100%;

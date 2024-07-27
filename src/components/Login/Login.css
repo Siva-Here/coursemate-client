@@ -18,14 +18,17 @@
 }
 .cust-text-dark {
   animation: blinkLogin 0.5s linear infinite;
-  font-size: medium;
-  font-weight: bolder;
+  font-size: 2rem;
+  font-family: "Nunito";
+  font-weight: bold;
 }
 .cust-text-light {
   /* animation: blinkLoginDark 0.5s linear infinite; */
   color: #102c57;
-  font-size: medium;
-  font-weight: 20px;
+  text-align: center;
+  font-family: "Nunito";
+  font-weight: bold;
+  font-size: 2rem;
 }
 @keyframes expandWidth {
   from {
