@@ -9,6 +9,7 @@ import { ResourceProvider } from "./ResourceContext";
 import { ThemeProvider } from "./ThemeContext";
 import { NavProvider } from "./NavContext";
 import { NavbarProvider } from "./NavbarContext";
+import "bootstrap/dist/js/bootstrap.bundle.min";
 
 const container = document.getElementById("root");
 const root = createRoot(container);

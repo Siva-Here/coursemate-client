@@ -33,14 +33,13 @@
   animation: zoomIn 0.3s ease-in;
   z-index: 10;
   margin: 20px;
-  padding: 10px;
+  /* padding: 10px;  */
   display: flex;
   align-items: center;
   justify-content: center;
   width: 50vw;
   min-width: 300px;
   background: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
@@ -49,17 +48,58 @@
   cursor: pointer;
   transition: 0.2s;
 }
+.accordion-item.light {
+  border: none;
+  background-color: #fefef6;
+  width: 100%;
+  /* margin: 10px; */
+}
+.accordion-item.dark {
+  border: none;
+  background: transparent;
+  width: 100%;
+  /* margin: 10px; */
+}
+.accordion-button {
+  width: 100%;
+  border: none;
+  padding: 0;
+  background-color: #fefef6;
+  padding: 25px 10px;
+}
+.accordion-button {
+  background-color: transparent;
+  border: none;
+}
+#accordionExample {
+  margin-top: 50px;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+.accordion-body {
+  margin: 0px;
+  padding: 0px;
+}
 .folder-div-year.light {
   background-color: #fff;
+  box-shadow: 4px 8px 8px 0 rgba(70, 130, 180, 0.5);
 }
 .folder-div-year.dark {
   background: rgba(0, 0, 0, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow: 4px 8px 22px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
 }
 .folder-div-year:hover {
-  transform: scale(1.05);
+  /* transform: scale(1.02); */
 }
 
 .img-container-year {

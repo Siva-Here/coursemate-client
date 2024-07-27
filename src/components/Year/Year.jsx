@@ -4,6 +4,7 @@ import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function Year({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
@@ -52,44 +53,86 @@ function Year({ folders }) {
                   Year
                 </h1>
                 <div className="content-year text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
-                  {delayedFolders.map((folder) => (
-                    <div
-                      key={folder._id}
-                      className={`folder-div-year ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
-                      onClick={() =>
-                        handleClick(folder._id, "/icons8-folder-96.png")
-                      }
-                    >
-                      <div className="w-25 text-end align-items-end">
-                        {theme == "light" ? (
-                          <>
-                            <img
-                              className="text-start"
-                              src="/bing/folder.png"
-                              alt=""
-                              height={"30px"}
-                              style={{ opacity: 1 }}
-                            />
-                          </>
-                        ) : (
-                          <>
-                            <img
-                              className="text-start"
-                              src="/bing/folder1.png"
-                              alt=""
-                              height={"40px"}
-                              style={{ opacity: 0.8 }}
-                            />
-                          </>
-                        )}
-                      </div>
+                  <div className="accordion" id="accordionExample">
+                    {delayedFolders.map((folder, index) => (
                       <div
-                        className={`${theme} w-75 text-start px-3 px-5 align-items-start`}
+                        className={`folder-div-year ${theme} d-flex rounded-3 fw-bold text-white lead justify-content-evenly`}
+                        // onClick={() =>
+                        //   handleClick(folder._id, "/icons8-folder-96.png")
+                        // }
                       >
-                        {folder.name}
+                        <div
+                          key={folder._id}
+                          className={`accordion-item ${theme}`}
+                        >
+                          <h2
+                            className="accordion-header"
+                            id={`heading${index}`}
+                          >
+                            <button
+                              className={`accordion-button ${theme}`}
+                              type="button"
+                              data-bs-toggle="collapse"
+                              data-bs-target={`#collapse${index}`}
+                              aria-expanded="true"
+                              aria-controls={`collapse${index}`}
+                            >
+                              <div className="w-25 text-end align-items-end">
+                                {theme === "light" ? (
+                                  <img
+                                    className="text-start"
+                                    src="/bing/folder.png"
+                                    alt=""
+                                    height={"30px"}
+                                    style={{ opacity: 1 }}
+                                  />
+                                ) : (
+                                  <img
+                                    className="text-start"
+                                    src="/bing/folder1.png"
+                                    alt=""
+                                    height={"40px"}
+                                    style={{ opacity: 0.8 }}
+                                  />
+                                )}
+                              </div>
+                              <div
+                                className={`${theme} w-75 text-start px-3 px-5 align-items-start fw-bold`}
+                              >
+                                {folder.name}
+                              </div>
+                            </button>
+                          </h2>
+                          <div
+                            id={`collapse${index}`}
+                            className="accordion-collapse collapse"
+                            aria-labelledby={`heading${index}`}
+                            data-bs-parent="#accordionExample"
+                          >
+                            <div className="accordion-body">
+                              <div
+                                className={`btn-group ${theme} text-center`}
+                                style={{ margin: "0px", marginTop: "-20px" }}
+                              >
+                                <button
+                                  className={`btn ${theme} active`}
+                                  style={{ width: "100px", zIndex: 1000 }}
+                                >
+                                  Sem1
+                                </button>
+                                <button
+                                  className={`btn ${theme} active`}
+                                  style={{ width: "100px", zIndex: 1000 }}
+                                >
+                                  Sem2
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
