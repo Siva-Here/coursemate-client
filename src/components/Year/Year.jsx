@@ -11,6 +11,7 @@ function Year({ folders }) {
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const [openId, setOpenId] = useState(-1);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -35,6 +36,14 @@ function Year({ folders }) {
   const handleClick = (folderId, imgSrc) => {
     navigate("/sem", { state: { folderId, imgSrc, folders } });
   };
+
+  function handleOpen(index) {
+    if (openId == index) {
+      setOpenId(-1);
+    } else {
+      setOpenId(index);
+    }
+  }
 
   return (
     <div>
@@ -76,13 +85,14 @@ function Year({ folders }) {
                               data-bs-target={`#collapse${index}`}
                               aria-expanded="true"
                               aria-controls={`collapse${index}`}
+                              onClick={() => handleOpen(index)}
                             >
                               <div className="w-25 text-end align-items-end">
                                 {theme === "light" ? (
                                   <img
                                     className="text-start"
                                     src={`/bing/${
-                                      false ? "folder" : "open-light"
+                                      openId != index ? "folder" : "open-light"
                                     }.png`}
                                     alt=""
                                     height={"30px"}
@@ -92,11 +102,11 @@ function Year({ folders }) {
                                   <img
                                     className="text-start"
                                     src={`/bing/${
-                                      false ? "folder1" : "open-dark"
+                                      openId != index ? "folder1" : "open-dark"
                                     }.png`}
                                     alt=""
-                                    height={"40px"}
-                                    style={{ opacity: 0.8 }}
+                                    height={"30px"}
+                                    style={{ opacity: 1 }}
                                   />
                                 )}
                               </div>
