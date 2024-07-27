@@ -81,7 +81,9 @@ function Year({ folders }) {
                                 {theme === "light" ? (
                                   <img
                                     className="text-start"
-                                    src="/bing/folder.png"
+                                    src={`/bing/${
+                                      false ? "folder" : "open-light"
+                                    }.png`}
                                     alt=""
                                     height={"30px"}
                                     style={{ opacity: 1 }}
@@ -89,7 +91,9 @@ function Year({ folders }) {
                                 ) : (
                                   <img
                                     className="text-start"
-                                    src="/bing/folder1.png"
+                                    src={`/bing/${
+                                      false ? "folder1" : "open-dark"
+                                    }.png`}
                                     alt=""
                                     height={"40px"}
                                     style={{ opacity: 0.8 }}
