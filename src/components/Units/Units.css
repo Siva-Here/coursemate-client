@@ -118,7 +118,8 @@ h1 span {
 }
 
 .units-img.light {
-  background-color: #fefaf6;
+  /* background-color: #fefaf6; */
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
 }
 
 .blur-units {
