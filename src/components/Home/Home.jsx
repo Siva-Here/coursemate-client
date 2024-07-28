@@ -151,10 +151,10 @@ function Home() {
           ) : (
             <>
               {/* <div className="blur1"></div> */}
-              <div className="blur">
+              <div className="blu">
                 <SideBar />
                 <div className="outer-container" style={{ marginTop: "15vh" }}>
-                  <div className="blur-home"></div>
+                  <div className="blurhome"></div>
                   <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                     <div
                       className={`categories ${theme} sem ${

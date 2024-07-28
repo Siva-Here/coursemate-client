@@ -48,7 +48,7 @@ function Subjects() {
         <>
           <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className={`units-img ${theme}`}></div>
+            <div className={`img-container2 ${theme}`}></div>
             <div>
               <Sidebar />
               <div className="outer-container-year">

@@ -56,9 +56,11 @@
   border: 1px solid rgb(52, 81, 175);
 }
 .domains-div.light {
-  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
-  box-shadow: 2px 2px 2px rgba(14, 34, 56, 1);
-  border: 1px solid #102c57;
+  /* background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%); */
+  background-color: white;
+  /* box-shadow: 2px 2px 2px rgba(14, 34, 56, 1); */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
 }
 
 .folder-div:hover {
@@ -74,11 +76,11 @@
   z-index: -1;
 }
 .img-container2.dark {
-  background: url("../../../public/favicons/domains1.png") no-repeat center
-    center/cover;
+  background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
 }
 .img-container2.light {
-  background-color: #fefef6;
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
+  /* background-color: #fefef6; */
 }
 
 .outer-container-domains {
