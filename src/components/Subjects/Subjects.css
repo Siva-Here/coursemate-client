@@ -29,26 +29,32 @@
   animation: blink-sub 1.5s linear infinite;
 }
 
-.folder-div {
-  animation: slideUp 1s ease-in;
+.folder-div-sub {
+  animation: zoomIn 0.3s ease-in;
   z-index: 10;
-  margin: 20px;
-  padding: 10px;
+  margin: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50vw;
+  width: 80vw;
   min-width: 300px;
-  background: rgba(0, 0, 0, 0.25);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
-  border: 1px solid rgb(31, 38, 135);
   max-width: 650px;
   cursor: pointer;
-  border: 2px solid rgb(18, 24, 105);
   transition: 0.2s;
+}
+.folder-div-sub.light {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  background: white;
+}
+.folder-div-sub.dark {
+  background: rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 8px 22px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 }
 .folder-div:hover {
   transform: scale(1.02);

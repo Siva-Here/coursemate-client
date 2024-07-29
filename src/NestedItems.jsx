@@ -157,7 +157,12 @@ const NestedItems = ({ data, docs, parentFolder }) => {
               <button
                 className="custom-button ms-auto me-auto"
                 htmlFor="file-input"
-                style={{ width: "150px", height: "50px", borderRadius: "10px" }}
+                style={{
+                  width: "100px",
+                  height: "50px",
+                  borderRadius: "10px",
+                  marginTop: "10px",
+                }}
               >
                 +
               </button>

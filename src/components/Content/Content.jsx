@@ -255,7 +255,7 @@ function Content(props) {
             <div>
               <h1
                 className={`display-5 text-center cust-text-${theme}`}
-                style={{ zIndex: 1000, marginTop: "15px" }}
+                style={{ zIndex: 1000, marginTop: "80px" }}
               >
                 {parentFolder}
               </h1>
@@ -387,7 +387,7 @@ function Content(props) {
                       >
                         <FaArrowLeft />
                       </button>
-                      {Array.from({ length: totalPages }, (_, index) => (
+                      {/* {Array.from({ length: totalPages }, (_, index) => (
                         <button
                           key={index + 1}
                           onClick={() => setCurrentPage(index + 1)}
@@ -397,7 +397,7 @@ function Content(props) {
                         >
                           {index + 1}
                         </button>
-                      ))}
+                      ))} */}
                       <button
                         onClick={() =>
                           setCurrentPage(

@@ -43,13 +43,15 @@
   transition: all 0.3s ease;
   z-index: 1000;
 }
-.stunning-btn.light {
+.stunning-btn.dark {
   background-color: black;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   color: white;
 }
-.stunning-btn.dark {
+.stunning-btn.light {
   background-color: white;
   color: black;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 .stunning-btn:hover {
   background-color: #0056b3;

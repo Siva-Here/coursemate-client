@@ -112,7 +112,7 @@ function Units({ folders }) {
                     {delayedFolders.map((folder) => (
                       <div
                         key={folder._id}
-                        className={`folder-div-year ${theme} d-flex rounded-3 fw-bold lead p-4 justify-content-evenly`}
+                        className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold lead p-4 justify-content-evenly`}
                         onClick={() =>
                           handleFolderClick(folder._id, folder.name)
                         }

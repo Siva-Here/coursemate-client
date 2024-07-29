@@ -20,7 +20,7 @@
 
 .switch__input {
   font: 20px/1.5 sans-serif;
-  transform: scale(1.2);
+  transform: scale(1.15);
 }
 body:has(.switch__input:checked) {
   color: hsl(var(--hue), 10%, 90%);
@@ -58,9 +58,9 @@ body:has(.switch__input:checked) {
   display: block;
   overflow: hidden;
   position: absolute;
-  top: 0.35em;
+  top: 0.3em;
   left: 0.35em;
-  width: 2.25em;
+  width: 2.3em;
   height: 1em;
 }
 .switch__inner:before,
@@ -90,7 +90,7 @@ body:has(.switch__input:checked) {
   left: auto;
 }
 .switch__input {
-  background-color: hsl(0, 0%, 100%);
+  background-color: black;
   border-radius: 0.75em;
   box-shadow: 0 0 0 0.0625em hsla(var(--hue), 90%, 50%, 0),
     0 0.125em 0.5em hsla(var(--hue), 10%, 10%, 0.1);
@@ -102,7 +102,8 @@ body:has(.switch__input:checked) {
   transition: background-color var(--trans-dur), box-shadow var(--trans-dur);
 }
 .switch__input:checked {
-  background-color: hsl(var(--hue), 10%, 10%);
+  background-color: white;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 }
 .switch__input:checked ~ .switch__icon {
   color: hsla(var(--hue), 10%, 40%);

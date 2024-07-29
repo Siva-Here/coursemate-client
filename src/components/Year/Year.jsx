@@ -25,7 +25,7 @@ function Year({ folders }) {
     rootFolders.forEach((folder, index) => {
       timer = setTimeout(() => {
         setDelayedFolders((prevFolders) => [...prevFolders, folder]);
-      }, index * 375);
+      }, index * 275);
     });
 
     return () => {
@@ -133,18 +133,26 @@ function Year({ folders }) {
                             <div className="accordion-body">
                               <div
                                 className={`btn-group ${theme} text-center`}
-                                style={{ margin: "0px", marginTop: "-20px" }}
+                                style={{ margin: "0px", marginTop: "0px" }}
                               >
                                 <button
                                   className={`btn ${theme} active`}
-                                  style={{ width: "100px", zIndex: 1000 }}
+                                  style={{
+                                    width: "100px",
+                                    zIndex: 1000,
+                                    marginBottom: "5px",
+                                  }}
                                   onClick={() => handleClick(folder._id, "1")}
                                 >
                                   Sem1
                                 </button>
                                 <button
                                   className={`btn ${theme} active`}
-                                  style={{ width: "100px", zIndex: 1000 }}
+                                  style={{
+                                    width: "100px",
+                                    zIndex: 1000,
+                                    marginBottom: "5px",
+                                  }}
                                   onClick={() => handleClick(folder._id, "2")}
                                 >
                                   Sem2

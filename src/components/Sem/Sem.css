@@ -32,7 +32,7 @@
 .folder-div-sem {
   animation: zoomIn 0.3s ease-in;
   z-index: 10;
-  margin: 20px;
+  margin: 10px;
   padding: 10px;
   display: flex;
   align-items: center;

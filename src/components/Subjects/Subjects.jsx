@@ -62,7 +62,7 @@ function Subjects() {
                   {delayedFolders.map((folder) => (
                     <div
                       key={folder._id}
-                      className={`folder-div-year ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
+                      className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
                       onClick={() =>
                         handleClick(folder._id, "/icons8-folder-96.png")
                       }
@@ -91,7 +91,7 @@ function Subjects() {
                         )}
                       </div>
                       <div
-                        className={`${theme} w-75 text-start px-3 px-5 align-items-start`}
+                        className={`${theme} w-75 text-start px-3 align-items-start`}
                       >
                         {folder.name}
                       </div>

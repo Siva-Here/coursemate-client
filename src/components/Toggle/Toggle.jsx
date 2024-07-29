@@ -104,7 +104,7 @@ const Toggle = () => {
           height="10px"
           aria-hidden="true"
         >
-          <use href="#light" />
+          <use href="#dark" />
         </svg>
         <svg
           className="switch__icon"
@@ -112,7 +112,7 @@ const Toggle = () => {
           height="10px"
           aria-hidden="true"
         >
-          <use href="#dark" />
+          <use href="#light" />
         </svg>
         <span className="switch__inner"></span>
         <span className="switch__inner-icons">
@@ -122,7 +122,7 @@ const Toggle = () => {
             height="10px"
             aria-hidden="true"
           >
-            <use href="#light" />
+            <use href="#dark" />
           </svg>
           <svg
             className="switch__icon"
@@ -130,7 +130,7 @@ const Toggle = () => {
             height="10px"
             aria-hidden="true"
           >
-            <use href="#dark" />
+            <use href="#light" />
           </svg>
         </span>
         <span className="switch__sr">Dark Mode</span>
