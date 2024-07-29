@@ -241,7 +241,7 @@ const Placements = ({ docs }) => {
                         />
                       </div>
                       <div
-                        className={`text-div text-start mt-2 align-items-start ${theme}`}
+                        className={`text-div text-start align-items-start ${theme} text-nowrap overflow-auto`}
                         onClick={() => {
                           window.location.href = `${rsc.rscLink}`;
                         }}

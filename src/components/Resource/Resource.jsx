@@ -92,7 +92,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             <div className="text-center">
               <h1
                 className={`display-5 text-center cust-text-${theme}`}
-                style={{ zIndex: 1000, marginTop: "15px" }}
+                style={{ zIndex: 1000, margin: "25px" }}
               >
                 {folderName}
               </h1>
@@ -109,6 +109,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
                     {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
                     <p
                       className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
+                      style={{ color: "HIGHLIGHT" }}
                     >
                       {rsc.name}
                     </p>

@@ -17,7 +17,7 @@
 }
 .resource-div.light {
   /* background: linear-gradient(90deg, #f0f5fa 1.71%, #fff8df 99.56%); */
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   backdrop-filter: blur(35px);
   border: 1px solid rgba(255, 255, 255, 0.18);
@@ -27,7 +27,7 @@
     background-image: none;
   }
   to {
-    background: url("../../../public/favicons/gate/algorithms.png");
+    background: url("../../../public/bing/colors.jpg");
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -103,7 +103,7 @@
 .modal-dialog {
   color: "white";
   /* margin: 1.75rem auto; */
-  max-width: 600px;
+  max-width: 499px;
 }
 .modal-body {
   height: auto;
@@ -119,11 +119,12 @@
 .form-group {
   margin: 0px;
   padding: 0px;
-  max-width: 450px;
+  max-width: 750px;
   width: 80vw;
 }
 .rsc-form {
-  width: 70%;
+  width: 80%;
   margin: 0px;
   padding: 0px;
+  transform: translateX(50px);
 }

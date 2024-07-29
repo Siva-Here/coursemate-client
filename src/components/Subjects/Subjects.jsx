@@ -91,7 +91,7 @@ function Subjects() {
                         )}
                       </div>
                       <div
-                        className={`${theme} w-75 text-start px-3 align-items-start`}
+                        className={`${theme} w-75 text-start px-3 align-items-start text-nowrap overflow-auto`}
                       >
                         {folder.name}
                       </div>

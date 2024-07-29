@@ -35,7 +35,7 @@ const NestedItem = ({ item, openId, setOpenId, docs }) => {
           height="22px"
           style={{ margin: "5px", marginLeft: "20px" }}
         />
-        <span className="ms-2 mt-1">{item.name}</span>
+        <span className="ms-2 mt-1 text-nowrap overflow-auto">{item.name}</span>
       </button>
       {openId === item._id && item.nested && (
         <ListGroup className="ml-4">

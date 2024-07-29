@@ -75,7 +75,14 @@ function Login() {
     <div className="login-container">
       <ToastContainer />
       <div className="login-content row">
-        <h1 className="display-5 fw-bold text-center cust-text">
+        <h1
+          className={`display-5 text-center cust-text-dark`}
+          style={{
+            zIndex: 1000,
+            marginTop: "15px",
+            fontFamily: "Julius Sans One",
+          }}
+        >
           Welcome To CoursMate
         </h1>
         <div className="login-left justify-content-center col-12 col-sm-12 col-md-6">

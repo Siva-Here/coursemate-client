@@ -241,8 +241,8 @@ function Content(props) {
     <>
       {isLoggedIn ? (
         <div>
+          <Sidebar />
           <ToastContainer />
-          {props.view != "gate" ? <div className="blr1"></div> : <></>}
           <div style={props.view !== "gate" ? { marginTop: "50px" } : {}}>
             {props.view != "gate" ? (
               <div className={`content-img ${theme}`}></div>
@@ -253,19 +253,18 @@ function Content(props) {
               ></div>
             )}
             <div>
-              <h1
-                className={`display-5 text-center cust-text-${theme}`}
-                style={{ zIndex: 1000, marginTop: "80px" }}
-              >
-                {parentFolder}
-              </h1>
-              <Sidebar />
               <div className="container-fluid">
                 <div className="row justify-content-center align-items-center">
                   <div
                     className="col-12 col-sm-12 col-md-8 text-center"
-                    style={{}}
+                    style={{ maxWidth: "799px" }}
                   >
+                    <h1
+                      className={`display-5 text-center cust-text-${theme}`}
+                      style={{ zIndex: 1000, marginTop: "0px" }}
+                    >
+                      {parentFolder}
+                    </h1>
                     {pdfLink ? (
                       <iframe
                         src={pdfLink + "/preview"}
@@ -356,9 +355,9 @@ function Content(props) {
                                     </div>
                                     <div className={`uploaded-date`}>
                                       <p
+                                        className={`${theme}`}
                                         style={{
                                           fontSize: "0.5em",
-                                          color: "#01254b",
                                         }}
                                       >
                                         {getDate(doc.createdAt)}

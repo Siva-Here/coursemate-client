@@ -51,8 +51,8 @@
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  margin-left: 28px;
-  margin-top: 29px;
+  margin-left: 30px;
+  margin-top: 30px;
 }
 .profile-card:hover .person {
   border-radius: 10px;
@@ -64,7 +64,7 @@
   .order-1 {
     border-radius: 10px;
     height: 360px;
-    padding-bottom: 50px;
+    padding-bottom: 40px;
     .person {
       border-radius: 10px;
       transform: translateY(-40px);

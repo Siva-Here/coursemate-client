@@ -19,15 +19,15 @@ const Team = () => {
     <>
       {isLoggedIn ? (
         <div className="container-fluid">
+          <h1
+            className={`display-5 text-center cust-text-${theme}`}
+            style={{ zIndex: 1000, margin: "100px 0px" }}
+          >
+            Web Team
+          </h1>
           <div style={{ marginTop: "50px" }}>
             <div className="img-container-sem"></div>
             <Sidebar />
-            <h1
-              className={`display-5 text-center cust-text-${theme}`}
-              style={{ zIndex: 1000, marginTop: "15px" }}
-            >
-              Web Team
-            </h1>
             <div className="home-container d-flex row justify-content-evenly">
               <div className="profile-card col-12 col-md-6 order-2 shrink">
                 <div className="img">
@@ -39,8 +39,10 @@ const Team = () => {
                   />
                 </div>
                 <div className="caption mb-5">
-                  <h2 className="blinking-text-team">Tvnl Charan</h2>
-                  <p className="blinking-text-team">Full Stack Developer</p>
+                  <h2 className="cust-text-dark fw-normal">Tvnl Charan</h2>
+                  <p className="cust-text-dark fw-normal">
+                    Full Stack Developer
+                  </p>
                   <div className="social-links">
                     <div className="button-container mb-5">
                       <a
@@ -84,12 +86,13 @@ const Team = () => {
                     className="person"
                     src="/favicons/siva4.png"
                     alt="Profile"
-                    style={{ marginBottom: "150px" }}
                   />
                 </div>
                 <div className="caption mb-5">
-                  <h2 className="blinking-text-team">Siva Shankar</h2>
-                  <p className="blinking-text-team">Full Stack Developer</p>
+                  <h2 className="cust-text-dark fw-normal">Siva Shankar</h2>
+                  <p className="cust-text-dark fw-normal">
+                    Full Stack Developer
+                  </p>
                   <div className="social-links">
                     <div className="button-container">
                       <a

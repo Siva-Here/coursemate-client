@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../AuthContext";
 import { ResourceContext } from "../../ResourceContext";
+import { ThemeContext } from "../../ThemeContext";
 
 function Admin(props) {
   const { resources } = useContext(ResourceContext);
@@ -15,6 +16,7 @@ function Admin(props) {
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("user") || null;
   const [view, setView] = useState("docs");
+  const { theme } = useContext(ThemeContext);
 
   useEffect(() => {
     fetchDocuments();
@@ -210,20 +212,24 @@ function Admin(props) {
               <Sidebar />
               <div className="outer-container-admin">
                 <h1
-                  className="display-3 text-center text-white blinking-text"
-                  style={{ zIndex: 100 }}
+                  className={`display-5 text-center cust-text-${theme}`}
+                  style={{ zIndex: 1000, margin: "20px 0px" }}
                 >
                   Recently Uploaded
                 </h1>
                 <div className="btn-group text-center w-75 justify-content-center ms-5">
                   <button
-                    className={`btn ${view === "docs" ? "active" : ""}`}
+                    className={`btn ${theme} ${
+                      view !== "docs" ? "active" : ""
+                    }`}
                     onClick={() => setView("docs")}
                   >
                     Documents
                   </button>
                   <button
-                    className={`btn ${view === "resource" ? "active" : ""}`}
+                    className={`btn ${
+                      view === "resource" ? "active" : ""
+                    } ${theme}`}
                     onClick={() => {
                       // navigate("/resource", {
                       //   state: { parentFolder: folderId, uploadedBy: userId },

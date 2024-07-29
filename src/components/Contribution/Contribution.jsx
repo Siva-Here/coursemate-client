@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
 
 const Contribution = () => {
   const [contributions, setContributions] = useState([]);
@@ -14,6 +15,7 @@ const Contribution = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
+  const { theme } = useContext(ThemeContext);
 
   const fetchContributions = async () => {
     try {
@@ -90,10 +92,10 @@ const Contribution = () => {
           <div>
             <Sidebar />
             <h1
-              className="display-4 text-center text-light blinking-text-leaderboard"
-              style={{ fontSize: "48px", marginTop: "80px", zIndex: 1000 }}
+              className={`display-5 text-center cust-text-${theme}`}
+              style={{ zIndex: 1000, marginTop: "50px" }}
             >
-              LeaderBoard
+              Leaderboard
             </h1>
             <div className="img-container-leaderboard"></div>
             <div className="blur-notify"></div>

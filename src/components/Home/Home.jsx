@@ -137,8 +137,8 @@ function Home() {
                 style={{ zIndex: 1000, position: "absolute" }}
               >
                 <h1
-                  className="lead fw-bold text-center cust-text welcome"
-                  style={{ fontSize: "2rem" }}
+                  className={`display-5 text-center cust-text-${theme}`}
+                  style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Welcome
                 </h1>

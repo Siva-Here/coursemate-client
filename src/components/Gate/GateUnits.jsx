@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IdContext } from "../../IdContext";
 import Content from "../Content/Content";
 import "./GateUnits.css";
+import { ThemeContext } from "../../ThemeContext";
 
 function GateUnits({ folders, docs }) {
   const location = useLocation();
@@ -15,6 +16,7 @@ function GateUnits({ folders, docs }) {
   const [view, setView] = useState("content");
   const [user, setUser] = useState(false);
   const { userId, setUserId } = useContext(IdContext);
+  const { theme } = useContext(ThemeContext);
 
   if (!user) {
     navigate("/resource", {
@@ -74,22 +76,29 @@ function GateUnits({ folders, docs }) {
           <div style={{ marginTop: "50px", zIndex: 10 }}>
             <div>
               <Sidebar />
-              <div className="outer-container-content text-center">
+              <div className="text-center">
                 <h1
-                  className="display-5 text-center text-white blinking-text-units"
-                  style={{ zIndex: 1001 }}
+                  className={`display-5 text-center cust-text-${theme}`}
+                  style={{
+                    zIndex: 1000,
+                    marginTop: "15px",
+                  }}
                 >
-                  {parentFolder}
+                  {parentFolder.toUpperCase()}
                 </h1>
                 <div className="btn-group text-center">
                   <button
-                    className={`btn ${view === "content" ? "active" : ""}`}
+                    className={`btn ${
+                      view === "content" ? "active" : ""
+                    } ${theme}`}
                     onClick={() => setView("content")}
                   >
                     Content
                   </button>
                   <button
-                    className={`btn ${view !== "content" ? "active" : ""}`}
+                    className={`btn ${
+                      view !== "content" ? "active" : ""
+                    } ${theme}`}
                     onClick={() => {
                       setView("pyqs");
                     }}
@@ -98,30 +107,30 @@ function GateUnits({ folders, docs }) {
                   </button>
                 </div>
                 {view === "content" ? (
-                  <div className="w-100">
-                    <a
-                      href={courseLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <div className="gate-img ms-auto me-auto">
-                        <img
-                          src={`/favicons/gate/${parentFolder.toLowerCase()}.png`}
-                          alt={`${parentFolder.toLowerCase()}`}
-                          height="100px"
-                        />
-                      </div>
-                    </a>
-                    <h1 className="lead text-white text-center fw-bold mt-3 cust-text">
-                      Video Course 👆
-                    </h1>
-                    <Content
-                      documents={docs}
-                      gateFolderId={folderId}
-                      view="gate"
-                    />
-                  </div>
+                  // <div className="w-100">
+                  //   <a
+                  //     href={courseLink}
+                  //     target="_blank"
+                  //     rel="noopener noreferrer"
+                  //   >
+                  //     <div className="gate-img ms-auto me-auto">
+                  //       <img
+                  //         src={`/favicons/gate/${parentFolder.toLowerCase()}.png`}
+                  //         alt={`${parentFolder.toLowerCase()}`}
+                  //         height="100px"
+                  //       />
+                  //     </div>
+                  //   </a>
+                  //   <h1 className="lead text-white text-center fw-bold mt-3 cust-text">
+                  //     Video Course 👆
+                  //   </h1>
+                  <Content
+                    documents={docs}
+                    gateFolderId={folderId}
+                    view="gate"
+                  />
                 ) : (
+                  // </div>
                   <>
                     <Resource
                       parentFolder={folderId}
