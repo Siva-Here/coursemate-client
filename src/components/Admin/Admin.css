@@ -75,6 +75,7 @@ h1 {
   top: 0;
   left: 0;
   background: url("../../../public/bing/book.png") no-repeat center center/cover;
+  background-attachment: fixed;
   z-index: -1;
 }
 

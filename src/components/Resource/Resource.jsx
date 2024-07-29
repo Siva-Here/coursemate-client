@@ -103,39 +103,41 @@ const Resource = ({ parentFolder, view, folderName }) => {
         {resource.length !== 0 ? (
           <>
             {resource.map((rsc) => (
-              <div key={rsc._id} className={`resource-div ${theme}`}>
-                <div className="resource-content">
-                  {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
-                  <p
-                    className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
-                  >
-                    {rsc.name}
-                  </p>
-                  <p className={`${theme}`}>{rsc.description}</p>
-                  <p
-                    className={`${theme}`}
-                    style={{
-                      width: "75vw",
-                      overflow: "auto",
-                      maxWidth: "750px",
-                    }}
-                  >
-                    Link:{" "}
-                    <a
-                      href={rsc.rscLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`rsc-link ${theme}`}
+              <div className={`rsc-img ${theme}`}>
+                <div key={rsc._id} className={`resource-div ${theme}`}>
+                  <div className="resource-content">
+                    {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
+                    <p
+                      className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
                     >
-                      {rsc.rscLink}
-                    </a>
-                  </p>
-                </div>
-                <br />
-                <div className={`resource-date ${theme}`}>
-                  <p style={{ fontSize: "1.2em" }}>
-                    Posted at: {formatTimestamp(rsc.uploadedAt)}
-                  </p>
+                      {rsc.name}
+                    </p>
+                    <p className={`${theme}`}>{rsc.description}</p>
+                    <p
+                      className={`${theme}`}
+                      style={{
+                        width: "75vw",
+                        overflow: "auto",
+                        maxWidth: "750px",
+                      }}
+                    >
+                      Link:{" "}
+                      <a
+                        href={rsc.rscLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`rsc-link ${theme}`}
+                      >
+                        {rsc.rscLink}
+                      </a>
+                    </p>
+                  </div>
+                  <br />
+                  <div className={`resource-date ${theme}`}>
+                    <p style={{ fontSize: "1.2em" }}>
+                      Posted at: {formatTimestamp(rsc.uploadedAt)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -166,12 +168,15 @@ const Resource = ({ parentFolder, view, folderName }) => {
             <Modal.Title>Add New Resource</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="formName">
+            <Form onSubmit={handleSubmit} className="rsc-form">
+              <Form.Group className="mb-3 form-group" controlId="formName">
                 <Form.Label>Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter name" />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formDescription">
+              <Form.Group
+                className="mb-3 form-group"
+                controlId="formDescription"
+              >
                 <Form.Label>Description</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -179,7 +184,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
                   placeholder="Enter description"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="formLink">
+              <Form.Group className="mb-3 form-group" controlId="formLink">
                 <Form.Label>Link</Form.Label>
                 <Form.Control type="text" placeholder="Enter link" />
               </Form.Group>

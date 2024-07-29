@@ -115,6 +115,7 @@ h1 span {
 }
 .units-img.dark {
   background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
 }
 
 .units-img.light {
@@ -144,8 +145,10 @@ h1 span {
 
 .content-units,
 .content-resources {
-  width: 100%;
-  max-width: 1200px;
+  width: 100vw;
+  overflow: auto;
+  height: 80vh;
+  padding-top: 40px;
 }
 
 .btn-group {

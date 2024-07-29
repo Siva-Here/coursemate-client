@@ -67,6 +67,7 @@
   top: 0;
   left: 0;
   background: url("../../../public/bing/team.jpg") no-repeat center center/cover;
+  background-attachment: fixed;
   z-index: -1;
 }
 
@@ -75,7 +76,10 @@
   padding: 20px;
 }
 
-.content {
-  width: 100%;
-  max-width: 1200px;
-}
+/* .content {
+  width: 100vw;
+  overflow-y: auto;
+  height: calc(95vh - 135px);
+  padding: 50px 0px;
+  position: relative;
+} */

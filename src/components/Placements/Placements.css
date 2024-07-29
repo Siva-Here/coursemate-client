@@ -4,12 +4,13 @@
   padding: 10px;
   width: 95%;
   display: flex;
+  height: fit-content;
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  backdrop-filter: blur(35px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
   transition: 0.2s;
 }

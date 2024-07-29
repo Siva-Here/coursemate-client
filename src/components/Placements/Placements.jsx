@@ -207,7 +207,7 @@ const Placements = ({ docs }) => {
         <div className={`units-img ${theme}`}></div>
         <div style={{ marginTop: "50px" }}>
           <Sidebar />
-          <div className="outer-container-units text-center">
+          <div className={`outer-container-units text-center ${theme}`}>
             <h1
               className={`display-5 text-center cust-text-${theme}`}
               style={{ zIndex: 1000, marginTop: "15px" }}
@@ -216,53 +216,55 @@ const Placements = ({ docs }) => {
             </h1>
           </div>
         </div>
-        <div className="blur1"></div>
         {placement.length !== 0 ? (
-          <>
+          <div className={`outer-resource-container ${theme}`}>
             {placement.map((rsc) => (
-              <div key={rsc._id} className="resource-div">
-                <div className="resource-content">
-                  <p className="text-uppercase fw-bold fst-italic font-italic">
-                    {rsc.name}
-                  </p>
-                  <p>{rsc.description}</p>
-                  <div
-                    className="placements-div d-flex fw-bold text-white lead py-4 justify-content-between mb-4 ms-auto me-auto"
-                    style={{ marginRight: "8px" }}
-                  >
-                    <div className="img-div text-start ms-4 align-items-end">
-                      <img
-                        className="text-start"
-                        src={getImageSrc(rsc.name)}
-                        alt=""
-                        height={"35px"}
-                      />
-                    </div>
-                    <div
-                      className="text-div text-start align-items-start"
-                      onClick={() => {
-                        window.location.href = `${rsc.rscLink}`;
-                      }}
+              <div className={`rsc-img ${theme}`}>
+                <div key={rsc._id} className={`resource-div ${theme}`}>
+                  <div className="resource-content">
+                    <p
+                      className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
                     >
-                      {rsc.name.toUpperCase()}
+                      {rsc.name}
+                    </p>
+                    <p className={`${theme}`}>{rsc.description}</p>
+                    <div
+                      className="placements-div d-flex fw-bold text-white lead py-2 justify-content-between mb-4 ms-auto me-auto"
+                      style={{ marginRight: "8px" }}
+                    >
+                      <div className="img-div text-start ms-4 align-items-end">
+                        <img
+                          className="text-start"
+                          src={getImageSrc(rsc.name)}
+                          alt=""
+                          height={"35px"}
+                        />
+                      </div>
+                      <div
+                        className={`text-div text-start mt-2 align-items-start ${theme}`}
+                        onClick={() => {
+                          window.location.href = `${rsc.rscLink}`;
+                        }}
+                      >
+                        {rsc.name.toUpperCase()}
+                      </div>
                     </div>
                   </div>
-                </div>
-                <br />
-                <div className="resource-date mt-5">
-                  <p style={{ fontSize: "1.2em" }}>
-                    Posted at: {formatTimestamp(rsc.uploadedAt)}
-                  </p>
+                  <br />
+                  <div className={`resource-date mt-5 ${theme}`}>
+                    <p style={{ fontSize: "1.2em" }}>
+                      Posted at: {formatTimestamp(rsc.uploadedAt)}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
-          </>
+          </div>
         ) : (
           <div
             className="text-center d-flex justify-content-center align-items-center text-white display-6"
             style={{ height: "60vh" }}
           >
-            <div className="blur1"></div>
             <h1
               className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
               style={{ zIndex: 100 }}
@@ -271,7 +273,7 @@ const Placements = ({ docs }) => {
         )}
         {isAllowed && (
           <div className="add-button-container">
-            <button className="add-button" onClick={handleModalShow}>
+            <button className={`add-button ${theme}`} onClick={handleModalShow}>
               +
             </button>
           </div>
@@ -282,7 +284,7 @@ const Placements = ({ docs }) => {
             <Modal.Title>Add New Placement Updates</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={submitResource}>
+            <Form onSubmit={submitResource} className="rsc-form">
               <Form.Group className="mb-3" controlId="formName">
                 <Form.Label>Company Name</Form.Label>
                 <Form.Control type="text" placeholder="Enter name" />

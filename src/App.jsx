@@ -165,11 +165,16 @@ function App() {
           >
             <i className="fas fa-plus"></i>
           </button>
-          <Modal show={show} onHide={handleClose} centered>
-            <Modal.Header closeButton>
+          <Modal
+            show={show}
+            onHide={handleClose}
+            centered
+            className="modal-dialog-upload"
+          >
+            <Modal.Header closeButton className="modal-header-upload">
               <Modal.Title>Upload document</Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="modal-body-upload">
               <NestedItems data={nestedFolders} docs={docs} />
             </Modal.Body>
           </Modal>

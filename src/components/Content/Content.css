@@ -93,6 +93,7 @@ h1 {
 }
 .content-img.dark {
   background: url("../../../public/bing/book.png") no-repeat center center/cover;
+  background-attachment: fixed;
 }
 .content-img.light {
   /* background-color: #d9e7fc; */

@@ -108,7 +108,7 @@ function Units({ folders }) {
                   </button>
                 </div>
                 {view === "units" ? (
-                  <div className="content-units text-center w-50 container-fluid d-flex flex-column align-items-center justify-content-center">
+                  <div className="content text-center container-fluid d-flex flex-column align-items-center justify-content-center">
                     {delayedFolders.map((folder) => (
                       <div
                         key={folder._id}
