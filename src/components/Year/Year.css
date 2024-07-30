@@ -125,22 +125,22 @@
   padding: 20px;
 }
 @media (min-width: 768px) {
-  .outer-container-year {
+  .outer-container-year.expanded {
     margin-left: 100px;
   }
-  .outer-container-domains {
+  .outer-container-domains.expanded {
     margin-left: 100px;
   }
   .outer-container-sem {
     margin-left: 100px;
   }
-  .outer-container-content {
+  .outer-container-content.expanded {
     margin-left: 100px;
   }
-  .outer-container-units {
+  .outer-container-units.expanded {
     margin-left: 100px;
   }
-  .outer-resource-container {
+  .outer-resource-container.expanded {
     margin-left: 200px;
   }
 }

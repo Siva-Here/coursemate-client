@@ -4,12 +4,14 @@ import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Gate({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -46,7 +48,11 @@ function Gate({ folders }) {
             <div className={`img-container2 ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container-year">
+              <div
+                className={`outer-container-year ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}

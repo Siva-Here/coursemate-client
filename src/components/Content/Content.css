@@ -376,3 +376,7 @@ option {
 .pagination-arrow:hover {
   background-color: #e0e0e0;
 }
+
+.sidebar-gate #sidebar.expand-dark {
+  backdrop-filter: 0px;
+}

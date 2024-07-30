@@ -4,6 +4,7 @@ import Sidebar from "../navbar/Sidebar";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Sem({ folders }) {
   const location = useLocation();
@@ -12,6 +13,7 @@ function Sem({ folders }) {
   const { folderId } = location.state;
   const { isLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     if (!folderId) {
@@ -49,7 +51,11 @@ function Sem({ folders }) {
             <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container-sem">
+              <div
+                className={`outer-container-sem ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}

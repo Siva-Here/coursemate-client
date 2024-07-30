@@ -9,6 +9,8 @@ import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { jwtDecode } from "jwt-decode";
 import { ThemeContext } from "../../ThemeContext";
+import Posts from "../Posts/Posts";
+import { NavbarContext } from "../../NavbarContext";
 
 const Placements = ({ docs }) => {
   const { resources } = useContext(ResourceContext);
@@ -24,7 +26,9 @@ const Placements = ({ docs }) => {
   const [rscLink, setRscLink] = useState(null);
   const [isAllowed, setIsAllowed] = useState(false);
   const [disable, setDisable] = useState(true);
+  const [view, setView] = useState("brochure");
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     try {
@@ -42,7 +46,7 @@ const Placements = ({ docs }) => {
 
     const sortedPlacements = resources
       .filter((rsc) => {
-        return rsc.isPlacement && rsc.isAccepted;
+        return rsc.isPlacement && rsc.isAccepted && !rsc.isPost;
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
@@ -204,79 +208,120 @@ const Placements = ({ docs }) => {
     <>
       <ToastContainer />
       <div>
+        <div className="blur1"></div>
+        <div className="blur1"></div>
         <div className={`units-img ${theme}`}></div>
         <div style={{ marginTop: "50px" }}>
           <Sidebar />
-          <div className={`outer-container-units text-center ${theme}`}>
+          <div
+            className={`outer-container-units text-center ${theme} ${
+              isExpanded ? "expanded" : ""
+            }`}
+          >
             <h1
               className={`display-5 text-center cust-text-${theme}`}
               style={{ zIndex: 1000, marginTop: "15px" }}
             >
               Placements
             </h1>
+            <div className={`btn-group ${theme} text-center`}>
+              <button
+                className={`btn ${theme} ${
+                  view === "brochure" ? "active" : ""
+                }`}
+                onClick={() => setView("brochure")}
+              >
+                Brochures
+              </button>
+              <button
+                className={`btn ${theme} ${
+                  view !== "brochure" ? "active" : ""
+                }`}
+                onClick={() => {
+                  setView("posts");
+                }}
+              >
+                Posts
+              </button>
+            </div>
           </div>
         </div>
-        {placement.length !== 0 ? (
-          <div className={`outer-resource-container ${theme}`}>
-            {placement.map((rsc) => (
-              <div className={`rsc-img ${theme}`}>
-                <div key={rsc._id} className={`resource-div ${theme}`}>
-                  <div className="resource-content">
-                    <p
-                      className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
-                    >
-                      {rsc.name}
-                    </p>
-                    <p className={`${theme}`}>{rsc.description}</p>
-                    <div
-                      className="placements-div d-flex fw-bold text-white lead py-2 justify-content-between mb-4 ms-auto me-auto"
-                      style={{ marginRight: "8px" }}
-                    >
-                      <div className="img-div text-start ms-4 align-items-end">
-                        <img
-                          className="text-start"
-                          src={getImageSrc(rsc.name)}
-                          alt=""
-                          height={"35px"}
-                        />
+        {view == "brochure" ? (
+          <>
+            {placement.length !== 0 ? (
+              <div
+                className={`outer-resource-container ${theme} ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
+                {placement.map((rsc) => (
+                  <div className={`rsc-img ${theme}`}>
+                    <div key={rsc._id} className={`resource-div ${theme}`}>
+                      <div className="resource-content">
+                        <p
+                          className={`text-uppercase fw-bold fst-italic font-italic ${theme}`}
+                        >
+                          {rsc.name}
+                        </p>
+                        <p className={`${theme}`}>{rsc.description}</p>
+                        <div
+                          className="placements-div d-flex fw-bold text-white lead py-2 justify-content-between mb-4 ms-auto me-auto"
+                          style={{ marginRight: "8px" }}
+                        >
+                          <div className="img-div text-start ms-4 align-items-end">
+                            <img
+                              className="text-start"
+                              src={getImageSrc(rsc.name)}
+                              alt=""
+                              height={"35px"}
+                            />
+                          </div>
+                          <div
+                            className={`text-div text-start align-items-start ${theme} text-nowrap overflow-auto`}
+                            onClick={() => {
+                              window.location.href = `${rsc.rscLink}`;
+                            }}
+                          >
+                            {rsc.name.toUpperCase()}
+                          </div>
+                        </div>
                       </div>
-                      <div
-                        className={`text-div text-start align-items-start ${theme} text-nowrap overflow-auto`}
-                        onClick={() => {
-                          window.location.href = `${rsc.rscLink}`;
-                        }}
-                      >
-                        {rsc.name.toUpperCase()}
+                      <br />
+                      <div className={`resource-date mt-5 ${theme}`}>
+                        <p style={{ fontSize: "1.2em" }}>
+                          Posted at: {formatTimestamp(rsc.uploadedAt)}
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <br />
-                  <div className={`resource-date mt-5 ${theme}`}>
-                    <p style={{ fontSize: "1.2em" }}>
-                      Posted at: {formatTimestamp(rsc.uploadedAt)}
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+            ) : (
+              <div
+                className="text-center d-flex justify-content-center align-items-center text-white display-6"
+                style={{ height: "60vh" }}
+              >
+                <h1
+                  className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
+                  style={{ zIndex: 100 }}
+                ></h1>
+              </div>
+            )}
+            {isAllowed && (
+              <div className="add-button-container">
+                <button
+                  className={`add-button ${theme}`}
+                  onClick={handleModalShow}
+                >
+                  +
+                </button>
+              </div>
+            )}
+          </>
         ) : (
-          <div
-            className="text-center d-flex justify-content-center align-items-center text-white display-6"
-            style={{ height: "60vh" }}
-          >
-            <h1
-              className="text-center fw-bold h-100 text-white display-6 d-flex align-items-center justify-content-center"
-              style={{ zIndex: 100 }}
-            ></h1>
-          </div>
-        )}
-        {isAllowed && (
-          <div className="add-button-container">
-            <button className={`add-button ${theme}`} onClick={handleModalShow}>
-              +
-            </button>
-          </div>
+          <>
+            <Posts />
+          </>
         )}
 
         <Modal show={showModal} onHide={handleModalClose} className="modal">

@@ -75,7 +75,7 @@ function GateUnits({ folders, docs }) {
         <>
           <div style={{ marginTop: "50px", zIndex: 10 }}>
             <div>
-              <Sidebar />
+              {view == "pyq" && <Sidebar />}
               <div className="text-center">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
@@ -86,24 +86,24 @@ function GateUnits({ folders, docs }) {
                 >
                   {parentFolder.toUpperCase()}
                 </h1>
-                <div className="btn-group text-center">
+                <div className={`btn-group ${theme} text-center`}>
                   <button
-                    className={`btn ${
+                    className={`btn ${theme} ${
                       view === "content" ? "active" : ""
-                    } ${theme}`}
+                    }`}
                     onClick={() => setView("content")}
                   >
                     Content
                   </button>
                   <button
-                    className={`btn ${
+                    className={`btn ${theme} ${
                       view !== "content" ? "active" : ""
-                    } ${theme}`}
+                    }`}
                     onClick={() => {
-                      setView("pyqs");
+                      setView("pyq");
                     }}
                   >
-                    PYQs
+                    PYQ's
                   </button>
                 </div>
                 {view === "content" ? (
@@ -131,14 +131,14 @@ function GateUnits({ folders, docs }) {
                   />
                 ) : (
                   // </div>
-                  <>
+                  <div style={{ marginLeft: "-100px" }}>
                     <Resource
                       parentFolder={folderId}
                       uploadedBy={userId}
                       view={"units"}
                       folderName={parentFolder}
                     />
-                  </>
+                  </div>
                 )}
               </div>
             </div>

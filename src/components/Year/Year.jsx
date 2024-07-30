@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { NavbarContext } from "../../NavbarContext";
 
 function Year({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
   const [openId, setOpenId] = useState(-1);
 
   useEffect(() => {
@@ -61,7 +63,11 @@ function Year({ folders }) {
             <div className={`img-container2 ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container-year">
+              <div
+                className={`outer-container-year ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
                 <h2
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
@@ -95,27 +101,15 @@ function Year({ folders }) {
                               onClick={() => handleOpen(index)}
                             >
                               <div className="w-25 text-end align-items-end">
-                                {theme === "light" ? (
-                                  <img
-                                    className="text-start"
-                                    src={`/bing/${
-                                      openId != index ? "folder" : "open-light"
-                                    }.png`}
-                                    alt=""
-                                    height={"30px"}
-                                    style={{ opacity: 1 }}
-                                  />
-                                ) : (
-                                  <img
-                                    className="text-start"
-                                    src={`/bing/${
-                                      openId != index ? "folder1" : "open-dark"
-                                    }.png`}
-                                    alt=""
-                                    height={"30px"}
-                                    style={{ opacity: 1 }}
-                                  />
-                                )}
+                                <img
+                                  className="text-start"
+                                  src={`/bing/${
+                                    openId != index ? "folder1" : "open-dark"
+                                  }.png`}
+                                  alt=""
+                                  height={"40px"}
+                                  style={{ opacity: 1 }}
+                                />
                               </div>
                               <div
                                 className={`${theme} w-75 text-start px-3 px-5 align-items-start fw-bold`}

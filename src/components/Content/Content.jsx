@@ -31,6 +31,7 @@ function Content(props) {
   const { theme } = useContext(ThemeContext);
   const token = localStorage.getItem("user") || null;
   const [pdfLink, setPdfLink] = useState(null);
+  const { isExpanded } = useContext(NavbarContext);
 
   const ITEMS_PER_PAGE = 6;
 
@@ -241,9 +242,11 @@ function Content(props) {
     <>
       {isLoggedIn ? (
         <div>
-          <Sidebar />
+          <div className="sidebar-gate" style={{ backdropFilter: "0px" }}>
+            <Sidebar />
+          </div>
           <ToastContainer />
-          <div style={props.view !== "gate" ? { marginTop: "50px" } : {}}>
+          <div style={{ marginTop: "50px" }}>
             {props.view != "gate" ? (
               <div className={`content-img ${theme}`}></div>
             ) : (
@@ -256,7 +259,9 @@ function Content(props) {
               <div className="container-fluid">
                 <div className="row justify-content-center align-items-center">
                   <div
-                    className="col-12 col-sm-12 col-md-8 text-center"
+                    className={`col-12 col-sm-12 col-md-8 text-center outer-container-year ${
+                      isExpanded ? "expanded" : ""
+                    }`}
                     style={{ maxWidth: "799px" }}
                   >
                     <h1
@@ -278,7 +283,11 @@ function Content(props) {
                       </p>
                     )}
                   </div>
-                  <div className="outer-container-content col-12 col-sm-12 col-md-4 justify-content-center align-items-center d-flex flex-column">
+                  <div
+                    className={`outer-container-content col-12 col-sm-12 col-md-4 justify-content-center align-items-center d-flex flex-column ${
+                      isExpanded ? "expanded" : ""
+                    }`}
+                  >
                     <div
                       className={`${theme} search-sort-container row justify-content-center align-items-center d-flex`}
                     >

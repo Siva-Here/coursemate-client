@@ -39,8 +39,9 @@
   animation: showBackground 0.25s ease-in-out 1s forwards;
 }
 .resource-content {
-  font-size: 15px;
-  line-height: 1.6;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
 }
 
 .resource-user {
@@ -88,16 +89,16 @@
   background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(35px);
-  box-shadow: 3px 3px 3px #102c57;
   border: 1px solid rgba(255, 255, 255, 0.18);
   color: white;
 }
 .modal-content {
-  color: "white";
-  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  background: rgba(255, 255, 255, 0.15);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(35px);
+  /* box-shadow: 3px 3px 3px #102c57;
+  -webkit-backdrop-filter: blur(5px); */
 }
 
 .modal-dialog {
@@ -107,7 +108,8 @@
 }
 .modal-body {
   height: auto;
-  min-height: 400px;
+  min-height: 500px;
+  overflow: auto;
 }
 .rsc-link.dark {
   color: yellow;
@@ -119,12 +121,13 @@
 .form-group {
   margin: 0px;
   padding: 0px;
-  max-width: 750px;
-  width: 80vw;
+  width: 100%;
 }
 .rsc-form {
   width: 80%;
   margin: 0px;
   padding: 0px;
   transform: translateX(50px);
+  height: 450px;
+  overflow: auto;
 }

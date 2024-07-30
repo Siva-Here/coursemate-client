@@ -6,6 +6,7 @@ import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
 import { IdContext } from "../../IdContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Domains({ folders }) {
   const [delayedFolders, setDelayedFolders] = useState([]);
@@ -13,6 +14,7 @@ function Domains({ folders }) {
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
@@ -57,7 +59,11 @@ function Domains({ folders }) {
             <div className={`img-container2 ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container-domains">
+              <div
+                className={`outer-container-domains ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, margin: "15px" }}

@@ -1,0 +1,19 @@
+.inner-post {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  min-height: 100px;
+  border-radius: 10px;
+  text-wrap: wrap;
+  /* padding: 1em; */
+}
+.inner-post {
+  background: transparent;
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(20px);
+}
+.post-text {
+  font-family: system-ui, "Nunito";
+  font-size: 0.9rem;
+}

@@ -1,53 +1,46 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./Resource.css";
+import "./Posts.css";
 import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useLocation } from "react-router-dom";
-import Sidebar from "../navbar/Sidebar";
 import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
-const Resource = ({ parentFolder, view, folderName }) => {
+const Post = () => {
   const { resources } = useContext(ResourceContext);
   const [resource, setResource] = useState([]);
-  const location = useLocation();
   const token = localStorage.getItem("user") || null;
   const [showModal, setShowModal] = useState(false);
-  const [folderId, setFolderId] = useState(parentFolder);
+  const [questions, setQuestions] = useState([""]);
   const { userId } = useContext(IdContext);
   const { theme } = useContext(ThemeContext);
-
-  if (!folderName) {
-    folderName = location.state.folderName;
-  }
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
-    if (view !== "units") {
-      setFolderId(location.state.parentFolder || parentFolder);
-    } else {
-      setFolderId(parentFolder);
-    }
-    if (!folderId) return;
-
     const sortedResources = resources
       .filter((rsc) => {
-        return (
-          !rsc.byAdmin &&
-          rsc.isAccepted &&
-          rsc.parentFolder === folderId &&
-          !rsc.isPlacement
-        );
+        return rsc.isPost && rsc.isAccepted;
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
     setResource(sortedResources);
-  }, [resources, location.state, parentFolder, view, folderId]);
+  }, [resources]);
 
   const handleModalClose = () => setShowModal(false);
   const handleModalShow = () => setShowModal(true);
+
+  const handleAddQuestion = () => {
+    setQuestions([...questions, ""]);
+  };
+
+  const handleQuestionChange = (index, event) => {
+    const newQuestions = [...questions];
+    newQuestions[index] = event.target.value;
+    setQuestions(newQuestions);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,13 +48,15 @@ const Resource = ({ parentFolder, view, folderName }) => {
     const formData = {
       name: event.target.formName.value,
       description: event.target.formDescription.value,
-      rscLink: event.target.formLink.value,
-      userId,
-      folderId,
+      posts: questions.filter((question) => question.trim() !== ""),
+      uploadedBy: userId,
+      parentFolder: process.env.REACT_APP_PLACEMENTS_FOLDER,
+      rscLink: "post",
     };
+    console.log(formData);
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_BASE_API_URL}/resource/create`,
+        `${process.env.REACT_APP_BASE_API_URL}/resource/addPost`,
         formData,
         {
           headers: {
@@ -73,44 +68,32 @@ const Resource = ({ parentFolder, view, folderName }) => {
         setShowModal(false);
         toast.success("Added! Wait until admin accepts it!");
       } else {
-        toast.error("Failed to add resource. Please try again later.");
+        toast.error("Failed to add Post. Please try again later.");
       }
     } catch (error) {
-      console.error("Error adding resource:", error);
-      toast.error("Failed to add resource. Please try again later.");
+      console.error("Error adding Post:", error);
+      toast.error("Failed to add Post. Please try again later.");
     }
   };
 
   return (
     <>
       <ToastContainer />
-      <div className="outer-resource-container">
+      <div
+        className={`outer-resource-container ${isExpanded ? "expanded" : ""}`}
+      >
         <div className={`units-img ${theme}`}></div>
-        {view !== "units" ? (
-          <div style={{ marginTop: "50px" }}>
-            <Sidebar />
-            <div className="text-center">
-              <h1
-                className={`display-5 text-center cust-text-${theme}`}
-                style={{ zIndex: 1000, margin: "25px" }}
-              >
-                {folderName}
-              </h1>
-            </div>
-          </div>
-        ) : null}
-        {/* <div className="blur1"></div> */}
+
         {resource.length !== 0 ? (
           <>
             {resource.map((rsc) => (
-              <div className={`rsc-img ${theme}`}>
-                <div key={rsc._id} className={`resource-div ${theme}`}>
+              <div className={`rsc-img ${theme}`} key={rsc._id}>
+                <div className={`resource-div ${theme}`}>
                   <div className="resource-content">
-                    {/* <p className="resource-user">Uploaded by: {rsc.uploadedBy}</p> */}
                     <p
                       className={`text-uppercase fw-bold fst-italic font-italic`}
                       style={
-                        theme == "light"
+                        theme === "light"
                           ? { color: "green" }
                           : { color: "lightblue" }
                       }
@@ -121,25 +104,24 @@ const Resource = ({ parentFolder, view, folderName }) => {
                     <p
                       className={`${theme}`}
                       style={{
-                        width: "75vw",
                         overflow: "auto",
                         maxWidth: "750px",
                       }}
                     >
-                      Link:{" "}
-                      <a
-                        href={rsc.rscLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={`rsc-link ${theme}`}
-                      >
-                        {rsc.rscLink}
-                      </a>
+                      <div className={`inner-post ${theme}`}>
+                        <ol>
+                          {rsc.posts.map((post, index) => (
+                            <li key={index} style={{ listStyle: "disc" }}>
+                              {post}
+                            </li>
+                          ))}
+                        </ol>
+                      </div>
                     </p>
                   </div>
                   <br />
                   <div className={`resource-date ${theme}`}>
-                    <p style={{ fontSize: "1.2em" }}>
+                    <p style={{ fontSize: "1.2em", margin: "0px" }}>
                       Posted at: {formatTimestamp(rsc.uploadedAt)}
                     </p>
                   </div>
@@ -170,28 +152,43 @@ const Resource = ({ parentFolder, view, folderName }) => {
 
         <Modal show={showModal} onHide={handleModalClose} className="modal">
           <Modal.Header closeButton>
-            <Modal.Title>Add New Resource</Modal.Title>
+            <Modal.Title>Add New Post</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="modal-body">
             <Form onSubmit={handleSubmit} className="rsc-form">
               <Form.Group className="mb-3 form-group" controlId="formName">
-                <Form.Label>Name</Form.Label>
+                <Form.Label>Company</Form.Label>
                 <Form.Control type="text" placeholder="Enter name" />
               </Form.Group>
               <Form.Group
                 className="mb-3 form-group"
                 controlId="formDescription"
               >
-                <Form.Label>Description</Form.Label>
+                <Form.Label>Your Experience</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  placeholder="Enter description"
+                  placeholder="Provide your experience"
                 />
               </Form.Group>
               <Form.Group className="mb-3 form-group" controlId="formLink">
-                <Form.Label>Link</Form.Label>
-                <Form.Control type="text" placeholder="Enter link" />
+                <Form.Label>Questions</Form.Label>
+                {questions.map((question, index) => (
+                  <Form.Control
+                    key={index}
+                    type="text"
+                    placeholder="Enter question"
+                    value={question}
+                    onChange={(event) => handleQuestionChange(index, event)}
+                    className="mb-2"
+                  />
+                ))}
+                <Button
+                  variant="btn btn-warning ms-auto"
+                  onClick={handleAddQuestion}
+                >
+                  Add
+                </Button>
               </Form.Group>
               <Button variant="outline-warning" type="submit">
                 Submit
@@ -217,4 +214,5 @@ const formatTimestamp = (timestamp) => {
   });
   return formattedDate.replace(",", "");
 };
-export default Resource;
+
+export default Post;

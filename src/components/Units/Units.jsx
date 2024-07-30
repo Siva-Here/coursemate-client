@@ -5,6 +5,7 @@ import Resource from "../Resource/Resource";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IdContext } from "../../IdContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function Units({ folders }) {
   const location = useLocation();
@@ -16,6 +17,7 @@ function Units({ folders }) {
   const [user, setUser] = useState(false);
   const { theme } = useContext(ThemeContext);
   const { userId } = useContext(IdContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   if (!user) {
     navigate("/resource", {
@@ -77,7 +79,11 @@ function Units({ folders }) {
             <div className={`units-img ${theme}`}></div>
             <div>
               <Sidebar />
-              <div className="outer-container-units text-center">
+              <div
+                className={`outer-container-units text-center ${
+                  isExpanded ? "expanded" : ""
+                }`}
+              >
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
@@ -118,27 +124,13 @@ function Units({ folders }) {
                         }
                       >
                         <div className="w-25 text-end align-items-end">
-                          {theme == "light" ? (
-                            <>
-                              <img
-                                className="text-start"
-                                src="/bing/folder.png"
-                                alt=""
-                                height={"30px"}
-                                style={{ opacity: 1 }}
-                              />
-                            </>
-                          ) : (
-                            <>
-                              <img
-                                className="text-start"
-                                src="/bing/folder1.png"
-                                alt=""
-                                height={"40px"}
-                                style={{ opacity: 0.8 }}
-                              />
-                            </>
-                          )}
+                          <img
+                            className="text-start"
+                            src="/bing/folder1.png"
+                            alt=""
+                            height={"40px"}
+                            style={{ opacity: 1 }}
+                          />
                         </div>
                         <div className="w-75 text-start px-3 px-5 align-items-start">
                           {folder.name}
