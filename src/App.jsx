@@ -200,13 +200,16 @@ function App() {
         <Route path="/domains" element={<Domains folders={folders} />} />
         <Route path="/units" element={<Units folders={folders} />} />
         <Route path="/content" element={<Content documents={docs} />} />
-        <Route path="/sem" element={<Sem folders={folders} />} />
+        {/* <Route path="/sem" element={<Sem folders={folders} />} /> */}
         <Route path="/year" element={<Year folders={folders} />} />
         <Route path="/team" element={<Team />} />
         <Route path="/notifications" element={<Notification />} />
         <Route path="/contribution" element={<Contribution />} />
         <Route path="/resource" element={<Resource />} />
-        <Route path="/admin" element={<Admin documents={docs} />} />
+        <Route
+          path="/admin"
+          element={<Admin documents={docs} folders={folders} />}
+        />
         <Route path="/gate" element={<Gate folders={folders} />} />
         <Route path="/placements" element={<Placements docs={docs} />} />
         <Route

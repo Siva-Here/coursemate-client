@@ -200,6 +200,14 @@ function Admin(props) {
     }
   }
 
+  function getFolderName(folderId) {
+    console.log(props.folders);
+    const folder = props.folders.find((f) => {
+      return f._id == folderId;
+    });
+    return folder.name;
+  }
+
   return (
     <>
       {isLoggedIn ? (
@@ -242,7 +250,8 @@ function Admin(props) {
                       <div key={doc._id}>
                         <div className="d-flex flex-column mt-3">
                           <h1 className="lead text-center text-white fw-bold m-0">
-                            {doc.uploadedBy}
+                            {doc.uploadedBy} upload into{" "}
+                            {getFolderName(doc.parentFolder)}
                           </h1>
                           <div className="admin-div d-flex fw-bold text-white lead py-4 justify-admin-between">
                             <div className="img-div text-start ms-4 align-items-end">
@@ -265,6 +274,7 @@ function Admin(props) {
                             <div
                               className="download-div text-end me-3 align-items-start"
                               onClick={() => handleAccept(doc._id)}
+                              style={{ cursor: "pointer" }}
                             >
                               <img
                                 className=""
@@ -276,6 +286,7 @@ function Admin(props) {
                             <div
                               className="download-div text-end me-3 align-items-start"
                               onClick={() => handleDelete(doc._id)}
+                              style={{ cursor: "pointer" }}
                             >
                               <img
                                 className=""
@@ -312,55 +323,85 @@ function Admin(props) {
                           <div className={`img-container2 ${theme}`}></div>
                         </div>
                       ) : null}
-                      {resource.map((resource) => (
-                        <div key={resource._id} className="resource-div">
-                          <div className="resource-content">
-                            <p className="resource-user d-inline">
-                              Uploaded by: {resource.uploadedBy}
-                            </p>
-                            <div
-                              className="download-div d-inline me-3 ms-5"
-                              onClick={() => handleAcceptResource(resource._id)}
-                            >
-                              <img
-                                src="/favicons/tick.png"
-                                alt=""
-                                height={"35px"}
-                              />
-                            </div>
-                            <div
-                              className="download-div d-inline me-3"
-                              onClick={() => handleDeleteResource(resource._id)}
-                            >
-                              <img
-                                src="/favicons/delete.png"
-                                alt=""
-                                height={"35px"}
-                                style={{ opacity: 0.8 }}
-                              />
-                            </div>
-                            <p className="text-uppercase fw-bold fst-italic font-italic">
-                              {" "}
-                              {resource.name}
-                            </p>
-                            <p>{resource.description}</p>
-                            <p>
-                              Link:{" "}
-                              <a
-                                href={resource.rscLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{ color: "yellow" }}
+                      {resource.map((rsc) => (
+                        <div className={`rsc-img ${theme}`}>
+                          <div
+                            key={rsc._id}
+                            className={`resource-div ${theme}`}
+                          >
+                            <div className="resource-content text-start">
+                              <p className={`resource-user ${theme}`}>
+                                {rsc.uploadedBy} upload into{" "}
+                                {getFolderName(rsc.parentFolder)}
+                              </p>
+                              <div className="d-flex justify-content-between align-items-center">
+                                <p
+                                  className={`text-uppercase fw-bold fst-italic font-italic`}
+                                  style={
+                                    theme == "light"
+                                      ? { color: "green" }
+                                      : { color: "lightblue" }
+                                  }
+                                >
+                                  {rsc.name}
+                                </p>
+                                <div className="d-flex justify-content-end">
+                                  <div
+                                    className="download-div d-inline me-3 ms-5"
+                                    onClick={() =>
+                                      handleAcceptResource(rsc._id)
+                                    }
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <img
+                                      src="/favicons/tick.png"
+                                      alt=""
+                                      height={"35px"}
+                                    />
+                                  </div>
+                                  <div
+                                    className="download-div d-inline me-3"
+                                    onClick={() =>
+                                      handleDeleteResource(rsc._id)
+                                    }
+                                    style={{ cursor: "pointer" }}
+                                  >
+                                    <img
+                                      src="/favicons/delete.png"
+                                      alt=""
+                                      height={"35px"}
+                                      style={{ opacity: 0.8 }}
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+
+                              <p className={`${theme}`}>{rsc.description}</p>
+                              <p
+                                className={`${theme}`}
+                                style={{
+                                  width: "75vw",
+                                  overflow: "auto",
+                                  maxWidth: "750px",
+                                }}
                               >
-                                {resource.rscLink}
-                              </a>
-                            </p>
-                          </div>
-                          <br />
-                          <div className="resource-date">
-                            <p style={{ fontSize: "1.2em" }}>
-                              Posted at: {formatTimestamp(resource.uploadedAt)}
-                            </p>
+                                Link:{" "}
+                                <a
+                                  href={rsc.rscLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`rsc-link ${theme}`}
+                                >
+                                  {rsc.rscLink}
+                                </a>
+                              </p>
+                            </div>
+                            <br />
+                            <div className={`resource-date ${theme}`}>
+                              <p style={{ fontSize: "1.2em" }}>
+                                Posted at: {formatTimestamp(rsc.uploadedAt)}
+                              </p>
+                            </div>
                           </div>
                         </div>
                       ))}
