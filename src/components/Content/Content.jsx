@@ -385,7 +385,7 @@ function Content(props) {
                         </p>
                       </div>
                     )}
-                    <div className="pagination-container">
+                    <div className={`pagination-container `}>
                       <button
                         onClick={() =>
                           setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
@@ -395,17 +395,6 @@ function Content(props) {
                       >
                         <FaArrowLeft />
                       </button>
-                      {/* {Array.from({ length: totalPages }, (_, index) => (
-                        <button
-                          key={index + 1}
-                          onClick={() => setCurrentPage(index + 1)}
-                          className={`pagination-button ${theme} ${
-                            currentPage === index + 1 ? "active" : ""
-                          }`}
-                        >
-                          {index + 1}
-                        </button>
-                      ))} */}
                       <button
                         onClick={() =>
                           setCurrentPage(

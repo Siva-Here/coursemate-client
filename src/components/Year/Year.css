@@ -127,21 +127,59 @@
 @media (min-width: 768px) {
   .outer-container-year.expanded {
     margin-left: 100px;
+    transition: 0.5s;
+  }
+  .outer-container-year {
+    margin-left: 0px;
+    transition: 0.5s;
   }
   .outer-container-domains.expanded {
     margin-left: 100px;
+    transition: 0.5s;
+  }
+  .outer-container-domains {
+    margin-left: 0px;
+    transition: 0.5s;
+  }
+  .outer-container-sem.expanded {
+    margin-left: 100px;
+    transition: 0.5s;
   }
   .outer-container-sem {
-    margin-left: 100px;
+    margin-left: 0px;
+    transition: 0.5s;
   }
   .outer-container-content.expanded {
     margin-left: 100px;
+    transition: 0.5s;
+  }
+  .outer-container-content {
+    margin-left: 0px;
+    transition: 0.5s;
   }
   .outer-container-units.expanded {
     margin-left: 100px;
+    transition: 0.5s;
+  }
+  .outer-container-units {
+    margin-left: 0px;
+    transition: 0.5s;
+  }
+  .pagination-container.expanded {
+    margin-left: 200px;
+    transition: 0.5s;
+  }
+  .pagination-container {
+    margin-left: 0px;
+    transition: 0.5s;
   }
   .outer-resource-container.expanded {
     margin-left: 200px;
+    transition: margin-left 0.5s;
+  }
+  .outer-resource-container {
+    margin-left: 0px;
+    transition: margin-left 0.5s;
   }
 }
 .content-year {

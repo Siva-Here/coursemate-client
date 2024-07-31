@@ -11,6 +11,7 @@ import { jwtDecode } from "jwt-decode";
 import { ThemeContext } from "../../ThemeContext";
 import Posts from "../Posts/Posts";
 import { NavbarContext } from "../../NavbarContext";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Placements = ({ docs }) => {
   const { resources } = useContext(ResourceContext);
@@ -29,6 +30,8 @@ const Placements = ({ docs }) => {
   const [view, setView] = useState("brochure");
   const { theme } = useContext(ThemeContext);
   const { isExpanded } = useContext(NavbarContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 4;
 
   useEffect(() => {
     try {
@@ -204,6 +207,13 @@ const Placements = ({ docs }) => {
     }
   };
 
+  const currentPlacements = placement.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(placement.length / ITEMS_PER_PAGE);
+
   return (
     <>
       <ToastContainer />
@@ -254,7 +264,7 @@ const Placements = ({ docs }) => {
                   isExpanded ? "expanded" : ""
                 }`}
               >
-                {placement.map((rsc) => (
+                {currentPlacements.map((rsc) => (
                   <div className={`rsc-img ${theme}`}>
                     <div key={rsc._id} className={`resource-div ${theme}`}>
                       <div className="resource-content">
@@ -289,7 +299,7 @@ const Placements = ({ docs }) => {
                       <br />
                       <div className={`resource-date mt-5 ${theme}`}>
                         <p style={{ fontSize: "1.2em" }}>
-                          Posted at: {formatTimestamp(rsc.uploadedAt)}
+                          Posted at: {getDate(rsc.uploadedAt)}
                         </p>
                       </div>
                     </div>
@@ -307,6 +317,30 @@ const Placements = ({ docs }) => {
                 ></h1>
               </div>
             )}
+            <div
+              className={`pagination-container ${isExpanded ? "expanded" : ""}`}
+            >
+              <button
+                onClick={() =>
+                  setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+                }
+                className="pagination-arrow"
+                disabled={currentPage === 1}
+              >
+                <FaArrowLeft />
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage(
+                    currentPage < totalPages ? currentPage + 1 : totalPages
+                  )
+                }
+                className="pagination-arrow"
+                disabled={currentPage === totalPages}
+              >
+                <FaArrowRight />
+              </button>
+            </div>
             {isAllowed && (
               <div className="add-button-container">
                 <button
@@ -402,3 +436,14 @@ const formatTimestamp = (timestamp) => {
 };
 
 export default Placements;
+
+const getDate = (timestamp) => {
+  const date = new Date(timestamp);
+
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  const formattedDate = `${day} ${month} ${year}`.toUpperCase();
+  return formattedDate;
+};

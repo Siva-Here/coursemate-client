@@ -8,6 +8,7 @@ import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { ThemeContext } from "../../ThemeContext";
 import { NavbarContext } from "../../NavbarContext";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const Post = () => {
   const { resources } = useContext(ResourceContext);
@@ -18,6 +19,8 @@ const Post = () => {
   const { userId } = useContext(IdContext);
   const { theme } = useContext(ThemeContext);
   const { isExpanded } = useContext(NavbarContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 4;
 
   useEffect(() => {
     const sortedResources = resources
@@ -76,6 +79,13 @@ const Post = () => {
     }
   };
 
+  const currentResources = resource.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const totalPages = Math.ceil(resource.length / ITEMS_PER_PAGE);
+
   return (
     <>
       <ToastContainer />
@@ -86,7 +96,7 @@ const Post = () => {
 
         {resource.length !== 0 ? (
           <>
-            {resource.map((rsc) => (
+            {currentResources.map((rsc) => (
               <div className={`rsc-img ${theme}`} key={rsc._id}>
                 <div className={`resource-div ${theme}`}>
                   <div className="resource-content">
@@ -122,12 +132,34 @@ const Post = () => {
                   <br />
                   <div className={`resource-date ${theme}`}>
                     <p style={{ fontSize: "1.2em", margin: "0px" }}>
-                      Posted at: {formatTimestamp(rsc.uploadedAt)}
+                      Posted at: {getDate(rsc.uploadedAt)}
                     </p>
                   </div>
                 </div>
               </div>
             ))}
+            <div className={`pagination-container`}>
+              <button
+                onClick={() =>
+                  setCurrentPage(currentPage > 1 ? currentPage - 1 : 1)
+                }
+                className="pagination-arrow"
+                disabled={currentPage === 1}
+              >
+                <FaArrowLeft />
+              </button>
+              <button
+                onClick={() =>
+                  setCurrentPage(
+                    currentPage < totalPages ? currentPage + 1 : totalPages
+                  )
+                }
+                className="pagination-arrow"
+                disabled={currentPage === totalPages}
+              >
+                <FaArrowRight />
+              </button>
+            </div>
           </>
         ) : (
           <div
@@ -201,18 +233,15 @@ const Post = () => {
   );
 };
 
-const formatTimestamp = (timestamp) => {
-  const d = new Date(timestamp);
-  const date = new Date(d);
-  const formattedDate = date.toLocaleString("en-US", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-  return formattedDate.replace(",", "");
+const getDate = (timestamp) => {
+  const date = new Date(timestamp);
+
+  const day = date.getDate();
+  const month = date.toLocaleString("en-US", { month: "long" });
+  const year = date.getFullYear();
+
+  const formattedDate = `${day} ${month} ${year}`.toUpperCase();
+  return formattedDate;
 };
 
 export default Post;

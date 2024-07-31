@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Resource.css";
-import { Button, Modal, Form } from "react-bootstrap";
+import { Button, Modal, Form, Navbar } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,7 @@ import Sidebar from "../navbar/Sidebar";
 import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 const Resource = ({ parentFolder, view, folderName }) => {
   const { resources } = useContext(ResourceContext);
@@ -19,6 +20,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
   const [folderId, setFolderId] = useState(parentFolder);
   const { userId } = useContext(IdContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   if (!folderName) {
     folderName = location.state.folderName;
@@ -84,7 +86,9 @@ const Resource = ({ parentFolder, view, folderName }) => {
   return (
     <>
       <ToastContainer />
-      <div className="outer-resource-container">
+      <div
+        className={`outer-resource-container ${isExpanded ? "expanded" : ""}`}
+      >
         <div className={`units-img ${theme}`}></div>
         {view !== "units" ? (
           <div style={{ marginTop: "50px" }}>

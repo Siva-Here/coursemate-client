@@ -6,6 +6,7 @@ import { IdContext } from "../../IdContext";
 import Content from "../Content/Content";
 import "./GateUnits.css";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 function GateUnits({ folders, docs }) {
   const location = useLocation();
@@ -17,6 +18,7 @@ function GateUnits({ folders, docs }) {
   const [user, setUser] = useState(false);
   const { userId, setUserId } = useContext(IdContext);
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   if (!user) {
     navigate("/resource", {
@@ -76,35 +78,41 @@ function GateUnits({ folders, docs }) {
           <div style={{ marginTop: "50px", zIndex: 10 }}>
             <div>
               {view == "pyq" && <Sidebar />}
-              <div className="text-center">
-                <h1
-                  className={`display-5 text-center cust-text-${theme}`}
-                  style={{
-                    zIndex: 1000,
-                    marginTop: "15px",
-                  }}
+              <div className={`container-lg`}>
+                <div
+                  className="text-center"
+                  style={
+                    isExpanded ? { marginLeft: "75px", transition: "0.5s" } : {}
+                  }
                 >
-                  {parentFolder.toUpperCase()}
-                </h1>
-                <div className={`btn-group ${theme} text-center`}>
-                  <button
-                    className={`btn ${theme} ${
-                      view === "content" ? "active" : ""
-                    }`}
-                    onClick={() => setView("content")}
-                  >
-                    Content
-                  </button>
-                  <button
-                    className={`btn ${theme} ${
-                      view !== "content" ? "active" : ""
-                    }`}
-                    onClick={() => {
-                      setView("pyq");
+                  <h1
+                    className={`display-5 text-center cust-text-${theme}`}
+                    style={{
+                      zIndex: 1000,
                     }}
                   >
-                    PYQ's
-                  </button>
+                    {parentFolder.toUpperCase()}
+                  </h1>
+                  <div className={`btn-group ${theme} text-center`}>
+                    <button
+                      className={`btn ${theme} ${
+                        view === "content" ? "active" : ""
+                      }`}
+                      onClick={() => setView("content")}
+                    >
+                      Content
+                    </button>
+                    <button
+                      className={`btn ${theme} ${
+                        view !== "content" ? "active" : ""
+                      }`}
+                      onClick={() => {
+                        setView("pyq");
+                      }}
+                    >
+                      PYQ's
+                    </button>
+                  </div>
                 </div>
                 {view === "content" ? (
                   // <div className="w-100">
@@ -130,15 +138,12 @@ function GateUnits({ folders, docs }) {
                     view="gate"
                   />
                 ) : (
-                  // </div>
-                  <div style={{ marginLeft: "-100px" }}>
-                    <Resource
-                      parentFolder={folderId}
-                      uploadedBy={userId}
-                      view={"units"}
-                      folderName={parentFolder}
-                    />
-                  </div>
+                  <Resource
+                    parentFolder={folderId}
+                    uploadedBy={userId}
+                    view={"units"}
+                    folderName={parentFolder}
+                  />
                 )}
               </div>
             </div>
