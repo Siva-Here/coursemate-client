@@ -119,6 +119,7 @@ function Content(props) {
     }
 
     const formData = new FormData();
+    console.log(billFile);
     formData.append("file", billFile);
 
     try {
@@ -132,7 +133,6 @@ function Content(props) {
           },
         }
       );
-
       const { name, fileId, viewLink, downloadLink } = response.data;
       const params = {
         name,

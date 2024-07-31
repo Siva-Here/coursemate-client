@@ -164,6 +164,8 @@ h1 span {
   border: 1px solid rgb(184, 172, 14);
   padding: 5px 10px;
   margin: 0 5px;
+  font-size: 0.8rem;
+  text-wrap: nowrap;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -174,7 +176,7 @@ h1 span {
   border: 1px solid #102c57;
   padding: 5px 10px;
   margin: 0 5px;
-  /* font-size: 0.8rem; */
+  font-size: 0.8rem;
   text-wrap: nowrap;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
