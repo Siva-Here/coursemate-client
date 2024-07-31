@@ -7,6 +7,7 @@ import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 const Contribution = () => {
   const [contributions, setContributions] = useState([]);
@@ -16,6 +17,7 @@ const Contribution = () => {
   const navigate = useNavigate();
   const token = localStorage.getItem("user") || null;
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   const fetchContributions = async () => {
     try {
@@ -89,7 +91,9 @@ const Contribution = () => {
       {isLoggedIn ? (
         <>
           <ToastContainer />
-          <div>
+          <div
+            className={`outer-container-year ${isExpanded ? "expanded" : ""}`}
+          >
             <Sidebar />
             <h1
               className={`display-5 text-center cust-text-${theme}`}
@@ -97,13 +101,13 @@ const Contribution = () => {
             >
               Leaderboard
             </h1>
-            <div className="img-container-leaderboard"></div>
-            <div className="blur-notify"></div>
-            <div className="blur-notify"></div>
-            <div className="blur-notify"></div>
+            <div className={`img-container2 ${theme}`}></div>
             <div className="contributions-container">
               {contributions.map((contribution, index) => (
-                <div key={contribution._id} className="contribution-div">
+                <div
+                  key={contribution._id}
+                  className={`contribution-div ${theme}`}
+                >
                   <img
                     className="medal-image"
                     src={getMedalImage(index)}
@@ -112,10 +116,12 @@ const Contribution = () => {
                     width="40px"
                   />
                   <div className="name-div ms-3 ps-3">
-                    <p className="fw-bold username">{contribution.username}</p>
+                    <p className={`fw-bold username ${theme}`}>
+                      {contribution.username}
+                    </p>
                   </div>
                   <div className="totaluploaded-div ">
-                    <p className="totaluploaded text-white fw-bold">
+                    <p className={`totaluploaded fw-bold ${theme}`}>
                       {contribution.totalUploaded}
                     </p>
                   </div>

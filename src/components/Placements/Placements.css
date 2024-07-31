@@ -12,5 +12,8 @@
   backdrop-filter: blur(35px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.5s;
+}
+.placements-div:hover {
+  transform: scale(1.01);
 }

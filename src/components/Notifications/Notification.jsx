@@ -4,9 +4,13 @@ import "react-toastify/dist/ReactToastify.css";
 import Sidebar from "../navbar/Sidebar";
 import { ResourceContext } from "../../ResourceContext";
 import { AuthContext } from "../../AuthContext";
+import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 const Notification = () => {
   const { resources } = useContext(ResourceContext);
+  const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
   const [Notifications, setNotifications] = useState([
     {
       uploadedBy: "Site is Under Maintanance...",
@@ -65,47 +69,51 @@ const Notification = () => {
   return (
     <>
       {isLoggedIn ? (
-        <div>
+        <>
+          <div className={`img-container2 ${theme}`}></div>
           <Sidebar />
-          <h1
-            className="display-3 text-center text-white blinking-text-notify"
-            style={{ zIndex: 100, marginTop: "80px" }}
+          <div
+            className={`outer-container-sem ${isExpanded ? "expanded" : ""}`}
           >
-            Notifications
-          </h1>
-          <div className="blur-notify"></div>
-          {Notifications.map((Notification) => (
-            <div key={Notification.name} className="Notification-div">
-              <div className="Notification-content">
-                <p className="Notification-user">
-                  Uploaded by: {Notification.uploadedBy}
-                </p>
-                <p className="text-uppercase fw-bold fst-italic font-italic">
-                  {" "}
-                  {Notification.name}
-                </p>
-                <p>{Notification.description}</p>
-                <p>
-                  Link:{""}
-                  <a
-                    href={Notification.rscLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: "red" }}
-                  >
-                    {Notification.rscLink}
-                  </a>
-                </p>
+            <h1
+              className={`display-5 text-center cust-text-${theme}`}
+              style={{ zIndex: 1000, margin: "25px", maxWidth: "799px" }}
+            >
+              Notifications
+            </h1>
+            {Notifications.map((Notification) => (
+              <div key={Notification.name} className="Notification-div">
+                <div className="Notification-content">
+                  <p className="Notification-user">
+                    Uploaded by: {Notification.uploadedBy}
+                  </p>
+                  <p className="text-uppercase fw-bold fst-italic font-italic">
+                    {" "}
+                    {Notification.name}
+                  </p>
+                  <p>{Notification.description}</p>
+                  <p>
+                    Link:{""}
+                    <a
+                      href={Notification.rscLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ color: "red" }}
+                    >
+                      {Notification.rscLink}
+                    </a>
+                  </p>
+                </div>
+                <br />
+                <div className="Notification-date">
+                  <p style={{ fontSize: "1.2em" }}>
+                    Posted at: {formatTimestamp(Notification.uploadedAt)}
+                  </p>
+                </div>
               </div>
-              <br />
-              <div className="Notification-date">
-                <p style={{ fontSize: "1.2em" }}>
-                  Posted at: {formatTimestamp(Notification.uploadedAt)}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       ) : (
         <p className="display-1 text-white"></p>
       )}
