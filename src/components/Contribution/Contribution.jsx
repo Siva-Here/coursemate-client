@@ -102,6 +102,7 @@ const Contribution = () => {
               Leaderboard
             </h1>
             <div className={`img-container2 ${theme}`}></div>
+            {theme == "dark" && <div className="blur1"></div>}
             <div className="contributions-container">
               {contributions.map((contribution, index) => (
                 <div

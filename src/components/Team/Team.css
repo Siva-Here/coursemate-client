@@ -12,7 +12,22 @@
   font-size: 30px;
   animation: blinkTeam 0.5s linear infinite;
 }
-
+.img-container-team {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.img-container-team.light {
+  background: linear-gradient(86deg, #e7f3ff 1.71%, #fff8df 99.56%);
+}
+.img-container-team.dark {
+  background: url("../../../public/bing/sem4.jpg") no-repeat center
+    center/contain;
+  background-attachment: fixed;
+}
 .home-container {
   width: 100vw;
   height: 100vh;
@@ -27,15 +42,26 @@
   height: 320px;
   padding: 30px;
   border-radius: 50%;
-  box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
   transition: all 0.4s;
   margin: 0 0px;
+  transform: scale(0.8);
+}
+.profile-card.light {
+  background: rgb(218, 216, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(218, 216, 255, 1) 0%,
+    rgba(181, 203, 250, 1) 10%,
+    rgba(211, 176, 246, 1) 100%
+  );
+}
+.profile-card.dark {
   background: rgba(0, 0, 0, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 255, 255, 0.774);
-  transform: scale(0.8);
+  border: 0.25px solid rgba(255, 255, 255, 0.574);
+  box-shadow: -5px 8px 45px rgba(51, 51, 51, 0.126);
 }
 
 .profile-card:hover {

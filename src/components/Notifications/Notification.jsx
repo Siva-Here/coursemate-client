@@ -20,9 +20,6 @@ const Notification = () => {
       rscLink: "",
     },
   ]);
-
-  const [loading, setLoading] = useState(true);
-  const [isSlow, setIsSlow] = useState(false);
   const { isLoggedIn } = useContext(AuthContext);
 
   const fetchNotifications = () => {
@@ -38,80 +35,69 @@ const Notification = () => {
     const sortedNotifications = data.sort((a, b) =>
       b.uploadedAt.localeCompare(a.uploadedAt)
     );
-    setLoading(false);
     setNotifications(sortedNotifications);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsSlow(true);
-    }, 2000);
     fetchNotifications();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner-notification"></div>
-        <p className="lead text-white m-3 loading">
-          Site is Under Maintanance...
-        </p>
-        {isSlow ? (
-          <p className="text-white m-3 loading">
-            Server is Busy! Please wait...
-          </p>
-        ) : (
-          <p></p>
-        )}
-      </div>
-    );
-  }
   return (
     <>
       {isLoggedIn ? (
         <>
+          <div style={{ marginTop: "50px" }}></div>
           <div className={`img-container2 ${theme}`}></div>
-          <Sidebar />
-          <div
-            className={`outer-container-sem ${isExpanded ? "expanded" : ""}`}
-          >
-            <h1
-              className={`display-5 text-center cust-text-${theme}`}
-              style={{ zIndex: 1000, margin: "25px", maxWidth: "799px" }}
+          <div>
+            <Sidebar />
+            <div
+              className={`outer-container-year justify-content-center ${
+                isExpanded ? "expanded" : ""
+              }`}
             >
-              Notifications
-            </h1>
-            {Notifications.map((Notification) => (
-              <div key={Notification.name} className="Notification-div">
-                <div className="Notification-content">
-                  <p className="Notification-user">
-                    Uploaded by: {Notification.uploadedBy}
-                  </p>
-                  <p className="text-uppercase fw-bold fst-italic font-italic">
-                    {" "}
-                    {Notification.name}
-                  </p>
-                  <p>{Notification.description}</p>
-                  <p>
-                    Link:{""}
-                    <a
-                      href={Notification.rscLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{ color: "red" }}
-                    >
-                      {Notification.rscLink}
-                    </a>
-                  </p>
-                </div>
-                <br />
-                <div className="Notification-date">
-                  <p style={{ fontSize: "1.2em" }}>
-                    Posted at: {formatTimestamp(Notification.uploadedAt)}
-                  </p>
-                </div>
+              <h1
+                className={`display-5 text-center cust-text-${theme}`}
+                style={{ zIndex: 1000, marginTop: "15px" }}
+              >
+                Notifications
+              </h1>
+              <div className="mt-5">
+                {Notifications.map((Notification) => (
+                  <div
+                    key={Notification.name}
+                    className={`Notification-div ms-auto me-auto ${theme}`}
+                  >
+                    <div className="Notification-content">
+                      <p className="Notification-user">
+                        Posted by: {Notification.uploadedBy}
+                      </p>
+                      <p className="text-uppercase fw-bold fst-italic font-italic">
+                        {" "}
+                        {Notification.name}
+                      </p>
+                      <p>{Notification.description}</p>
+                      <p>
+                        Link: {""}
+                        <a
+                          href={Notification.rscLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{ color: "red" }}
+                        >
+                          {Notification.rscLink}
+                        </a>
+                      </p>
+                    </div>
+                    <br />
+                    <div className={`Notification-date ${theme}`}>
+                      <p style={{ fontSize: "1.2em" }}>
+                        Posted at: {formatTimestamp(Notification.uploadedAt)}
+                      </p>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </>
       ) : (

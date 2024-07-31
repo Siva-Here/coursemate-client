@@ -4,11 +4,13 @@ import Sidebar from "../navbar/Sidebar";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthContext";
 import { ThemeContext } from "../../ThemeContext";
+import { NavbarContext } from "../../NavbarContext";
 
 const Team = () => {
   const { isLoggedIn } = useContext(AuthContext);
   const navigate = useNavigate();
   const { theme } = useContext(ThemeContext);
+  const { isExpanded } = useContext(NavbarContext);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -18,18 +20,31 @@ const Team = () => {
   return (
     <>
       {isLoggedIn ? (
-        <div className="container-fluid">
+        <div className="container">
           <h1
-            className={`display-5 text-center cust-text-${theme}`}
-            style={{ zIndex: 1000, margin: "100px 0px" }}
+            className={`display-5 text-center cust-text-${theme} ${
+              isExpanded ? "expanded" : ""
+            }`}
+            style={{ zIndex: 1000, marginTop: "55px" }}
           >
             Web Team
           </h1>
           <div style={{ marginTop: "50px" }}>
-            <div className="img-container-sem"></div>
+            <div className={`img-container-team ${theme}`}></div>
+            {theme == "dark" && (
+              <>
+                <div className="blur1"></div>
+                <div className="blur1"></div>
+              </>
+            )}
             <Sidebar />
-            <div className="home-container d-flex row justify-content-evenly">
-              <div className="profile-card col-12 col-md-6 order-2 shrink">
+            <div
+              className="outer-container-gate d-flex row justify-content-evenly"
+              // style={{ maxWidth: "80vw" }}
+            >
+              <div
+                className={`profile-card col-12 col-md-6 mx-5 order-2 shrink ${theme}`}
+              >
                 <div className="img">
                   <img
                     className="person"
@@ -80,7 +95,9 @@ const Team = () => {
                   </div>
                 </div>
               </div>
-              <div className="profile-card col-12 col-md-6 order-1 shrink">
+              <div
+                className={`profile-card col-12 col-md-6 mx-5 order-1 shrink ${theme}`}
+              >
                 <div className="img">
                   <img
                     className="person"
