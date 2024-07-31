@@ -205,35 +205,31 @@ function Admin(props) {
       {isLoggedIn ? (
         <div>
           <ToastContainer />
-          <div className="blur1"></div>
           <div style={{ marginTop: "50px" }}>
-            <div className="admin-img"></div>
-            <div>
+            <div className={`img-container2 ${theme}`}></div>
+            <div className="text-center">
               <Sidebar />
-              <div className="outer-container-admin">
+              <div className="outer-container-year">
                 <h1
                   className={`display-5 text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, margin: "20px 0px" }}
                 >
                   Recently Uploaded
                 </h1>
-                <div className="btn-group text-center w-75 justify-content-center ms-5">
+                <div className={`btn-group ${theme} text-center`}>
                   <button
                     className={`btn ${theme} ${
-                      view !== "docs" ? "active" : ""
+                      view === "docs" ? "active" : ""
                     }`}
                     onClick={() => setView("docs")}
                   >
                     Documents
                   </button>
                   <button
-                    className={`btn ${
-                      view === "resource" ? "active" : ""
-                    } ${theme}`}
+                    className={`btn ${theme} ${
+                      view !== "docs" ? "active" : ""
+                    }`}
                     onClick={() => {
-                      // navigate("/resource", {
-                      //   state: { parentFolder: folderId, uploadedBy: userId },
-                      // })
                       setView("resource");
                     }}
                   >
@@ -313,11 +309,9 @@ function Admin(props) {
                     <div>
                       {view !== "docs" ? (
                         <div style={{ marginTop: "50px" }}>
-                          <Sidebar />
-                          <div className={`units-img ${theme}`}></div>
+                          <div className={`img-container2 ${theme}`}></div>
                         </div>
                       ) : null}
-                      <div className="blur1"></div>
                       {resource.map((resource) => (
                         <div key={resource._id} className="resource-div">
                           <div className="resource-content">

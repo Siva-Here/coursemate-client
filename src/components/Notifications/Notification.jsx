@@ -67,6 +67,10 @@ const Notification = () => {
                     key={Notification.name}
                     className={`Notification-div ms-auto me-auto ${theme}`}
                   >
+                    <span className="top"></span>
+                    <span className="left"></span>
+                    <span className="right"></span>
+                    <span className="bottom"></span>
                     <div className="Notification-content">
                       <p className="Notification-user">
                         Posted by: {Notification.uploadedBy}
@@ -82,7 +86,7 @@ const Notification = () => {
                           href={Notification.rscLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          style={{ color: "red" }}
+                          style={{ color: "blue" }}
                         >
                           {Notification.rscLink}
                         </a>

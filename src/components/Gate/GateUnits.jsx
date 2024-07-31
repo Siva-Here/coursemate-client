@@ -75,15 +75,14 @@ function GateUnits({ folders, docs }) {
     <div>
       {user ? (
         <>
-          <div style={{ marginTop: "50px", zIndex: 10 }}>
+          <div style={{ marginTop: "70px", zIndex: 10 }}>
             <div>
               {view == "pyq" && <Sidebar />}
-              <div className={`container-lg`}>
+              <div>
                 <div
-                  className="text-center"
-                  style={
-                    isExpanded ? { marginLeft: "75px", transition: "0.5s" } : {}
-                  }
+                  className={`outer-container-year text-center ${
+                    isExpanded ? "expanded" : ""
+                  }`}
                 >
                   <h1
                     className={`display-5 text-center cust-text-${theme}`}

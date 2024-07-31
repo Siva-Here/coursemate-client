@@ -250,8 +250,8 @@ a {
 .sort-select {
   padding: 3px 10px;
   background: transparent;
-  border-bottom: 1px solid #007bff;
-  border-top: 1px solid #007bff;
+  border: 1px solid #007bff;
+  /* border-top: 1px solid #007bff; */
   border-radius: 5px;
   width: 100%;
   max-width: 400px;
@@ -287,8 +287,8 @@ option {
   border: none;
   font-size: 1rem;
   /* box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); */
-  border-bottom: 1px solid #007bff;
-  border-top: 1px solid #007bff;
+  /* border-bottom: 1px solid #007bff; */
+  border: 1px solid #007bff;
   -webkit-appearance: button;
   appearance: button;
   outline: none;

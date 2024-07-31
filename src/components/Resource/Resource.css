@@ -8,6 +8,11 @@
   position: relative;
   transition: 0.3s;
 }
+/* @media (max-width: 499px) {
+  .resource-div {
+    width: 100%;
+  }
+} */
 .resource-div.dark {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -29,12 +34,13 @@
   to {
     background: url("../../../public/bing/colors.jpg");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
   }
 }
 .rsc-img.light {
+  width: auto;
   transition: background-image 0.5s ease-in-out;
   animation: showBackground 0.25s ease-in-out 1s forwards;
 }

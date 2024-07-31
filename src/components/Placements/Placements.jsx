@@ -218,7 +218,7 @@ const Placements = ({ docs }) => {
   return (
     <>
       <ToastContainer />
-      <div>
+      <div className="d-flex flex-column justify-content-center align-items-center">
         <div className="blur1"></div>
         <div className="blur1"></div>
         <div className={`units-img ${theme}`}></div>

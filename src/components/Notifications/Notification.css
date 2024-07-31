@@ -18,6 +18,148 @@
 .blinking-text-notify {
   animation: blink-notify 1.5s linear infinite;
 } */
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+span {
+  position: absolute;
+  border-radius: 100vmax;
+}
+
+.top {
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 50%,
+    rgba(255, 49, 49, 0.5),
+    rgb(255, 49, 49)
+  );
+}
+
+.bottom {
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 50%,
+    rgba(255, 49, 49, 0.5),
+    rgb(255, 49, 49)
+  );
+}
+
+.right {
+  top: 0;
+  right: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 50%,
+    rgba(255, 49, 49, 0.5),
+    rgb(255, 49, 49)
+  );
+}
+
+.left {
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  height: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 50%,
+    rgba(255, 49, 49, 0.5),
+    rgb(255, 49, 49)
+  );
+}
+
+.top {
+  animation: animateTop 1.5s ease-in-out infinite;
+}
+
+.bottom {
+  animation: animateBottom 1.5s ease-in-out infinite;
+}
+
+.right {
+  animation: animateRight 1.5s ease-in-out infinite;
+}
+
+.left {
+  animation: animateLeft 1.5s ease-in-out infinite;
+}
+
+@keyframes animateTop {
+  25% {
+    width: 100%;
+    opacity: 1;
+  }
+
+  30%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animateBottom {
+  0%,
+  50% {
+    opacity: 0;
+    width: 0;
+  }
+
+  75% {
+    opacity: 1;
+    width: 100%;
+  }
+
+  76%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes animateRight {
+  0%,
+  25% {
+    opacity: 0;
+    height: 0;
+  }
+
+  50% {
+    opacity: 1;
+    height: 100%;
+  }
+
+  55%,
+  100% {
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes animateLeft {
+  0%,
+  75% {
+    opacity: 0;
+    bottom: 0;
+    height: 0;
+  }
+
+  100% {
+    opacity: 1;
+    height: 100%;
+  }
+}
 
 .blinking-text-notify {
   animation: blink-notify 1.5s linear infinite;
@@ -51,6 +193,7 @@
   left: 0;
   z-index: -1;
 }
+
 .Notification-div {
   padding: 10px;
   max-width: 799px;
@@ -65,10 +208,9 @@
   background: rgba(0, 0, 55, 0.25);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(255, 0, 0, 0.2);
 }
 .Notification-div.light {
-  background-color: #fce9da;
+  /* background-color: #fce9da; */
   color: black;
 }
 .Notification-content {
