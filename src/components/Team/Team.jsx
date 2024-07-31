@@ -25,7 +25,7 @@ const Team = () => {
             className={`display-5 text-center cust-text-${theme} ${
               isExpanded ? "expanded" : ""
             }`}
-            style={{ zIndex: 1000, marginTop: "55px" }}
+            style={{ zIndex: 1000, marginTop: "75px" }}
           >
             Web Team
           </h1>
@@ -51,6 +51,7 @@ const Team = () => {
                     src="/favicons/charan3.png"
                     alt="Profile"
                     width="180px"
+                    style={{ marginTop: "50px" }}
                   />
                 </div>
                 <div className="caption mb-5">

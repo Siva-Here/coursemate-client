@@ -14,19 +14,8 @@ const Toggle = () => {
     }
   }, [theme]);
 
-  const toggleTheme = () => {
-    let theme1 = localStorage.getItem("theme");
-    if (theme1 == "light") {
-      theme1 = "dark";
-    } else {
-      theme1 = "light";
-    }
-    setTheme(theme1);
-    localStorage.setItem("theme", theme);
-  };
-
   return (
-    <div className="toggle-button" onClick={toggleTheme}>
+    <div className="toggle-button">
       <svg display="none">
         <symbol id="light" viewBox="0 0 24 24">
           <g stroke="currentColor" strokeWidth="2" strokeLinecap="round">

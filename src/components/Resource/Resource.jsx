@@ -197,7 +197,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
                 <Form.Label>Link</Form.Label>
                 <Form.Control type="text" placeholder="Enter link" />
               </Form.Group>
-              <Button variant="outline-warning" type="submit">
+              <Button variant="outline-primary" type="submit">
                 Submit
               </Button>
             </Form>

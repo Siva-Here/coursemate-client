@@ -55,7 +55,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  const { theme } = useContext(ThemeContext);
+  const { theme, setTheme } = useContext(ThemeContext);
   const { isExpanded } = useContext(NavbarContext);
 
   const handleClose = () => setShow(false);
@@ -151,13 +151,26 @@ function App() {
     });
   });
 
+  const toggleTheme = () => {
+    let theme1 = localStorage.getItem("theme");
+    if (theme1 == "light") {
+      theme1 = "dark";
+    } else {
+      theme1 = "light";
+    }
+    setTheme(theme1);
+    localStorage.setItem("theme", theme);
+  };
+
   return (
     <div className="App">
       <ToastContainer />
       {/* <Options docs={docs} folders={folders}/> */}
       {docs.length != 0 && (
         <>
-          <Toggle />
+          <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
+            <Toggle />
+          </div>
           <Search docs={docs} folders={folders} />
           <button
             className={`${theme} stunning-btn show-${isExpanded}`}

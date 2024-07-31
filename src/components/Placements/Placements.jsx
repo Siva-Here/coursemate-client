@@ -12,6 +12,7 @@ import { ThemeContext } from "../../ThemeContext";
 import Posts from "../Posts/Posts";
 import { NavbarContext } from "../../NavbarContext";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import Resource from "../Resource/Resource";
 
 const Placements = ({ docs }) => {
   const { resources } = useContext(ResourceContext);
@@ -244,14 +245,20 @@ const Placements = ({ docs }) => {
                 Brochures
               </button>
               <button
-                className={`btn ${theme} ${
-                  view !== "brochure" ? "active" : ""
-                }`}
+                className={`btn ${theme} ${view == "posts" ? "active" : ""}`}
                 onClick={() => {
                   setView("posts");
                 }}
               >
                 Posts
+              </button>
+              <button
+                className={`btn ${theme} ${view == "job" ? "active" : ""}`}
+                onClick={() => {
+                  setView("job");
+                }}
+              >
+                Job Updates
               </button>
             </div>
           </div>
@@ -354,7 +361,18 @@ const Placements = ({ docs }) => {
           </>
         ) : (
           <>
-            <Posts />
+            {view == "posts" ? (
+              <Posts />
+            ) : (
+              <>
+                <Resource
+                  parentFolder={process.env.REACT_APP_JOB_FOLDER}
+                  uploadedBy={userId}
+                  view={"units"}
+                  folderName={parentFolder}
+                />
+              </>
+            )}
           </>
         )}
 
@@ -407,7 +425,7 @@ const Placements = ({ docs }) => {
                 </div>
               </Form.Group>
               <Button
-                variant="outline-warning"
+                variant="outline-primary"
                 type="submit"
                 disabled={disable}
               >

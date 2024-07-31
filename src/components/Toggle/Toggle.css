@@ -39,7 +39,7 @@ body:has(.switch__input:checked) {
 }
 .switch__icon {
   color: hsla(var(--hue), 10%, 80%);
-  pointer-events: none;
+  /* pointer-events: none; */
   position: absolute;
   top: 0.375em;
   left: 0.375em;
@@ -62,6 +62,7 @@ body:has(.switch__input:checked) {
   left: 0.35em;
   width: 2.3em;
   height: 1em;
+  cursor: pointer;
 }
 .switch__inner:before,
 .switch__inner-icons {
@@ -77,7 +78,7 @@ body:has(.switch__input:checked) {
   height: 100%;
 }
 .switch__inner-icons {
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 .switch__inner-icons .switch__icon {
   color: hsl(0, 0%, 100%);
