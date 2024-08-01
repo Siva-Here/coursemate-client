@@ -252,7 +252,7 @@ function Admin(props) {
                 </div>
                 {view == "docs" ? (
                   <div className="admin-admin text-center w-50 container-fluid d-flex flex-column align-items-center justify-admin-center">
-                    <div className="blur1"></div>
+                    {theme == "dark" && <div className="blur1"></div>}
                     {delayedDocs.map((doc) => (
                       <div key={doc._id}>
                         <div className="d-flex flex-column mt-3">
@@ -333,7 +333,7 @@ function Admin(props) {
                   </div>
                 ) : (
                   <>
-                    <div className="blur1"></div>
+                    {theme == "dark" && <div className="blur1"></div>}
                     <ToastContainer />
                     <div>
                       {view !== "docs" ? (
