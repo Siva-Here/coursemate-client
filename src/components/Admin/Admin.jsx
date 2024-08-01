@@ -13,7 +13,6 @@ function Admin(props) {
   const [resource, setResource] = useState([]);
   const { isLoggedIn } = useContext(AuthContext);
   const [delayedDocs, setDelayedDocs] = useState([]);
-  const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("user") || null;
   const [view, setView] = useState("docs");
   const { theme } = useContext(ThemeContext);
@@ -28,7 +27,7 @@ function Admin(props) {
         b.uploadedAt.localeCompare(a.uploadedAt)
       );
       sortedResources = sortedResources.filter((rsc) => {
-        return !rsc.isAccepted && !rsc.isPlacement;
+        return !rsc.isAccepted;
       });
       setResource(sortedResources);
     };
@@ -45,7 +44,6 @@ function Admin(props) {
           doc.parentFolder != process.env.REACT_APP_PLACEMENTS_FOLDER
         );
       });
-      setLoading(false);
       setDelayedDocs([]);
       rootDocs.forEach((doc, index) => {
         setTimeout(() => {
@@ -69,17 +67,6 @@ function Admin(props) {
       return "/favicons/default.png";
     }
   };
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p className="lead text-white m-3 loading">
-          Site is Under Maintanance...
-        </p>
-      </div>
-    );
-  }
 
   async function handleAccept(docId) {
     try {
@@ -201,10 +188,29 @@ function Admin(props) {
   }
 
   function getFolderName(folderId) {
-    console.log(props.folders);
     const folder = props.folders.find((f) => {
       return f._id == folderId;
     });
+    return folder.name;
+  }
+
+  function getDocFolderName(folderId) {
+    const folder = props.folders.find((f) => {
+      return f._id == folderId;
+    });
+
+    if (!folder) {
+      return "";
+    }
+
+    const subFolder = props.folders.find((f) => {
+      return f._id == folder.parentFolder;
+    });
+
+    if (subFolder) {
+      return `${folder.name} (${subFolder.name})`;
+    }
+    console.log(folder);
     return folder.name;
   }
 
@@ -246,14 +252,25 @@ function Admin(props) {
                 </div>
                 {view == "docs" ? (
                   <div className="admin-admin text-center w-50 container-fluid d-flex flex-column align-items-center justify-admin-center">
+                    <div className="blur1"></div>
                     {delayedDocs.map((doc) => (
                       <div key={doc._id}>
                         <div className="d-flex flex-column mt-3">
-                          <h1 className="lead text-center text-white fw-bold m-0">
-                            {doc.uploadedBy} upload into{" "}
-                            {getFolderName(doc.parentFolder)}
-                          </h1>
-                          <div className="admin-div d-flex fw-bold text-white lead py-4 justify-admin-between">
+                          <h2
+                            className={`lead text-center text-white fw-bold m-0 ${theme}`}
+                          >
+                            {doc.uploadedBy} uploaded into{" "}
+                            {getDocFolderName(doc.parentFolder)}
+                          </h2>
+
+                          <div
+                            className="content-div d-flex fw-bold text-white lead py-4 justify-admin-between"
+                            style={{
+                              height: "50px",
+                              textWrap: "nowrap",
+                              borderRadius: "5px",
+                            }}
+                          >
                             <div className="img-div text-start ms-4 align-items-end">
                               <img
                                 className="text-start"
@@ -263,7 +280,7 @@ function Admin(props) {
                               />
                             </div>
                             <div
-                              className="text-div text-start align-items-start"
+                              className={`text-div text-start align-items-start mt-2 ${theme}`}
                               onClick={() => {
                                 window.location.href = `${doc.viewLink}`;
                               }}
@@ -316,6 +333,7 @@ function Admin(props) {
                   </div>
                 ) : (
                   <>
+                    <div className="blur1"></div>
                     <ToastContainer />
                     <div>
                       {view !== "docs" ? (

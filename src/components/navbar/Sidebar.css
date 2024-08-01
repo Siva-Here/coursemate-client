@@ -22,10 +22,10 @@ li {
   list-style: none;
 }
 
-h1 {
+/* h1 {
   font-weight: 600;
   font-size: 1.5rem;
-}
+} */
 
 body {
   font-family: "Poppins", sans-serif;
@@ -170,7 +170,6 @@ a.sidebar-link {
 
 a.sidebar-link:hover {
   background-color: rgba(255, 255, 255, 0.075);
-  border-left: 3px solid #0e2238;
 }
 
 .sidebar-item {
@@ -229,7 +228,11 @@ a.sidebar-link:hover {
   top: 5px;
 }
 
-.selected {
+.selected.light {
   border-left: 3px solid rgb(14, 34, 56);
   background-color: rgba(14, 34, 56, 0.3);
+}
+.selected.dark {
+  border-left: 3px solid rgb(60, 82, 105);
+  background-color: rgba(60, 82, 105, 0.3);
 }

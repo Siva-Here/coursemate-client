@@ -53,7 +53,7 @@ const Post = () => {
       description: event.target.formDescription.value,
       posts: questions.filter((question) => question.trim() !== ""),
       uploadedBy: userId,
-      parentFolder: process.env.REACT_APP_PLACEMENTS_FOLDER,
+      parentFolder: process.env.REACT_APP_POSTS_FOLDER,
       rscLink: "post",
     };
     console.log(formData);
@@ -216,13 +216,13 @@ const Post = () => {
                   />
                 ))}
                 <Button
-                  variant="btn btn-warning ms-auto"
+                  variant="outline-warning ms-auto"
                   onClick={handleAddQuestion}
                 >
                   Add
                 </Button>
               </Form.Group>
-              <Button variant="outline-primary" type="submit">
+              <Button variant="btn btn-primary" type="submit">
                 Submit
               </Button>
             </Form>

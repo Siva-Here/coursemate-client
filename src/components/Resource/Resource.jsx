@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./Resource.css";
-import { Button, Modal, Form, Navbar } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +10,7 @@ import { IdContext } from "../../IdContext";
 import { ResourceContext } from "../../ResourceContext";
 import { ThemeContext } from "../../ThemeContext";
 import { NavbarContext } from "../../NavbarContext";
+import { jwtDecode } from "jwt-decode";
 
 const Resource = ({ parentFolder, view, folderName }) => {
   const { resources } = useContext(ResourceContext);
@@ -21,11 +22,17 @@ const Resource = ({ parentFolder, view, folderName }) => {
   const { userId } = useContext(IdContext);
   const { theme } = useContext(ThemeContext);
   const { isExpanded } = useContext(NavbarContext);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   if (!folderName) {
     folderName = location.state.folderName;
   }
 
+  const user = jwtDecode(localStorage.getItem("user"));
+  const email = user.email;
+  if (process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
+    setIsAdmin(true);
+  }
   useEffect(() => {
     if (view !== "units") {
       setFolderId(location.state.parentFolder || parentFolder);
@@ -37,10 +44,8 @@ const Resource = ({ parentFolder, view, folderName }) => {
     const sortedResources = resources
       .filter((rsc) => {
         return (
-          !rsc.byAdmin &&
-          rsc.isAccepted &&
-          rsc.parentFolder === folderId &&
-          !rsc.isPlacement
+          (!rsc.byAdmin && rsc.isAccepted && rsc.parentFolder === folderId) ||
+          rsc.isJobUpdate
         );
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
@@ -165,12 +170,13 @@ const Resource = ({ parentFolder, view, folderName }) => {
             </h1>
           </div>
         )}
-
-        <div className="add-button-container">
-          <button className={`add-button ${theme}`} onClick={handleModalShow}>
-            +
-          </button>
-        </div>
+        {(folderId != process.env.REACT_APP_JOB_FOLDER || isAdmin) && (
+          <div className="add-button-container">
+            <button className={`add-button ${theme}`} onClick={handleModalShow}>
+              +
+            </button>
+          </div>
+        )}
 
         <Modal show={showModal} onHide={handleModalClose} className="modal">
           <Modal.Header closeButton>
@@ -197,7 +203,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
                 <Form.Label>Link</Form.Label>
                 <Form.Control type="text" placeholder="Enter link" />
               </Form.Group>
-              <Button variant="outline-primary" type="submit">
+              <Button variant="btn btn-primary" type="submit">
                 Submit
               </Button>
             </Form>

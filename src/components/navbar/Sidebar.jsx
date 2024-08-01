@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { BiSolidCategory } from "react-icons/bi";
 import { TbLogout2 } from "react-icons/tb";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 import { jwtDecode } from "jwt-decode";
 import { AuthContext } from "../../AuthContext";
@@ -18,6 +18,20 @@ function Sidebar() {
   const { setIsLoggedIn } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const { selected, setSelected } = useContext(NavContext);
+  const location = useLocation();
+
+  const routeToItemMap = {
+    "/home": "Home",
+    "/year": "Year",
+    "/placements": "Placements",
+    "/gate": "Gate",
+    "/domains": "Domains",
+    "/placements": "Placements",
+    "/contribution": "Contributions",
+    "/notifications": "Notifications",
+    "/team": "Web Team",
+    "/admin": "Admin Page",
+  };
 
   useEffect(() => {
     try {
@@ -56,7 +70,7 @@ function Sidebar() {
     localStorage.removeItem("user");
     localStorage.removeItem("userId");
     localStorage.removeItem("username");
-    setIsLoggedIn(false);
+    window.location.reload();
     // playClickSound();
   }
 
@@ -65,9 +79,12 @@ function Sidebar() {
     // playClickSound();
   };
 
-  const handleNavLinkClick = (page) => {
-    setSelected(page);
-  };
+  useEffect(() => {
+    const selectedItem = routeToItemMap[location.pathname];
+    if (selectedItem) {
+      setSelected(selectedItem);
+    }
+  }, [location.pathname]);
 
   return (
     <div className={`wrapper ${isExpanded ? "expand" : ""}`}>
@@ -102,9 +119,11 @@ function Sidebar() {
         >
           <li
             className={`sidebar-item text-start ms-2 ${
-              selected === "Home" ? "selected" : ""
+              selected === "Home" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Home")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/home" className="sidebar-link">
               <img src="/favicons/home.png" height={"32px"} alt="" />
@@ -113,9 +132,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-2 text-start ms-2 ${
-              selected === "Year" ? "selected" : ""
+              selected === "Year" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Year")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/year" className="sidebar-link">
               <img src="/favicons/book.png" height={"32px"} alt="" />
@@ -124,9 +145,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-2 text-start ms-2 ${
-              selected === "Domains" ? "selected" : ""
+              selected === "Domains" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Domains")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/domains" className="sidebar-link">
               <img src="/favicons/computer.png" height={"32px"} alt="" />
@@ -135,9 +158,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-1 text-start ms-2 ${
-              selected === "Gate" ? "selected" : ""
+              selected === "Gate" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Gate")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/gate" className="sidebar-link">
               <img src="/favicons/gate.png" height={"32px"} alt="" />
@@ -146,9 +171,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-1 text-start ms-2 ${
-              selected === "Placements" ? "selected" : ""
+              selected === "Placements" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Placements")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/placements" className="sidebar-link">
               <img src="/favicons/job.png" height={"32px"} alt="" />
@@ -157,9 +184,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-2 text-start ms-2 ${
-              selected === "Contributions" ? "selected" : ""
+              selected === "Contributions" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Contributions")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/contribution" className="sidebar-link">
               <img src="/favicons/star1.png" height={"32px"} alt="" />
@@ -168,9 +197,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-1 text-start ms-2 ${
-              selected === "Notifications" ? "selected" : ""
+              selected === "Notifications" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Notifications")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/notifications" className="sidebar-link">
               <div style={{ display: "inline" }}>
@@ -182,9 +213,11 @@ function Sidebar() {
           </li>
           <li
             className={`sidebar-item mt-1 text-start ms-2 ${
-              selected === "Web Team" ? "selected" : ""
+              selected === "Web Team" ? `selected ${theme}` : ""
             }`}
-            onClick={() => handleNavLinkClick("Web Team")}
+            onClick={() => {
+              setIsExpanded(false || window.innerWidth >= 768);
+            }}
           >
             <NavLink to="/team" className="sidebar-link">
               <img src="/favicons/coding.png" height={"32px"} alt="" />
@@ -194,9 +227,11 @@ function Sidebar() {
           {isAdmin ? (
             <li
               className={`sidebar-item mt-2 text-start ms-2 ${
-                selected === "Admin Page" ? "selected" : ""
+                selected === "Admin Page" ? `selected ${theme}` : ""
               }`}
-              onClick={() => handleNavLinkClick("Admin Page")}
+              onClick={() => {
+                setIsExpanded(false || window.innerWidth >= 768);
+              }}
             >
               <NavLink to="/admin" className="sidebar-link">
                 <img src="/favicons/admin.png" height={"32px"} alt="" />

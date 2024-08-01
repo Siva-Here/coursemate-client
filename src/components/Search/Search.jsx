@@ -25,7 +25,6 @@ const Search = ({
           doc.name.toLowerCase().includes(searchQuery.toLowerCase())
         )
         .slice(0, 5);
-      console.log(filtered);
       setFilteredDocs(filtered);
     } else {
       setFilteredDocs([]);

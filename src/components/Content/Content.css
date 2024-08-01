@@ -8,10 +8,10 @@
   font-family: "Julius Sans One", sans-serif;
 } */
 
-h1 {
+/* h1 {
   font-size: 88px;
   text-align: center;
-}
+} */
 
 .blinking-text {
   animation: blink 1.5s linear infinite;

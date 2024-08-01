@@ -50,7 +50,9 @@ const Placements = ({ docs }) => {
 
     const sortedPlacements = resources
       .filter((rsc) => {
-        return rsc.isPlacement && rsc.isAccepted && !rsc.isPost;
+        return (
+          rsc.isPlacement && rsc.isAccepted && !rsc.isPost && !rsc.isJobUpdate
+        );
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
 
@@ -142,9 +144,7 @@ const Placements = ({ docs }) => {
           setIsFileSet(true);
           setBillFile(null);
           setRscLink(viewLink);
-          toast.success(
-            "File saved successfully! Wait until admin accepts it!"
-          );
+          toast.success("Document saved! Please Submit");
           setDisable(false);
         })
         .catch((error) => {
@@ -369,7 +369,7 @@ const Placements = ({ docs }) => {
                   parentFolder={process.env.REACT_APP_JOB_FOLDER}
                   uploadedBy={userId}
                   view={"units"}
-                  folderName={parentFolder}
+                  folderName={"Job Updates"}
                 />
               </>
             )}
@@ -390,7 +390,7 @@ const Placements = ({ docs }) => {
                 <Form.Label>Job Description</Form.Label>
                 <Form.Control
                   as="textarea"
-                  rows={3}
+                  rows={8}
                   placeholder="Enter description"
                 />
               </Form.Group>
@@ -425,7 +425,7 @@ const Placements = ({ docs }) => {
                 </div>
               </Form.Group>
               <Button
-                variant="outline-primary"
+                variant="btn btn-primary"
                 type="submit"
                 disabled={disable}
               >

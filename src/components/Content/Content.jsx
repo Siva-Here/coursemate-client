@@ -119,7 +119,6 @@ function Content(props) {
     }
 
     const formData = new FormData();
-    console.log(billFile);
     formData.append("file", billFile);
 
     try {

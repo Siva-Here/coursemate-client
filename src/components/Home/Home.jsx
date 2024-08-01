@@ -8,6 +8,8 @@ import Lottie from "lottie-react";
 import welcome from "./welcome.json";
 import { ThemeContext } from "../../ThemeContext";
 import { NavContext } from "../../NavContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -27,7 +29,6 @@ function Home() {
   }, 5000);
 
   useEffect(() => {
-    console.log(theme);
     // const notify = localStorage.getItem("notify") || false;
     // if (!notify) {
     //   localStorage.removeItem("userId");
@@ -116,6 +117,7 @@ function Home() {
 
   return (
     <div>
+      <ToastContainer />
       {isLoggedIn ? (
         <div className={`img-container ${theme}`}>
           <img
@@ -151,7 +153,7 @@ function Home() {
           ) : (
             <>
               {/* <div className="blur1"></div> */}
-              <div className="blu">
+              <div>
                 <SideBar />
                 <div className="outer-container" style={{ marginTop: "15vh" }}>
                   <div className="blurhome"></div>
