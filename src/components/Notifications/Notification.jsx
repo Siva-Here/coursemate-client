@@ -13,7 +13,7 @@ const Notification = () => {
   const { isExpanded } = useContext(NavbarContext);
   const [Notifications, setNotifications] = useState([
     {
-      uploadedBy: "Site is Under Maintanance...",
+      uploadedBy: "Loading...",
       name: "",
       _id: "",
       description: "",
