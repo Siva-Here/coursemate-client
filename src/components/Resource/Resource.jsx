@@ -27,12 +27,14 @@ const Resource = ({ parentFolder, view, folderName }) => {
   if (!folderName) {
     folderName = location.state.folderName;
   }
+  useEffect(() => {
+    const user = jwtDecode(localStorage.getItem("user"));
+    const email = user.email;
+    if (process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
+      setIsAdmin(true);
+    }
+  }, []);
 
-  const user = jwtDecode(localStorage.getItem("user"));
-  const email = user.email;
-  if (process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)) {
-    setIsAdmin(true);
-  }
   useEffect(() => {
     if (view !== "units") {
       setFolderId(location.state.parentFolder || parentFolder);
