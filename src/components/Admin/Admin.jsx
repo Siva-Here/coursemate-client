@@ -257,14 +257,14 @@ function Admin(props) {
                       <div key={doc._id}>
                         <div className="d-flex flex-column mt-3">
                           <h2
-                            className={`lead text-center text-white fw-bold m-0 ${theme}`}
+                            className={`lead text-center fw-bold m-0 ${theme}`}
                           >
                             {doc.uploadedBy} uploaded into{" "}
                             {getDocFolderName(doc.parentFolder)}
                           </h2>
 
                           <div
-                            className="content-div d-flex fw-bold text-white lead py-4 justify-admin-between"
+                            className={`content-div d-flex fw-bold lead py-4 justify-admin-between ${theme}`}
                             style={{
                               height: "50px",
                               textWrap: "nowrap",
@@ -349,7 +349,7 @@ function Admin(props) {
                           >
                             <div className="resource-content text-start">
                               <p className={`resource-user ${theme}`}>
-                                {rsc.uploadedBy} upload into{" "}
+                                {rsc.uploadedBy} uploaded into{" "}
                                 {getFolderName(rsc.parentFolder)}
                               </p>
                               <div className="d-flex justify-content-between align-items-center">
