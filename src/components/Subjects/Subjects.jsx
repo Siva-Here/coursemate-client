@@ -59,7 +59,7 @@ function Subjects() {
                 }`}
               >
                 <h1
-                  className={`display-5 text-center cust-text-${theme}`}
+                  className={`text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Subjects
@@ -68,7 +68,7 @@ function Subjects() {
                   {delayedFolders.map((folder) => (
                     <div
                       key={folder._id}
-                      className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold text-white lead p-4 justify-content-evenly`}
+                      className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold text-white lead p-3 justify-content-evenly`}
                       onClick={() =>
                         handleClick(folder._id, "/icons8-folder-96.png")
                       }

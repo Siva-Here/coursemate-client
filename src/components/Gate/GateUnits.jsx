@@ -85,7 +85,7 @@ function GateUnits({ folders, docs }) {
                   }`}
                 >
                   <h1
-                    className={`display-5 text-center cust-text-${theme}`}
+                    className={`text-center cust-text-${theme}`}
                     style={{
                       zIndex: 1000,
                     }}

@@ -76,7 +76,7 @@ function Login() {
       <ToastContainer />
       <div className="login-content row">
         <h1
-          className={`display-5 text-center cust-text-dark`}
+          className={`text-center cust-text-dark`}
           style={{
             zIndex: 1000,
             marginTop: "15px",

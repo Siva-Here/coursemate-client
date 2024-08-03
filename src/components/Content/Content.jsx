@@ -260,7 +260,7 @@ function Content(props) {
                   }`}
                 >
                   <h1
-                    className={`display-5 text-center cust-text-${theme}`}
+                    className={`lead text-center cust-text-${theme}`}
                     style={{ zIndex: 1000, marginTop: "0px" }}
                   >
                     {parentFolder}
@@ -342,7 +342,7 @@ function Content(props) {
                                       handlePreview(doc);
                                     }}
                                   >
-                                    {doc.name.toUpperCase()}
+                                    {doc.name}
                                   </div>
                                   <div
                                     className="download-div text-end me-1 align-items-start"
@@ -448,7 +448,7 @@ const getDate = (timestamp) => {
   const date = new Date(timestamp);
 
   const day = date.getDate();
-  const month = date.toLocaleString("en-US", { month: "long" });
+  const month = date.toLocaleString("en-IN", { month: "long" });
   const year = date.getFullYear();
 
   const getDayWithSuffix = (day) => {

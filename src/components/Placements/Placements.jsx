@@ -230,7 +230,7 @@ const Placements = ({ docs }) => {
             }`}
           >
             <h1
-              className={`display-5 text-center cust-text-${theme}`}
+              className={`text-center cust-text-${theme}`}
               style={{ zIndex: 1000, marginTop: "15px" }}
             >
               Placements
@@ -378,7 +378,7 @@ const Placements = ({ docs }) => {
 
         <Modal show={showModal} onHide={handleModalClose} className="modal">
           <Modal.Header closeButton>
-            <Modal.Title>Add New Placement Updates</Modal.Title>
+            <Modal.Title>Add New Updates</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form onSubmit={submitResource} className="rsc-form">
@@ -442,7 +442,7 @@ const Placements = ({ docs }) => {
 const formatTimestamp = (timestamp) => {
   const d = new Date(timestamp);
   const date = new Date(d);
-  const formattedDate = date.toLocaleString("en-US", {
+  const formattedDate = date.toLocaleString("en-IN", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

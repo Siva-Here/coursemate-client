@@ -94,10 +94,10 @@ const Contribution = () => {
           >
             <Sidebar />
             <h1
-              className={`display-5 text-center cust-text-${theme}`}
+              className={`text-center cust-text-${theme}`}
               style={{ zIndex: 1000, marginTop: "50px" }}
             >
-              Leaderboard
+              LeaderBoard
             </h1>
             <div className={`img-container2 ${theme}`}></div>
             {theme == "dark" && <div className="blur1"></div>}

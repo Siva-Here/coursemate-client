@@ -36,7 +36,7 @@ function Domains({ folders }) {
     rootFolders.forEach((folder, index) => {
       timer = setTimeout(() => {
         setDelayedFolders((prevFolders) => [...prevFolders, folder]);
-      }, index * 75);
+      }, index * 25);
     });
 
     return () => {
@@ -65,7 +65,7 @@ function Domains({ folders }) {
                 }`}
               >
                 <h1
-                  className={`display-5 text-center cust-text-${theme}`}
+                  className={`text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, margin: "15px" }}
                 >
                   Domains

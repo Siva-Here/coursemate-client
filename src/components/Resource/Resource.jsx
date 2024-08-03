@@ -46,8 +46,9 @@ const Resource = ({ parentFolder, view, folderName }) => {
     const sortedResources = resources
       .filter((rsc) => {
         return (
-          (!rsc.byAdmin && rsc.isAccepted && rsc.parentFolder === folderId) ||
-          rsc.isJobUpdate
+          (!rsc.byAdmin || rsc.isJobUpdate || rsc.isPost || rsc.isPlacement) &&
+          rsc.isAccepted &&
+          rsc.parentFolder === folderId
         );
       })
       .sort((a, b) => b.uploadedAt.localeCompare(a.uploadedAt));
@@ -102,7 +103,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
             <Sidebar />
             <div className="text-center">
               <h1
-                className={`display-5 text-center cust-text-${theme}`}
+                className={`text-center cust-text-${theme}`}
                 style={{ zIndex: 1000, margin: "25px" }}
               >
                 {folderName}
@@ -219,7 +220,7 @@ const Resource = ({ parentFolder, view, folderName }) => {
 const formatTimestamp = (timestamp) => {
   const d = new Date(timestamp);
   const date = new Date(d);
-  const formattedDate = date.toLocaleString("en-US", {
+  const formattedDate = date.toLocaleString("en-IN", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

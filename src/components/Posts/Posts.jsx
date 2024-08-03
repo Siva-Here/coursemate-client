@@ -237,7 +237,7 @@ const getDate = (timestamp) => {
   const date = new Date(timestamp);
 
   const day = date.getDate();
-  const month = date.toLocaleString("en-US", { month: "long" });
+  const month = date.toLocaleString("en-IN", { month: "long" });
   const year = date.getFullYear();
 
   const formattedDate = `${day} ${month} ${year}`.toUpperCase();

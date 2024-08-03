@@ -56,7 +56,7 @@ const Notification = () => {
               }`}
             >
               <h1
-                className={`display-5 text-center cust-text-${theme}`}
+                className={`text-center cust-text-${theme}`}
                 style={{ zIndex: 1000, marginTop: "15px" }}
               >
                 Notifications
@@ -114,7 +114,7 @@ const Notification = () => {
 const formatTimestamp = (timestamp) => {
   const d = new Date(timestamp);
   const date = new Date(d - -19800000);
-  const formattedDate = date.toLocaleString("en-US", {
+  const formattedDate = date.toLocaleString("en-IN", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

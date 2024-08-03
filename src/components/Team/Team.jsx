@@ -22,7 +22,7 @@ const Team = () => {
       {isLoggedIn ? (
         <div className="container">
           <h1
-            className={`display-5 text-center cust-text-${theme} ${
+            className={`text-center cust-text-${theme} ${
               isExpanded ? "expanded" : ""
             }`}
             style={{ zIndex: 1000, marginTop: "75px" }}

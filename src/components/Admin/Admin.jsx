@@ -225,10 +225,10 @@ function Admin(props) {
               <Sidebar />
               <div className="outer-container-year">
                 <h1
-                  className={`display-5 text-center cust-text-${theme}`}
+                  className={`text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, margin: "20px 0px" }}
                 >
-                  Recently Uploaded
+                  Uploaded
                 </h1>
                 <div className={`btn-group ${theme} text-center`}>
                   <button
@@ -439,7 +439,7 @@ function Admin(props) {
 
 const formatTimestamp = (timestamp) => {
   const date = new Date(timestamp);
-  const formattedDate = date.toLocaleString("en-US", {
+  const formattedDate = date.toLocaleString("en-IN", {
     year: "numeric",
     month: "2-digit",
     day: "2-digit",

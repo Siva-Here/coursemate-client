@@ -139,7 +139,7 @@ function Home() {
                 style={{ zIndex: 1000, position: "absolute" }}
               >
                 <h1
-                  className={`display-5 text-center cust-text-${theme}`}
+                  className={`text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   Welcome

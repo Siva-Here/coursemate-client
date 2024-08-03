@@ -20,7 +20,7 @@
   animation: blinkLogin 0.5s linear infinite;
   font-size: 2rem;
   font-family: "Nunito";
-  font-weight: bold;
+  /* font-weight: bold; */
   position: sticky;
   /* top: 50px; */
 }
@@ -29,7 +29,7 @@
   color: #102c57;
   text-align: center;
   font-family: "Nunito";
-  font-weight: bold;
+  /* font-weight: bold; */
   font-size: 2rem;
   position: sticky;
 }

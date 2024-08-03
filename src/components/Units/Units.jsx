@@ -85,7 +85,7 @@ function Units({ folders }) {
                 }`}
               >
                 <h1
-                  className={`display-5 text-center cust-text-${theme}`}
+                  className={`text-center cust-text-${theme}`}
                   style={{ zIndex: 1000, marginTop: "15px" }}
                 >
                   {parentFolder}
@@ -118,7 +118,7 @@ function Units({ folders }) {
                     {delayedFolders.map((folder) => (
                       <div
                         key={folder._id}
-                        className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold lead p-4 justify-content-evenly`}
+                        className={`folder-div-sub ${theme} d-flex rounded-3 fw-bold lead p-3 justify-content-evenly`}
                         onClick={() =>
                           handleFolderClick(folder._id, folder.name)
                         }
@@ -132,7 +132,9 @@ function Units({ folders }) {
                             style={{ opacity: 1 }}
                           />
                         </div>
-                        <div className="w-75 text-start px-3 px-5 align-items-start">
+                        <div
+                          className={`w-75 text-start px-3 px-5 align-items-start ${theme}`}
+                        >
                           {folder.name}
                         </div>
                       </div>
