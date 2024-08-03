@@ -21,11 +21,11 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 .resource-div.light {
-  /* background: linear-gradient(90deg, #f0f5fa 1.71%, #fff8df 99.56%); */
   background: rgba(255, 255, 255, 0.9);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   backdrop-filter: blur(35px);
   border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
 }
 @keyframes showBackground {
   from {
@@ -40,7 +40,10 @@
   }
 }
 .rsc-img.light {
-  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90vw;
+  max-width: 799px;
   transition: background-image 0.5s ease-in-out;
   animation: showBackground 0.25s ease-in-out 1s forwards;
 }
@@ -118,11 +121,14 @@
   overflow: auto;
 }
 .rsc-link.dark {
-  color: yellow;
+  color: rgb(20, 121, 228);
+  text-decoration: underline;
 }
 .rsc-link.light {
-  color: rgb(14, 34, 56);
+  /* color: rgb(14, 34, 56); */
   font-weight: bold;
+  color: rgb(20, 121, 228);
+  text-decoration: underline;
 }
 .form-group {
   margin: 0px;

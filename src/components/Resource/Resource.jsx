@@ -123,8 +123,8 @@ const Resource = ({ parentFolder, view, folderName }) => {
                       className={`text-uppercase fw-bold fst-italic font-italic`}
                       style={
                         theme == "light"
-                          ? { color: "green" }
-                          : { color: "lightblue" }
+                          ? { color: "rgb(14, 34, 56)" }
+                          : { color: "yellow" }
                       }
                     >
                       {rsc.name}
