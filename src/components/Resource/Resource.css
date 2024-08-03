@@ -39,6 +39,12 @@
     background-attachment: fixed;
   }
 }
+.rsc-img {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90vw;
+  max-width: 799px;
+}
 .rsc-img.light {
   margin-left: auto;
   margin-right: auto;
