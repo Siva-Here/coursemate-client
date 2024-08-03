@@ -10,6 +10,7 @@ import { ThemeContext } from "../../ThemeContext";
 import { NavContext } from "../../NavContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Launch from "../Launch/Launch";
 
 function Home() {
   const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
@@ -29,6 +30,9 @@ function Home() {
   }, 5000);
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
     // const notify = localStorage.getItem("notify") || false;
     // if (!notify) {
     //   localStorage.removeItem("userId");
@@ -57,7 +61,6 @@ function Home() {
       .then((res) => {
         if (res.status === 200) {
           setIsLoggedIn(true);
-          setLoading(false);
         }
       })
       .catch((error) => {});
@@ -118,158 +121,167 @@ function Home() {
   return (
     <div>
       <ToastContainer />
-      {isLoggedIn ? (
-        <div className={`img-container ${theme}`}>
-          <img
-            className="d-block logo ms-auto me-auto"
-            src="/logo-login.png"
-            alt=""
-            height="250px"
-          />
-          {/* <h1
-            className="display-5 text-center text-white cust-text d-block logo ms-auto me-auto"
-            style={{ zIndex: 1000, marginTop: "40px" }}
-          >
-            CoursMate
-          </h1> */}
-          {isSlow && lottie == 1 ? (
-            <>
-              <div
-                className="lottie"
-                style={{ zIndex: 1000, position: "absolute" }}
+      {false ? (
+        <Launch />
+      ) : (
+        <>
+          {isLoggedIn ? (
+            <div className={`img-container ${theme}`}>
+              <img
+                className="d-block logo ms-auto me-auto"
+                src="/logo-login.png"
+                alt=""
+                height="250px"
+              />
+              {/* <h1
+                className="display-5 text-center text-white cust-text d-block logo ms-auto me-auto"
+                style={{ zIndex: 1000, marginTop: "40px" }}
               >
-                <h1
-                  className={`text-center cust-text-${theme}`}
-                  style={{ zIndex: 1000, marginTop: "15px" }}
-                >
-                  Welcome
-                </h1>
-                <Lottie
-                  animationData={welcome}
-                  style={{ marginInlineStart: "30px" }}
-                />
-              </div>
-            </>
-          ) : (
-            <>
-              {/* <div className="blur1"></div> */}
-              <div>
-                <SideBar />
-                <div className="outer-container" style={{ marginTop: "15vh" }}>
-                  <div className="blurhome"></div>
-                  <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
-                    <div
-                      className={`categories ${theme} sem ${
-                        isClickedSem ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
-                      onClick={handleOpenSem}
+                CoursMate
+              </h1> */}
+              {isSlow && lottie == 1 ? (
+                <>
+                  <div
+                    className="lottie"
+                    style={{ zIndex: 1000, position: "absolute" }}
+                  >
+                    <h1
+                      className={`text-center cust-text-${theme}`}
+                      style={{ zIndex: 1000, marginTop: "15px" }}
                     >
-                      <div className="w-100">
-                        <div
-                          className="px-3 ps-auto d-inline-block text-end"
-                          style={{ width: "40%" }}
-                        >
-                          <img
-                            src="/favicons/book.png"
-                            alt="book"
-                            height="38px"
-                            className="ms-auto"
-                          />
-                        </div>
-                        <div
-                          className="text-start ps-3 d-inline-block"
-                          style={{ width: "60%" }}
-                        >
-                          SEMESTERS
-                        </div>
-                      </div>
-                    </div>
+                      Welcome
+                    </h1>
+                    <Lottie
+                      animationData={welcome}
+                      style={{ marginInlineStart: "30px" }}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* <div className="blur1"></div> */}
+                  <div>
+                    <SideBar />
                     <div
-                      className={`categories ${theme} domains ${
-                        isClickedDomains ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
-                      onClick={handleOpenDomains}
+                      className="outer-container"
+                      style={{ marginTop: "15vh" }}
                     >
-                      <div className="w-100">
+                      <div className="blurhome"></div>
+                      <div className="content container-fluid d-flex flex-column align-items-center justify-content-center">
                         <div
-                          className="px-3 ps-auto d-inline-block text-end"
-                          style={{ width: "40%" }}
+                          className={`categories ${theme} sem ${
+                            isClickedSem ? "expand-open" : ""
+                          } text-decoration-none rounded-3 fw-bold  lead p-4`}
+                          onClick={handleOpenSem}
                         >
-                          <img
-                            src="/favicons/domain-home.png"
-                            alt="book"
-                            height="38px"
-                            className="ms-auto"
-                          />
+                          <div className="w-100">
+                            <div
+                              className="px-3 ps-auto d-inline-block text-end"
+                              style={{ width: "40%" }}
+                            >
+                              <img
+                                src="/favicons/book.png"
+                                alt="book"
+                                height="38px"
+                                className="ms-auto"
+                              />
+                            </div>
+                            <div
+                              className="text-start ps-3 d-inline-block"
+                              style={{ width: "60%" }}
+                            >
+                              SEMESTERS
+                            </div>
+                          </div>
                         </div>
                         <div
-                          className="text-start ps-3 d-inline-block"
-                          style={{ width: "60%" }}
+                          className={`categories ${theme} domains ${
+                            isClickedDomains ? "expand-open" : ""
+                          } text-decoration-none rounded-3 fw-bold  lead p-4`}
+                          onClick={handleOpenDomains}
                         >
-                          DOMAINS
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className={`categories ${theme} gate${
-                        isClickedGate ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
-                      onClick={handleOpenGate}
-                    >
-                      <div className="w-100">
-                        <div
-                          className="px-3 ps-auto d-inline-block text-end"
-                          style={{ width: "40%" }}
-                        >
-                          <img
-                            src="/favicons/gate.png"
-                            alt="book"
-                            height="38px"
-                            className="ms-auto"
-                          />
-                        </div>
-                        <div
-                          className="text-start ps-3 d-inline-block"
-                          style={{ width: "60%" }}
-                        >
-                          GATE
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className={`categories ${theme} placements${
-                        isClickedPlacements ? "expand-open" : ""
-                      } text-decoration-none rounded-3 fw-bold  lead p-4`}
-                      onClick={handleOpenPlacements}
-                    >
-                      <div className="w-100">
-                        <div
-                          className="px-3 ps-auto d-inline-block text-end"
-                          style={{ width: "40%" }}
-                        >
-                          <img
-                            src="/favicons/job.png"
-                            alt="book"
-                            height="38px"
-                            className="ms-auto"
-                          />
+                          <div className="w-100">
+                            <div
+                              className="px-3 ps-auto d-inline-block text-end"
+                              style={{ width: "40%" }}
+                            >
+                              <img
+                                src="/favicons/domain-home.png"
+                                alt="book"
+                                height="38px"
+                                className="ms-auto"
+                              />
+                            </div>
+                            <div
+                              className="text-start ps-3 d-inline-block"
+                              style={{ width: "60%" }}
+                            >
+                              DOMAINS
+                            </div>
+                          </div>
                         </div>
                         <div
-                          className="text-start ps-3 d-inline-block"
-                          style={{ width: "60%" }}
+                          className={`categories ${theme} gate${
+                            isClickedGate ? "expand-open" : ""
+                          } text-decoration-none rounded-3 fw-bold  lead p-4`}
+                          onClick={handleOpenGate}
                         >
-                          PLACEMENTS
+                          <div className="w-100">
+                            <div
+                              className="px-3 ps-auto d-inline-block text-end"
+                              style={{ width: "40%" }}
+                            >
+                              <img
+                                src="/favicons/gate.png"
+                                alt="book"
+                                height="38px"
+                                className="ms-auto"
+                              />
+                            </div>
+                            <div
+                              className="text-start ps-3 d-inline-block"
+                              style={{ width: "60%" }}
+                            >
+                              GATE
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className={`categories ${theme} placements${
+                            isClickedPlacements ? "expand-open" : ""
+                          } text-decoration-none rounded-3 fw-bold  lead p-4`}
+                          onClick={handleOpenPlacements}
+                        >
+                          <div className="w-100">
+                            <div
+                              className="px-3 ps-auto d-inline-block text-end"
+                              style={{ width: "40%" }}
+                            >
+                              <img
+                                src="/favicons/job.png"
+                                alt="book"
+                                height="38px"
+                                className="ms-auto"
+                              />
+                            </div>
+                            <div
+                              className="text-start ps-3 d-inline-block"
+                              style={{ width: "60%" }}
+                            >
+                              PLACEMENTS
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </>
+                </>
+              )}
+            </div>
+          ) : (
+            <></>
           )}
-        </div>
-      ) : (
-        <></>
+        </>
       )}
     </div>
   );

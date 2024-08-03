@@ -66,3 +66,50 @@
 .stunning-btn i {
   font-size: 20px;
 }
+
+.wrapper-launch {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.launch-a {
+  display: block;
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  font-family: sans-serif;
+  text-decoration: none;
+  color: #333;
+  border: 2px solid #333;
+  letter-spacing: 2px;
+  text-align: center;
+  position: relative;
+  transition: all 0.35s;
+}
+
+.launch-span {
+  position: relative;
+  z-index: 2;
+}
+
+.launch-a:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #ff003b;
+  transition: all 0.35s;
+}
+
+.launch-a:hover {
+  color: #fff;
+}
+
+.launch-a:hover:after {
+  width: 100%;
+}

@@ -1,3 +1,4 @@
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Subjects from "./components/Subjects/Subjects";
@@ -7,10 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import Domains from "./components/Domains/Domains";
 import Units from "./components/Units/Units";
 import Content from "./components/Content/Content";
-import Sem from "./components/Sem/Sem";
 import Year from "./components/Year/Year";
 import Team from "./components/Team/Team";
-import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Notification from "./components/Notifications/Notification";
 import Resource from "./components/Resource/Resource";
@@ -27,15 +26,16 @@ import Notifications from "./Notification";
 import Toggle from "./components/Toggle/Toggle";
 import Search from "./components/Search/Search";
 import { Modal } from "react-bootstrap";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import NestedItems from "./NestedItems";
 import { ThemeContext } from "./ThemeContext";
 import { NavbarContext } from "./NavbarContext";
+import Launch from "./components/Launch/Launch";
 
 function buildNestedStructure(folderId, folders) {
   let nestedFolders = [];
   folders.forEach((folder) => {
-    if (folder.parentFolder == folderId) {
+    if (folder.parentFolder === folderId) {
       nestedFolders.push({
         _id: folder._id,
         name: folder.name,
@@ -60,6 +60,10 @@ function App() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [launch, setLaunch] = useState(true);
+  const [launch1, setLaunch1] = useState(false);
+  const [showButton, setShowButton] = useState(true);
+  let launching = localStorage.getItem("launching");
 
   function fetchFolders() {
     const token = localStorage.getItem("user") || false;
@@ -87,8 +91,7 @@ function App() {
         },
       })
       .then((response) => {
-        const docs = response.data;
-        setDocs(docs);
+        setDocs(response.data);
       });
   }
 
@@ -101,21 +104,17 @@ function App() {
         },
       })
       .then((response) => {
-        const resources = response.data;
-        setResources(resources);
+        setResources(response.data);
       });
   }
 
   useEffect(() => {
     localStorage.setItem("lottie", 1);
+    console.log(launching, typeof launching);
     const token = localStorage.getItem("user") || false;
     try {
       const email = jwtDecode(token).email;
-      if (
-        email.endsWith("@rguktn.ac.in") &&
-        // process.env.REACT_APP_ADMIN_EMAILS.split(",").includes(email)
-        true
-      ) {
+      if (email.endsWith("@rguktn.ac.in") && true) {
         fetchFolders();
         fetchDocuments();
         fetchResources();
@@ -130,14 +129,6 @@ function App() {
     }
   }, []);
 
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-        <p className="lead text-white m-3 loading">Loading...</p>
-      </div>
-    );
-  }
   let semFolders = folders
     .filter((folder) => ["E1", "E2", "E3", "E4"].includes(folder.name))
     .sort((a, b) => a.name.localeCompare(b.name));
@@ -152,71 +143,95 @@ function App() {
 
   const toggleTheme = () => {
     let theme1 = localStorage.getItem("theme");
-    if (theme1 == "light") {
+    if (theme1 === "light") {
       theme1 = "dark";
     } else {
       theme1 = "light";
     }
     setTheme(theme1);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme1);
   };
 
   return (
     <div className="App">
       <ToastContainer />
-      {/* <Options docs={docs} folders={folders}/> */}
-      {docs.length != 0 && (
+      {launch && launching == 1 ? (
+        <div>
+          {showButton && (
+            <div
+              className="wrapper-launch"
+              onClick={() => {
+                setShowButton(false);
+                setLaunch1(true);
+                setTimeout(() => {
+                  setLaunch(false);
+                  localStorage.setItem("launching", 0);
+                }, 11000);
+              }}
+            >
+              <a className="launch-a" href="#">
+                <span className="launch-span">Launch</span>
+              </a>
+            </div>
+          )}
+          {launch1 && <Launch />}
+        </div>
+      ) : (
         <>
-          <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
-            <Toggle />
-          </div>
-          <Search docs={docs} folders={folders} />
-          <button
-            className={`${theme} stunning-btn show-${isExpanded}`}
-            onClick={handleShow}
-          >
-            <i className="fas fa-plus"></i>
-          </button>
-          <Modal
-            show={show}
-            onHide={handleClose}
-            centered
-            className="modal-dialog-upload"
-          >
-            <Modal.Header closeButton className="modal-header-upload">
-              <Modal.Title>Upload document</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="modal-body-upload">
-              <NestedItems data={nestedFolders} docs={docs} />
-            </Modal.Body>
-          </Modal>
+          {docs.length !== 0 && (
+            <>
+              <div onClick={toggleTheme} style={{ cursor: "pointer" }}>
+                <Toggle />
+              </div>
+              <Search docs={docs} folders={folders} />
+              <button
+                className={`${theme} stunning-btn show-${isExpanded}`}
+                onClick={handleShow}
+              >
+                <i className="fas fa-plus"></i>
+              </button>
+              <Modal
+                show={show}
+                onHide={handleClose}
+                centered
+                className="modal-dialog-upload"
+              >
+                <Modal.Header closeButton className="modal-header-upload">
+                  <Modal.Title>Upload document</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-body-upload">
+                  <NestedItems data={nestedFolders} docs={docs} />
+                </Modal.Body>
+              </Modal>
+            </>
+          )}
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/subjects" element={<Subjects folders={folders} />} />
+            <Route path="/domains" element={<Domains folders={folders} />} />
+            <Route path="/units" element={<Units folders={folders} />} />
+            <Route path="/content" element={<Content documents={docs} />} />
+            {/* <Route path="/sem" element={<Sem folders={folders} />} /> */}
+            <Route path="/year" element={<Year folders={folders} />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/notifications" element={<Notification />} />
+            <Route path="/contribution" element={<Contribution />} />
+            <Route path="/resource" element={<Resource />} />
+            <Route
+              path="/admin"
+              element={<Admin documents={docs} folders={folders} />}
+            />
+            <Route path="/gate" element={<Gate folders={folders} />} />
+            <Route path="/placements" element={<Placements docs={docs} />} />
+            <Route
+              path="/gateunits"
+              element={<GateUnits folders={folders} docs={docs} />}
+            />
+          </Routes>
+          <Notifications />
         </>
       )}
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/subjects" element={<Subjects folders={folders} />} />
-        <Route path="/domains" element={<Domains folders={folders} />} />
-        <Route path="/units" element={<Units folders={folders} />} />
-        <Route path="/content" element={<Content documents={docs} />} />
-        {/* <Route path="/sem" element={<Sem folders={folders} />} /> */}
-        <Route path="/year" element={<Year folders={folders} />} />
-        <Route path="/team" element={<Team />} />
-        <Route path="/notifications" element={<Notification />} />
-        <Route path="/contribution" element={<Contribution />} />
-        <Route path="/resource" element={<Resource />} />
-        <Route
-          path="/admin"
-          element={<Admin documents={docs} folders={folders} />}
-        />
-        <Route path="/gate" element={<Gate folders={folders} />} />
-        <Route path="/placements" element={<Placements docs={docs} />} />
-        <Route
-          path="/gateunits"
-          element={<GateUnits folders={folders} docs={docs} />}
-        />
-      </Routes>
-      <Notifications />
     </div>
   );
 }
