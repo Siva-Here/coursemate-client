@@ -10,6 +10,7 @@ import { ThemeProvider } from "./ThemeContext";
 import { NavProvider } from "./NavContext";
 import { NavbarProvider } from "./NavbarContext";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import { Analytics } from "@vercel/analytics/react";
 
 const container = document.getElementById("root");
 const root = createRoot(container);
@@ -38,6 +39,7 @@ root.render(
           <NavProvider>
             <NavbarProvider>
               <ThemeProvider>
+                <Analytics />
                 <App />
               </ThemeProvider>
             </NavbarProvider>
